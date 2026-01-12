@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Omnibus Preview (Chrome)",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "edge",
+            "request": "launch",
+            "name": "Omnibus Preview (Edge)",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Bass | Algorithmic DX Stream</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2563EB;
+            --color-secondary: #7C3AED;
+            --color-text: #1F2937;
+            --color-light: #F8FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            background: var(--color-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: 0.3s;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            /* Slightly more opaque */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            /* distinct shadow for separation */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #111;
+            letter-spacing: -0.05em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+
+        .lang-switch {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 99px;
+            gap: 4px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--color-primary);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-btn {
+            background: var(--color-primary);
+            color: white !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 99px;
+            margin-left: 1rem;
+            /* Separate from lang switch */
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            /* Adjusted size (approx 70% of previous) */
+            font-size: clamp(3rem, 8.5vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.8rem;
+            color: #111;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 0.8rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ccc, transparent);
+        }
+
+        /* Philosophy */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .philosophy-head {
+            text-center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .main-copy {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .sub-copy {
+            font-size: 1.125rem;
+            color: #4B5563;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border-radius: 99px;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .philo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .philo-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .philo-list li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            margin-top: 8px;
+        }
+
+        /* Logic */
+        .logic {
+            background: #f9fafb;
+        }
+
+        .logic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .logic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-center;
+            border: 1px solid #f3f4f6;
+            transition: 0.3s;
+        }
+
+        .logic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logic-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .logic-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .logic-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Product */
+        .product {
+            overflow: hidden;
+        }
+
+        .prod-layout {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .prod-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .prod-img {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .prod-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+            transform: rotate(2deg);
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .f-icon {
+            width: 40px;
+            height: 40px;
+            background: #eff6ff;
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding-top: 6rem;
+            padding-bottom: 3rem;
+        }
+
+        .cta-area {
+            text-center;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--color-primary);
+            display: inline-block;
+            padding: 1rem 3rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .cta-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 3rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            transition: transform 0.2s;
+            min-width: 280px;
+        }
+
+        .cta-line {
+            background: #06C755;
+            /* LINE Green */
+        }
+
+        .cta-email {
+            background: var(--color-primary);
+        }
+
+        .cta-btn-item:hover {
+            transform: translateY(-3px);
+            opacity: 0.95;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+        }
+
+        .footer-grid h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+        }
+
+        .footer-grid li {
+            margin-bottom: 0.8rem;
+        }
+
+        .bottom-bar {
+            margin-top: 4rem;
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            color: #6B7280;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .philo-grid,
+            .prod-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">Omni Bass</div>
+            <nav class="nav">
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="#services" data-i18n="nav.services">Services</a>
+                <a href="#product" data-i18n="nav.product">Product</a>
+                <a href="#contact" data-i18n="nav.contact">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero with Algorithmic Background -->
+    <section class="hero" id="hero-canvas-container">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <!-- Extremely minimal, intellectual typography -->
+            <!-- Extremely minimal, intellectual typography -->
+            <h1>Omni Bass</h1>
+            <p data-i18n="hero.subtitle">DIGITAL SHIFT FOR LOCAL</p>
+        </div>
+        <div class="scroll-down"></div>
+    </section>
+
+    <!-- Gentle Aquarium Boids Script -->
+    <script>
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let boids = [];
+        const numBoids = 80;
+        const visualRange = 100;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Boid {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.dx = Math.random() * 2 - 1; // Slower start
+                this.dy = Math.random() * 2 - 1;
+                this.history = [];
+
+                // 3 Patterns of Fish Design
+                this.type = Math.floor(Math.random() * 3); // 0, 1, 2
+
+                // Rarity Check (1 in 20 = 5%)
+                this.isRare = Math.random() < 0.05;
+
+                // Colors
+                if (this.isRare) {
+                    // Rare: Golden/Amber that stands out in Blue
+                    this.color = '#F59E0B';
+                    this.size = Math.random() * 4 + 3; // Slightly larger
+                } else {
+                    // Normal: Gentle Blue/Aqua
+                    const colors = ['#60A5FA', '#38BDF8', '#818CF8', '#93C5FD'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.size = Math.random() * 3 + 2;
+                }
+            }
+
+            update() {
+                // Steering forces (simulating fluid movement)
+                let xMove = 0, yMove = 0;
+                let avgDX = 0, avgDY = 0;
+                let avgX = 0, avgY = 0;
+                let numNeighbors = 0;
+
+                for (let other of boids) {
+                    if (other !== this) {
+                        const dist = Math.hypot(this.x - other.x, this.y - other.y);
+                        if (dist < visualRange) {
+                            if (dist < 30) { // Personal bubble (slightly larger to prevent sudden repels)
+                                xMove += this.x - other.x;
+                                yMove += this.y - other.y;
+                            }
+                            avgDX += other.dx;
+                            avgDY += other.dy;
+                            avgX += other.x;
+                            avgY += other.y;
+                            numNeighbors++;
+                        }
+                    }
+                }
+
+                // Apply forces with lower weights for smoothness
+                if (numNeighbors > 0) {
+                    avgDX /= numNeighbors;
+                    avgDY /= numNeighbors;
+                    avgX /= numNeighbors;
+                    avgY /= numNeighbors;
+
+                    // Alignment (match direction): Reduced from 0.03 to 0.02
+                    this.dx += (avgDX - this.dx) * 0.02;
+                    this.dy += (avgDY - this.dy) * 0.02;
+
+                    // Cohesion (move to center of group): Reduced from 0.0003 to 0.0002
+                    this.dx += (avgX - this.x) * 0.0002;
+                    this.dy += (avgY - this.y) * 0.0002;
+                }
+
+                // Separation: Reduced influence to avoid jitter
+                this.dx += xMove * 0.015;
+                this.dy += yMove * 0.015;
+
+                const centerX = width / 2;
+                const centerY = height / 2;
+                // Gentle return to center (very subtle)
+                this.dx += (centerX - this.x) * 0.00001;
+                this.dy += (centerY - this.y) * 0.00001;
+
+                // Speed Control (Smooth Clamping)
+                const speed = Math.hypot(this.dx, this.dy);
+                const maxSpeed = this.isRare ? 2.2 : 1.8; // Slightly slower for grace
+                const minSpeed = 0.8; // Don't stop completely
+
+                if (speed > maxSpeed) {
+                    this.dx = (this.dx / speed) * maxSpeed;
+                    this.dy = (this.dy / speed) * maxSpeed;
+                } else if (speed < minSpeed) {
+                    this.dx = (this.dx / speed) * minSpeed;
+                    this.dy = (this.dy / speed) * minSpeed;
+                }
+
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Edge wrapping
+                const margin = 50;
+                if (this.x < -margin) this.x = width + margin;
+                if (this.x > width + margin) this.x = -margin;
+                if (this.y < -margin) this.y = height + margin;
+                if (this.y > height + margin) this.y = -margin;
+
+                // Trail history
+                this.history.push({ x: this.x, y: this.y });
+                if (this.history.length > 8) this.history.shift();
+            }
+
+            draw() {
+                const angle = Math.atan2(this.dy, this.dx);
+
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(angle);
+
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.9;
+
+                // Draw Fish based on Type
+                ctx.beginPath();
+                if (this.type === 0) {
+                    // Type 1: Teardrop (Standard)
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(-this.size * 2, -this.size * 0.8);
+                    ctx.lineTo(-this.size * 2, this.size * 0.8);
+                    ctx.fill();
+                } else if (this.type === 1) {
+                    // Type 2: Slim/Dart (Fast look)
+                    ctx.ellipse(0, 0, this.size * 2, this.size * 0.6, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Small tail fin
+                    ctx.beginPath();
+                    ctx.moveTo(-this.size * 1.5, 0);
+                    ctx.lineTo(-this.size * 2.5, -this.size);
+                    ctx.lineTo(-this.size * 2.5, this.size);
+                    ctx.fill();
+                } else {
+                    // Type 3: Diamond / Kite (Geometric)
+                    ctx.moveTo(this.size * 1.5, 0); // Nose
+                    ctx.lineTo(-this.size, this.size); // Bottom wing
+                    ctx.lineTo(-this.size * 0.5, 0); // Tail junction
+                    ctx.lineTo(-this.size, -this.size); // Top wing
+                    ctx.fill();
+                }
+
+                ctx.restore();
+
+                // Optional: Draw trail only for Rare or Speed
+                if (this.isRare) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.2;
+                    if (this.history.length > 1) {
+                        ctx.moveTo(this.history[0].x, this.history[0].y);
+                        for (let i = 1; i < this.history.length; i++) {
+                            ctx.lineTo(this.history[i].x, this.history[i].y);
+                        }
+                    }
+                    ctx.stroke();
+                }
+            }
+        }
+
+        for (let i = 0; i < numBoids; i++) {
+            boids.push(new Boid());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let boid of boids) {
+                boid.update();
+                boid.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Philosophy -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="philosophy-head">
+                <h2 class="main-copy">
+                    <span data-i18n="about.headline.1">地域社会へ、</span><br>
+                    <span class="gradient-text" data-i18n="about.headline.2">確かなデジタルの実りを</span>
+                </h2>
+                <p class="sub-copy" data-i18n="about.subcopy">
+                    私たちは、現場の皆様と同じ視点に立ち、<br>
+                    「本当に役立つ」デジタル活用を共に考え、実現します。
+                </p>
+                <a href="#contact" class="btn">
+                    <span data-i18n="about.cta">お気軽にご相談ください</span> <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="philo-grid">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; font-weight: 700;" data-i18n="about.left_title">
+                        現場の想いに寄り添い、<br>未来を創るパートナー</h3>
+                    <p style="color: #4b5563;" data-i18n="about.left_body">
+                        Omnibusは、システムの導入をゴールとは考えません。滋賀・琵琶湖エリアの企業様が抱える課題に対し、対話を通じて最適な解決策を導き出し、定着まで責任を持って伴走いたします。</p>
+                </div>
+                <div class="philo-box">
+                    <ul class="philo-list">
+                        <li>
+                            <div class="dot"></div>
+                            <div data-i18n="about.bullets.1"><strong>地域理解:</strong> 地域の特性や商習慣を尊重したご提案</div>
+                        </li>
+                        <li>
+                            <div class="dot"></div>
+                            <div data-i18n="about.bullets.2"><strong>実用志向:</strong> 現場の方が使いやすく、効果を実感できる仕組み</div>
+                        </li>
+                        <li>
+                            <div class="dot"></div>
+                            <div data-i18n="about.bullets.3"><strong>一貫支援:</strong> 企画から運用保守まで、長期的なパートナーとして</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logic -->
+    <section class="section logic" id="services">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 style="font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 1rem;"
+                    data-i18n="logic.title">観光・飲食産業への取り組み
+                </h2>
+                <p style="text-align: center; color: #666;" data-i18n="logic.subtitle">
+                    人と地域をつなぐ重要な産業だからこそ、<br>デジタルによる業務効率化が、心を通わせる「おもてなし」の時間を創出します。
+                </p>
+            </div>
+            <div class="logic-grid">
+                <div class="logic-card">
+                    <div class="logic-icon"><i class="far fa-clock"></i></div>
+                    <div class="logic-title" data-i18n="logic.cards.1.title">業務負担の軽減</div>
+                    <div class="logic-desc" data-i18n="logic.cards.1.desc">定型業務を自動化し、スタッフ様が本来の接客業務に注力できる環境を整えます。</div>
+                </div>
+                <div class="logic-card">
+                    <div class="logic-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="logic-title" data-i18n="logic.cards.2.title">サービス品質の向上</div>
+                    <div class="logic-desc" data-i18n="logic.cards.2.desc">オペレーションを円滑にすることで、お客様をお待たせしないスムーズな体験を提供します。
+                    </div>
+                </div>
+                <div class="logic-card">
+                    <div class="logic-icon"><i class="fas fa-users"></i></div>
+                    <div class="logic-title" data-i18n="logic.cards.3.title">働きやすい環境作り</div>
+                    <div class="logic-desc" data-i18n="logic.cards.3.desc">データに基づいた無理のない人員配置で、スタッフ様の満足度向上にも寄与します。</div>
+                </div>
+                <div class="logic-card">
+                    <div class="logic-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="logic-title" data-i18n="logic.cards.4.title">安心できる運営体制</div>
+                    <div class="logic-desc" data-i18n="logic.cards.4.desc">ヒューマンエラーを未然に防ぐ仕組みを導入し、安定した店舗運営をサポートします。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product -->
+    <section class="section product" id="product">
+        <div class="container">
+            <div class="prod-layout">
+                <div class="prod-text">
+                    <div style="color: var(--color-primary); font-weight: 700; letter-spacing: 2px; margin-bottom: 1rem;"
+                        data-i18n="product.kicker">
+                        OMNIBUS QR ORDER</div>
+                    <h2 style="font-size: 3rem; line-height: 1.1; margin-bottom: 2rem; font-weight: 700;">
+                        <span data-i18n="product.headline.1">すべてのお客様に、</span><br>
+                        <span style="color: var(--color-primary);" data-i18n="product.headline.2">快適な注文体験を。</span>
+                    </h2>
+                    <p style="margin-bottom: 3rem; color: #555;" data-i18n="product.body">
+                        お客様のスマートフォンから簡単に注文できるシステムです。<br>言葉の壁や待ち時間を解消し、お店とお客様の双方にゆとりを生み出します。</p>
+
+                    <div class="feature-item">
+                        <div class="f-icon"><i class="fas fa-globe"></i></div>
+                        <div>
+                            <h4 style="font-weight: 700;" data-i18n="product.features.1.title">多言語対応で安心</h4>
+                            <p style="font-size: 0.9rem; color: #666;" data-i18n="product.features.1.desc">
+                                海外からのお客様も、母国語のメニューで安心してご注文いただけます。</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="f-icon"><i class="fas fa-database"></i></div>
+                        <div>
+                            <h4 style="font-weight: 700;" data-i18n="product.features.2.title">データ活用で改善へ</h4>
+                            <p style="font-size: 0.9rem; color: #666;" data-i18n="product.features.2.desc">
+                                日々の注文状況を可視化し、より良いお店作りのヒントをご提供します。</p>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn">
+                        <span data-i18n="product.cta">デモを依頼する</span> <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="prod-img">
+                    <img src="src/assets/product-mockup.png" alt="Product Mockup">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="cta-area">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;" data-i18n="footer.cta_title">
+                    まずは、お話をお聞かせください。</h2>
+                <p style="margin-bottom: 3rem; color: #ccc;" data-i18n="footer.cta_body">
+                    現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。</p>
+
+                <div class="cta-grid">
+                    <a href="#" class="cta-btn-item cta-line">
+                        <i class="fab fa-line" style="font-size: 1.5rem;"></i>
+                        <span data-i18n="footer.cta_line">LINEで相談する</span>
+                    </a>
+                    <a href="mailto:contact@omnibus.jp" class="cta-btn-item cta-email">
+                        <i class="fas fa-envelope" style="font-size: 1.2rem;"></i>
+                        <span data-i18n="footer.cta_email">メールで相談する</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-grid">
+                <div style="grid-column: span 2;">
+                    <span
+                        style="font-size: 1.5rem; font-weight: 700; display: block; margin-bottom: 1rem; color: white;">Omni
+                        Bass</span>
+                    <p data-i18n="footer.desc">滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。</p>
+                </div>
+                <div>
+                    <h4 data-i18n="nav.services">Services</h4>
+                    <ul>
+                        <li data-i18n="footer.services.1">業務改善・自動化</li>
+                        <li data-i18n="footer.services.2">ITツール導入支援</li>
+                        <li data-i18n="footer.services.3">AI活用コンサルティング</li>
+                        <li data-i18n="footer.services.4">QRオーダーシステム</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li data-i18n="footer.company.1">私たちについて</li>
+                        <li data-i18n="footer.company.2">導入事例</li>
+                        <li data-i18n="footer.company.3">お知らせ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <p>&copy; 2026 Omnibus Inc. All rights reserved.</p>
+                <div>
+                    <i class="fab fa-twitter" style="margin-left: 1rem; cursor: pointer;"></i>
+                    <i class="fab fa-facebook" style="margin-left: 1rem; cursor: pointer;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Translation Logic -->
+    <script>
+        const translations = {
+            ja: {
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.product": "Product",
+                "nav.contact": "お問い合わせ",
+                "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
+                "about.headline.1": "地域社会へ、",
+                "about.headline.2": "確かなデジタルの実りを",
+                "about.subcopy": "私たちは、現場の皆様と同じ視点に立ち、<br>「本当に役立つ」デジタル活用を共に考え、実現します。",
+                "about.cta": "お気軽にご相談ください",
+                "about.left_title": "現場の想いに寄り添い、<br>未来を創るパートナー",
+                "about.left_body": "Omnibusは、システムの導入をゴールとは考えません。滋賀・琵琶湖エリアの企業様が抱える課題に対し、対話を通じて最適な解決策を導き出し、定着まで責任を持って伴走いたします。",
+                "about.bullets.1": "<strong>地域理解:</strong> 地域の特性や商習慣を尊重したご提案",
+                "about.bullets.2": "<strong>実用志向:</strong> 現場の方が使いやすく、効果を実感できる仕組み",
+                "about.bullets.3": "<strong>一貫支援:</strong> 企画から運用保守まで、長期的なパートナーとして",
+                "logic.title": "観光・飲食産業への取り組み",
+                "logic.subtitle": "人と地域をつなぐ重要な産業だからこそ、<br>デジタルによる業務効率化が、心を通わせる「おもてなし」の時間を創出します。",
+                "logic.cards.1.title": "業務負担の軽減",
+                "logic.cards.1.desc": "定型業務を自動化し、スタッフ様が本来の接客業務に注力できる環境を整えます。",
+                "logic.cards.2.title": "サービス品質の向上",
+                "logic.cards.2.desc": "オペレーションを円滑にすることで、お客様をお待たせしないスムーズな体験を提供します。",
+                "logic.cards.3.title": "働きやすい環境作り",
+                "logic.cards.3.desc": "データに基づいた無理のない人員配置で、スタッフ様の満足度向上にも寄与します。",
+                "logic.cards.4.title": "安心できる運営体制",
+                "logic.cards.4.desc": "ヒューマンエラーを未然に防ぐ仕組みを導入し、安定した店舗運営をサポートします。",
+                "product.kicker": "OMNIBUS QR ORDER",
+                "product.headline.1": "すべてのお客様に、",
+                "product.headline.2": "快適な注文体験を。",
+                "product.body": "お客様のスマートフォンから簡単に注文できるシステムです。<br>言葉の壁や待ち時間を解消し、お店とお客様の双方にゆとりを生み出します。",
+                "product.features.1.title": "多言語対応で安心",
+                "product.features.1.desc": "海外からのお客様も、母国語のメニューで安心してご注文いただけます。",
+                "product.features.2.title": "データ活用で改善へ",
+                "product.features.2.desc": "日々の注文状況を可視化し、より良いお店作りのヒントをご提供します。",
+                "product.cta": "デモを依頼する",
+                "footer.cta_title": "まずは、お話をお聞かせください。",
+                "footer.cta_body": "現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。",
+                "footer.cta_line": "LINEで相談する",
+                "footer.cta_email": "メールで相談する",
+                "footer.desc": "滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。",
+                "footer.services.1": "業務改善・自動化",
+                "footer.services.2": "ITツール導入支援",
+                "footer.services.3": "AI活用コンサルティング",
+                "footer.services.4": "QRオーダーシステム",
+                "footer.company.1": "私たちについて",
+                "footer.company.2": "導入事例",
+                "footer.company.3": "お知らせ"
+            },
+            en: {
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.product": "Product",
+                "nav.contact": "Contact",
+                "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
+                "about.headline.1": "Harvesting Digital Certainty",
+                "about.headline.2": "for Local Communities",
+                "about.subcopy": "We stand from the same perspective as those on the ground,<br>co-creating and realizing 'truly useful' digital utilization.",
+                "about.cta": "Feel free to contact us",
+                "about.left_title": "A Partner Close to Your Vision,<br>Building the Future Together",
+                "about.left_body": "Omnibus does not consider system implementation as the goal. We derive optimal solutions for challenges faced by companies in the Shiga/Biwa area through dialogue and accompany you responsibly until they are established.",
+                "about.bullets.1": "<strong>Regional Understanding:</strong> Proposals respecting local characteristics and business customs.",
+                "about.bullets.2": "<strong>Practicality Oriented:</strong> Mechanisms that are easy for on-site staff to use and feel effective.",
+                "about.bullets.3": "<strong>Consistent Support:</strong> As a long-term partner from planning to operation and maintenance.",
+                "logic.title": "Initiatives for Tourism & Food",
+                "logic.subtitle": "Because it's a vital industry connecting people and regions,<br>operational efficiency through digital means creates time for 'omotenashi' to connect hearts.",
+                "logic.cards.1.title": "Reducing Workload",
+                "logic.cards.1.desc": "Automating routine tasks to create an environment where staff can focus on essential customer service.",
+                "logic.cards.2.title": "Improving Service Quality",
+                "logic.cards.2.desc": "Smoothing operations to provide a seamless experience without making customers wait.",
+                "logic.cards.3.title": "Creating a Better Workplace",
+                "logic.cards.3.desc": "Contributing to staff satisfaction through reasonable personnel allocation based on data.",
+                "logic.cards.4.title": "Reliable Operation System",
+                "logic.cards.4.desc": "Introducing mechanisms to prevent human error and supporting stable store operations.",
+                "product.kicker": "OMNIBUS QR ORDER",
+                "product.headline.1": "A Comfortable Ordering",
+                "product.headline.2": "Experience for Everyone.",
+                "product.body": "A system where customers can easily order from their smartphones.<br>Eliminating language barriers and wait times, creating ease for both the shop and customers.",
+                "product.features.1.title": "Peace of Mind Multilingual",
+                "product.features.1.desc": "Overseas guests can also order with peace of mind using menus in their native language.",
+                "product.features.2.title": "Improvement via Data",
+                "product.features.2.desc": "Visualizing daily order status to provide hints for creating a better shop.",
+                "product.cta": "Request a Demo",
+                "footer.cta_title": "First, let's talk.",
+                "footer.cta_body": "We will listen carefully to any current issues or requests.<br>We will not make unreasonable solicitations, so please feel free to consult with us.",
+                "footer.cta_line": "Consult via LINE",
+                "footer.cta_email": "Consult via Email",
+                "footer.desc": "Supporting DX for local companies mainly in the Shiga/Biwa area.<br>Aiming to be a partner walking and growing together.",
+                "footer.services.1": "Business Improvement/Automation",
+                "footer.services.2": "IT Tool Implementation Support",
+                "footer.services.3": "AI Utilization Consulting",
+                "footer.services.4": "QR Order System",
+                "footer.company.1": "About Us",
+                "footer.company.2": "Case Studies",
+                "footer.company.3": "News"
+            }
+        };
+
+        function setLang(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update Active Button State
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Simple logic: Assuming order is [0]=JA, [1]=EN
+            if (lang === 'ja') document.querySelectorAll('.lang-btn')[0].classList.add('active');
+            else document.querySelectorAll('.lang-btn')[1].classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
