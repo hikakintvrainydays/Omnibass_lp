@@ -1,0 +1,175 @@
+/* ========================================
+   Omni Bass LP アニメーション定義
+   ANTIGRAVITY.md ブランドコンセプト準拠
+   ======================================== */
+
+/* ----------------------------------------
+   1. 琵琶湖アイコン - ゆったりとした波紋
+   データレイク（情報の集積地）を表現
+   ---------------------------------------- */
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        box-shadow:
+            0 0 0 0 rgba(14, 165, 233, 0.4),
+            0 0 0 0 rgba(56, 189, 248, 0.2);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow:
+            0 0 0 10px rgba(14, 165, 233, 0.15),
+            0 0 0 20px rgba(56, 189, 248, 0.08);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 0 15px rgba(14, 165, 233, 0),
+            0 0 0 25px rgba(56, 189, 248, 0);
+    }
+}
+
+/* 琵琶湖アイコン適用クラス */
+.biwa-icon {
+    animation: ripple 3s ease-in-out infinite;
+}
+
+.biwa-icon:hover {
+    animation-play-state: paused;
+}
+
+
+/* ----------------------------------------
+   2. Streamline - パスが流れるアニメーション
+   業務効率化（流れるようなプロセス）を表現
+   ---------------------------------------- */
+@keyframes flow {
+    0% {
+        stroke-dashoffset: 100;
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0.3;
+    }
+}
+
+/* Streamlineアイコン適用クラス */
+.streamline-icon {
+    stroke-dasharray: 100;
+    animation: flow 2s ease-in-out infinite;
+}
+
+.streamline-icon:hover {
+    animation-duration: 1s;
+    /* ホバー時に加速 */
+}
+
+/* 流線（複数本）の順次アニメーション */
+.streamline-icon .line-1 {
+    animation: flow 2.5s ease-in-out infinite;
+    animation-delay: 0s;
+}
+
+.streamline-icon .line-2 {
+    animation: flow 2.5s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+
+.streamline-icon .line-3 {
+    animation: flow 2.5s ease-in-out infinite;
+    animation-delay: 0.6s;
+}
+
+
+/* ----------------------------------------
+   3. 彦根城 - 下からせり上がるビルドアップ
+   強力な基盤（滋賀に根ざす信頼）を表現
+   ---------------------------------------- */
+@keyframes build-up {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+        clip-path: inset(100% 0 0 0);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* 彦根城アイコン適用クラス */
+.hikone-castle {
+    animation: build-up 1.5s ease-out forwards;
+}
+
+/* スクロールトリガー用（初期状態） */
+.hikone-castle-hidden {
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.hikone-castle-hidden.visible {
+    animation: build-up 1.5s ease-out forwards;
+}
+
+
+/* ----------------------------------------
+   汎用ホバーエフェクト（統一ルール準拠）
+   スケールアップ + 浮き上がり + 影
+   ---------------------------------------- */
+.section-icon-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-icon-hover:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ----------------------------------------
+   フェードイン アニメーション
+   ---------------------------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.fade-in-delay-1 {
+    animation: fadeIn 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.fade-in-delay-2 {
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+.fade-in-delay-3 {
+    animation: fadeIn 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+}

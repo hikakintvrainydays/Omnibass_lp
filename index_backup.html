@@ -7,9 +7,6 @@
     <title>Omni Bass | Digital shift for local</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link href="styles/design_system.css" rel="stylesheet">
-    <link href="styles/animations.css" rel="stylesheet">
-    <link href="styles/responsive.css" rel="stylesheet">
     <style>
         :root {
             --color-primary: #2563EB;
@@ -134,23 +131,62 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* Update to Suntory-like Royal Blue for high contrast with white text */
-            background: linear-gradient(135deg, #0052D4 0%, #209CFF 100%);
+            /* User Request: Brighter Blue base with "seeping yellow-green" accent */
+            background:
+                radial-gradient(circle at 80% 20%, rgba(220, 255, 120, 0.6) 0%, transparent 60%),
+                linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
             color: white;
+            /* Ensure background stays behind text */
             z-index: 1;
         }
 
-        /* ... */
+        /* The Scrolling Wrapper - Moves over the fixed layer */
+        .content-scroller {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero: Solid background to cover Vision initially */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        /* Spacer: Transparent window that lets Vision show through */
+        .vision-window-spacer {
+            height: 100vh;
+            background: transparent;
+            pointer-events: none;
+            /* Let clicks pass through if needed */
+        }
+
+        /* Main Content: Solid background to cover Vision after scrolling past spacer */
+        .main-content-bg {
+            background-color: #F8FAFC;
+            /* Matches body/light theme */
+            position: relative;
+            z-index: 20;
+            padding-top: 4rem;
+            /* Initial padding for the content block */
+        }
 
         /* Gradient Overlay - Overlaps the Vision Spacer */
         .gradient-overlay {
             height: 100vh;
             width: 100%;
-            /* Make it more transparent at the top to show Vision text clearly */
+            /* User Request: Remove darkness, fade to light/white */
             background: linear-gradient(to bottom,
                     rgba(248, 250, 252, 0) 0%,
-                    rgba(248, 250, 252, 0.1) 70%,
+                    rgba(248, 250, 252, 0.4) 60%,
                     rgba(248, 250, 252, 1) 100%);
+            /* Fades into #F8FAFC (Main Content Color) */
             position: relative;
             z-index: 15;
             margin-top: -100vh;
@@ -204,9 +240,8 @@
         /* Philosophy Head (Inside Fixed Layer) */
         .philosophy-head {
             text-align: center;
-            max-width: 100%;
-            /* Allow full width to prevent line breaks */
-            width: 100%;
+            max-width: 1000px;
+            /* Wider to allow large text to breathe */
             margin: 0 auto;
             padding: 0 1rem;
             position: relative;
@@ -215,25 +250,22 @@
         }
 
         .vision-kicker {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 0.2em;
-            margin-bottom: 3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
             display: block;
             text-transform: uppercase;
             opacity: 0.9;
         }
 
         .main-copy {
-            font-size: clamp(2rem, 5vw, 4.5rem);
-            /* Adjusted for better fit */
-            font-weight: 700;
-            line-height: 1.6;
-            margin-bottom: 0;
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            /* Reduced size */
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
             letter-spacing: 0.05em;
-            word-break: keep-all;
-            /* Prevent unnatural breaks */
-            overflow-wrap: break-word;
         }
 
         .main-copy span {
@@ -1133,12 +1165,16 @@
     <div class="vision-fixed-layer" id="vision-fixed">
         <div class="container">
             <div class="philosophy-head" style="margin: 0 auto;">
-                <span class="vision-kicker">Our Purpose</span>
+                <span class="vision-kicker">Our Vision</span>
                 <h2 class="main-copy">
-                    <span data-i18n="about.headline.1">人と地域と紡ぎあい、</span><br>
-                    <span data-i18n="about.headline.2">デジタルの実りを創造し、</span><br>
-                    <span data-i18n="about.headline.3">「おもてなし」を未来へつなぐ。</span>
+                    <span data-i18n="about.headline.1">現場と響きあい、</span><br>
+                    <span data-i18n="about.headline.2">地域の未来を拓き、</span><br>
+                    <span data-i18n="about.headline.3">確かなデジタルの実りを。</span>
                 </h2>
+                <p class="sub-copy" data-i18n="about.subcopy">
+                    私たちは、現場の皆様と同じ視点に立ち、<br>
+                    本当に役立つ解決策を共に創り上げ、持続可能な地域の明日を照らします。
+                </p>
 
                 <!-- CTA Button Removed as per request -->
             </div>
@@ -1167,219 +1203,150 @@
         <!-- Main Content Area (Covers Vision Again) -->
         <div class="main-content-bg">
 
-            <!-- ニュース (News) - データレイク × 琵琶湖デザイン -->
-            <section class="section news-section data-lake-section" id="news">
-                <!-- 琵琶湖（データレイク）背景SVG -->
-                <svg class="data-lake-bg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <!-- 湖面グラデーション -->
-                        <linearGradient id="lake-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#E0F7FF" stop-opacity="0.3" />
-                            <stop offset="50%" stop-color="#BAE6FD" stop-opacity="0.4" />
-                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.2" />
-                        </linearGradient>
-                        <!-- 波紋グラデーション -->
-                        <radialGradient id="ripple-gradient" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.3" />
-                            <stop offset="70%" stop-color="#0EA5E9" stop-opacity="0.1" />
-                            <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0" />
-                        </radialGradient>
-                    </defs>
-                    <!-- 琵琶湖シルエット（大きめ・背景） -->
-                    <path class="lake-silhouette" d="M600,50 
-                           C450,80 380,150 400,280 
-                           L480,230 C520,200 580,210 560,300 
-                           L450,380 C350,450 300,550 330,650 
-                           C370,720 480,780 600,740 
-                           L660,650 C750,530 840,370 870,250 
-                           C900,140 810,60 600,50 Z" fill="url(#lake-gradient)" opacity="0.6" />
-                    <!-- 竹生島 -->
-                    <circle class="takeshima" cx="480" cy="290" r="20" fill="#0EA5E9" opacity="0.2" />
-                    <!-- 波紋1（中央） -->
-                    <circle class="ripple ripple-1" cx="550" cy="400" r="80" stroke="#0EA5E9" stroke-width="2"
-                        fill="none" opacity="0.3" />
-                    <!-- 波紋2（広がる） -->
-                    <circle class="ripple ripple-2" cx="550" cy="400" r="150" stroke="#0EA5E9" stroke-width="1.5"
-                        fill="none" opacity="0.2" />
-                    <!-- 波紋3（さらに広がる） -->
-                    <circle class="ripple ripple-3" cx="550" cy="400" r="250" stroke="#0EA5E9" stroke-width="1"
-                        fill="none" opacity="0.1" />
-                    <!-- データ粒子（流入するデータ） -->
-                    <circle class="data-particle particle-1" cx="200" cy="200" r="4" fill="#38BDF8" opacity="0.6" />
-                    <circle class="data-particle particle-2" cx="900" cy="300" r="3" fill="#0EA5E9" opacity="0.5" />
-                    <circle class="data-particle particle-3" cx="350" cy="500" r="5" fill="#7DD3FC" opacity="0.4" />
-                    <circle class="data-particle particle-4" cx="800" cy="450" r="3" fill="#38BDF8" opacity="0.5" />
-                </svg>
-
+            <!-- ニュース (News) - ハイクラス企業HPデザイン -->
+            <section class="section news-section" id="news">
                 <div class="container">
                     <div class="news-header">
-
+                        <!-- 琵琶湖（データレイク）アイコン -->
+                        <div class="section-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 琵琶湖の正確な形状 -->
+                                <path
+                                    d="M20 4C16 5 13 8 14 14L17 12C19 10 22 11 21 15L16 18C12 21 10 27 11 32C12 35 16 38 20 36L22 32C25 26 28 18 29 12C30 7 27 4 20 4Z"
+                                    fill="rgba(14, 165, 233, 0.15)" stroke="#0ea5e9" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <!-- 竹生島 -->
+                                <circle cx="17" cy="16" r="2" fill="#0ea5e9" opacity="0.7" />
+                                <!-- データ波紋 -->
+                                <circle cx="20" cy="22" r="6" stroke="#0ea5e9" stroke-width="0.75" opacity="0.4"
+                                    fill="none" />
+                                <circle cx="20" cy="22" r="10" stroke="#0ea5e9" stroke-width="0.5" opacity="0.25"
+                                    fill="none" />
+                            </svg>
+                        </div>
                         <h2>ニュース</h2>
-                        <p class="news-subtitle">最新の企業情報をお届けします</p>
+                        <p class="news-subtitle">データの湖から最新情報をお届け</p>
                     </div>
 
-                    <div class="news-list data-lake-news">
-                        <!-- ニュースアイテム 1 -->
-                        <article class="news-item data-island news-item--coming-soon">
-                            <time class="news-date">2026.01.--</time>
-                            <div class="news-content">
-                                <span class="news-tag">お知らせ</span>
-                                <h3 class="news-title">近日公開予定</h3>
-                            </div>
-                        </article>
-                        <!-- ニュースアイテム 2 -->
-                        <article class="news-item data-island news-item--coming-soon">
-                            <time class="news-date">2026.01.--</time>
-                            <div class="news-content">
-                                <span class="news-tag">プレス</span>
-                                <h3 class="news-title">近日公開予定</h3>
-                            </div>
-                        </article>
-                        <!-- ニュースアイテム 3 -->
-                        <article class="news-item data-island news-item--coming-soon">
-                            <time class="news-date">2026.01.--</time>
-                            <div class="news-content">
-                                <span class="news-tag">お知らせ</span>
-                                <h3 class="news-title">近日公開予定</h3>
-                            </div>
-                        </article>
-                        <!-- ニュースアイテム 4 -->
-                        <article class="news-item data-island news-item--coming-soon">
-                            <time class="news-date">2026.01.--</time>
-                            <div class="news-content">
-                                <span class="news-tag">ブログ</span>
-                                <h3 class="news-title">近日公開予定</h3>
-                            </div>
-                        </article>
-                        <!-- ニュースアイテム 5 -->
-                        <article class="news-item data-island news-item--coming-soon">
-                            <time class="news-date">2026.01.--</time>
-                            <div class="news-content">
-                                <span class="news-tag">お知らせ</span>
-                                <h3 class="news-title">近日公開予定</h3>
-                            </div>
-                        </article>
+                    <div class="news-list">
+                        <div class="news-placeholder-box">
+                            <p>現在準備中です</p>
+                        </div>
                     </div>
 
-                    <div class="news-footer">
-                        <a href="#" class="news-more">すべてのニュースを見る <span class="news-more-arrow">→</span></a>
+                    <div style="text-align: center;">
+                        <a href="#" class="news-more">一覧を見る →</a>
                     </div>
                 </div>
             </section>
 
-            <!-- 事業案内 (Service) - YamatoDX風 水の流れデザイン -->
+            <!-- 事業案内 (Service) - ハイクラス企業HPデザイン -->
             <section class="section service-section" id="services">
-                <!-- Streamline - 川の流れデザイン（S字カーブ） -->
-                <svg class="streamline-svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                    <defs>
-                        <!-- 川の流れグラデーション -->
-                        <linearGradient id="river-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.15" />
-                            <stop offset="25%" stop-color="#0EA5E9" stop-opacity="0.35" />
-                            <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.4" />
-                            <stop offset="75%" stop-color="#0EA5E9" stop-opacity="0.35" />
-                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.2" />
-                        </linearGradient>
-                        <!-- 水面の輝き -->
-                        <linearGradient id="water-shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.3" />
-                            <stop offset="50%" stop-color="#E0F2FE" stop-opacity="0.5" />
-                            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.3" />
-                        </linearGradient>
-                    </defs>
-                    <!-- メインの川の流れ（太い帯） -->
-                    <path class="river-main" d="M-200,400 
-                           C0,400 100,100 400,100 
-                           C700,100 800,500 1100,500 
-                           C1300,500 1400,200 1600,200" stroke="url(#river-gradient)" stroke-width="180" fill="none"
-                        stroke-linecap="round" />
-                    <!-- 川の中央線（輝き） -->
-                    <path class="river-shimmer" d="M-200,400 
-                           C0,400 100,100 400,100 
-                           C700,100 800,500 1100,500 
-                           C1300,500 1400,200 1600,200" stroke="url(#water-shimmer)" stroke-width="60" fill="none"
-                        stroke-linecap="round" />
-                    <!-- 水の流れライン1（細い波） -->
-                    <path class="river-wave river-wave-1" d="M-180,380 
-                           C20,380 120,120 420,120 
-                           C720,120 820,480 1120,480 
-                           C1320,480 1420,220 1620,220" stroke="#7DD3FC" stroke-width="4" fill="none"
-                        stroke-linecap="round" stroke-dasharray="20 40" opacity="0.6" />
-                    <!-- 水の流れライン2 -->
-                    <path class="river-wave river-wave-2" d="M-220,420 
-                           C-20,420 80,80 380,80 
-                           C680,80 780,520 1080,520 
-                           C1280,520 1380,180 1580,180" stroke="#0EA5E9" stroke-width="3" fill="none"
-                        stroke-linecap="round" stroke-dasharray="15 35" opacity="0.5" />
-                </svg>
-
                 <div class="container">
                     <div class="service-header">
-                        <p class="service-label">サービス</p>
+                        <!-- Streamline（川の流れ）アイコン -->
+                        <div class="section-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 川の流れ（3本の曲線ライン） -->
+                                <path d="M4 12C10 8 18 16 26 12C32 9 36 12 38 14" stroke="#0ea5e9" stroke-width="2"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M2 20C8 16 16 24 24 20C30 17 34 20 38 22" stroke="#0ea5e9" stroke-width="2.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M4 28C10 24 18 32 26 28C32 25 36 28 38 30" stroke="#0ea5e9" stroke-width="2"
+                                    stroke-linecap="round" fill="none" />
+                                <!-- フロードット -->
+                                <circle cx="12" cy="20" r="2" fill="#0ea5e9" opacity="0.6" />
+                                <circle cx="26" cy="20" r="2" fill="#0ea5e9" opacity="0.6" />
+                            </svg>
+                        </div>
                         <h2>事業案内</h2>
+                        <p class="service-subtitle">業務効率化への流れ</p>
                     </div>
 
-                    <!-- 3つのサービス（YamatoDX風） -->
-                    <div class="service-grid">
-                        <!-- サービス 1: 食の体験ツアー -->
-                        <div class="service-item">
-                            <div class="service-bg-number">01</div>
-                            <h3 class="service-title">食の体験ツアー</h3>
-                            <ul class="service-list">
-                                <li>外国人観光客向け滋賀の食文化体験</li>
-                                <li>近江牛・鮒寿司など地元グルメ</li>
-                                <li>農家訪問・料理教室プラン</li>
-                            </ul>
+                    <!-- 3ステップ（横並び） -->
+                    <div class="service-steps">
+                        <div class="service-step">
+                            <div class="step-number">1</div>
+                            <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                            <h3 class="step-title">業務改善・自動化</h3>
+                            <p class="step-desc">Excel業務の整理・自動化、手作業フローの見直し、定型作業の自動処理設計</p>
                         </div>
-
-                        <!-- サービス 2: QRオーダーシステム -->
-                        <div class="service-item">
-                            <div class="service-bg-number">02</div>
-                            <h3 class="service-title">QRオーダーシステム</h3>
-                            <ul class="service-list">
-                                <li>インバウンド対応の多言語メニュー</li>
-                                <li>スマホで簡単セルフオーダー</li>
-                                <li>飲食店への導入・運用サポート</li>
-                            </ul>
+                        <div class="service-step">
+                            <div class="step-number">2</div>
+                            <div class="step-icon"><i class="fas fa-cloud"></i></div>
+                            <h3 class="step-title">IT・ツール導入支援</h3>
+                            <p class="step-desc">クラウドツール導入サポート、小規模システム開発、API連携・データ活用</p>
                         </div>
-
-                        <!-- サービス 3: 中小企業DX支援 -->
-                        <div class="service-item">
-                            <div class="service-bg-number">03</div>
-                            <h3 class="service-title">中小企業DX支援</h3>
-                            <ul class="service-list">
-                                <li>業務効率化・自動化の設計支援</li>
-                                <li>クラウドツール導入サポート</li>
-                                <li>AI・生成AIの実務活用提案</li>
-                            </ul>
+                        <div class="service-step">
+                            <div class="step-number">3</div>
+                            <div class="step-icon"><i class="fas fa-robot"></i></div>
+                            <h3 class="step-title">AI・生成AI活用</h3>
+                            <p class="step-desc">ChatGPTなど生成AIの業務活用、社内利用を前提とした設計支援</p>
                         </div>
-                    </div>
-
-                    <div class="service-footer">
-                        <a href="#contact" class="service-cta">サービス詳細を見る →</a>
                     </div>
                 </div>
             </section>
 
             <!-- 会社概要 (Company) - 彦根城背景デザイン -->
             <section class="section company-section hikone-castle-section" id="about">
-                <!-- 彦根城背景画像 -->
-                <img src="images/hikone_castle_bg.png" alt="Hikone Castle" class="hikone-castle-bg-img"
-                    style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); max-width: 100%; max-height: 85%; height: auto; width: auto; opacity: 0.12; pointer-events: none; z-index: 0;" />
+                <!-- 彦根城シルエット背景 -->
+                <svg class="hikone-castle-bg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax meet">
+                    <g fill="rgba(75, 85, 99, 0.08)">
+                        <!-- メイン天守 -->
+                        <rect x="170" y="120" width="60" height="80" />
+                        <rect x="175" y="95" width="50" height="30" />
+                        <rect x="180" y="70" width="40" height="30" />
+                        <rect x="185" y="50" width="30" height="25" />
+                        <!-- 屋根 -->
+                        <polygon points="165,120 200,100 235,120" />
+                        <polygon points="172,95 200,78 228,95" />
+                        <polygon points="177,70 200,55 223,70" />
+                        <polygon points="182,50 200,35 218,50" />
+                        <!-- 先端 -->
+                        <rect x="198" y="25" width="4" height="12" />
+                        <!-- 左翼 -->
+                        <rect x="100" y="150" width="75" height="50" />
+                        <polygon points="95,150 137,130 180,150" />
+                        <!-- 右翼 -->
+                        <rect x="225" y="150" width="75" height="50" />
+                        <polygon points="220,150 262,130 305,150" />
+                    </g>
+                </svg>
 
                 <div class="container">
                     <div class="company-header" style="text-align: center; margin-bottom: 3rem;">
-
+                        <!-- 彦根城シルエットアイコン -->
+                        <div class="section-icon"
+                            style="background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 天守閣メイン -->
+                                <rect x="16" y="22" width="8" height="12" fill="#64748b" opacity="0.3" />
+                                <rect x="17" y="17" width="6" height="6" fill="#64748b" opacity="0.3" />
+                                <rect x="18" y="13" width="4" height="5" fill="#64748b" opacity="0.3" />
+                                <!-- 屋根 -->
+                                <polygon points="14,22 20,18 26,22" fill="#64748b" opacity="0.5" />
+                                <polygon points="15,17 20,14 25,17" fill="#64748b" opacity="0.5" />
+                                <polygon points="16,13 20,10 24,13" fill="#64748b" opacity="0.5" />
+                                <!-- 先端 -->
+                                <rect x="19" y="6" width="2" height="4" fill="#64748b" opacity="0.6" />
+                                <!-- 石垣ライン -->
+                                <path d="M10 34 L20 32 L30 34" stroke="#64748b" stroke-width="1.5" fill="none"
+                                    opacity="0.4" />
+                                <!-- 左右の翼 -->
+                                <rect x="8" y="28" width="8" height="6" fill="#64748b" opacity="0.2" />
+                                <rect x="24" y="28" width="8" height="6" fill="#64748b" opacity="0.2" />
+                            </svg>
+                        </div>
                         <h2 style="font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">会社概要
                         </h2>
                         <p style="font-size: 1rem; color: #6b7280;">滋賀に根ざす、揺るぎない基盤</p>
                     </div>
-                    <div class="company-content" style="text-align: center;">
-                        <p class="company-desc" style="text-align: center; display: inline-block;">
+                    <div class="company-content">
+                        <p class="company-desc">
                             Omni Bassは、滋賀・琵琶湖エリアを拠点に、地域企業のDXを推進する会社です。<br>
                             最新のAI技術を駆使し、中小企業の業務改善と成長を支援しています。
                         </p>
-                        <a href="#" class="service-list-cta">こちらから →</a>
+                        <a href="#" class="company-link">こちらから →</a>
                     </div>
                 </div>
             </section>
@@ -1389,7 +1356,7 @@
                 <div class="container">
                     <div class="service-list-header">
                         <h2>サービス一覧</h2>
-                        <p class="service-list-subtitle">小さなところからすべてを解決する</p>
+                        <p class="service-list-subtitle">近江から世界へ</p>
                         <p class="service-list-desc">
                             DXの推進に役立つソリューションを複数展開しています。<br>
                             詳細は準備が整い次第お知らせします。
@@ -1634,10 +1601,9 @@
                 "nav.product": "Product",
                 "nav.contact": "お問い合わせ",
                 "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
-                "about.label": "Our Purpose",
-                "about.headline.1": "人と地域と紡ぎあい、",
-                "about.headline.2": "デジタルの実りを創造し、",
-                "about.headline.3": "「おもてなし」を未来へつなぐ。",
+                "about.headline.1": "現場と響きあい、",
+                "about.headline.2": "地域の未来を拓き、",
+                "about.headline.3": "確かなデジタルの実りを。",
                 "about.subcopy": "私たちは、現場の皆様と同じ視点に立ち、<br>本当に役立つ解決策を共に創り上げ、持続可能な地域の明日を照らします。",
                 "about.cta": "お気軽にご相談ください",
                 "about.left_title": "現場の想いに寄り添い、<br>未来を創るパートナー",
@@ -1781,44 +1747,7 @@
         // 初期化
         document.addEventListener('DOMContentLoaded', () => {
             initStreamlineAnimation();
-            initWaterStreamAnimation();
         });
-
-        // 水のラインの高度なスクロール連動アニメーション
-        function initWaterStreamAnimation() {
-            const serviceSection = document.getElementById('services');
-            const mainPath = document.querySelector('.stream-path.stream-main');
-            const particles = document.querySelectorAll('.particle');
-
-            if (!serviceSection || !mainPath) return;
-
-            // 初期状態: パーティクル非表示
-            particles.forEach(p => {
-                p.style.opacity = '0';
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // メインラインの描画アニメーション開始
-                        mainPath.classList.add('animate');
-
-                        // パーティクルを順番に表示
-                        particles.forEach((particle, index) => {
-                            setTimeout(() => {
-                                particle.style.transition = 'opacity 0.8s ease-out';
-                                particle.style.opacity = particle.getAttribute('opacity') || '0.8';
-                            }, 800 + (index * 400));
-                        });
-
-                        // 一度発動したら監視終了
-                        observer.disconnect();
-                    }
-                });
-            }, { threshold: 0.15 });
-
-            observer.observe(serviceSection);
-        }
 
         // Hikone Castle Scroll Trigger
         function checkCastleVisible() {

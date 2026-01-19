@@ -1,0 +1,61 @@
+/* ========================================
+   Responsive Styles (Mobile & Tablet)
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .main-copy {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Hero */
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    /* Navigation */
+    .nav {
+        display: none;
+        /* ハンバーガーメニュー未実装のため一時非表示 */
+    }
+
+    /* Layout Grids */
+    .philo-grid,
+    .prod-layout,
+    .service-steps,
+    .service-cards,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* News */
+    .news-item {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .news-header h2 {
+        font-size: 2rem;
+    }
+
+    /* Service Steps */
+    .service-step {
+        margin-bottom: 2rem;
+    }
+
+    /* Hikone Castle */
+    .castle-silhouette {
+        width: 80%;
+    }
+
+    /* Typography */
+    .os-section-title {
+        font-size: 1.75rem;
+    }
+}

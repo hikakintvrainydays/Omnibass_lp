@@ -1,13 +1,2086 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Omnibus | 琵琶湖から、ビジネスに新しい流れを</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni Bass | Digital shift for local</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #2563EB;
+            --color-secondary: #7C3AED;
+            --color-text: #1F2937;
+            --color-light: #F8FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            background: var(--color-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: 0.3s;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #111;
+            letter-spacing: -0.05em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+
+        .lang-switch {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 99px;
+            gap: 4px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--color-primary);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-btn {
+            background: var(--color-primary);
+            color: white !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 99px;
+            margin-left: 1rem;
+        }
+
+        /* --- Parallax Reveal Styles --- */
+
+        /* The Fixed Layer (Vision) - Sits behind everything */
+        .vision-fixed-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* User Request: Brighter Blue base with "seeping yellow-green" accent */
+            background:
+                radial-gradient(circle at 80% 20%, rgba(220, 255, 120, 0.6) 0%, transparent 60%),
+                linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+            color: white;
+            /* Ensure background stays behind text */
+            z-index: 1;
+        }
+
+        /* The Scrolling Wrapper - Moves over the fixed layer */
+        .content-scroller {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero: Solid background to cover Vision initially */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        /* Spacer: Transparent window that lets Vision show through */
+        .vision-window-spacer {
+            height: 100vh;
+            background: transparent;
+            pointer-events: none;
+            /* Let clicks pass through if needed */
+        }
+
+        /* Main Content: Solid background to cover Vision after scrolling past spacer */
+        .main-content-bg {
+            background-color: #F8FAFC;
+            /* Matches body/light theme */
+            position: relative;
+            z-index: 20;
+            padding-top: 4rem;
+            /* Initial padding for the content block */
+        }
+
+        /* Gradient Overlay - Overlaps the Vision Spacer */
+        .gradient-overlay {
+            height: 100vh;
+            width: 100%;
+            /* User Request: Remove darkness, fade to light/white */
+            background: linear-gradient(to bottom,
+                    rgba(248, 250, 252, 0) 0%,
+                    rgba(248, 250, 252, 0.4) 60%,
+                    rgba(248, 250, 252, 1) 100%);
+            /* Fades into #F8FAFC (Main Content Color) */
+            position: relative;
+            z-index: 15;
+            margin-top: -100vh;
+            pointer-events: none;
+        }
+
+        /* Canvas */
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8.5vw, 6.5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.8rem;
+            color: #111;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 0.8rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, #ccc, transparent);
+        }
+
+        /* Philosophy Head (Inside Fixed Layer) */
+        .philosophy-head {
+            text-align: center;
+            max-width: 1000px;
+            /* Wider to allow large text to breathe */
+            margin: 0 auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 5;
+            /* Ensure text is above the fixed background */
+        }
+
+        .vision-kicker {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            display: block;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .main-copy {
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            /* Reduced size */
+            font-weight: 900;
+            line-height: 1.5;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .main-copy span {
+            display: inline-block;
+        }
+
+        .sub-copy {
+            font-size: clamp(1.2rem, 2vw, 2rem);
+            /* Larger sub-copy */
+            font-weight: 500;
+            line-height: 1.8;
+            opacity: 0.95;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border-radius: 99px;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Philosophy Grid (In Main Content) */
+        .philo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .philo-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .philo-list li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            margin-top: 8px;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        /* Logic */
+        .logic {
+            background: #f9fafb;
+        }
+
+        .logic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .logic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            border: 1px solid #f3f4f6;
+            transition: 0.3s;
+        }
+
+        .logic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .logic-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .logic-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .logic-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        /* Product */
+        .product {
+            overflow: hidden;
+        }
+
+        .prod-layout {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .prod-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .prod-img {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .prod-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+            transform: rotate(2deg);
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .f-icon {
+            width: 40px;
+            height: 40px;
+            background: #eff6ff;
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding-top: 6rem;
+            padding-bottom: 3rem;
+        }
+
+        .cta-area {
+            text-align: center;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--color-primary);
+            display: inline-block;
+            padding: 1rem 3rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .cta-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 3rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            transition: transform 0.2s;
+            min-width: 280px;
+        }
+
+        .cta-line {
+            background: #06C755;
+        }
+
+        .cta-email {
+            background: var(--color-primary);
+        }
+
+        .cta-btn-item:hover {
+            transform: translateY(-3px);
+            opacity: 0.95;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+        }
+
+        .footer-grid h4 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-grid ul {
+            list-style: none;
+        }
+
+        .footer-grid li {
+            margin-bottom: 0.8rem;
+        }
+
+        .bottom-bar {
+            margin-top: 4rem;
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            color: #6B7280;
+            font-size: 0.8rem;
+        }
+
+        /* Hikone Castle Animation */
+        .castle-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin-top: 4rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .castle-silhouette {
+            width: 300px;
+            height: auto;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .castle-silhouette.built {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .castle-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #6B7280;
+            opacity: 0;
+            transition: opacity 1s ease-out 0.5s;
+        }
+
+        .castle-caption.visible {
+            opacity: 1;
+        }
+
+        /* O.SINGULARITY Style Sections */
+        .os-section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--color-text);
+        }
+
+        /* Service Cards */
+        .service-section {
+            background: #fff;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #f9fafb;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .service-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .service-card-desc {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card-link {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .service-card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* News Section */
+        .news-section {
+            background: #f9fafb;
+        }
+
+        .news-content {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .news-placeholder {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            padding: 3rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px dashed #d1d5db;
+        }
+
+        .news-link-wrapper {
+            text-align: center;
+        }
+
+        .news-link {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .news-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Company Section */
+        .company-section {
+            background: #fff;
+        }
+
+        .company-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .company-desc {
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .company-link {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .company-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Service List Section */
+        .service-list-section {
+            background: #f9fafb;
+            text-align: center;
+        }
+
+        .service-list-desc {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .service-list-link {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .service-list-link:hover {
+            text-decoration: underline;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section .os-section-title {
+            color: white;
+        }
+
+        .cta-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* OS Footer */
+        .os-footer {
+            background: #111827;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-nav a {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover {
+            color: white;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* ========================================
+           ニュースセクション - ハイクラス企業HPデザイン
+           ======================================== */
+        .news-section {
+            position: relative;
+            background: #ffffff;
+            padding: 6rem 0;
+        }
+
+        .news-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .news-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* セクションアイコン共通スタイル */
+        .section-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-icon:hover {
+            transform: scale(1.08) translateY(-4px);
+            box-shadow: 0 12px 30px rgba(14, 165, 233, 0.25);
+        }
+
+        .section-icon svg {
+            width: 36px;
+            height: 36px;
+            transition: all 0.3s ease;
+        }
+
+        .section-icon:hover svg {
+            filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.5));
+        }
+
+        .news-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .news-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 0;
+        }
+
+        /* ニュースカード */
+        .news-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .news-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            background: #fafafa;
+            padding-left: 1rem;
+            margin-left: -1rem;
+            margin-right: -1rem;
+            padding-right: 1rem;
+        }
+
+        .news-date {
+            font-size: 0.875rem;
+            color: #6b7280;
+            min-width: 100px;
+            font-weight: 500;
+        }
+
+        .news-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #0ea5e9;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .news-title {
+            font-size: 1rem;
+            color: #1f2937;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .news-title:hover {
+            color: #0ea5e9;
+        }
+
+        .news-placeholder-box {
+            text-align: center;
+            padding: 3rem;
+            background: #f9fafb;
+            border-radius: 1rem;
+            border: 1px dashed #e5e7eb;
+        }
+
+        .news-placeholder-box p {
+            color: #9ca3af;
+            margin: 0;
+        }
+
+        .news-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            color: #0ea5e9;
+            font-weight: 600;
+            border: 2px solid #0ea5e9;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+        }
+
+        .news-more:hover {
+            background: #0ea5e9;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .news-item {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .news-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* ========================================
+           事業案内セクション - ハイクラス企業HPデザイン
+           ======================================== */
+        .service-section {
+            position: relative;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            padding: 6rem 0;
+        }
+
+        .service-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .service-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .service-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-subtitle {
+            font-size: 1rem;
+            color: #0ea5e9;
+            font-weight: 500;
+        }
+
+        /* 3ステップ横並び */
+        .service-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .service-steps {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+            }
+        }
+
+        .service-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f4f6;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.12);
+            border-color: #38bdf8;
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        .step-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #f0f9ff;
+            border-radius: 12px;
+            color: #0284c7;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           彦根城背景デザイン
+           ======================================== */
+        .hikone-castle-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .hikone-castle-bg {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            opacity: 1;
+        }
+
+        .castle-subtitle {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* ========================================
+           サービス一覧セクション - ハイクラス企業HPデザイン
+           ======================================== */
+        .service-list-section {
+            position: relative;
+            background: #ffffff;
+            padding: 6rem 0;
+        }
+
+        .service-list-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+
+        .service-list-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .service-list-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-list-subtitle {
+            font-size: 1rem;
+            color: #0ea5e9;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .service-list-desc {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .service-list-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            font-weight: 600;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .service-list-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+        }
+
+        /* ========================================
+           革新的デザイン: Glassmorphism効果
+           ======================================== */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* セクションアイコン強化ホバー - 波紋パーティクル効果 */
+        .section-icon {
+            position: relative;
+            overflow: visible;
+        }
+
+        .section-icon::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .section-icon:hover::before {
+            opacity: 1;
+            transform: scale(1.5);
+        }
+
+        .section-icon:hover svg {
+            animation: iconPulse 0.8s ease-in-out;
+        }
+
+        @keyframes iconPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* ========================================
+           近江牛セクション - 地域の誇り
+           ======================================== */
+        .omi-beef-section {
+            position: relative;
+            background: linear-gradient(180deg, #f8faf8 0%, #f0f7f4 100%);
+            padding: 6rem 0;
+            overflow: hidden;
+        }
+
+        .omi-beef-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(100, 180, 160, 0.5), transparent);
+        }
+
+        .omi-beef-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .omi-beef-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.75rem;
+        }
+
+        .omi-beef-subtitle {
+            font-size: 1rem;
+            color: rgba(100, 180, 160, 1);
+            font-weight: 500;
+        }
+
+        /* 近江牛アイコン */
+        .section-icon.omi-beef-icon {
+            background: linear-gradient(135deg, rgba(100, 180, 160, 0.2) 0%, rgba(100, 180, 160, 0.1) 100%);
+        }
+
+        .section-icon.omi-beef-icon:hover {
+            box-shadow: 0 12px 30px rgba(100, 180, 160, 0.25);
+        }
+
+        .section-icon.omi-beef-icon::before {
+            background: radial-gradient(circle, rgba(100, 180, 160, 0.3) 0%, transparent 70%);
+        }
+
+        .omi-beef-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .omi-beef-tagline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .omi-beef-desc {
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .omi-beef-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, rgba(100, 180, 160, 1), rgba(80, 160, 140, 1));
+            color: white;
+            font-weight: 600;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(100, 180, 160, 0.3);
+        }
+
+        .omi-beef-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(100, 180, 160, 0.4);
+        }
+
+        /* 品質カード（Glassmorphism適用） */
+        .quality-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .quality-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .quality-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 180, 160, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .quality-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(100, 180, 160, 0.15);
+            border-color: rgba(100, 180, 160, 0.4);
+        }
+
+        .quality-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quality-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .quality-card-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           滋賀トライアングル（フッター装飾）
+           ======================================== */
+        .shiga-triangle {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            padding: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .shiga-triangle-item {
+            text-align: center;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .shiga-triangle-item:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .shiga-triangle-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shiga-triangle-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .philo-grid,
+            .prod-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">Omni Bass</div>
+            <nav class="nav">
+                <a href="#about" data-i18n="nav.about">About</a>
+                <a href="#services" data-i18n="nav.services">Services</a>
+                <a href="#product" data-i18n="nav.product">Product</a>
+                <a href="#contact" data-i18n="nav.contact">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Vision (Fixed Background Layer) -->
+    <div class="vision-fixed-layer" id="vision-fixed">
+        <div class="container">
+            <div class="philosophy-head" style="margin: 0 auto;">
+                <span class="vision-kicker">Our Vision</span>
+                <h2 class="main-copy">
+                    <span data-i18n="about.headline.1">現場と響きあい、</span><br>
+                    <span data-i18n="about.headline.2">地域の未来を拓き、</span><br>
+                    <span data-i18n="about.headline.3">確かなデジタルの実りを。</span>
+                </h2>
+                <p class="sub-copy" data-i18n="about.subcopy">
+                    私たちは、現場の皆様と同じ視点に立ち、<br>
+                    本当に役立つ解決策を共に創り上げ、持続可能な地域の明日を照らします。
+                </p>
+
+                <!-- CTA Button Removed as per request -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrolling Foreground Content -->
+    <div class="content-scroller">
+
+        <!-- Hero Section (Covers Vision Initially) -->
+        <section class="hero" id="hero-canvas-container">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-content">
+                <h1>Omni Bass</h1>
+                <p data-i18n="hero.subtitle">DIGITAL SHIFT FOR LOCAL</p>
+            </div>
+            <div class="scroll-down"></div>
+        </section>
+
+        <!-- Spacer (Reveals Vision) -->
+        <div class="vision-window-spacer"></div>
+
+        <!-- Gradient Overlay (Overlaps Spacer) -->
+        <div class="gradient-overlay"></div>
+
+        <!-- Main Content Area (Covers Vision Again) -->
+        <div class="main-content-bg">
+
+            <!-- ニュース (News) - ハイクラス企業HPデザイン -->
+            <section class="section news-section" id="news">
+                <div class="container">
+                    <div class="news-header">
+                        <!-- 琵琶湖（データレイク）アイコン -->
+                        <div class="section-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 琵琶湖の正確な形状 -->
+                                <path
+                                    d="M20 4C16 5 13 8 14 14L17 12C19 10 22 11 21 15L16 18C12 21 10 27 11 32C12 35 16 38 20 36L22 32C25 26 28 18 29 12C30 7 27 4 20 4Z"
+                                    fill="rgba(14, 165, 233, 0.15)" stroke="#0ea5e9" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <!-- 竹生島 -->
+                                <circle cx="17" cy="16" r="2" fill="#0ea5e9" opacity="0.7" />
+                                <!-- データ波紋 -->
+                                <circle cx="20" cy="22" r="6" stroke="#0ea5e9" stroke-width="0.75" opacity="0.4"
+                                    fill="none" />
+                                <circle cx="20" cy="22" r="10" stroke="#0ea5e9" stroke-width="0.5" opacity="0.25"
+                                    fill="none" />
+                            </svg>
+                        </div>
+                        <h2>ニュース</h2>
+                        <p class="news-subtitle">データの湖から最新情報をお届け</p>
+                    </div>
+
+                    <div class="news-list">
+                        <div class="news-placeholder-box">
+                            <p>現在準備中です</p>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <a href="#" class="news-more">一覧を見る →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 事業案内 (Service) - ハイクラス企業HPデザイン -->
+            <section class="section service-section" id="services">
+                <div class="container">
+                    <div class="service-header">
+                        <!-- Streamline（川の流れ）アイコン -->
+                        <div class="section-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 川の流れ（3本の曲線ライン） -->
+                                <path d="M4 12C10 8 18 16 26 12C32 9 36 12 38 14" stroke="#0ea5e9" stroke-width="2"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M2 20C8 16 16 24 24 20C30 17 34 20 38 22" stroke="#0ea5e9" stroke-width="2.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M4 28C10 24 18 32 26 28C32 25 36 28 38 30" stroke="#0ea5e9" stroke-width="2"
+                                    stroke-linecap="round" fill="none" />
+                                <!-- フロードット -->
+                                <circle cx="12" cy="20" r="2" fill="#0ea5e9" opacity="0.6" />
+                                <circle cx="26" cy="20" r="2" fill="#0ea5e9" opacity="0.6" />
+                            </svg>
+                        </div>
+                        <h2>事業案内</h2>
+                        <p class="service-subtitle">業務効率化への流れ</p>
+                    </div>
+
+                    <!-- 3ステップ（横並び） -->
+                    <div class="service-steps">
+                        <div class="service-step">
+                            <div class="step-number">1</div>
+                            <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                            <h3 class="step-title">業務改善・自動化</h3>
+                            <p class="step-desc">Excel業務の整理・自動化、手作業フローの見直し、定型作業の自動処理設計</p>
+                        </div>
+                        <div class="service-step">
+                            <div class="step-number">2</div>
+                            <div class="step-icon"><i class="fas fa-cloud"></i></div>
+                            <h3 class="step-title">IT・ツール導入支援</h3>
+                            <p class="step-desc">クラウドツール導入サポート、小規模システム開発、API連携・データ活用</p>
+                        </div>
+                        <div class="service-step">
+                            <div class="step-number">3</div>
+                            <div class="step-icon"><i class="fas fa-robot"></i></div>
+                            <h3 class="step-title">AI・生成AI活用</h3>
+                            <p class="step-desc">ChatGPTなど生成AIの業務活用、社内利用を前提とした設計支援</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 会社概要 (Company) - 彦根城背景デザイン -->
+            <section class="section company-section hikone-castle-section" id="about">
+                <!-- 彦根城シルエット背景 -->
+                <svg class="hikone-castle-bg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax meet">
+                    <g fill="rgba(75, 85, 99, 0.08)">
+                        <!-- メイン天守 -->
+                        <rect x="170" y="120" width="60" height="80" />
+                        <rect x="175" y="95" width="50" height="30" />
+                        <rect x="180" y="70" width="40" height="30" />
+                        <rect x="185" y="50" width="30" height="25" />
+                        <!-- 屋根 -->
+                        <polygon points="165,120 200,100 235,120" />
+                        <polygon points="172,95 200,78 228,95" />
+                        <polygon points="177,70 200,55 223,70" />
+                        <polygon points="182,50 200,35 218,50" />
+                        <!-- 先端 -->
+                        <rect x="198" y="25" width="4" height="12" />
+                        <!-- 左翼 -->
+                        <rect x="100" y="150" width="75" height="50" />
+                        <polygon points="95,150 137,130 180,150" />
+                        <!-- 右翼 -->
+                        <rect x="225" y="150" width="75" height="50" />
+                        <polygon points="220,150 262,130 305,150" />
+                    </g>
+                </svg>
+
+                <div class="container">
+                    <div class="company-header" style="text-align: center; margin-bottom: 3rem;">
+                        <!-- 彦根城シルエットアイコン -->
+                        <div class="section-icon"
+                            style="background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 天守閣メイン -->
+                                <rect x="16" y="22" width="8" height="12" fill="#64748b" opacity="0.3" />
+                                <rect x="17" y="17" width="6" height="6" fill="#64748b" opacity="0.3" />
+                                <rect x="18" y="13" width="4" height="5" fill="#64748b" opacity="0.3" />
+                                <!-- 屋根 -->
+                                <polygon points="14,22 20,18 26,22" fill="#64748b" opacity="0.5" />
+                                <polygon points="15,17 20,14 25,17" fill="#64748b" opacity="0.5" />
+                                <polygon points="16,13 20,10 24,13" fill="#64748b" opacity="0.5" />
+                                <!-- 先端 -->
+                                <rect x="19" y="6" width="2" height="4" fill="#64748b" opacity="0.6" />
+                                <!-- 石垣ライン -->
+                                <path d="M10 34 L20 32 L30 34" stroke="#64748b" stroke-width="1.5" fill="none"
+                                    opacity="0.4" />
+                                <!-- 左右の翼 -->
+                                <rect x="8" y="28" width="8" height="6" fill="#64748b" opacity="0.2" />
+                                <rect x="24" y="28" width="8" height="6" fill="#64748b" opacity="0.2" />
+                            </svg>
+                        </div>
+                        <h2 style="font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">会社概要
+                        </h2>
+                        <p style="font-size: 1rem; color: #6b7280;">滋賀に根ざす、揺るぎない基盤</p>
+                    </div>
+                    <div class="company-content">
+                        <p class="company-desc">
+                            Omni Bassは、滋賀・琵琶湖エリアを拠点に、地域企業のDXを推進する会社です。<br>
+                            最新のAI技術を駆使し、中小企業の業務改善と成長を支援しています。
+                        </p>
+                        <a href="#" class="company-link">こちらから →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 近江牛セクション - 地域の誇り（🐄 高品質なサービス）-->
+            <section class="section omi-beef-section" id="omi-beef">
+                <div class="container">
+                    <div class="omi-beef-header">
+                        <!-- 近江牛SVGアイコン -->
+                        <div class="section-icon omi-beef-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 牛のシルエット（幾何学的・正確） -->
+                                <ellipse cx="20" cy="22" rx="14" ry="10" fill="rgba(100, 180, 160, 0.15)"
+                                    stroke="rgba(100, 180, 160, 0.8)" stroke-width="1.5" />
+                                <!-- 頭部 -->
+                                <ellipse cx="10" cy="18" rx="5" ry="4" fill="rgba(100, 180, 160, 0.15)"
+                                    stroke="rgba(100, 180, 160, 0.8)" stroke-width="1.5" />
+                                <!-- 角 -->
+                                <path d="M7 14 L5 10" stroke="rgba(100, 180, 160, 0.8)" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <path d="M13 14 L15 10" stroke="rgba(100, 180, 160, 0.8)" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                                <!-- 脚 -->
+                                <line x1="12" y1="30" x2="12" y2="36" stroke="rgba(100, 180, 160, 0.6)" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <line x1="18" y1="31" x2="18" y2="36" stroke="rgba(100, 180, 160, 0.6)" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <line x1="24" y1="31" x2="24" y2="36" stroke="rgba(100, 180, 160, 0.6)" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <line x1="30" y1="30" x2="30" y2="36" stroke="rgba(100, 180, 160, 0.6)" stroke-width="2"
+                                    stroke-linecap="round" />
+                                <!-- 品質マーク -->
+                                <circle cx="32" cy="12" r="4" fill="rgba(100, 180, 160, 0.3)"
+                                    stroke="rgba(100, 180, 160, 1)" stroke-width="1" />
+                                <text x="32" y="14" text-anchor="middle" font-size="5" fill="rgba(100, 180, 160, 1)"
+                                    font-weight="bold">★</text>
+                            </svg>
+                        </div>
+                        <h2>サービス品質</h2>
+                        <p class="omi-beef-subtitle">近江の誇りを、サービスに。</p>
+                    </div>
+
+                    <div class="omi-beef-content">
+                        <p class="omi-beef-tagline">
+                            近江牛のような「本物」のサービスを、<br>
+                            地域の皆様へお届けします。
+                        </p>
+                        <p class="omi-beef-desc">
+                            400年の歴史を持つ近江牛は、丹念な育成と品質へのこだわりで世界に認められています。<br>
+                            私たちもまた、お客様一社一社と向き合い、本物の価値を創造することを使命としています。
+                        </p>
+                    </div>
+
+                    <!-- 品質カード（Glassmorphism） -->
+                    <div class="quality-cards">
+                        <div class="quality-card">
+                            <div class="quality-card-icon">🏆</div>
+                            <h3 class="quality-card-title">本物の価値</h3>
+                            <p class="quality-card-desc">表面的な機能ではなく、お客様のビジネスに本当に寄り添う解決策を。</p>
+                        </div>
+                        <div class="quality-card">
+                            <div class="quality-card-icon">🤝</div>
+                            <h3 class="quality-card-title">信頼の関係</h3>
+                            <p class="quality-card-desc">一過性のサポートではなく、長期的なパートナーシップを築きます。</p>
+                        </div>
+                        <div class="quality-card">
+                            <div class="quality-card-icon">🌱</div>
+                            <h3 class="quality-card-title">持続する成長</h3>
+                            <p class="quality-card-desc">導入して終わりではなく、継続的な改善と成長をサポートします。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- サービス一覧 (Service List) - ハイクラス企業HPデザイン -->
+            <section class="section service-list-section" id="service-list">
+                <div class="container">
+                    <div class="service-list-header">
+                        <h2>サービス一覧</h2>
+                        <p class="service-list-subtitle">近江から世界へ</p>
+                        <p class="service-list-desc">
+                            DXの推進に役立つソリューションを複数展開しています。<br>
+                            詳細は準備が整い次第お知らせします。
+                        </p>
+                        <a href="#contact" class="service-list-cta">お問い合わせはこちら →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer (Restored Original) -->
+            <footer id="contact">
+                <div class="container">
+                    <div class="cta-area">
+                        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;"
+                            data-i18n="footer.cta_title">
+                            まずは、お話をお聞かせください。</h2>
+                        <p style="margin-bottom: 3rem; color: #ccc;" data-i18n="footer.cta_body">
+                            現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。</p>
+
+                        <div class="cta-grid">
+                            <a href="#" class="cta-btn-item cta-line">
+                                <i class="fab fa-line" style="font-size: 1.5rem;"></i>
+                                <span data-i18n="footer.cta_line">LINEで相談する</span>
+                            </a>
+                            <a href="mailto:contact@omnibus.jp" class="cta-btn-item cta-email">
+                                <i class="fas fa-envelope" style="font-size: 1.2rem;"></i>
+                                <span data-i18n="footer.cta_email">メールで相談する</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-grid">
+                        <div style="grid-column: span 2;">
+                            <span
+                                style="font-size: 1.5rem; font-weight: 700; display: block; margin-bottom: 1rem; color: white;">Omnibass</span>
+                            <p data-i18n="footer.desc">滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。</p>
+                        </div>
+                        <div>
+                            <h4 data-i18n="nav.services">Services</h4>
+                            <ul>
+                                <li data-i18n="footer.services.1">業務改善・自動化</li>
+                                <li data-i18n="footer.services.2">ITツール導入支援</li>
+                                <li data-i18n="footer.services.3">AI活用コンサルティング</li>
+                                <li data-i18n="footer.services.4">QRオーダーシステム</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Company</h4>
+                            <ul>
+                                <li data-i18n="footer.company.1">私たちについて</li>
+                                <li data-i18n="footer.company.2">導入事例</li>
+                                <li data-i18n="footer.company.3">お知らせ</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 滋賀トライアングル - 地域の三位一体 -->
+                    <div class="shiga-triangle">
+                        <div class="shiga-triangle-item">
+                            <div class="shiga-triangle-icon">🌊</div>
+                            <div class="shiga-triangle-label">琵琶湖</div>
+                        </div>
+                        <div class="shiga-triangle-item">
+                            <div class="shiga-triangle-icon">🏯</div>
+                            <div class="shiga-triangle-label">彦根城</div>
+                        </div>
+                        <div class="shiga-triangle-item">
+                            <div class="shiga-triangle-icon">🐄</div>
+                            <div class="shiga-triangle-label">近江牛</div>
+                        </div>
+                    </div>
+
+                    <div class="bottom-bar">
+                        <p>&copy; 2026 Omnibass Inc. All rights reserved.</p>
+                        <div>
+                            <i class="fab fa-twitter" style="margin-left: 1rem; cursor: pointer;"></i>
+                            <i class="fab fa-facebook" style="margin-left: 1rem; cursor: pointer;"></i>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div> <!-- End .main-content-bg -->
+    </div> <!-- End .content-scroller -->
+
+    <!-- Gentle Aquarium Boids Script -->
+    <script>
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let boids = [];
+        const numBoids = 80;
+        const visualRange = 100;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            // Also update fixed layer height to match if needed, but 100vh handles it nicely
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Boid {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.dx = Math.random() * 2 - 1;
+                this.dy = Math.random() * 2 - 1;
+                this.history = [];
+                this.type = Math.floor(Math.random() * 3);
+                this.isRare = Math.random() < 0.05;
+
+                if (this.isRare) {
+                    this.color = '#F59E0B';
+                    this.size = Math.random() * 4 + 3;
+                } else {
+                    const colors = ['#60A5FA', '#38BDF8', '#818CF8', '#93C5FD'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.size = Math.random() * 3 + 2;
+                }
+            }
+
+            update() {
+                let xMove = 0, yMove = 0;
+                let avgDX = 0, avgDY = 0;
+                let avgX = 0, avgY = 0;
+                let numNeighbors = 0;
+
+                for (let other of boids) {
+                    if (other !== this) {
+                        const dist = Math.hypot(this.x - other.x, this.y - other.y);
+                        if (dist < visualRange) {
+                            if (dist < 30) {
+                                xMove += this.x - other.x;
+                                yMove += this.y - other.y;
+                            }
+                            avgDX += other.dx;
+                            avgDY += other.dy;
+                            avgX += other.x;
+                            avgY += other.y;
+                            numNeighbors++;
+                        }
+                    }
+                }
+
+                if (numNeighbors > 0) {
+                    avgDX /= numNeighbors;
+                    avgDY /= numNeighbors;
+                    avgX /= numNeighbors;
+                    avgY /= numNeighbors;
+                    this.dx += (avgDX - this.dx) * 0.02;
+                    this.dy += (avgDY - this.dy) * 0.02;
+                    this.dx += (avgX - this.x) * 0.0002;
+                    this.dy += (avgY - this.y) * 0.0002;
+                }
+
+                this.dx += xMove * 0.015;
+                this.dy += yMove * 0.015;
+
+                const centerX = width / 2;
+                const centerY = height / 2;
+                this.dx += (centerX - this.x) * 0.00001;
+                this.dy += (centerY - this.y) * 0.00001;
+
+                const speed = Math.hypot(this.dx, this.dy);
+                const maxSpeed = this.isRare ? 2.2 : 1.8;
+                const minSpeed = 0.8;
+
+                if (speed > maxSpeed) {
+                    this.dx = (this.dx / speed) * maxSpeed;
+                    this.dy = (this.dy / speed) * maxSpeed;
+                } else if (speed < minSpeed) {
+                    this.dx = (this.dx / speed) * minSpeed;
+                    this.dy = (this.dy / speed) * minSpeed;
+                }
+
+                this.x += this.dx;
+                this.y += this.dy;
+
+                const margin = 50;
+                if (this.x < -margin) this.x = width + margin;
+                if (this.x > width + margin) this.x = -margin;
+                if (this.y < -margin) this.y = height + margin;
+                if (this.y > height + margin) this.y = -margin;
+
+                this.history.push({ x: this.x, y: this.y });
+                if (this.history.length > 8) this.history.shift();
+            }
+
+            draw() {
+                const angle = Math.atan2(this.dy, this.dx);
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(angle);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.9;
+                ctx.beginPath();
+                if (this.type === 0) {
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(-this.size * 2, -this.size * 0.8);
+                    ctx.lineTo(-this.size * 2, this.size * 0.8);
+                    ctx.fill();
+                } else if (this.type === 1) {
+                    ctx.ellipse(0, 0, this.size * 2, this.size * 0.6, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.moveTo(-this.size * 1.5, 0);
+                    ctx.lineTo(-this.size * 2.5, -this.size);
+                    ctx.lineTo(-this.size * 2.5, this.size);
+                    ctx.fill();
+                } else {
+                    ctx.moveTo(this.size * 1.5, 0);
+                    ctx.lineTo(-this.size, this.size);
+                    ctx.lineTo(-this.size * 0.5, 0);
+                    ctx.lineTo(-this.size, -this.size);
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                if (this.isRare) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = 0.2;
+                    if (this.history.length > 1) {
+                        ctx.moveTo(this.history[0].x, this.history[0].y);
+                        for (let i = 1; i < this.history.length; i++) {
+                            ctx.lineTo(this.history[i].x, this.history[i].y);
+                        }
+                    }
+                    ctx.stroke();
+                }
+            }
+        }
+
+        for (let i = 0; i < numBoids; i++) {
+            boids.push(new Boid());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let boid of boids) {
+                boid.update();
+                boid.draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Translation Logic -->
+    <script>
+        const translations = {
+            ja: {
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.product": "Product",
+                "nav.contact": "お問い合わせ",
+                "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
+                "about.headline.1": "現場と響きあい、",
+                "about.headline.2": "地域の未来を拓き、",
+                "about.headline.3": "確かなデジタルの実りを。",
+                "about.subcopy": "私たちは、現場の皆様と同じ視点に立ち、<br>本当に役立つ解決策を共に創り上げ、持続可能な地域の明日を照らします。",
+                "about.cta": "お気軽にご相談ください",
+                "about.left_title": "現場の想いに寄り添い、<br>未来を創るパートナー",
+                "about.left_body": "Omnibusは、システムの導入をゴールとは考えません。滋賀・琵琶湖エリアの企業様が抱える課題に対し、対話を通じて最適な解決策を導き出し、定着まで責任を持って伴走いたします。",
+                "about.bullets.1": "<strong>地域理解:</strong> 地域の特性や商習慣を尊重したご提案",
+                "about.bullets.2": "<strong>実用志向:</strong> 現場の方が使いやすく、効果を実感できる仕組み",
+                "about.bullets.3": "<strong>一貫支援:</strong> 企画から運用保守まで、長期的なパートナーとして",
+                "logic.title": "観光・飲食産業への取り組み",
+                "logic.subtitle": "人と地域をつなぐ重要な産業だからこそ、<br>デジタルによる業務効率化が、心を通わせる「おもてなし」の時間を創出します。",
+                "logic.cards.1.title": "業務負担の軽減",
+                "logic.cards.1.desc": "定型業務を自動化し、スタッフ様が本来の接客業務に注力できる環境を整えます。",
+                "logic.cards.2.title": "サービス品質の向上",
+                "logic.cards.2.desc": "オペレーションを円滑にすることで、お客様をお待たせしないスムーズな体験を提供します。",
+                "logic.cards.3.title": "働きやすい環境作り",
+                "logic.cards.3.desc": "データに基づいた無理のない人員配置で、スタッフ様の満足度向上にも寄与します。",
+                "logic.cards.4.title": "安心できる運営体制",
+                "logic.cards.4.desc": "ヒューマンエラーを未然に防ぐ仕組みを導入し、安定した店舗運営をサポートします。",
+                "product.kicker": "OMNIBUS QR ORDER",
+                "product.headline.1": "すべてのお客様に、",
+                "product.headline.2": "快適な注文体験を。",
+                "product.body": "お客様のスマートフォンから簡単に注文できるシステムです。<br>言葉の壁や待ち時間を解消し、お店とお客様の双方にゆとりを生み出します。",
+                "product.features.1.title": "多言語対応で安心",
+                "product.features.1.desc": "海外からのお客様も、母国語のメニューで安心してご注文いただけます。",
+                "product.features.2.title": "データ活用で改善へ",
+                "product.features.2.desc": "日々の注文状況を可視化し、より良いお店作りのヒントをご提供します。",
+                "product.cta": "デモを依頼する",
+                "footer.cta_title": "まずは、お話をお聞かせください。",
+                "footer.cta_body": "現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。",
+                "footer.cta_line": "LINEで相談する",
+                "footer.cta_email": "メールで相談する",
+                "footer.desc": "滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。",
+                "footer.services.1": "業務改善・自動化",
+                "footer.services.2": "ITツール導入支援",
+                "footer.services.3": "AI活用コンサルティング",
+                "footer.services.4": "QRオーダーシステム",
+                "footer.company.1": "私たちについて",
+                "footer.company.2": "導入事例",
+                "footer.company.3": "お知らせ"
+            },
+            en: {
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.product": "Product",
+                "nav.contact": "Contact",
+                "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
+                "about.headline.1": "Resonating with the field,",
+                "about.headline.2": "Opening the region's future,",
+                "about.headline.3": "Harvesting certain digital value.",
+                "about.subcopy": "We stand from the same perspective as those on the ground,<br>co-creating truly useful solutions and illuminating a sustainable future for the region.",
+                "about.cta": "Feel free to contact us",
+                "about.left_title": "A Partner Close to Your Vision,<br>Building the Future Together",
+                "about.left_body": "Omnibus does not consider system implementation as the goal. We derive optimal solutions for challenges faced by companies in the Shiga/Biwa area through dialogue and accompany you responsibly until they are established.",
+                "about.bullets.1": "<strong>Regional Understanding:</strong> Proposals respecting local characteristics and business customs.",
+                "about.bullets.2": "<strong>Practicality Oriented:</strong> Mechanisms that are easy for on-site staff to use and feel effective.",
+                "about.bullets.3": "<strong>Consistent Support:</strong> As a long-term partner from planning to operation and maintenance.",
+                "logic.title": "Initiatives for Tourism & Food",
+                "logic.subtitle": "Because it's a vital industry connecting people and regions,<br>operational efficiency through digital means creates time for 'omotenashi' to connect hearts.",
+                "logic.cards.1.title": "Reducing Workload",
+                "logic.cards.1.desc": "Automating routine tasks to create an environment where staff can focus on essential customer service.",
+                "logic.cards.2.title": "Improving Service Quality",
+                "logic.cards.2.desc": "Smoothing operations to provide a seamless experience without making customers wait.",
+                "logic.cards.3.title": "Creating a Better Workplace",
+                "logic.cards.3.desc": "Contributing to staff satisfaction through reasonable personnel allocation based on data.",
+                "logic.cards.4.title": "Reliable Operation System",
+                "logic.cards.4.desc": "Introducing mechanisms to prevent human error and supporting stable store operations.",
+                "product.kicker": "OMNIBUS QR ORDER",
+                "product.headline.1": "A Comfortable Ordering",
+                "product.headline.2": "Experience for Everyone.",
+                "product.body": "A system where customers can easily order from their smartphones.<br>Eliminating language barriers and wait times, creating ease for both the shop and customers.",
+                "product.features.1.title": "Peace of Mind Multilingual",
+                "product.features.1.desc": "Overseas guests can also order with peace of mind using menus in their native language.",
+                "product.features.2.title": "Improvement via Data",
+                "product.features.2.desc": "Visualizing daily order status to provide hints for creating a better shop.",
+                "product.cta": "Request a Demo",
+                "footer.cta_title": "First, let's talk.",
+                "footer.cta_body": "We will listen carefully to any current issues or requests.<br>We will not make unreasonable solicitations, so please feel free to consult with us.",
+                "footer.cta_line": "Consult via LINE",
+                "footer.cta_email": "Consult via Email",
+                "footer.desc": "Supporting DX for local companies mainly in the Shiga/Biwa area.<br>Aiming to be a partner walking and growing together.",
+                "footer.services.1": "Business Improvement/Automation",
+                "footer.services.2": "IT Tool Implementation Support",
+                "footer.services.3": "AI Utilization Consulting",
+                "footer.services.4": "QR Order System",
+                "footer.company.1": "About Us",
+                "footer.company.2": "Case Studies",
+                "footer.company.3": "News"
+            }
+        };
+
+        function setLang(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (lang === 'ja') document.querySelectorAll('.lang-btn')[0].classList.add('active');
+            else document.querySelectorAll('.lang-btn')[1].classList.add('active');
+        }
+
+        // Streamline River Scroll Animation
+        function initStreamlineAnimation() {
+            const riverPath = document.getElementById('river-path');
+            const streamlineSection = document.getElementById('services');
+            const nodes = document.querySelectorAll('.step-node');
+
+            if (!riverPath || !streamlineSection) return;
+
+            // IntersectionObserverでセクションが画面に入ったらアニメーション開始
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 川のパスを描画（stroke-dashoffsetを0に） - 4秒でゆっくり
+                        riverPath.style.transition = 'stroke-dashoffset 4s cubic-bezier(0.4, 0, 0.2, 1)';
+                        riverPath.style.strokeDashoffset = '0';
+
+                        // ノードを順番にフェードイン + スケールアニメーション
+                        nodes.forEach((node, index) => {
+                            setTimeout(() => {
+                                node.style.transition = 'opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                                node.style.opacity = '1';
+                                node.style.transform = 'scale(1.2)';
+                                // 少し縮んで落ち着く
+                                setTimeout(() => {
+                                    node.style.transform = 'scale(1)';
+                                }, 400);
+                            }, 1000 + (index * 800));
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(streamlineSection);
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            initStreamlineAnimation();
+        });
+
+        // Hikone Castle Scroll Trigger
+        function checkCastleVisible() {
+            const castle = document.getElementById('hikone-castle');
+            const caption = document.getElementById('castle-caption');
+            const container = document.getElementById('castle-container');
+
+            if (!container) return;
+
+            const rect = container.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Trigger when castle container is 80% visible
+            if (rect.top < windowHeight * 0.8) {
+                castle.classList.add('built');
+                caption.classList.add('visible');
+            }
+        }
+
+        window.addEventListener('scroll', checkCastleVisible);
+        window.addEventListener('load', checkCastleVisible);
+    </script>
+</body>
+
 </html>
