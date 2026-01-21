@@ -157,6 +157,13 @@
             pointer-events: none;
         }
 
+        /* Main Content Background - prevents gray area on mobile */
+        .main-content-bg {
+            background: #ffffff;
+            position: relative;
+            z-index: 20;
+        }
+
         /* Canvas */
         #hero-canvas {
             position: absolute;
@@ -925,6 +932,14 @@
             font-weight: 500;
         }
 
+        .service-intro {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-top: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
         /* 3ステップ横並び */
         .service-steps {
             display: grid;
@@ -1317,6 +1332,7 @@
                     <div class="service-header">
                         <p class="service-label">サービス</p>
                         <h2>事業案内</h2>
+                        <p class="service-intro">この想いを、3つの事業で形にしています。</p>
                     </div>
 
                     <!-- 3つのサービス（YamatoDX風） -->
@@ -1372,11 +1388,12 @@
 
                         <h2 style="font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">会社概要
                         </h2>
-                        <p style="font-size: 1rem; color: #6b7280;">滋賀に根ざす、揺るぎない基盤</p>
+                        <p style="font-size: 1rem; color: #6b7280;">滋賀大学発、地域と共に歩むチーム</p>
                     </div>
                     <div class="company-content" style="text-align: center;">
                         <p class="company-desc" style="text-align: center; display: inline-block;">
-                            Omni Bassは、滋賀・琵琶湖エリアを拠点に、地域企業のDXを推進する会社です。<br>
+                            Omni Bassは、滋賀大学の学生が立ち上げたベンチャーです。<br>
+                            滋賀・琵琶湖エリアを拠点に、地域企業のDXを推進。<br>
                             最新のAI技術を駆使し、中小企業の業務改善と成長を支援しています。
                         </p>
                         <a href="#" class="service-list-cta">こちらから →</a>
