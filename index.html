@@ -902,6 +902,7 @@
             position: relative;
             background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
             padding: 6rem 0;
+            overflow: hidden;
         }
 
         .service-section::before {
@@ -1108,7 +1109,37 @@
             box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
         }
 
+        /* 川の流れSVG - 基本スタイル */
+        .streamline-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* デスクトップでは横の激しい流れを表示 */
+        .streamline-desktop {
+            display: block;
+        }
+
+        /* モバイルでは縦の流れを非表示（初期） */
+        .streamline-mobile {
+            display: none;
+        }
+
+        /* モバイル専用改行 - デフォルトで非表示 */
+        .br-mobile {
+            display: none;
+        }
+
         @media (max-width: 768px) {
+            /* モバイルでは改行を表示 */
+            .br-mobile {
+                display: inline;
+            }
             .hero h1 {
                 font-size: 3.5rem;
             }
@@ -1120,6 +1151,64 @@
 
             .nav {
                 display: none;
+            }
+
+            /* モバイルでは川の流れを切り替え */
+            .streamline-desktop {
+                display: none;
+            }
+
+            .streamline-mobile {
+                display: block;
+                width: 60%;
+                height: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0.95;
+            }
+
+            /* 会社概要セクションのタイトル調整 */
+            .company-header h2 {
+                font-size: 2rem !important;
+                line-height: 1.4 !important;
+            }
+
+            .company-desc {
+                font-size: 0.95rem !important;
+                line-height: 1.8 !important;
+            }
+
+            /* サービス一覧セクションの調整 */
+            .service-list-header h2 {
+                font-size: 2rem !important;
+                line-height: 1.4 !important;
+            }
+
+            .service-list-subtitle {
+                font-size: 0.95rem !important;
+                line-height: 1.6 !important;
+            }
+
+            .service-list-desc {
+                font-size: 0.9rem !important;
+                line-height: 1.8 !important;
+            }
+
+            /* フッターCTAエリアの調整 */
+            .cta-area h2 {
+                font-size: 1.8rem !important;
+                line-height: 1.4 !important;
+            }
+
+            .cta-area p {
+                font-size: 0.9rem !important;
+                line-height: 1.8 !important;
+            }
+
+            /* フッター説明文の調整 */
+            footer p {
+                font-size: 0.85rem !important;
+                line-height: 1.7 !important;
             }
         }
     </style>
@@ -1284,8 +1373,8 @@
 
             <!-- 事業案内 (Service) - YamatoDX風 水の流れデザイン -->
             <section class="section service-section" id="services">
-                <!-- Streamline - 川の流れデザイン（S字カーブ） -->
-                <svg class="streamline-svg" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                <!-- Streamline - 川の流れデザイン（S字カーブ） デスクトップ用 -->
+                <svg class="streamline-svg streamline-desktop" viewBox="0 0 1200 600" preserveAspectRatio="none">
                     <defs>
                         <!-- 川の流れグラデーション -->
                         <linearGradient id="river-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1303,36 +1392,84 @@
                         </linearGradient>
                     </defs>
                     <!-- メインの川の流れ（太い帯） -->
-                    <path class="river-main" d="M-200,400 
-                           C0,400 100,100 400,100 
-                           C700,100 800,500 1100,500 
+                    <path class="river-main" d="M-200,400
+                           C0,400 100,100 400,100
+                           C700,100 800,500 1100,500
                            C1300,500 1400,200 1600,200" stroke="url(#river-gradient)" stroke-width="180" fill="none"
                         stroke-linecap="round" />
                     <!-- 川の中央線（輝き） -->
-                    <path class="river-shimmer" d="M-200,400 
-                           C0,400 100,100 400,100 
-                           C700,100 800,500 1100,500 
+                    <path class="river-shimmer" d="M-200,400
+                           C0,400 100,100 400,100
+                           C700,100 800,500 1100,500
                            C1300,500 1400,200 1600,200" stroke="url(#water-shimmer)" stroke-width="60" fill="none"
                         stroke-linecap="round" />
                     <!-- 水の流れライン1（細い波） -->
-                    <path class="river-wave river-wave-1" d="M-180,380 
-                           C20,380 120,120 420,120 
-                           C720,120 820,480 1120,480 
+                    <path class="river-wave river-wave-1" d="M-180,380
+                           C20,380 120,120 420,120
+                           C720,120 820,480 1120,480
                            C1320,480 1420,220 1620,220" stroke="#7DD3FC" stroke-width="4" fill="none"
                         stroke-linecap="round" stroke-dasharray="20 40" opacity="0.6" />
                     <!-- 水の流れライン2 -->
-                    <path class="river-wave river-wave-2" d="M-220,420 
-                           C-20,420 80,80 380,80 
-                           C680,80 780,520 1080,520 
+                    <path class="river-wave river-wave-2" d="M-220,420
+                           C-20,420 80,80 380,80
+                           C680,80 780,520 1080,520
                            C1280,520 1380,180 1580,180" stroke="#0EA5E9" stroke-width="3" fill="none"
                         stroke-linecap="round" stroke-dasharray="15 35" opacity="0.5" />
+                </svg>
+
+                <!-- Streamline - 川の流れデザイン（縦の流れ） モバイル用 -->
+                <svg class="streamline-svg streamline-mobile" viewBox="0 0 600 1400" preserveAspectRatio="none">
+                    <defs>
+                        <!-- 川の流れグラデーション（モバイル・縦） -->
+                        <linearGradient id="river-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.2" />
+                            <stop offset="25%" stop-color="#0EA5E9" stop-opacity="0.4" />
+                            <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.45" />
+                            <stop offset="75%" stop-color="#0EA5E9" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.25" />
+                        </linearGradient>
+                        <!-- 水面の輝き（モバイル・縦） -->
+                        <linearGradient id="water-shimmer-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.4" />
+                            <stop offset="50%" stop-color="#E0F2FE" stop-opacity="0.6" />
+                            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.4" />
+                        </linearGradient>
+                    </defs>
+                    <!-- メインの川の流れ（桃太郎風・大きく蛇行） -->
+                    <path class="river-main-mobile" d="M200,0
+                           C180,100 420,200 450,350
+                           C480,500 150,600 180,750
+                           C210,900 480,950 450,1100
+                           C420,1250 220,1350 250,1500" stroke="url(#river-gradient-mobile)" stroke-width="180" fill="none"
+                        stroke-linecap="round" />
+                    <!-- 川の中央線（輝き） -->
+                    <path class="river-shimmer-mobile" d="M200,0
+                           C180,100 420,200 450,350
+                           C480,500 150,600 180,750
+                           C210,900 480,950 450,1100
+                           C420,1250 220,1350 250,1500" stroke="url(#water-shimmer-mobile)" stroke-width="70" fill="none"
+                        stroke-linecap="round" />
+                    <!-- 水の流れライン1（細い波・右側の流れ） -->
+                    <path class="river-wave-mobile river-wave-1-mobile" d="M220,0
+                           C200,100 440,200 470,350
+                           C500,500 170,600 200,750
+                           C230,900 500,950 470,1100
+                           C440,1250 240,1350 270,1500" stroke="#7DD3FC" stroke-width="4" fill="none"
+                        stroke-linecap="round" stroke-dasharray="20 40" opacity="0.7" />
+                    <!-- 水の流れライン2（細い波・左側の流れ） -->
+                    <path class="river-wave-mobile river-wave-2-mobile" d="M180,0
+                           C160,100 400,200 430,350
+                           C460,500 130,600 160,750
+                           C190,900 460,950 430,1100
+                           C400,1250 200,1350 230,1500" stroke="#0EA5E9" stroke-width="3" fill="none"
+                        stroke-linecap="round" stroke-dasharray="15 35" opacity="0.6" />
                 </svg>
 
                 <div class="container">
                     <div class="service-header">
                         <p class="service-label">サービス</p>
                         <h2>事業案内</h2>
-                        <p class="service-intro">この想いを、3つの事業で形にしています。</p>
+                        <p class="service-intro">3つの事業で地域をサポート</p>
                     </div>
 
                     <!-- 3つのサービス（YamatoDX風） -->
@@ -1392,9 +1529,8 @@
                     </div>
                     <div class="company-content" style="text-align: center;">
                         <p class="company-desc" style="text-align: center; display: inline-block;">
-                            Omni Bassは、滋賀大学の学生が立ち上げたベンチャーです。<br>
-                            滋賀・琵琶湖エリアを拠点に、地域企業のDXを推進。<br>
-                            最新のAI技術を駆使し、中小企業の業務改善と成長を支援しています。
+                            滋賀大学発のベンチャー。<br>
+                            地域企業のDX推進をサポートします。
                         </p>
                         <a href="#" class="service-list-cta">こちらから →</a>
                     </div>
@@ -1406,10 +1542,9 @@
                 <div class="container">
                     <div class="service-list-header">
                         <h2>サービス一覧</h2>
-                        <p class="service-list-subtitle">小さなところからすべてを解決する</p>
+                        <p class="service-list-subtitle">Coming Soon</p>
                         <p class="service-list-desc">
-                            DXの推進に役立つソリューションを複数展開しています。<br>
-                            詳細は準備が整い次第お知らせします。
+                            準備中です。詳細はお問い合わせください。
                         </p>
                         <a href="#contact" class="service-list-cta">お問い合わせはこちら →</a>
                     </div>
@@ -1422,9 +1557,9 @@
                     <div class="cta-area">
                         <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;"
                             data-i18n="footer.cta_title">
-                            まずは、お話をお聞かせください。</h2>
+                            お気軽にご相談ください</h2>
                         <p style="margin-bottom: 3rem; color: #ccc;" data-i18n="footer.cta_body">
-                            現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。</p>
+                            課題やご要望など、お気軽にお聞かせください。</p>
 
                         <div class="cta-grid">
                             <a href="#" class="cta-btn-item cta-line">
@@ -1442,7 +1577,7 @@
                         <div style="grid-column: span 2;">
                             <span
                                 style="font-size: 1.5rem; font-weight: 700; display: block; margin-bottom: 1rem; color: white;">Omnibass</span>
-                            <p data-i18n="footer.desc">滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。</p>
+                            <p data-i18n="footer.desc">滋賀・琵琶湖エリアを中心に、<br>地域企業のDXを支援します。</p>
                         </div>
                         <div>
                             <h4 data-i18n="nav.services">Services</h4>
