@@ -221,7 +221,7 @@
             /* Ensure text is above the fixed background */
         }
 
-        /* Bubble animation for underwater atmosphere */
+        /* Bubble animation for underwater atmosphere - LARGE & REALISTIC */
         .philosophy-head::before {
             content: '';
             position: absolute;
@@ -230,24 +230,47 @@
             right: 0;
             bottom: 0;
             background-image:
-                radial-gradient(circle, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.3) 3px, transparent 3px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.35) 1.5px, transparent 1.5px);
-            background-size: 250px 400px, 350px 500px, 300px 450px;
-            background-position: 0 100%, 150px 120%, 250px 110%;
+                radial-gradient(circle, rgba(255, 255, 255, 0.8) 20px, rgba(255, 255, 255, 0.4) 21px, transparent 25px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.75) 15px, rgba(255, 255, 255, 0.35) 16px, transparent 20px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.7) 12px, rgba(255, 255, 255, 0.3) 13px, transparent 16px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.8) 18px, rgba(255, 255, 255, 0.4) 19px, transparent 23px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.65) 10px, rgba(255, 255, 255, 0.25) 11px, transparent 14px);
+            background-size: 400px 700px, 500px 800px, 450px 750px, 350px 650px, 300px 600px;
+            background-position: 0 130%, 200px 140%, 350px 135%, 100px 125%, 250px 120%;
             pointer-events: none;
             z-index: -1;
-            animation: bubbles-float 25s linear infinite;
-            opacity: 0.6;
+            opacity: 0;
+            /* Hidden by default */
+            filter: blur(1px);
+            /* Slight blur for realism */
+            transition: opacity 0.6s ease-out;
         }
 
-        @keyframes bubbles-float {
+        /* Active state when scrolled into view */
+        .philosophy-head.bubbles-active::before {
+            animation: bubbles-float-realistic 18s ease-in-out infinite;
+            opacity: 1;
+        }
+
+        @keyframes bubbles-float-realistic {
             0% {
-                background-position: 0 100%, 150px 120%, 250px 110%;
+                background-position: 0 130%, 200px 140%, 350px 135%, 100px 125%, 250px 120%;
+            }
+
+            25% {
+                background-position: 20px 100%, 220px 110%, 330px 105%, 120px 95%, 270px 90%;
+            }
+
+            50% {
+                background-position: -10px 70%, 210px 80%, 360px 75%, 110px 65%, 240px 60%;
+            }
+
+            75% {
+                background-position: 15px 40%, 190px 50%, 340px 45%, 90px 35%, 260px 30%;
             }
 
             100% {
-                background-position: 0 -100%, 150px -80%, 250px -90%;
+                background-position: 0 -150%, 200px -120%, 350px -130%, 100px -140%, 250px -125%;
             }
         }
 
@@ -1202,7 +1225,7 @@
             overflow: hidden;
         }
 
-        /* Ripple effect for Cards #1 & #2 */
+        /* Ripple effect for Cards #1 & #2 - ENHANCED */
         .service-step:nth-child(1)::after,
         .service-step:nth-child(2)::after {
             content: '';
@@ -1212,34 +1235,42 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, rgba(56, 189, 248, 0.3) 40%, transparent 70%);
             transform: translate(-50%, -50%);
-            transition: width 0.6s ease-out, height 0.6s ease-out;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
         }
 
         .service-step:nth-child(1):hover::after,
         .service-step:nth-child(2):hover::after {
-            width: 400px;
-            height: 400px;
+            width: 600px;
+            height: 600px;
         }
 
-        /* Fishing-up animation for Card #3 */
+        /* Fishing-up animation for Card #3 - ENHANCED */
         .service-step:nth-child(3):hover {
-            animation: fishing-up 0.6s ease-out forwards;
+            animation: fishing-up 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
         @keyframes fishing-up {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) scale(1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             }
 
-            50% {
-                transform: translateY(-20px) rotate(-3deg);
+            40% {
+                transform: translateY(-50px) rotate(-10deg) scale(1.08);
+                box-shadow: 0 35px 70px rgba(14, 165, 233, 0.35);
+            }
+
+            70% {
+                transform: translateY(-30px) rotate(6deg) scale(1.05);
             }
 
             100% {
-                transform: translateY(-12px) rotate(0deg);
+                transform: translateY(-25px) rotate(0deg) scale(1.03);
+                box-shadow: 0 30px 60px rgba(14, 165, 233, 0.3);
             }
         }
 
@@ -2319,6 +2350,26 @@
             }, { threshold: 0.3 });
 
             observer.observe(streamlineSection);
+        }
+
+        // Bubble Animation Scroll Trigger (Our Purpose Section)
+        function initBubbleAnimation() {
+            const philosophyHead = document.querySelector('.philosophy-head');
+            if (!philosophyHead) return;
+
+            const bubbleObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        philosophyHead.classList.add('bubbles-active');
+                    } else {
+                        philosophyHead.classList.remove('bubbles-active');
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            bubbleObserver.observe(philosophyHead);
         }
 
         // 初期化
