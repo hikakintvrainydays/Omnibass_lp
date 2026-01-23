@@ -538,6 +538,13 @@
             color: var(--color-text);
         }
 
+        /* Dark background sections (water sections) */
+        .news-section .os-section-title,
+        .company-section .os-section-title,
+        .service-list-section .os-section-title {
+            color: white;
+        }
+
         /* Service Cards */
         .service-section {
             background: #fff;
@@ -632,9 +639,14 @@
             text-decoration: underline;
         }
 
-        /* Company Section */
+        /* Company Section - 中程度の水深（ミディアムブルー） */
         .company-section {
-            background: #fff;
+            background: linear-gradient(to bottom,
+                    #0ea5e9 0%,
+                    #0284c7 30%,
+                    #0369a1 70%,
+                    #075985 100%);
+            color: white;
         }
 
         .company-content {
@@ -645,44 +657,54 @@
 
         .company-desc {
             font-size: 1rem;
-            color: #4b5563;
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.8;
             margin-bottom: 2rem;
         }
 
         .company-link {
-            color: var(--color-primary);
+            color: #bfdbfe;
             font-weight: 600;
         }
 
         .company-link:hover {
             text-decoration: underline;
+            color: white;
         }
 
-        /* Service List Section */
+        /* Service List Section - さらに深く（ディープブルー） */
         .service-list-section {
-            background: #f9fafb;
+            background: linear-gradient(to bottom,
+                    #075985 0%,
+                    #0c4a6e 30%,
+                    #083344 70%,
+                    #042f2e 100%);
             text-align: center;
+            color: white;
         }
 
         .service-list-desc {
             font-size: 1rem;
-            color: #6b7280;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 2rem;
         }
 
         .service-list-link {
-            color: var(--color-primary);
+            color: #93c5fd;
             font-weight: 600;
         }
 
         .service-list-link:hover {
             text-decoration: underline;
+            color: white;
         }
 
-        /* CTA Section */
+        /* CTA Section - 最も深い湖底（ダークブルー） */
         .cta-section {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            background: linear-gradient(135deg,
+                    #042f2e 0%,
+                    #022c22 50%,
+                    #011716 100%);
             color: white;
             text-align: center;
         }
@@ -737,27 +759,175 @@
         }
 
         /* ========================================
-           ニュースセクション - ハイクラス企業HPデザイン
+           ニュースセクション - 琵琶湖に潜るグラデーション
+           統一された水のグラデーション（表面から深部へ）
            ======================================== */
         .news-section {
             position: relative;
-            background: #ffffff;
-            padding: 6rem 0;
+            /* Unified gradient from water surface (white/light blue) to deeper water (medium blue) */
+            background: linear-gradient(to bottom,
+                    #ffffff 0%,
+                    #f0f9ff 8%,
+                    #e0f2fe 18%,
+                    #bae6fd 35%,
+                    #7dd3fc 55%,
+                    #38bdf8 80%,
+                    #0ea5e9 100%);
+            padding: 6rem 0 8rem 0;
+            overflow: hidden;
         }
 
         .news-section::before {
+            display: none;
+        }
+
+        /* 琵琶湖背景SVG - 非表示（断面図に変更） */
+        .biwa-lake-bg {
+            display: none;
+        }
+
+        /* 水面の波 - シンプルでページ幅にフィットするデザイン */
+        .water-surface {
+            position: relative;
+            width: 100%;
+            height: 0px;
+            /* Remove height to eliminate the wave visual */
+            margin: 0;
+            z-index: 1;
+        }
+
+        .surface-wave {
+            display: none;
+            /* Hide the problematic wave SVG */
+        }
+
+        /* Remove all wave animations */
+        @keyframes wave-move {
+            /* Disabled */
+        }
+
+        .wave-top {
+            animation: none;
+        }
+
+        @keyframes wave-line-move {
+            /* Disabled */
+        }
+
+        height: 80px;
+        margin: 3rem 0 4rem 0;
+        z-index: 1;
+        }
+
+        .surface-wave {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 波の表面アニメーション */
+        @keyframes wave-move {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-300px);
+            }
+        }
+
+        .wave-top {
+            animation: wave-move 15s linear infinite;
+        }
+
+        /* 波のラインアニメーション */
+        @keyframes wave-line-move {
+            0% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 100;
+            }
+        }
+
+        .wave-surface-line {
+            stroke-dasharray: 20 10;
+            animation: wave-line-move 3s linear infinite;
+        }
+
+        /* 水中コンテンツ */
+        .underwater-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 気泡エフェクト */
+        .news-section::after {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.2) 3px, transparent 3px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
+            background-size: 200px 300px, 300px 400px, 250px 350px;
+            background-position: 0 0, 100px 150px, 200px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: bubbles-rise 20s linear infinite;
+        }
+
+        @keyframes bubbles-rise {
+            0% {
+                background-position: 0 0, 100px 150px, 200px 50px;
+            }
+
+            100% {
+                background-position: 0 -600px, 100px -450px, 200px -550px;
+            }
+        }
+
+        /* 水中の光のライン */
+        @keyframes light-shimmer {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .water-light-ray {
+            animation: light-shimmer 4s ease-in-out infinite;
+        }
+
+        .ray-1 {
+            animation-delay: 0s;
+        }
+
+        .ray-2 {
+            animation-delay: 1s;
+        }
+
+        .ray-3 {
+            animation-delay: 2s;
+        }
+
+        .ray-4 {
+            animation-delay: 3s;
         }
 
         .news-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         /* セクションアイコン共通スタイル */
@@ -793,35 +963,43 @@
             font-weight: 700;
             color: #1f2937;
             margin-bottom: 0.75rem;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
         }
 
         .news-subtitle {
             font-size: 1rem;
-            color: #6b7280;
+            color: #0284c7;
             margin-bottom: 0;
+            text-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
         }
 
         /* ニュースカード */
         .news-list {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .news-item {
             display: flex;
             align-items: flex-start;
             gap: 1.5rem;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #f3f4f6;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.1);
             transition: all 0.3s ease;
         }
 
         .news-item:hover {
-            background: #fafafa;
-            padding-left: 1rem;
-            margin-left: -1rem;
-            margin-right: -1rem;
-            padding-right: 1rem;
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
         }
 
         .news-date {
@@ -866,22 +1044,34 @@
             margin: 0;
         }
 
+        .news-footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
         .news-more {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             margin-top: 2rem;
             padding: 0.75rem 1.5rem;
-            color: #0ea5e9;
+            color: white;
+            background: rgba(14, 165, 233, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             font-weight: 600;
-            border: 2px solid #0ea5e9;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 999px;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
         }
 
         .news-more:hover {
-            background: #0ea5e9;
-            color: white;
+            background: rgba(14, 165, 233, 1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -892,6 +1082,12 @@
 
             .news-header h2 {
                 font-size: 2rem;
+            }
+
+            /* スマホでの水面調整 */
+            .water-surface {
+                height: 60px;
+                margin: 2rem 0 3rem 0;
             }
         }
 
@@ -1136,10 +1332,12 @@
         }
 
         @media (max-width: 768px) {
+
             /* モバイルでは改行を表示 */
             .br-mobile {
                 display: inline;
             }
+
             .hero h1 {
                 font-size: 3.5rem;
             }
@@ -1271,48 +1469,73 @@
         <!-- Main Content Area (Covers Vision Again) -->
         <div class="main-content-bg">
 
-            <!-- ニュース (News) - データレイク × 琵琶湖デザイン -->
-            <section class="section news-section data-lake-section" id="news">
-                <!-- 琵琶湖（データレイク）背景SVG -->
-                <svg class="data-lake-bg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+            <!-- ニュース (News) - 琵琶湖デザイン -->
+            <section class="section news-section biwa-lake-section" id="news">
+                <!-- 琵琶湖背景SVG - ポップ&フラットデザイン -->
+                <svg class="biwa-lake-bg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
                     <defs>
-                        <!-- 湖面グラデーション -->
-                        <linearGradient id="lake-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#E0F7FF" stop-opacity="0.3" />
-                            <stop offset="50%" stop-color="#BAE6FD" stop-opacity="0.4" />
-                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.2" />
+                        <!-- 琵琶湖の明確なブルーグラデーション -->
+                        <linearGradient id="lake-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.5" />
                         </linearGradient>
-                        <!-- 波紋グラデーション -->
-                        <radialGradient id="ripple-gradient" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.3" />
-                            <stop offset="70%" stop-color="#0EA5E9" stop-opacity="0.1" />
-                            <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0" />
-                        </radialGradient>
+                        <!-- 波のグラデーション -->
+                        <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.6" />
+                            <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.8" />
+                            <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.6" />
+                        </linearGradient>
                     </defs>
-                    <!-- 琵琶湖シルエット（大きめ・背景） -->
-                    <path class="lake-silhouette" d="M600,50 
-                           C450,80 380,150 400,280 
-                           L480,230 C520,200 580,210 560,300 
-                           L450,380 C350,450 300,550 330,650 
-                           C370,720 480,780 600,740 
-                           L660,650 C750,530 840,370 870,250 
-                           C900,140 810,60 600,50 Z" fill="url(#lake-gradient)" opacity="0.6" />
-                    <!-- 竹生島 -->
-                    <circle class="takeshima" cx="480" cy="290" r="20" fill="#0EA5E9" opacity="0.2" />
-                    <!-- 波紋1（中央） -->
-                    <circle class="ripple ripple-1" cx="550" cy="400" r="80" stroke="#0EA5E9" stroke-width="2"
-                        fill="none" opacity="0.3" />
-                    <!-- 波紋2（広がる） -->
-                    <circle class="ripple ripple-2" cx="550" cy="400" r="150" stroke="#0EA5E9" stroke-width="1.5"
-                        fill="none" opacity="0.2" />
-                    <!-- 波紋3（さらに広がる） -->
-                    <circle class="ripple ripple-3" cx="550" cy="400" r="250" stroke="#0EA5E9" stroke-width="1"
-                        fill="none" opacity="0.1" />
-                    <!-- データ粒子（流入するデータ） -->
-                    <circle class="data-particle particle-1" cx="200" cy="200" r="4" fill="#38BDF8" opacity="0.6" />
-                    <circle class="data-particle particle-2" cx="900" cy="300" r="3" fill="#0EA5E9" opacity="0.5" />
-                    <circle class="data-particle particle-3" cx="350" cy="500" r="5" fill="#7DD3FC" opacity="0.4" />
-                    <circle class="data-particle particle-4" cx="800" cy="450" r="3" fill="#38BDF8" opacity="0.5" />
+
+                    <!-- 琵琶湖本体 - シンプルなひょうたん型 -->
+                    <path class="lake-shape" d="
+                        M 600,120
+                        C 700,120 770,160 780,220
+                        C 790,280 780,340 760,380
+                        C 745,410 720,430 690,440
+                        Q 645,455 600,470
+                        Q 555,455 510,440
+                        C 480,430 455,410 440,380
+                        C 420,340 410,280 420,220
+                        C 430,160 500,120 600,120
+                        Z" fill="url(#lake-blue)" />
+
+                    <!-- 波のライン1（大きい） -->
+                    <path class="wave-line wave-1" d="
+                        M 420,200
+                        Q 480,190 540,200
+                        T 660,200
+                        Q 720,190 780,200" stroke="url(#wave-gradient)" stroke-width="2.5" fill="none"
+                        stroke-linecap="round" />
+
+                    <!-- 波のライン2（中） -->
+                    <path class="wave-line wave-2" d="
+                        M 440,260
+                        Q 500,250 560,260
+                        T 680,260
+                        Q 730,250 760,260" stroke="url(#wave-gradient)" stroke-width="2.5" fill="none"
+                        stroke-linecap="round" />
+
+                    <!-- 波のライン3（小） -->
+                    <path class="wave-line wave-3" d="
+                        M 460,320
+                        Q 520,310 580,320
+                        T 700,320
+                        Q 740,310 740,320" stroke="url(#wave-gradient)" stroke-width="2.5" fill="none"
+                        stroke-linecap="round" />
+
+                    <!-- 波のライン4（小） -->
+                    <path class="wave-line wave-4" d="
+                        M 480,380
+                        Q 540,370 600,380
+                        T 720,380" stroke="url(#wave-gradient)" stroke-width="2.5" fill="none"
+                        stroke-linecap="round" />
+
+                    <!-- 波のライン5（最小） -->
+                    <path class="wave-line wave-5" d="
+                        M 510,430
+                        Q 555,425 600,430
+                        T 690,430" stroke="url(#wave-gradient)" stroke-width="2" fill="none" stroke-linecap="round" />
                 </svg>
 
                 <div class="container">
@@ -1322,7 +1545,48 @@
                         <p class="news-subtitle">最新の企業情報をお届けします</p>
                     </div>
 
-                    <div class="news-list data-lake-news">
+                    <!-- 湖面の波（水面） -->
+                    <div class="water-surface">
+                        <svg class="surface-wave" viewBox="0 0 1200 80" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="surface-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#38BDF8" />
+                                    <stop offset="50%" stop-color="#0EA5E9" />
+                                    <stop offset="100%" stop-color="#38BDF8" />
+                                </linearGradient>
+                                <linearGradient id="water-light" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.4" />
+                                    <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <!-- 波の表面 -->
+                            <path class="wave-surface wave-top" d="
+                                M 0,40
+                                Q 150,20 300,40
+                                T 600,40
+                                Q 750,20 900,40
+                                T 1200,40
+                                L 1200,80 L 0,80 Z" fill="url(#surface-gradient)" opacity="0.8" />
+                            <!-- 波のライン（太い） -->
+                            <path class="wave-surface-line" d="
+                                M 0,40
+                                Q 150,20 300,40
+                                T 600,40
+                                Q 750,20 900,40
+                                T 1200,40" stroke="#0EA5E9" stroke-width="4" fill="none" />
+                            <!-- 水中の光のライン -->
+                            <path class="water-light-ray ray-1" d="
+                                M 200,40 L 180,80" stroke="url(#water-light)" stroke-width="30" opacity="0.3" />
+                            <path class="water-light-ray ray-2" d="
+                                M 500,40 L 480,80" stroke="url(#water-light)" stroke-width="40" opacity="0.3" />
+                            <path class="water-light-ray ray-3" d="
+                                M 800,40 L 820,80" stroke="url(#water-light)" stroke-width="35" opacity="0.3" />
+                            <path class="water-light-ray ray-4" d="
+                                M 1000,40 L 1020,80" stroke="url(#water-light)" stroke-width="25" opacity="0.3" />
+                        </svg>
+                    </div>
+
+                    <div class="news-list data-lake-news underwater-content">
                         <!-- ニュースアイテム 1 -->
                         <article class="news-item data-island news-item--coming-soon">
                             <time class="news-date">2026.01.--</time>
@@ -1440,15 +1704,15 @@
                            C180,100 420,200 450,350
                            C480,500 150,600 180,750
                            C210,900 480,950 450,1100
-                           C420,1250 220,1350 250,1500" stroke="url(#river-gradient-mobile)" stroke-width="180" fill="none"
-                        stroke-linecap="round" />
+                           C420,1250 220,1350 250,1500" stroke="url(#river-gradient-mobile)" stroke-width="180"
+                        fill="none" stroke-linecap="round" />
                     <!-- 川の中央線（輝き） -->
                     <path class="river-shimmer-mobile" d="M200,0
                            C180,100 420,200 450,350
                            C480,500 150,600 180,750
                            C210,900 480,950 450,1100
-                           C420,1250 220,1350 250,1500" stroke="url(#water-shimmer-mobile)" stroke-width="70" fill="none"
-                        stroke-linecap="round" />
+                           C420,1250 220,1350 250,1500" stroke="url(#water-shimmer-mobile)" stroke-width="70"
+                        fill="none" stroke-linecap="round" />
                     <!-- 水の流れライン1（細い波・右側の流れ） -->
                     <path class="river-wave-mobile river-wave-1-mobile" d="M220,0
                            C200,100 440,200 470,350
