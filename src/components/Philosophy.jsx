@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 
@@ -27,10 +28,10 @@ const Philosophy = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <a href="#contact" className="btn btn-primary group px-8">
+                            <Link to="/contact" className="btn btn-primary group px-8">
                                 無料で相談する
                                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-                            </a>
+                            </Link>
                         </div>
                     </motion.div>
 

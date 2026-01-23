@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaGlobe, FaLine, FaDatabase, FaArrowRight } from 'react-icons/fa';
 import productImg from '../assets/product-mockup.png';
@@ -62,10 +63,10 @@ const Product = () => {
                         </div>
 
                         <div className="flex gap-4">
-                            <a href="#contact" className="btn btn-primary px-8">
+                            <Link to="/contact" className="btn btn-primary px-8">
                                 デモを依頼する
                                 <FaArrowRight className="ml-2" />
-                            </a>
+                            </Link>
                             <a href="#details" className="btn btn-outline px-8">
                                 機能詳細
                             </a>
