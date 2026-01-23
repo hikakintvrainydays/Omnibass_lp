@@ -221,7 +221,7 @@
             /* Ensure text is above the fixed background */
         }
 
-        /* Bubble animation for underwater atmosphere - LARGE & REALISTIC */
+        /* Bubble animation for underwater atmosphere - LARGE & SPECTACULAR */
         .philosophy-head::before {
             content: '';
             position: absolute;
@@ -230,47 +230,50 @@
             right: 0;
             bottom: 0;
             background-image:
-                radial-gradient(circle, rgba(255, 255, 255, 0.8) 20px, rgba(255, 255, 255, 0.4) 21px, transparent 25px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.75) 15px, rgba(255, 255, 255, 0.35) 16px, transparent 20px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.7) 12px, rgba(255, 255, 255, 0.3) 13px, transparent 16px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.8) 18px, rgba(255, 255, 255, 0.4) 19px, transparent 23px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.65) 10px, rgba(255, 255, 255, 0.25) 11px, transparent 14px);
-            background-size: 400px 700px, 500px 800px, 450px 750px, 350px 650px, 300px 600px;
-            background-position: 0 130%, 200px 140%, 350px 135%, 100px 125%, 250px 120%;
+                radial-gradient(circle, rgba(255, 255, 255, 0.35) 30px, rgba(255, 255, 255, 0.12) 31px, transparent 35px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.32) 25px, rgba(255, 255, 255, 0.1) 26px, transparent 30px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.28) 22px, rgba(255, 255, 255, 0.09) 23px, transparent 27px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.3) 28px, rgba(255, 255, 255, 0.11) 29px, transparent 33px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.25) 20px, rgba(255, 255, 255, 0.08) 21px, transparent 25px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.33) 26px, rgba(255, 255, 255, 0.1) 27px, transparent 31px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.27) 23px, rgba(255, 255, 255, 0.09) 24px, transparent 28px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.29) 24px, rgba(255, 255, 255, 0.1) 25px, transparent 29px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.31) 27px, rgba(255, 255, 255, 0.11) 28px, transparent 32px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.26) 21px, rgba(255, 255, 255, 0.08) 22px, transparent 26px);
+            background-size: 500px 800px, 600px 900px, 550px 850px, 450px 750px, 400px 700px, 520px 820px, 480px 780px, 530px 830px, 470px 770px, 420px 720px;
+            background-position: 50px 110%, 280px 118%, 450px 125%, 150px 108%, 380px 115%, 80px 112%, 320px 120%, 200px 110%, 410px 117%, 250px 113%;
             pointer-events: none;
             z-index: -1;
             opacity: 0;
             /* Hidden by default */
-            filter: blur(1px);
-            /* Slight blur for realism */
+            filter: blur(1.5px) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+            /* Glow effect for dramatic impact */
             transition: opacity 0.6s ease-out;
         }
 
         /* Active state when scrolled into view */
         .philosophy-head.bubbles-active::before {
-            animation: bubbles-float-realistic 18s ease-in-out infinite;
+            animation: bubbles-rise-from-bottom 8s ease-out infinite;
             opacity: 1;
         }
 
-        @keyframes bubbles-float-realistic {
+        @keyframes bubbles-rise-from-bottom {
             0% {
-                background-position: 0 130%, 200px 140%, 350px 135%, 100px 125%, 250px 120%;
+                background-position: 50px 110%, 280px 118%, 450px 125%, 150px 108%, 380px 115%, 80px 112%, 320px 120%, 200px 110%, 410px 117%, 250px 113%;
+                opacity: 0;
             }
 
-            25% {
-                background-position: 20px 100%, 220px 110%, 330px 105%, 120px 95%, 270px 90%;
+            10% {
+                opacity: 0.35;
             }
 
-            50% {
-                background-position: -10px 70%, 210px 80%, 360px 75%, 110px 65%, 240px 60%;
-            }
-
-            75% {
-                background-position: 15px 40%, 190px 50%, 340px 45%, 90px 35%, 260px 30%;
+            70% {
+                opacity: 0.35;
             }
 
             100% {
-                background-position: 0 -150%, 200px -120%, 350px -130%, 100px -140%, 250px -125%;
+                background-position: 60px 35%, 270px 28%, 460px 22%, 160px 40%, 370px 32%, 90px 38%, 310px 25%, 210px 36%, 400px 30%, 260px 34%;
+                opacity: 0;
             }
         }
 
@@ -699,7 +702,8 @@
                     #0284c7 30%,
                     #0369a1 70%,
                     #075985 100%);
-            color: white;
+            color: #1f2937;
+            /* Changed from white to dark gray for better readability */
         }
 
         .company-content {
@@ -710,7 +714,8 @@
 
         .company-desc {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            /* Changed from rgba(255, 255, 255, 0.9) to dark gray */
             line-height: 1.8;
             margin-bottom: 2rem;
         }
@@ -1194,13 +1199,13 @@
         .service-steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            /* Increased from 2rem */
-            max-width: 1300px;
-            /* Increased from 1100px for better screen real estate use */
+            gap: 4rem;
+            /* Increased from 3rem for more spacious layout */
+            max-width: 1400px;
+            /* Increased from 1300px for maximum screen real estate use */
             margin: 0 auto;
-            padding: 0 2rem;
-            /* Increased padding */
+            padding: 0 3rem;
+            /* Increased padding from 2rem for better breathing room */
         }
 
         @media (max-width: 900px) {
@@ -1235,17 +1240,38 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, rgba(56, 189, 248, 0.3) 40%, transparent 70%);
+            background:
+                radial-gradient(circle, rgba(14, 165, 233, 0.7) 0%, rgba(56, 189, 248, 0.5) 30%, rgba(14, 165, 233, 0.3) 50%, transparent 70%),
+                radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, rgba(34, 211, 238, 0.4) 35%, transparent 65%),
+                radial-gradient(circle, rgba(8, 145, 178, 0.5) 0%, rgba(14, 165, 233, 0.35) 40%, transparent 75%);
+            background-size: 100% 100%, 80% 80%, 60% 60%;
+            background-position: center, center, center;
             transform: translate(-50%, -50%);
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease-out;
             pointer-events: none;
-            box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
+            box-shadow:
+                0 0 50px rgba(14, 165, 233, 0.6),
+                0 0 80px rgba(56, 189, 248, 0.4),
+                inset 0 0 40px rgba(6, 182, 212, 0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
         .service-step:nth-child(1):hover::after,
         .service-step:nth-child(2):hover::after {
-            width: 600px;
-            height: 600px;
+            width: 900px;
+            height: 900px;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.3);
+            }
         }
 
         /* Fishing-up animation for Card #3 - ENHANCED */
@@ -1259,18 +1285,34 @@
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             }
 
-            40% {
-                transform: translateY(-50px) rotate(-10deg) scale(1.08);
-                box-shadow: 0 35px 70px rgba(14, 165, 233, 0.35);
+            30% {
+                transform: translateY(-95px) rotate(-15deg) scale(1.12);
+                box-shadow:
+                    0 50px 100px rgba(14, 165, 233, 0.5),
+                    0 30px 60px rgba(56, 189, 248, 0.4),
+                    0 0 40px rgba(6, 182, 212, 0.3);
             }
 
-            70% {
-                transform: translateY(-30px) rotate(6deg) scale(1.05);
+            55% {
+                transform: translateY(-70px) rotate(8deg) scale(1.06);
+                box-shadow:
+                    0 45px 90px rgba(14, 165, 233, 0.45),
+                    0 25px 55px rgba(56, 189, 248, 0.35);
+            }
+
+            75% {
+                transform: translateY(-85px) rotate(-5deg) scale(1.08);
+                box-shadow:
+                    0 48px 95px rgba(14, 165, 233, 0.48),
+                    0 28px 58px rgba(56, 189, 248, 0.38);
             }
 
             100% {
-                transform: translateY(-25px) rotate(0deg) scale(1.03);
-                box-shadow: 0 30px 60px rgba(14, 165, 233, 0.3);
+                transform: translateY(-80px) rotate(0deg) scale(1.05);
+                box-shadow:
+                    0 55px 110px rgba(14, 165, 233, 0.45),
+                    0 35px 70px rgba(56, 189, 248, 0.35),
+                    0 0 50px rgba(6, 182, 212, 0.25);
             }
         }
 
