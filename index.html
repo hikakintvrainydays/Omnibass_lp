@@ -120,6 +120,82 @@
             margin-left: 1rem;
         }
 
+        /* Hamburger Menu Button - Mobile Only */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #1f2937;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                gap: 1.5rem;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                align-items: flex-start;
+            }
+
+            .nav.active {
+                right: 0;
+            }
+
+            .nav a {
+                font-size: 1.1rem;
+                width: 100%;
+                padding: 0.5rem 0;
+            }
+
+            .lang-switch {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
         /* --- Parallax Reveal Styles --- */
 
         /* The Fixed Layer (Vision) - Sits behind everything */
@@ -1591,7 +1667,12 @@
     <header>
         <div class="container header-inner">
             <div class="logo">OMNIBASS</div>
-            <nav class="nav">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav">
                 <a href="#about" data-i18n="nav.about">About</a>
                 <a href="#services" data-i18n="nav.services">Services</a>
                 <a href="#product" data-i18n="nav.product">Product</a>
@@ -2414,11 +2495,42 @@
             bubbleObserver.observe(philosophyHead);
         }
 
+        // Hamburger Menu Toggle
+        function initHamburgerMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+
+            if (!hamburger || !nav) return;
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // Close menu when clicking nav links
+            const navLinks = nav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && !hamburger.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+            });
+        }
+
         // 初期化
         document.addEventListener('DOMContentLoaded', () => {
             initStreamlineAnimation();
             initWaterStreamAnimation();
             initBubbleAnimation(); // Scroll-triggered bubble animation
+            initHamburgerMenu(); // Mobile hamburger menu
         });
 
         // 水のラインの高度なスクロール連動アニメーション
