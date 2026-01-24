@@ -2,7 +2,8 @@
 
 ## 1. yamatoGH に全権限を与える手順
 
-### ステップ：
+### 既にCollaboratorとして追加されている場合（現在の状況）：
+
 1. GitHubリポジトリページを開く
    - https://github.com/hikakintvrainydays/Omnibass_lp
 
@@ -10,17 +11,25 @@
 
 3. 左サイドバーから **Collaborators and teams** をクリック
 
-4. **Add people** ボタンをクリック
+4. **Manage access** セクションで、YamatoGH の名前の横にある **Type** ドロップダウンをクリック
+   - 現在「Collaborator」と表示されている部分
 
-5. 検索欄に `yamatoGH` と入力
-
-6. 権限レベルを選択：
+5. 権限レベルを選択：
    - **Admin** を選択（全権限）
-   - または **Maintain** （プッシュ権限 + 設定の一部）
+   - または **Write** （プッシュ権限）
+   - または **Maintain** （プッシュ + 一部設定権限）
 
-7. **Add yamatoGH to this repository** をクリック
+6. 選択すると自動的に保存されます
 
-8. yamatoGH宛に招待メールが送信されます
+---
+
+### 新しくCollaboratorを追加する場合：
+
+1. **Add people** ボタンをクリック
+
+2. 検索欄にユーザー名を入力
+
+3. 権限レベルを選択して招待を送信
 
 ---
 
