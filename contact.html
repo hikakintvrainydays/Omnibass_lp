@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | OMNIBASS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="styles/design_system.css" rel="stylesheet">
+    <link href="styles/animations.css" rel="stylesheet">
+    <link href="styles/responsive.css" rel="stylesheet">
+    <style>
+        /* Contact specific styles */
+        .contact-page {
+            padding-top: 100px;
+            padding-bottom: 5rem;
+            background: var(--color-light);
+            min-height: 100vh;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 2rem;
+            background: #f0fdf4;
+            border-radius: 1rem;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo">OMNIBASS</a>
+            <nav class="nav">
+                <a href="index.html">HOME</a>
+                <a href="index.html#philosophy">PHILOSOPHY</a>
+                <a href="index.html#service">SERVICE</a>
+                <a href="index.html#company">COMPANY</a>
+                <a href="contact.html" class="nav-btn">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contact-page">
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1 class="contact-title">Contact Us</h1>
+                <p class="contact-subtitle">お問い合わせはこちらのフォームより承っております。</p>
+            </div>
+
+            <div id="contactFormWrapper">
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">お名前 <span style="color:red">*</span></label>
+                        <input type="text" id="name" class="form-control" required placeholder="山田 太郎">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">メールアドレス <span style="color:red">*</span></label>
+                        <input type="email" id="email" class="form-control" required
+                            placeholder="example@omnibass.co.jp">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">件名</label>
+                        <input type="text" id="subject" class="form-control" placeholder="サービスについてのお問い合わせ">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">お問い合わせ内容 <span style="color:red">*</span></label>
+                        <textarea id="message" class="form-control" required placeholder="お問い合わせ内容をご記入ください"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fas fa-paper-plane" style="margin-right: 8px;"></i> 送信する
+                    </button>
+                </form>
+            </div>
+
+            <div id="successMessage" class="hidden">
+                <div class="success-message">
+                    <i class="fas fa-check-circle success-icon"></i>
+                    <h2>送信完了</h2>
+                    <p>お問い合わせありがとうございます。<br>担当者より順次ご連絡させていただきます。</p>
+                    <div style="margin-top: 2rem;">
+                        <a href="index.html" class="btn">トップページに戻る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Footer (Copied/Simplified from Index) -->
+    <footer class="os-footer">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="index.html">HOME</a>
+                <a href="index.html#philosophy">PHILOSOPHY</a>
+                <a href="index.html#service">SERVICE</a>
+                <a href="contact.html">CONTACT</a>
+            </div>
+            <div class="bottom-bar"
+                style="justify-content: center; border: none; margin-top: 2rem; border-top: 1px solid #374151;">
+                <p>&copy; 2024 OMNIBASS Inc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 送信中...';
+            btn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            fetch('http://localhost:3000/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('エラー: ' + data.error);
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    } else {
+                        document.getElementById('contactFormWrapper').classList.add('hidden');
+                        document.getElementById('successMessage').classList.remove('hidden');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        document.getElementById('contactForm').reset();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('通信エラーが発生しました。サーバーが起動しているか確認してください。');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                });
+        });
+    </script>
+</body>
+
+</html>
