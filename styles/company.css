@@ -1,0 +1,693 @@
+/* Company Page Styles - Clean & Professional Design */
+
+:root {
+    --color-primary: #2563EB;
+    --color-secondary: #7C3AED;
+    --color-text: #1F2937;
+    --color-light: #F8FAFC;
+    --color-lake-blue: #0284C7;
+    --color-gray: #64748b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text);
+    line-height: 1.6;
+    background: var(--color-light);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition: 0.3s;
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.05em;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4B5563;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: var(--color-primary);
+}
+
+.nav-btn {
+    background: var(--color-primary);
+    color: white !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px;
+    margin-left: 1rem;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #1f2937;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Hero Section - Lake Biwa Underwater Theme */
+.company-hero {
+    padding: 180px 0 120px;
+    background: linear-gradient(180deg, #004D7A 0%, #007BA7 30%, #0091BB 60%, #00A0CC 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Underwater light rays effect */
+.company-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 140%;
+    height: 200%;
+    background:
+        radial-gradient(ellipse at 30% 0%, rgba(102, 204, 238, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 0%, rgba(77, 182, 218, 0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 0%, rgba(153, 217, 234, 0.25) 0%, transparent 70%);
+    animation: underwater-light 12s ease-in-out infinite;
+}
+
+@keyframes underwater-light {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(20px) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Water ripple effect */
+.company-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(ellipse 200px 80px at 50% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse 150px 60px at 30% 40%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 180px 70px at 70% 60%, rgba(255, 255, 255, 0.06) 0%, transparent 40%);
+    animation: water-ripple 15s ease-in-out infinite;
+}
+
+@keyframes water-ripple {
+    0%, 100% {
+        transform: translateY(0) scaleX(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-15px) scaleX(1.15);
+        opacity: 0.5;
+    }
+}
+
+.company-hero .container {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-en {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fade-in-down 1s ease-out 0.3s forwards;
+}
+
+@keyframes fade-in-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    animation: fade-in-up 1s ease-out 0.5s forwards;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    opacity: 0;
+    animation: fade-in-up 1s ease-out 0.7s forwards;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Underwater bubbles */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.3));
+    border-radius: 50%;
+    box-shadow:
+        inset -2px -2px 4px rgba(255, 255, 255, 0.5),
+        0 0 8px rgba(255, 255, 255, 0.3);
+    animation: bubble-rise 20s infinite ease-in;
+}
+
+.particle:nth-child(1) {
+    width: 8px;
+    height: 8px;
+    left: 15%;
+    bottom: -50px;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.particle:nth-child(2) {
+    width: 12px;
+    height: 12px;
+    left: 35%;
+    bottom: -50px;
+    animation-delay: 3s;
+    animation-duration: 15s;
+}
+
+.particle:nth-child(3) {
+    width: 6px;
+    height: 6px;
+    left: 55%;
+    bottom: -50px;
+    animation-delay: 1.5s;
+    animation-duration: 10s;
+}
+
+.particle:nth-child(4) {
+    width: 10px;
+    height: 10px;
+    left: 70%;
+    bottom: -50px;
+    animation-delay: 4s;
+    animation-duration: 13s;
+}
+
+.particle:nth-child(5) {
+    width: 7px;
+    height: 7px;
+    left: 25%;
+    bottom: -50px;
+    animation-delay: 2s;
+    animation-duration: 11s;
+}
+
+.particle:nth-child(6) {
+    width: 14px;
+    height: 14px;
+    left: 85%;
+    bottom: -50px;
+    animation-delay: 5s;
+    animation-duration: 16s;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+    }
+    5% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(30px) scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(-20px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0;
+    animation: fade-in 1s ease-out 1.5s forwards;
+}
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+.scroll-indicator::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+    margin: 0 auto 0.5rem;
+    animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(10px);
+        opacity: 1;
+    }
+}
+
+.scroll-indicator span {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* MVV Section */
+.mvv-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--color-gray);
+    margin-bottom: 3.5rem;
+    font-weight: 400;
+}
+
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.mvv-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.mvv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.15);
+    border-color: var(--color-primary);
+}
+
+.mvv-icon {
+    display: none;
+}
+
+.mvv-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+    letter-spacing: -0.01em;
+}
+
+.mvv-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.mvv-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #475569;
+    font-weight: 400;
+}
+
+/* Company Info Section */
+.company-info-section {
+    padding: 5rem 0;
+    background: var(--color-light);
+}
+
+.info-table {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid #e2e8f0;
+}
+
+.info-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid #e2e8f0;
+    transition: background-color 0.2s ease;
+}
+
+.info-row:hover {
+    background: #f8fafc;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    background: #f8fafc;
+    padding: 1.5rem 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
+    border-right: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.info-value {
+    padding: 1.5rem 1.75rem;
+    color: #475569;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Footer */
+footer {
+    background: #111827;
+    color: white;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    font-size: 0.9rem;
+    color: #9CA3AF;
+    margin-bottom: 3rem;
+}
+
+.footer-grid h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.footer-grid ul {
+    list-style: none;
+}
+
+.footer-grid li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-grid a {
+    color: #9CA3AF;
+    transition: color 0.3s;
+}
+
+.footer-grid a:hover {
+    color: white;
+}
+
+.bottom-bar {
+    border-top: 1px solid #374151;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6B7280;
+    font-size: 0.85rem;
+}
+
+.bottom-bar i {
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.bottom-bar i:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        gap: 1.5rem;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        align-items: flex-start;
+    }
+
+    .nav.active {
+        right: 0;
+    }
+
+    .nav a {
+        font-size: 1.1rem;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
+
+    .nav-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .company-hero {
+        padding: 140px 0 80px;
+        min-height: 100vh;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .particle {
+        display: none;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .mvv-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .mvv-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .mvv-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .info-row {
+        grid-template-columns: 1fr;
+    }
+
+    .info-label {
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 1.25rem;
+    }
+
+    .info-value {
+        padding: 1rem 1.25rem;
+    }
+
+    .bottom-bar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .mvv-title {
+        font-size: 1.5rem;
+    }
+
+    .mvv-card {
+        padding: 1.5rem 1.25rem;
+    }
+}
