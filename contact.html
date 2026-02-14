@@ -218,7 +218,7 @@
                 message: document.getElementById('message').value
             };
 
-            fetch('http://localhost:3000/api/send-email', {
+            fetch('public/contact.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -227,7 +227,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.error) {
+                    if (data.success === false) {
                         alert('エラー: ' + data.error);
                         btn.innerHTML = originalText;
                         btn.disabled = false;
@@ -240,7 +240,7 @@
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    alert('通信エラーが発生しました。サーバーが起動しているか確認してください。');
+                    alert('通信エラーが発生しました。');
                     btn.innerHTML = originalText;
                     btn.disabled = false;
                 });
