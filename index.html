@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMNIBASS | DIGITAL SHIFT FROM MOTHER LAKE</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800;900&display=swap"
+        rel="stylesheet">
     <link href="styles/design_system.css" rel="stylesheet">
     <link href="styles/animations.css" rel="stylesheet">
     <link href="styles/responsive.css" rel="stylesheet">
@@ -56,7 +58,7 @@
             transition: 0.3s;
             padding: 1rem 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            /* backdrop-filter: blur(10px);  Removed for mobile performance */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
@@ -121,27 +123,48 @@
         }
 
         /* Hamburger Menu Button - Mobile Only */
+        /* Hamburger Menu Button - Mobile Only */
         .hamburger {
             display: none;
-            flex-direction: column;
-            gap: 5px;
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.5rem;
-            z-index: 101;
+            padding: 0;
+            z-index: 1100;
+            position: relative;
+            width: 44px;
+            height: 44px;
         }
 
         .hamburger span {
-            width: 25px;
-            height: 3px;
+            display: block;
+            width: 24px;
+            height: 2px;
             background: #1f2937;
-            border-radius: 3px;
-            transition: all 0.3s ease;
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
+        /* 通常時の3本線 */
+        .hamburger span:nth-child(1) {
+            top: 14px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 21px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 28px;
+        }
+
+        /* アクティブ時の×ボタン */
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
+            top: 21px;
+            transform: translateX(-50%) rotate(45deg);
         }
 
         .hamburger.active span:nth-child(2) {
@@ -149,33 +172,58 @@
         }
 
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
+            top: 21px;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+
+        /* Mobile menu overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
         }
 
         /* Mobile Navigation */
         @media (max-width: 768px) {
             .hamburger {
-                display: flex;
+                display: block;
+                /* blockに変更（flex不要） */
             }
 
             .nav {
+                display: flex;
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
-                max-width: 300px;
+                width: 75%;
+                max-width: 320px;
                 height: 100vh;
-                background: white;
+                background: #ffffff;
                 flex-direction: column;
                 padding: 5rem 2rem 2rem;
                 gap: 1.5rem;
-                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+                transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
                 align-items: flex-start;
+                z-index: 1000;
+                overflow-y: auto;
+                will-change: right;
             }
 
             .nav.active {
-                right: 0;
+                right: 0 !important;
             }
 
             .nav a {
@@ -609,6 +657,7 @@
 
         .footer-grid li {
             margin-bottom: 0.8rem;
+            white-space: nowrap;
         }
 
         .bottom-bar {
@@ -948,10 +997,7 @@
             /* Disabled */
         }
 
-        height: 80px;
-        margin: 3rem 0 4rem 0;
-        z-index: 1;
-        }
+
 
         .surface-wave {
             width: 100%;
@@ -1596,9 +1642,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .nav {
-                display: none;
-            }
+
 
             /* モバイルでは川の流れを切り替え */
             .streamline-desktop {
@@ -1662,6 +1706,9 @@
 </head>
 
 <body>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
 
     <!-- Header -->
     <header>
@@ -1955,34 +2002,20 @@
                             <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.4" />
                         </linearGradient>
                     </defs>
-                    <!-- メインの川の流れ（桃太郎風・大きく蛇行） -->
-                    <path class="river-main-mobile" d="M200,0
-                           C180,100 420,200 450,350
-                           C480,500 150,600 180,750
-                           C210,900 480,950 450,1100
-                           C420,1250 220,1350 250,1500" stroke="url(#river-gradient-mobile)" stroke-width="180"
+                    <!-- メインの川の流れ（緩やかな蛇行・均一幅） -->
+                    <path class="river-main-mobile" d="M280,0
+                           C260,120 430,250 440,400
+                           C450,550 160,650 170,800
+                           C180,950 440,1050 430,1150
+                           C420,1300 200,1350 220,1500" stroke="url(#river-gradient-mobile)" stroke-width="200"
                         fill="none" stroke-linecap="round" />
                     <!-- 川の中央線（輝き） -->
-                    <path class="river-shimmer-mobile" d="M200,0
-                           C180,100 420,200 450,350
-                           C480,500 150,600 180,750
-                           C210,900 480,950 450,1100
-                           C420,1250 220,1350 250,1500" stroke="url(#water-shimmer-mobile)" stroke-width="70"
+                    <path class="river-shimmer-mobile" d="M280,0
+                           C260,120 430,250 440,400
+                           C450,550 160,650 170,800
+                           C180,950 440,1050 430,1150
+                           C420,1300 200,1350 220,1500" stroke="url(#water-shimmer-mobile)" stroke-width="80"
                         fill="none" stroke-linecap="round" />
-                    <!-- 水の流れライン1（細い波・右側の流れ） -->
-                    <path class="river-wave-mobile river-wave-1-mobile" d="M220,0
-                           C200,100 440,200 470,350
-                           C500,500 170,600 200,750
-                           C230,900 500,950 470,1100
-                           C440,1250 240,1350 270,1500" stroke="#7DD3FC" stroke-width="4" fill="none"
-                        stroke-linecap="round" stroke-dasharray="20 40" opacity="0.7" />
-                    <!-- 水の流れライン2（細い波・左側の流れ） -->
-                    <path class="river-wave-mobile river-wave-2-mobile" d="M180,0
-                           C160,100 400,200 430,350
-                           C460,500 130,600 160,750
-                           C190,900 460,950 430,1100
-                           C400,1250 200,1350 230,1500" stroke="#0EA5E9" stroke-width="3" fill="none"
-                        stroke-linecap="round" stroke-dasharray="15 35" opacity="0.6" />
                 </svg>
 
                 <div class="container">
@@ -2086,14 +2119,10 @@
                         <p style="margin-bottom: 3rem; color: #ccc;" data-i18n="footer.cta_body">
                             課題やご要望など、お気軽にお聞かせください。</p>
 
-                        <div class="cta-grid">
-                            <a href="#" class="cta-btn-item cta-line">
-                                <i class="fab fa-line" style="font-size: 1.5rem;"></i>
-                                <span data-i18n="footer.cta_line">LINEで相談する</span>
-                            </a>
-                            <a href="mailto:contact@omnibus.jp" class="cta-btn-item cta-email">
-                                <i class="fas fa-envelope" style="font-size: 1.2rem;"></i>
-                                <span data-i18n="footer.cta_email">メールで相談する</span>
+                        <div style="margin-top: 2rem;">
+                            <a href="contact.html" class="nav-btn"
+                                style="display: inline-block; margin: 0; padding: 1rem 3rem; font-size: 1.1rem; text-decoration: none; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900;">
+                                <span data-i18n="footer.contact_btn">お問い合わせはこちら →</span>
                             </a>
                         </div>
                     </div>
@@ -2346,6 +2375,7 @@
                 "footer.cta_body": "現状の課題やご要望など、どのようなことでも丁寧にお伺いします。<br>無理な勧誘はいたしませんので、安心してご相談ください。",
                 "footer.cta_line": "LINEで相談する",
                 "footer.cta_email": "メールで相談する",
+                "footer.contact_btn": "お問い合わせはこちら →",
                 "footer.desc": "滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。",
                 "footer.services.1": "業務改善・自動化",
                 "footer.services.2": "ITツール導入支援",
@@ -2395,6 +2425,7 @@
                 "footer.cta_body": "We will listen carefully to any current issues or requests.<br>We will not make unreasonable solicitations, so please feel free to consult with us.",
                 "footer.cta_line": "Consult via LINE",
                 "footer.cta_email": "Consult via Email",
+                "footer.contact_btn": "Contact Us →",
                 "footer.desc": "Supporting DX for local companies mainly in the Shiga/Biwa area.<br>Aiming to be a partner walking and growing together.",
                 "footer.services.1": "Business Improvement/Automation",
                 "footer.services.2": "IT Tool Implementation Support",
@@ -2587,11 +2618,68 @@
             if (rect.top < windowHeight * 0.8) {
                 castle.classList.add('built');
                 caption.classList.add('visible');
+                // Remove listener after animation triggers to improve performance
+                window.removeEventListener('scroll', checkCastleVisible);
             }
         }
 
         window.addEventListener('scroll', checkCastleVisible);
         window.addEventListener('load', checkCastleVisible);
+
+        // Hamburger Menu Toggle
+        function initHamburgerMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const overlay = document.getElementById('nav-overlay');
+
+            if (!hamburger || !nav) return;
+
+            // Toggle menu
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                if (overlay) {
+                    overlay.classList.toggle('active');
+                }
+                // Prevent body scroll when menu is open
+                document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+            });
+
+            // Close menu when clicking nav links
+            const navLinks = nav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                    }
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close menu when clicking overlay
+            if (overlay) {
+                overlay.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close menu when clicking outside (fallback)
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && !hamburger.contains(e.target) && !overlay.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                    }
+                    document.body.style.overflow = '';
+                }
+            });
+        }
     </script>
 </body>
 
