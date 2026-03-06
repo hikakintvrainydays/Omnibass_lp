@@ -1,0 +1,408 @@
+/* ============================================
+   🌌 Toru Tour | About ページ（立体宇宙＋流れ星）
+   ============================================ */
+
+:root {
+  --light-x: 50%;
+  --light-y: 50%;
+}
+
+/* =============================
+   ベース設定
+   ============================= */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Noto Serif JP", serif;
+  color: #f5f5f5;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at center, #050505 0%, #000010 100%);
+  position: relative;
+}
+
+/* =============================
+   🌌 宇宙背景（3層の星空）
+   ============================= */
+.about-bg {
+  position: relative;
+  flex: 1 0 auto;
+  z-index: 0;
+  overflow: hidden;
+  /* Make inner footer stick to bottom even with short content */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- 🌑 遠景の星層 --- */
+.about-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.35) 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, rgba(255,255,255,0.25) 1px, transparent 1px),
+    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 400px 400px;
+  opacity: 0.3;
+  animation: starsFar 180s linear infinite;
+  z-index: -4;
+}
+@keyframes starsFar {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to   { background-position: 200px 400px, -200px 200px, 100px -300px; }
+}
+
+/* --- 🌟 中景の星層 --- */
+.about-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.7) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.6) 1px, transparent 1px),
+    radial-gradient(circle at 40% 90%, rgba(255,255,255,0.5) 1px, transparent 1px),
+    radial-gradient(circle at 70% 10%, rgba(255,255,255,0.6) 1px, transparent 1px);
+  background-size: 250px 250px;
+  opacity: 0.45;
+  animation: starsMid 120s linear infinite;
+  z-index: -3;
+}
+@keyframes starsMid {
+  from { background-position: 0 0, 100px 50px, 200px 0, 50px 200px; }
+  to   { background-position: 400px 400px, 300px 250px, 400px 200px, 250px 400px; }
+}
+
+/* --- ✨ 前景の星層（明滅） --- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 60%, rgba(255,255,255,0.8) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 60% 20%, rgba(255,255,255,0.9) 2px, transparent 2px),
+    radial-gradient(circle at 90% 80%, rgba(255,255,255,0.8) 1.5px, transparent 1.5px);
+  background-size: 180px 180px;
+  animation: starsNear 60s linear infinite, twinkle 5s ease-in-out infinite;
+  z-index: -2;
+  opacity: 0.6;
+}
+@keyframes starsNear {
+  from { background-position: 0 0, 100px 100px, -100px -50px; }
+  to   { background-position: 300px 600px, -200px 400px, 200px -200px; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* --- 🌠 マウス追従の光 --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--light-x) var(--light-y),
+    rgba(255,255,255,0.15),
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+  z-index: -1;
+  pointer-events: none;
+  transition: background 0.25s ease;
+}
+
+/* =============================
+   🌠 流れ星（ランダムに横切る）
+   ============================= */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: rotate(45deg);
+  z-index: -1;
+  animation: shooting 3s ease-in-out infinite;
+}
+
+/* 10個の流れ星を生成してランダム時間で動く */
+@keyframes shooting {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0) rotate(45deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(600px) translateY(300px) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(900px) translateY(500px) rotate(45deg);
+  }
+}
+
+/* ランダム位置・遅延で10個配置 */
+.shooting-star:nth-child(1) { top: 10%; left: 5%;  animation-delay: 2s; }
+.shooting-star:nth-child(2) { top: 30%; left: 20%; animation-delay: 5s; }
+.shooting-star:nth-child(3) { top: 50%; left: 40%; animation-delay: 8s; }
+.shooting-star:nth-child(4) { top: 70%; left: 10%; animation-delay: 12s; }
+.shooting-star:nth-child(5) { top: 20%; left: 60%; animation-delay: 16s; }
+.shooting-star:nth-child(6) { top: 40%; left: 75%; animation-delay: 20s; }
+.shooting-star:nth-child(7) { top: 60%; left: 50%; animation-delay: 24s; }
+.shooting-star:nth-child(8) { top: 80%; left: 30%; animation-delay: 28s; }
+.shooting-star:nth-child(9) { top: 35%; left: 85%; animation-delay: 32s; }
+.shooting-star:nth-child(10){ top: 55%; left: 65%; animation-delay: 36s; }
+
+/* =============================
+   Heroセクション
+   ============================= */
+.about-hero-section {
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.6)),
+              url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1600&auto=format&fit=crop")
+              center/cover no-repeat;
+  text-align: center;
+  color: #fff;
+  padding: 30vh 2rem 30vh;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.about-hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  color: #8fd3ff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px rgba(143,211,255,0.25);
+}
+.about-hero-section p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* =============================
+   共通セクション
+   ============================= */
+.about-section,
+.about-greeting,
+.about-profile {
+  max-width: 960px;
+  margin: 16vh auto;
+  padding: 0 1.5rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.about-section.in-view,
+.about-greeting.in-view,
+.about-profile.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================
+   タイトル
+   ============================= */
+.about-title,
+.about-greeting-title,
+.about-profile-title {
+  font-size: 2.2rem;
+  color: #8fd3ff;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 12px rgba(143,211,255,0.25);
+}
+.about-sub,
+.about-profile-sub,
+.about-greeting-sub {
+  color: #c2e8ff;
+  opacity: 0.9;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.about-desc {
+  color: #e0e0e0;
+  line-height: 2;
+  font-size: 1rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* =============================
+   Greeting（代表2人）
+   ============================= */
+.greeting-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  margin-top: 3rem;
+}
+.greeting-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 3rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 20px rgba(255,255,255,0.05);
+}
+.greeting-photo img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 15px rgba(143,211,255,0.2);
+}
+.greeting-text { flex: 1; text-align: left; }
+.greeting-name {
+  font-size: 1.4rem;
+  color: #8fd3ff;
+  margin-bottom: 1rem;
+}
+.greeting-text p {
+  color: #ccc;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.greeting-signature {
+  color: #8fd3ff;
+  text-align: right;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+/* =============================
+   Profile（会社概要）
+   ============================= */
+.about-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.about-table th,
+.about-table td {
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 1.2rem 1rem;
+}
+.about-table th {
+  color: #8fd3ff;
+  background: rgba(255,255,255,0.05);
+  width: 28%;
+  text-align: left;
+  font-weight: 600;
+}
+.about-table td {
+  color: #f8f8f8;
+  line-height: 1.7;
+  background: rgba(0,0,0,0.4);
+}
+
+/* =============================
+   Footer
+   ============================= */
+.site-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  background: rgba(5,5,15,0.95);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 0 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.footer-container {
+  width: 80%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.footer-links a {
+  color: #ddd;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 0.95rem;
+}
+.footer-links a:hover { color: #8fd3ff; }
+.footer-copy {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+/* =============================
+   📱 Responsive (Tablet & Phone)
+   ============================= */
+@media (max-width: 1024px) {
+  .about-hero-section { padding: 24vh 1.5rem 24vh; }
+  .about-section, .about-greeting, .about-profile { margin: 12vh auto; }
+  .greeting-card { gap: 2rem; padding: 2.2rem; }
+  .greeting-photo img { width: 180px; height: 180px; }
+  .about-table th, .about-table td { padding: 1rem 0.9rem; }
+  .footer-container { width: 86%; }
+}
+
+@media (max-width: 768px) {
+  .about-hero-section { padding: 20vh 1rem 20vh; }
+  .about-hero-title { font-size: clamp(2rem, 6vw, 2.6rem); }
+
+  .about-section, .about-greeting, .about-profile { margin: 10vh auto; padding: 0 1rem; }
+  .about-title, .about-greeting-title, .about-profile-title { font-size: 1.8rem; }
+  .about-sub, .about-profile-sub, .about-greeting-sub { font-size: 1rem; }
+  .about-desc { font-size: 0.95rem; max-width: 90%; }
+
+  .greeting-card { flex-direction: column; align-items: center; gap: 1.6rem; padding: 1.6rem; text-align: left; }
+  .greeting-photo img { width: 150px; height: 150px; }
+  .greeting-name { font-size: 1.2rem; }
+  .greeting-text p { font-size: 0.95rem; }
+  .greeting-signature { margin-top: 1.2rem; text-align: right; }
+
+  .about-table th { width: 36%; }
+  .about-table th, .about-table td { padding: 0.9rem 0.7rem; font-size: 0.95rem; }
+
+  .footer-container { width: 90%; gap: 1rem; }
+  .footer-links { gap: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .about-hero-section { padding: 18vh 1rem 18vh; }
+  .about-hero-title { font-size: clamp(1.8rem, 7vw, 2.2rem); }
+
+  .about-section, .about-greeting, .about-profile { margin: 9vh auto; padding: 0 0.9rem; }
+  .about-title, .about-greeting-title, .about-profile-title { font-size: 1.6rem; }
+  .about-desc { font-size: 0.92rem; max-width: 94%; }
+
+  .greeting-card { padding: 1.2rem; gap: 1.2rem; }
+  .greeting-photo img { width: 128px; height: 128px; }
+  .greeting-name { font-size: 1.1rem; }
+  .greeting-text p { font-size: 0.92rem; line-height: 1.7; }
+
+  .about-table th, .about-table td { padding: 0.7rem 0.6rem; font-size: 0.9rem; }
+  .footer-links { gap: 0.9rem; }
+  .footer-copy { font-size: 0.8rem; }
+}

@@ -1,0 +1,1165 @@
+/* 🌌 ベース設定 */
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  color: #fff;
+  background: #000;
+  height: 500vh; /* JSで上書き（演出用スクロール） */
+}
+
+/* 🌍 Three.js Canvas */
+canvas#earthCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3; /* 背景のさらに奥 */
+  background: transparent;
+}
+
+/* 💧 水色のオーバーレイ（下 70%） */
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70vh;
+  background: linear-gradient(to top, rgba(0, 179, 255, 0), rgba(0,180,255,0));
+  z-index: -2;
+}
+
+
+
+
+/* =========================
+   🟦 共通ボタンデザイン
+   ========================= */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.btn-primary {
+  color: #fff;
+  background: rgba(0, 194, 255, 0.25);
+  border: 1px solid rgba(0, 194, 255, 0.7);
+}
+.btn-primary:hover {
+  background: rgba(0, 194, 255, 0.45);
+  border-color: rgba(0, 194, 255, 0.9);
+  box-shadow: 0 0 12px rgba(0, 194, 255, 0.6);
+}
+
+
+
+/* 🌊 オーバーレイ内のコンテンツ（固定） */
+.overlay-content {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%; height: 70vh;
+  display: flex; justify-content: center; align-items: center;
+  text-align: center;
+  z-index: 1;
+  pointer-events: none; /* ← 全体ではクリックを受け取らない */
+}
+ /* 内部要素はクリック可能にする */
+.overlay-content * {
+  pointer-events: auto !important;
+}
+
+/* ✨ フェードイン効果（中央の重ねコンテンツ） */
+.fade-section {
+  opacity: 0; 
+  transform: translateY(20px); 
+  transition: all 0.5s ease-out;
+  position: absolute; 
+  max-width: min(86ch, 92vw); padding: 0 1rem;
+  margin-top: 5rem;
+}
+.fade-section.visible { opacity: 1; transform: translateY(0); }
+
+/* 🧭 左側セクションメニュー（オーバーレイ内） */
+/* 🧭 左側セクションメニュー（オーバーレイ内） */
+.section-nav {
+  position: absolute;
+  left: 1.6rem;
+  top: 70%;
+  transform: translateY(-50%);
+  z-index: 12;
+  user-select: none;
+}
+
+.section-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+}
+
+/* ✅ Heroを除外して、2番目〜最後の項目だけを結ぶ縦線 */
+.section-nav ul::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: calc(1.4rem + 6px);   /* ← 2番目のドットの中央に合うよう微調整 */
+  bottom: calc(0.6rem + 6px); /* ← 最後のドットの中央に合うよう微調整 */
+  width: 2px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  outline: none;
+}
+
+.nav-item:hover,
+.nav-item:focus {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.nav-item.active {
+  opacity: 1;
+}
+
+.nav-item .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25) inset;
+  transition: all 0.2s;
+}
+
+.nav-item.active .dot {
+  width: 14px;
+  height: 14px;
+  background: #00c2ff;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.85);
+}
+
+.nav-item .label {
+  font-size: 0.9rem;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* ===========================================
+   📱 セクションナビ（.section-nav）レスポンシブ対応
+   =========================================== */
+
+/* ---- Tablet (<=1024px) ---- */
+@media (max-width: 1024px) {
+  .section-nav {
+    left: 1rem;
+    top: 95vh;
+    transform: none;
+  }
+
+  .section-nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .section-nav ul::before {
+    top: 12px;
+    bottom: 12px;
+  }
+
+  .nav-item .label {
+    font-size: 0.85rem;
+  }
+}
+
+/* ---- Phone (<=768px) ---- */
+@media (max-width: 768px) {
+  .section-nav {
+    position: fixed;
+    bottom: 8vh;
+    left: 48%;
+    transform: translateX(-50%);
+    z-index: 400;
+  }
+
+  .section-nav ul {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .section-nav ul::before {
+    display: none; /* 横並びなので縦線削除 */
+  }
+
+  .nav-item {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .nav-item .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-item .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .nav-item.active .dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* ---- Small Phone (<=480px) ---- */
+@media (max-width: 480px) {
+  .section-nav {
+    bottom: 6vh;
+  }
+
+  .nav-item .label {
+    display: none; /* ドットのみ表示 */
+  }
+
+  .section-nav ul {
+    gap: 1rem;
+  }
+}
+
+
+
+
+
+
+
+/* ===============================
+   🧭 Header & Hamburger （完全差し替え版）
+   ※ 既存の header / .nav-toggle / #siteNav / body.nav-open の定義は削除してこれを貼る
+   =============================== */
+
+/* ---- Base (PC含む全端末) ---- */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem clamp(1.2rem, 3vw, 2.4rem);            /* 右端の余白はここで確保 */
+  box-sizing: border-box;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(3px);
+  z-index: 200;                                          /* 背景より前、モーダルよりは後でOK */
+  overflow: visible;                                     /* 回転×のはみ出しを切らない */
+}
+
+.logo { font-size: 1.2rem; font-weight: 700; }
+
+/* Desktop inline nav (hidden on mobile) */
+.main-nav { display: none; align-items: center; gap: 1.2rem; }
+.main-nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+.main-nav a { color: #fff; text-decoration: none; font-weight: 600; letter-spacing: .02em; }
+.main-nav a:hover { color: #00c2ff; }
+.lang-select select,
+#siteNav select {
+  background: #111827; /* 深い紺寄りの黒 */
+  color: #e6f6ff;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: dark;
+}
+.lang-select select:focus,
+#siteNav select:focus { outline: none; border-color: #00c2ff; box-shadow: 0 0 0 2px rgba(0,194,255,0.3); }
+.lang-select select option,
+#siteNav select option { background-color: #0b1220; color: #e6f6ff; }
+
+/* Windows/Edge 等での可読性向上（OS依存のためベストエフォート） */
+.lang-select select::-ms-expand { display: none; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,1px,1px); white-space: nowrap; border: 0; }
+
+.nav-toggle {
+  position: relative;                                    /* 回転中心を枠内に固定 */
+  display: flex; justify-content: center; align-items: center; /* バーは絶対配置で中央基準 */
+  width: 52px; height: 52px;                             /* 回転余白つきのボタンサイズ */
+  padding: 0.6rem; box-sizing: border-box;               /* 内側余白で見切れ防止 */
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4);
+  cursor: pointer;
+  z-index: 2200;                                         /* headerより前面：常に見える */
+  transition: background .25s ease;
+  overflow: visible;                                     /* 回転時のはみ出しを許可 */
+}
+.nav-toggle:hover { background: rgba(0,0,0,0.55); }
+
+.nav-toggle__bar {
+  position: absolute;                                    /* 中央基準で正確に重ねる */
+  left: 50%; top: 50%;
+  display: block;
+  width: 24px; height: 2px;
+  background: #fff;
+  transform-origin: center center;                       /* 中央回転でズレない */
+  transform: translate(-50%, var(--y, 0)) rotate(0deg);
+  transition: transform .3s ease, opacity .3s ease, background .2s ease;
+}
+
+/* 初期（≡）の3本位置を中央基準で配置 */
+.nav-toggle__bar:nth-child(1) { --y: -6px; }
+.nav-toggle__bar:nth-child(2) { --y: 0; }
+.nav-toggle__bar:nth-child(3) { --y: 6px; }
+
+/* × 変形（中央で交差・見切れなし） */
+body.nav-open .nav-toggle__bar:nth-child(1) { --y: 0; transform: translate(-50%, 0) rotate(45deg); }
+body.nav-open .nav-toggle__bar:nth-child(2) { opacity: 0; }
+body.nav-open .nav-toggle__bar:nth-child(3) { --y: 0; transform: translate(-50%, 0) rotate(-45deg); }
+
+/* ---- 全画面メニュー（オーバーレイ） ---- */
+#siteNav {
+  position: fixed; inset: 0;
+  width: 100vw; height: 100dvh;
+  display: flex; justify-content: center; align-items: center;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s ease;
+  z-index: 2100;                                         /* ボタン(2200)より下、header(200)より上 */
+}
+body.nav-open #siteNav { opacity: 1; pointer-events: auto; }
+#siteNav ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 1.8rem;
+}
+#siteNav a {
+  color: #fff; text-decoration: none;
+  font-size: 1.6rem; font-weight: 600; letter-spacing: .05em;
+  transition: color .25s ease, transform .25s ease;
+}
+#siteNav a:hover { color: #00c2ff; transform: scale(1.08); }
+/* Place language select within overlay list */
+#siteNav .lang-item { margin-top: 1rem; }
+#siteNav select { font-size: 1rem; }
+
+/* メニュー展開時：背面スクロール禁止。headerは透過だが要素は前面維持 */
+body.nav-open { overflow: hidden; }
+body.nav-open header {
+  background: transparent;
+  backdrop-filter: none;
+  z-index: 2300;                                         /* #siteNav(2100)より上、.nav-toggle(2200)より下でもOK */
+}
+
+/* ---- Tablet 以下での当たり判定と右端余白の強化 ---- */
+@media (max-width: 1024px) {
+  header {
+    padding-right: calc(clamp(1.2rem, 3vw, 2.4rem) + env(safe-area-inset-right));
+  }
+  .main-nav { display: none; }
+}
+
+/* ---- Phone ---- */
+@media (max-width: 768px) {
+  /* 指で押しやすく、かつ右端から適度に離す（見切れ根絶） */
+  header { padding-right: calc(1.6rem + env(safe-area-inset-right)); }
+  .nav-toggle { width: 52px; height: 52px; padding: 0.6rem; }
+  .nav-toggle__bar { width: 24px; }
+}
+
+/* ---- Small Phone ---- */
+@media (max-width: 480px) {
+  header { padding-right: calc(1.8rem + env(safe-area-inset-right)); }
+  .nav-toggle { width: 50px; height: 50px; padding: 0.55rem; }
+}
+
+/* Desktop (>=1025px): show inline nav, hide hamburger+overlay */
+@media (min-width: 1025px) {
+  .main-nav { display: flex; }
+  .nav-toggle { display: none; }
+  #siteNav { display: none !important; }
+}
+
+
+
+
+
+
+/* ============================
+   🎯 現在のセクションタイトル縦書き（1つだけ表示）
+   ============================ */
+.vtitle-single {
+  position: fixed;
+  left: 12vw;            /* ドットナビの右隣 */
+  top: 80vh;
+  transform: translateY(-50%);
+  
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 2rem;
+  font-weight: 9000;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.25s ease, color 0.3s ease;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  z-index: 20;            /* ヘッダー(20)と被らないよう同値でもOK */
+  user-select: none;
+  pointer-events: none;
+}
+.vtitle-single.show {
+  opacity: 1;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0,210,255,0.8);
+}
+
+/* =======================================
+   📱 セクションタイトル（.vtitle-single）レスポンシブ対応
+   ======================================= */
+
+/* ---- Tablet (<=1024px) ---- */
+@media (max-width: 1024px) {
+  .vtitle-single {
+    left: 8vw;
+    top: 90vh;
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+    z-index: 400;
+  }
+  :root:has(#hero.fade-section.visible) .vtitle-single {
+    display: none !important;
+  }
+}
+
+/* ---- Phone (<=768px) ---- */
+@media (max-width: 768px) {
+  .vtitle-single {
+    position: fixed;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    opacity: 0.9;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 0 8px rgba(0,210,255,0.6);
+  }
+}
+
+/* ---- Small Phone (<=480px) ---- */
+@media (max-width: 480px) {
+  .vtitle-single {
+    bottom: 8vh;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+
+
+.fade-section > h2 {
+  display: none;
+}
+
+/* 🖼️ ビジョンボード（共通） */
+.billboard {
+  position: fixed;
+  z-index: -1;            /* 地球より前 / オーバーレイより前 */
+  pointer-events: none;
+  overflow: visible;      /* 外枠の光が切れない */
+}
+
+/* 左・中央・右の位置とサイズ（ビューポート基準で可変） */
+.billboard--left   { top: 15vh; left: 3vw;  width: 25vw; height: 25vh; }
+.billboard--center { top: 15vh; left: 50%; transform: translateX(-50%); width: 35vw; height: 23vh; }
+.billboard--right  { top: 15vh; right: 3vw; width: 25vw; height: 25vh; }
+
+/* 枠（内側でクリップ） */
+.billboard-frame {
+  position: absolute; inset: 0;
+  border-radius: 1vw; overflow: hidden; pointer-events: none;
+}
+
+/* 枠グロー（デフォルト消灯 / 画像と同期で点灯） */
+.billboard-frame::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 1.5px solid rgba(0,220,255,0.9);
+  box-shadow:
+    0 0 25px rgba(0,220,255,0.6),
+    0 0 80px rgba(0,220,255,0.4),
+    inset 0 0 20px rgba(0,220,255,0.2);
+  mix-blend-mode: screen;
+  opacity: 0; transition: opacity 450ms ease; z-index: 2; pointer-events: none;
+}
+.billboard-frame.active::before { opacity: 1; }
+
+/* 🌟 枠線のみ非表示にするクラス */
+.no-frame-glow .billboard-frame::before {
+  opacity: 0 !important;
+}
+
+/* 画像（3面共通） */
+#billboardImageLeft,
+#billboardImageCenter,
+#billboardImageRight {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block; object-fit: cover;
+  filter: saturation(1.1) contrast(1.05) brightness(1.08);
+  opacity: 0; transition: opacity 450ms ease, transform 900ms ease;
+  transform: scale(1.03);
+  z-index: 1;
+}
+#billboardImageLeft.active,
+#billboardImageCenter.active,
+#billboardImageRight.active {
+  opacity: .95; transform: scale(1);
+}
+
+
+/* 💬 スクロール指示 */
+#scrollHint {
+  position: fixed;
+  left: 2rem;
+  bottom: 40vh;
+  font-size: 2rem;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 30;
+  pointer-events: none;
+}
+#scrollHint.visible {
+  opacity: 1;
+  animation: scrollPulse 1.6s infinite ease-in-out;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+@media (max-width: 1024px) {
+  #scrollHint {
+    font-size: 1.8rem;
+    bottom: 50vh;
+  }
+}
+@media (max-width: 768px) {
+  #scrollHint {
+    left: 2rem;
+    bottom: 50vh;
+  }
+}
+@media (max-width: 480px) {
+  #scrollHint {
+    left: 2rem;
+    bottom: 50vh;
+  }
+}
+
+
+/* ==========================
+   🌤️ ヒーローロゴ配置
+   ========================== */
+.hero-logo-container {
+  position: fixed;
+  top: 30vh; /* 上部に余白を確保 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15; /* ヘッダーより下、ビジョンより上 */
+  pointer-events: none;
+}
+.hero-logo {
+  width: 60vw;
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 12px rgba(0, 200, 255, 0.6));
+  animation: fadeLogo 2s ease-out;
+}
+
+/* 🌊 水色オーバーレイ非表示（Hero専用） */
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+/* 🌍 Heroセクション時にセクションメニューを非表示 */
+.section-nav.hidden-nav {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* 通常時にもトランジション適用しておく */
+.section-nav {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+@keyframes fadeLogo {
+  from { opacity: 0; transform: translateY(-10px) scale(1.05); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ================================
+   📱 Heroセクション専用レスポンシブ
+   ================================ */
+
+/* ---- Tablet (<=1024px) ---- */
+@media (max-width: 1024px) {
+  .hero-logo-container {
+    top: 28vh;
+  }
+
+  .hero-logo {
+    width: 60vw;
+    max-width: 480px;
+    height: auto;
+  }
+}
+
+/* ---- Phone (<=768px) ---- */
+@media (max-width: 768px) {
+  .hero-logo-container {
+    top: 32vh;
+  }
+
+  .hero-logo {
+    width: 70vw;
+    max-width: 360px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 200, 255, 0.5));
+  }
+}
+
+/* ---- Small Phone (<=480px) ---- */
+@media (max-width: 480px) {
+  .hero-logo-container {
+    top: 35vh;
+  }
+
+  .hero-logo {
+    width: 80vw;
+    max-width: 300px;
+    height: auto;
+  }
+}
+
+
+
+/* ================================
+   🌐 Business タブUI（2カラム）
+   ================================ */
+
+.billboard--left.business-left-resize {
+  left: 3vw;
+  width: 45%;
+  height: 35vh;
+  overflow: visible;
+}
+.billboard--left.business-left-resize #billboardImageLeft {
+  transform: scale(1) !important;
+  transform-origin: center center;
+  transition: transform 0.6s ease;
+}
+
+.billboard--right.business-right-resize {
+  width: 40%;
+  height: 32vh;
+  top: 15vh;
+  right: 5vw;
+  transition: all 0.6s ease;
+}
+.billboard--right.business-right-resize #billboardImageRight {
+  transform: scale(1.15) !important;
+  transform-origin: center center;
+  transition: transform 0.6s ease;
+}
+
+.biz-layout {
+  margin-top: 2vh;
+  width: 75vw;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 2vw;
+  align-items: start;
+  text-align: left;
+}
+.biz-tabs{ display:flex; flex-direction:column; gap: 0vh; }
+.biz-tab{
+  appearance: none;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(0,0,0,.25);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 999px;
+  font-size: .95rem;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  transition: background .25s, border-color .25s, transform .15s;
+  outline: none;
+  margin-top: 5vh;
+  z-index: 50;
+}
+.biz-tab:hover, .biz-tab:focus{
+  border-color: rgba(0,194,255,.8);
+  transform: translateX(2px);
+}
+.biz-tab.is-active{
+  background: rgba(0,194,255,.18);
+  border-color: rgba(0,194,255,.95);
+  box-shadow: 0 0 0 2px rgba(0,194,255,.25) inset, 0 0 20px rgba(0,194,255,.25);
+}
+.biz-panel{
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 1.5rem 1.1rem;
+  background: rgba(0,0,0,.28);
+  backdrop-filter: blur(2px);
+  min-height: 9.5rem;
+  animation: panelFade .35s ease;
+  margin-top: 5vh;                 /* デザイン基準位置に戻す */
+  width: 35vw;
+  height: 30vh;                   /* PCは元の高さに戻す */
+  overflow: auto;                 /* 長文時は内部スクロール */
+  -webkit-overflow-scrolling: touch;  /* iOS慣性スクロール */
+  z-index: 50;
+  pointer-events: auto !important; 
+}
+@keyframes panelFade {
+  from{ opacity: 0; transform: translateY(6px); }
+  to  { opacity: 1; transform: translateY(0); }
+}
+.biz-title{ margin: .2rem 0 .6rem; font-size: 1.25rem; color: #00c2ff; }
+.biz-desc{ line-height: 2; opacity: 0.95; word-break: break-word; overflow-wrap: anywhere; font-size: 0.95rem; }
+.biz-panel a.btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 999; /* ← すべての前面に */
+}
+#bizPanel .btn,
+.biz-panel .btn {
+  /* タップしやすさと視認性を維持しつつ可変に */
+  font-size: clamp(0.85rem, 0.75rem + 0.25vw, 1rem);
+  padding: clamp(0.45rem, 0.4rem + 0.25vw, 0.7rem)
+           clamp(0.9rem, 0.8rem + 0.9vw, 1.4rem);
+  min-height: 40px; /* 少し小さめに調整 */
+  display: inline-flex;               /* テキストを高さ中央に */
+  align-items: center;
+  justify-content: center;
+  line-height: 1;                    /* 行高の影響を無くす */
+  vertical-align: middle;
+}
+#bizLinkBtn {
+  pointer-events: auto;
+  opacity: 1;
+  position: relative;
+  z-index: 1001; /* 前面へ */
+}
+:root:has(#business.fade-section.visible) #bizLinkBtn {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* ==============================
+   📱 Business 専用レスポンシブ
+   ============================== */
+
+/* ---- Tablet (<=1024px) ---- */
+@media (max-width: 1024px) {
+  .billboard--center,
+  .billboard--right {
+    display: none !important;
+  }
+
+  /* Business演出で右が拡大されても出ないように保険 */
+  .billboard--right.business-right-resize {
+    display: none !important;
+  }
+
+  /* 左は見せるので、少しだけ大きめ＆位置最適化（お好みで調整） */
+  .billboard--left.business-left-resize {
+    left: 3vw;
+    width: 90%;
+    height: 35vh;
+    overflow: visible;
+  }
+
+  #billboardImageLeft,
+  #billboardImageCenter,
+  #billboardImageRight {
+    object-fit: contain !important;   /* ← これで切り抜かない */
+    transform: none !important;       /* 拡大アニメの縮尺を無効 */
+    background: transparent;
+  }
+
+
+  /* 本体レイアウト：中央寄せ＋間隔最適化 */
+  .biz-layout {
+    width: 88vw;
+    max-width: 980px;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 1.4rem;
+    margin: 1.5rem auto 0;
+  }
+
+  .biz-tab   { padding: 0.85rem 1.1rem; font-size: .95rem; margin-top: 0; }
+  .biz-panel { padding: 1.4rem 1.2rem; margin: 0; height: 22vh; overflow: auto; -webkit-overflow-scrolling: touch; }
+  .biz-title { font-size: 1.1rem; }
+  .biz-desc  { line-height: 2; font-size: 0.9rem; }
+  .biz-panel .btn { min-width: 140px; }
+}
+
+/* ---- Phone / Phablet (<=768px) ---- */
+@media (max-width: 768px) {
+
+  /* Business 本体：1カラム化 */
+  .biz-layout {
+    grid-template-columns: 1fr;
+    width: 90vw;
+    gap: 1rem;
+    margin: 1.2rem auto 0;
+  }
+
+  /* タブを横スクロール（スワイプ）に */
+  .biz-tabs {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: .6rem;
+    overflow-x: auto;              /* 横スクロールを許可 */
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;             /* 折り返さずスクロール */
+    padding-bottom: .4rem;
+    scrollbar-width: thin;         /* Firefox */
+  }
+  .biz-tabs::-webkit-scrollbar { height: 6px; }
+  .biz-tabs::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.25);
+    border-radius: 999px;
+  }
+
+  .biz-tab {
+    white-space: nowrap;
+    margin: 0;
+    padding: .7rem 1rem;
+    font-size: .9rem;
+    flex: 0 0 auto;                /* 横スクロール対象 */
+    min-height: 44px;              /* 指で押しやすく */
+    touch-action: manipulation;
+  }
+
+  .biz-panel {
+    width: 90%;
+    height: 22vh;                  /* モバイルはさらに低めに固定 */
+    padding: 1.1rem 1rem;
+    margin: 0;
+    overflow: auto;                /* 長文時は内部スクロール */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+  .biz-title { font-size: clamp(0.95rem, 3.6vw, 1.1rem); }
+  .biz-desc  { font-size: clamp(0.82rem, 3.2vw, 0.92rem); line-height: 1.7; hyphens: auto; }
+  .biz-panel .btn,
+  #bizPanel .btn,
+  #bizLinkBtn {
+    width: auto; max-width: 100%; min-width: 0; align-self: flex-start;
+    font-size: 0.75rem;
+    padding: .28rem .7rem;           /* 高さをさらに薄く */
+    min-height: 30px;                 /* スマホで薄め */
+    line-height: 1;                   /* ボタン内テキストを中央に */
+    white-space: nowrap;              /* 折り返しで高さが増えないように */
+    margin-top: .6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ================================
+   📱 モバイル時：Tourタブ 最適化（スクロールなしで収める）
+   ================================ */
+@media (max-width: 768px) {
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel {
+    /* 余白を詰めて有効領域を確保 */
+    padding: 0.8rem 0.8rem;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .biz-title {
+    font-size: clamp(0.85rem, 3.1vw, 1rem);
+    margin: .05rem 0 .25rem;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .biz-desc {
+    font-size: clamp(0.74rem, 2.9vw, 0.88rem);
+    line-height: 1.5;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .btn {
+    font-size: 0.68rem;
+    min-height: 26px;
+    padding: .22rem .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel {
+    padding: 0.7rem 0.7rem;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .biz-title {
+    font-size: clamp(0.82rem, 3.4vw, 0.95rem);
+    margin: .04rem 0 .2rem;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .biz-desc {
+    font-size: clamp(0.7rem, 3.2vw, 0.82rem);
+    line-height: 1.48;
+  }
+  .biz-tabs:has(#tab-tour.is-active) + .biz-panel .btn {
+    font-size: 0.66rem;
+    min-height: 24px;
+    padding: .2rem .48rem;
+  }
+}
+
+/* ---- Small Phone (<=480px) ---- */
+@media (max-width: 480px) {
+  .biz-tab   { 
+    text-align: center;
+    width: auto;                     /* 固定幅を撤廃して自動に */
+    padding: .6rem .9rem; 
+    font-size: .85rem; 
+    white-space: nowrap;             /* 折り返さず横スクロール */
+    flex: 0 0 auto;
+  }
+  .biz-title { font-size: 1.0rem; }
+  .biz-desc  { font-size: clamp(.78rem, 3.5vw, .88rem); line-height: 1.65; hyphens: auto; }
+  .biz-panel { height: 26vh; }
+  .biz-panel .btn,
+  #bizPanel .btn,
+  #bizLinkBtn {
+    font-size: 0.7rem;
+    padding: .25rem .6rem;            /* さらに薄く */
+    min-height: 28px;                 /* 最小高さ */
+    line-height: 1;                   /* テキスト中央 */
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+
+/* ================================
+   ✅ About セクション
+   ================================ */
+
+.about-grid {
+  margin: 2vh auto 0;
+  width: 45vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  text-align: left;
+}
+.about-card {
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 2vh 2vw;
+  background: rgba(0,0,0,.28);
+  backdrop-filter: blur(2px);
+  line-height: 2.2;
+  opacity: 0.95;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30vh;
+  overflow: hidden;
+}
+.about-card__text{
+  margin: 0;
+  /* 長文や英数字連続の折り返し対策 */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  /* 複数行クランプでパネルからはみ出さない */
+  line-height: 1.9;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5; /* デスクトップは5行まで */
+  overflow: hidden;
+}
+.about-card__title{
+  margin: .2rem 0 .8rem;
+  font-size: 1.3rem;
+  color: #7de2ff;
+}
+.about-cta{
+  margin-top: 1.4rem;
+}
+
+/* 📱 About CTA button (mobile sizes) */
+@media (max-width: 768px){
+  .about-card__cta .btn{
+    font-size: 0.8rem;
+    padding: .35rem .8rem;      /* 高さを薄く */
+    min-height: 32px;
+    line-height: 1;             /* テキスト中央寄せ */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;        /* 折り返し防止で高さ増を抑制 */
+  }
+}
+@media (max-width: 480px){
+  .about-card__cta .btn{
+    font-size: 0.75rem;
+    padding: .3rem .7rem;       /* さらに薄く */
+    min-height: 28px;
+  }
+}
+
+/* ✨ 光のキャラクター */
+.particle {
+  position: fixed;
+  width: 10vw;
+  left: -50%;
+  bottom: 8vh;
+  z-index: 5;
+  opacity: 0;
+  filter: drop-shadow(0 0 2vw rgba(255,255,180,0.8));
+}
+.particle.active {
+  animation: particleMove 2s ease-in-out forwards;
+}
+.catch_phrase_about {
+  position: absolute;
+  width: 20vw;
+  height: 20vh;
+  bottom: 15vh;
+  right: -19vw;
+}
+
+/* 光の軌跡アニメーション */
+@keyframes particleMove {
+  0% { transform: translate(15vw, 0vh); opacity: 1; }
+  10% { transform: translate(15vw, -35vh); }
+  60% { transform: translate(62vw, -35vh); }
+  80% { transform: translate(62vw, 0); opacity: 1; }
+  100% { transform: translate(85vw, 0); opacity: 1; }
+}
+
+/* 📱 Aboutレスポンシブ */
+@media (max-width: 900px){
+  .about-grid{ width: 86vw; }
+  .about-card{ height: auto; }
+  .about-card__text{
+    /* モバイルは高さ可変、クランプ解除で読みやすさ優先 */
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+}
+
+/* 🧾 テキスト全体の可変フォント */
+h1, h2, h3, p {
+  font-size: clamp(0.9rem, 1.2vw, 1.6rem);
+}
+
+
+
+/* ✅ Footer：黒いオーバーレイが水色オーバーレイの上にかかる */
+.main-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 60vh;
+  background: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0,180,255,0));
+  z-index: 12; /* overlay(10)より上に */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+/* ✨ キャッチフレーズ */
+.footer-tagline {
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+  opacity: 0.95;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* 📸 Instagramアイコン + Contact */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
+  margin-top: 0.8rem;
+}
+
+.footer-icon {
+  color: #fff;
+  font-size: 2rem;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+.footer-icon:hover {
+  color: #f58529;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px rgba(255, 100, 150, 0.6));
+}
+
+.footer-contact-link {
+  color: #fff;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  transition: 0.3s ease;
+}
+.footer-contact-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* ====== Interactivity overrides ====== */
+.overlay-content { pointer-events: auto !important; z-index: 30 !important; }
+.overlay-content * { pointer-events: auto !important; }
+.main-footer { pointer-events: none !important; }
+#bizLinkBtn { pointer-events: auto !important; opacity: 1 !important; z-index: 1001; }
+.biz-panel, .biz-tabs { z-index: 50; }
+/* Ensure only the active section is interactive */
+.overlay-content .fade-section:not(.visible),
+.overlay-content .fade-section:not(.visible) * { pointer-events: none !important; }
+.overlay-content .fade-section.visible,
+.overlay-content .fade-section.visible * { pointer-events: auto !important; }
+
+/* ====== Desktop overlap fix (>900px) ====== */
+@media (min-width: 901px){
+  /* Business セクションをフッターより前面に */
+  #business.fade-section { z-index: 20; }
+  /* z-index を有効化するため position 指定 */
+  .biz-panel, .biz-tabs { position: relative; z-index: 100; }
+}

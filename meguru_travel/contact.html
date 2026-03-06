@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Toru Tour</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header (same as index/about) -->
+  <header>
+    <div class="logo">Toru Tour</div>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html#business" data-i18n="nav.business">Business</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li><a class="contact-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="lang-select">
+        <label for="langSelectDesktop" class="visually-hidden">Language</label>
+        <select id="langSelectDesktop" aria-label="Language select">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </nav>
+    <button class="nav-toggle" aria-controls="siteNav" aria-expanded="false" aria-label="メニューを開く">
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- Mobile overlay nav -->
+  <nav id="siteNav" role="navigation">
+    <ul>
+      <li><a href="index.html#business" data-i18n="nav.business">Business</a></li>
+      <li><a href="about.html" data-i18n="nav.about">About</a></li>
+      <li><a class="contact-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      <li class="lang-item">
+        <label for="langSelectMobile" class="visually-hidden">Language</label>
+        <select id="langSelectMobile" aria-label="Language select">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- No hero image on contact -->
+
+  <!-- Main content under starry bg like about -->
+  <div class="about-bg">
+    <section id="contact" class="about-section fade-in">
+      <h2 class="about-title">お問い合わせ</h2>
+      <p class="about-desc">ご質問・ご相談は以下のフォームからお送りください。</p>
+
+      <div class="greeting-card">
+        <div class="greeting-text" style="width:100%">
+          <form id="contactForm" class="contact-form wpcf7-form">
+            <!-- CF7 hidden fields -->
+            <input type="hidden" name="_wpcf7" value="7">
+            <input type="hidden" name="_wpcf7_version" value="5.9.4">
+            <input type="hidden" name="_wpcf7_locale" value="ja">
+            <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f7-o1">
+            <input type="hidden" name="_wpcf7_container_post" value="0">
+            <input type="hidden" name="your-subject" value="お問い合わせ">
+
+            <label for="your-name">氏名 <span class="required">*</span></label>
+            <input type="text" id="your-name" name="your-name" placeholder="例：山田太郎" required>
+
+            <label for="your-email">メールアドレス <span class="required">*</span></label>
+            <input type="email" id="your-email" name="your-email" placeholder="例：example@mail.com" required>
+
+            <label for="your-message">メッセージ（任意）</label>
+            <textarea id="your-message" name="your-message" rows="6" placeholder="ご用件をご記入ください"></textarea>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary">送信</button>
+          </form>
+
+          <p id="resultMessage"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer same as about -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand"><div class="logo">Toru Tour</div></div>
+        <nav class="footer-nav">
+          <ul class="footer-links">
+            <li><a href="index.html">トップ</a></li>
+            <li><a href="index.html#business">事業紹介</a></li>
+            <li><a href="about.html#company">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer-copy">© 2025 Toru Tour. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <!-- Animations and behavior -->
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('in-view'));
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    const root = document.documentElement;
+    window.addEventListener("scroll", () => {
+      const deg = 135 + window.scrollY / 40;
+      root.style.setProperty("--line-angle", `${deg}deg`);
+    });
+    document.addEventListener("mousemove", e => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      root.style.setProperty("--light-x", `${x * 100}%`);
+      root.style.setProperty("--light-y", `${y * 100}%`);
+    });
+  </script>
+  <script src="assets/js/lang.js"></script>
+  <script>
+    (function setupMobileNav(){
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('siteNav');
+      if (!toggle || !nav) return;
+      let backdrop = document.querySelector('.nav-backdrop');
+      if (!backdrop) { backdrop = document.createElement('div'); backdrop.className = 'nav-backdrop'; document.body.appendChild(backdrop); }
+      const openNav = () => {
+        document.body.classList.add('nav-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'メニューを閉じる');
+        const first = nav.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
+        if (first) setTimeout(() => first.focus(), 150);
+      };
+      const closeNav = () => {
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'メニューを開く');
+        toggle.focus();
+      };
+      toggle.addEventListener('click', () => { document.body.classList.contains('nav-open') ? closeNav() : openNav(); });
+      backdrop.addEventListener('click', closeNav);
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.body.classList.contains('nav-open')) closeNav(); });
+      nav.addEventListener('click', (e) => { if (e.target && e.target.closest('a')) closeNav(); });
+      const mql = window.matchMedia('(min-width: 1025px)');
+      const sync = () => { if (mql.matches) closeNav(); };
+      mql.addEventListener ? mql.addEventListener('change', sync) : mql.addListener(sync);
+    })();
+  </script>
+  <script src="assets/js/contact.js"></script>
+</body>
+</html>

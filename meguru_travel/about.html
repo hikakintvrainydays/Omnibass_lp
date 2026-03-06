@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Toru Tour</title>
+  <meta name="description" content="Toru Tourの理念・ビジョン・代表挨拶・会社概要を紹介します。">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- 共通ヘッダー（index.html と同一構造） -->
+  <header>
+    <div class="logo">Toru Tour</div>
+
+    <!-- Desktop inline nav -->
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html#business" data-i18n="nav.business">Business</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li><a class="contact-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <div class="lang-select">
+        <label for="langSelectDesktop" class="visually-hidden">Language</label>
+        <select id="langSelectDesktop" aria-label="Language select">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </nav>
+
+    <!-- Mobile hamburger button -->
+    <button class="nav-toggle" aria-controls="siteNav" aria-expanded="false" aria-label="メニューを開く">
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+      <span class="nav-toggle__bar" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- モバイル用オーバーレイナビ -->
+  <nav id="siteNav" role="navigation">
+    <ul>
+      <li><a href="index.html#business" data-i18n="nav.business">Business</a></li>
+      <li><a href="about.html" data-i18n="nav.about">About</a></li>
+      <li><a class="contact-link" href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      <li class="lang-item">
+        <label for="langSelectMobile" class="visually-hidden">Language</label>
+        <select id="langSelectMobile" aria-label="Language select">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Heroセクション（画像のみ） -->
+  <section id="lead" class="about-hero-section">
+    <div class="about-hero-inner">
+      <h2 class="about-hero-title">About Us</h2>
+    </div>
+  </section>
+
+  <!-- 🪞Hero以外すべてを包む背景付き領域 -->
+  <div class="about-bg">
+    <!-- Mission -->
+    <section id="mission" class="about-section fade-in">
+      <h2 class="about-title">Mission</h2>
+      <p class="about-sub">旅を通じて、世界と地域をつなぐ。</p>
+      <p class="about-desc">
+        私たちは、地域の誇りと人の温かさを世界へ届け、<br>
+        学び合い、共に成長する旅の形を創ります。
+      </p>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" class="about-section fade-in">
+      <h2 class="about-title">Vision</h2>
+      <p class="about-sub">地域と世界のあいだに、心の橋をかける。</p>
+      <p class="about-desc">
+        Toru Tourは、旅を通じて人が育ち、地域が輝く“つながりの循環”を生み出します。<br>
+        私たちは、観光を「伝える仕事」から「共に創る文化」へと進化させていきます。
+      </p>
+    </section>
+
+    <!-- Value -->
+    <section id="value" class="about-section fade-in">
+      <h2 class="about-title">Value</h2>
+      <p class="about-desc">
+        ・<strong>Authenticity｜本質を伝える</strong><br>
+        　地域の声と文化を、飾らずまっすぐに届ける。<br>
+        ・<strong>Empathy｜心でつながる</strong><br>
+        　人と人、地域と旅人が共に響き合う関係を築く。<br>
+        ・<strong>Growth｜共に育つ</strong><br>
+        　旅を通じて、学び、挑戦し、次の世代へつなぐ。
+      </p>
+    </section>
+
+    <!-- 代表挨拶 -->
+    <!-- 代表社員挨拶 -->
+    <section id="greeting" class="about-greeting fade-in">
+      <div class="about-greeting-header">
+        <small class="about-greeting-sub">MESSAGE FROM CEO</small>
+        <h2 class="about-greeting-title">代表挨拶</h2>
+      </div>
+
+      <div class="greeting-wrapper">
+
+        <!-- 🔹代表者1 -->
+        <div class="greeting-card">
+          <div class="greeting-photo">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=400&auto=format&fit=crop" alt="代表社員1">
+          </div>
+          <div class="greeting-text">
+            <h3 class="greeting-name">吉崎 徹（代表取締役）</h3>
+            <p>
+              旅は、出会いと学びの連続です。<br>
+              私たちは、地域と世界の“心をつなぐ”旅を創ることを目指しています。
+            </p>
+            <p>
+              地元の声や文化をそのまま伝えることで、旅人が「本当の日本」を体験できるように。<br>
+              そしてその体験が、地域の人々にとっても新たな誇りと学びになるように。
+            </p>
+            <p class="greeting-signature">株式会社Toru Tour<br>代表取締役　吉崎 徹</p>
+          </div>
+        </div>
+
+        <!-- 🔹代表者2 -->
+        <div class="greeting-card">
+          <div class="greeting-photo">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=400&auto=format&fit=crop" alt="代表社員2">
+          </div>
+          <div class="greeting-text">
+            <h3 class="greeting-name">竹内 大和</h3>
+            <p>
+              私たちは「旅を通じた共創」を大切にしています。<br>
+              旅人と地域が互いに学び合うことで、未来の観光が変わると信じています。
+            </p>
+            <p>
+              そしていつか——言葉も文化も超えて、宇宙人とでも語り合えるような、<br>
+              そんな心の通じる旅を創り続けたいと思っています。
+            </p>
+            <p class="greeting-signature">株式会社Toru Tour<br>竹内 大和</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 会社概要 -->
+    <section id="company" class="about-profile fade-in">
+      <div class="about-profile-header">
+        <small class="about-profile-sub">COMPANY PROFILE</small>
+        <h2 class="about-profile-title">会社概要</h2>
+      </div>
+      <table class="about-table">
+        <tr><th>会社名</th><td>株式会社Toru Tour</td></tr>
+        <tr><th>設立</th><td>2025年</td></tr>
+        <tr><th>所在地</th><td>滋賀県彦根市</td></tr>
+        <tr><th>事業内容</th><td>インバウンド観光 / ツアー企画 / 地域プロモーション / Web制作・運営支援</td></tr>
+        <tr><th>代表取締役</th><td>吉崎 徹</td></tr>
+        <tr><th>連絡先</th><td>torutour81@gmail.com</td></tr>
+      </table>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand"><div class="logo">Toru Tour</div></div>
+        <nav class="footer-nav">
+          <ul class="footer-links">
+            <li><a href="index.html">トップ</a></li>
+            <li><a href="index.html#business">事業紹介</a></li>
+            <li><a href="#company">会社概要</a></li>
+            <li><a href="contact.html">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer-copy">© 2025 Toru Tour. All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <!-- アニメーション制御 -->
+  <script>
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('in-view'));
+    }, { threshold: 0.2 });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // スクロールで角度変化
+    const root = document.documentElement;
+    window.addEventListener("scroll", () => {
+      const deg = 135 + window.scrollY / 40;
+      root.style.setProperty("--line-angle", `${deg}deg`);
+    });
+
+    // マウスで光を追従
+    document.addEventListener("mousemove", e => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      root.style.setProperty("--light-x", `${x * 100}%`);
+      root.style.setProperty("--light-y", `${y * 100}%`);
+    });
+  </script>
+  <!-- i18n（ヘッダーの言語切替／ラベル更新） -->
+  <script src="assets/js/lang.js"></script>
+  <!-- ヘッダーのハンバーガー開閉のみ（scrollEffectは読み込まない） -->
+  <script>
+    (function setupMobileNav(){
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('siteNav');
+      if (!toggle || !nav) return;
+      let backdrop = document.querySelector('.nav-backdrop');
+      if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'nav-backdrop';
+        document.body.appendChild(backdrop);
+      }
+      const openNav = () => {
+        document.body.classList.add('nav-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'メニューを閉じる');
+        const first = nav.querySelector('a,button,[tabindex]:not([tabindex="-1"])');
+        if (first) setTimeout(() => first.focus(), 150);
+      };
+      const closeNav = () => {
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'メニューを開く');
+        toggle.focus();
+      };
+      toggle.addEventListener('click', () => {
+        document.body.classList.contains('nav-open') ? closeNav() : openNav();
+      });
+      backdrop.addEventListener('click', closeNav);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('nav-open')) closeNav();
+      });
+      nav.addEventListener('click', (e) => { if (e.target && e.target.closest('a')) closeNav(); });
+      const mql = window.matchMedia('(min-width: 1025px)');
+      const sync = () => { if (mql.matches) closeNav(); };
+      mql.addEventListener ? mql.addEventListener('change', sync) : mql.addListener(sync);
+    })();
+  </script>
+</body>
+</html>

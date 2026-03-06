@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMNIBASS | DIGITAL SHIFT FROM MOTHER LAKE</title>
+    <title>OMNIBASS | NEW FLOWS FROM MOTHER LAKE</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=M+PLUS+Rounded+1c:wght@400;700;800;900&display=swap"
@@ -1693,12 +1693,29 @@
             animation: fadeIn 0.6s ease forwards;
         }
 
-        .article-card:nth-child(1) { animation-delay: 0.1s; }
-        .article-card:nth-child(2) { animation-delay: 0.2s; }
-        .article-card:nth-child(3) { animation-delay: 0.3s; }
-        .article-card:nth-child(4) { animation-delay: 0.4s; }
-        .article-card:nth-child(5) { animation-delay: 0.5s; }
-        .article-card:nth-child(6) { animation-delay: 0.6s; }
+        .article-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .article-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .article-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .article-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .article-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .article-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
 
         .article-card:hover {
             transform: translateY(-8px);
@@ -1830,6 +1847,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1947,6 +1965,7 @@
         }
 
         @media (max-width: 480px) {
+
             /* 記事セクション - 極小画面対応 */
             .filter-btn {
                 padding: 0.5rem 1rem;
@@ -1955,6 +1974,7 @@
         }
 
         @media (max-width: 900px) {
+
             /* 記事セクション - タブレット対応 */
             .article-grid {
                 gap: 2rem;
@@ -2088,12 +2108,19 @@
             <div class="philosophy-head" style="margin: 0 auto;">
                 <span class="vision-kicker">Our Purpose</span>
                 <h2 class="main-copy">
-                    <span data-i18n="about.headline.1">人と地域と紡ぎあい、</span><br>
-                    <span data-i18n="about.headline.2">デジタルの実りを創造し、</span><br>
-                    <span data-i18n="about.headline.3">「おもてなし」を未来へつなぐ。</span>
+                    <span data-i18n="about.headline.1">あらゆる新しいものを巡らせる</span>
                 </h2>
 
                 <!-- CTA Button Removed as per request -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Businesses Subtitle (Fixed Background Layer) -->
+    <div class="businesses-fixed-layer" id="businesses-fixed">
+        <div class="container">
+            <div class="businesses-head">
+                <p data-en="Our Businesses">Our Businesses</p>
             </div>
         </div>
     </div>
@@ -2106,7 +2133,7 @@
             <canvas id="hero-canvas"></canvas>
             <div class="hero-content">
                 <h1>OMNIBASS</h1>
-                <p data-i18n="hero.subtitle">DIGITAL SHIFT FROM MOTHER LAKE</p>
+                <p data-i18n="hero.subtitle">NEW FLOWS FROM MOTHER LAKE</p>
             </div>
             <div class="scroll-down"></div>
         </section>
@@ -2287,135 +2314,335 @@
                 </div>
             </section>
 
-            <!-- 事業案内 (Service) - YamatoDX風 水の流れデザイン -->
-            <section class="section service-section" id="services">
-                <!-- Streamline - 川の流れデザイン（S字カーブ） デスクトップ用 -->
-                <svg class="streamline-svg streamline-desktop" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                    <defs>
-                        <!-- 川の流れグラデーション -->
-                        <linearGradient id="river-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.15" />
-                            <stop offset="25%" stop-color="#0EA5E9" stop-opacity="0.35" />
-                            <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.4" />
-                            <stop offset="75%" stop-color="#0EA5E9" stop-opacity="0.35" />
-                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.2" />
-                        </linearGradient>
-                        <!-- 水面の輝き -->
-                        <linearGradient id="water-shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.3" />
-                            <stop offset="50%" stop-color="#E0F2FE" stop-opacity="0.5" />
-                            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.3" />
-                        </linearGradient>
-                    </defs>
-                    <!-- メインの川の流れ（太い帯） -->
-                    <path class="river-main" d="M-200,400
-                           C0,400 100,100 400,100
-                           C700,100 800,500 1100,500
-                           C1300,500 1400,200 1600,200" stroke="url(#river-gradient)" stroke-width="180" fill="none"
-                        stroke-linecap="round" />
-                    <!-- 川の中央線（輝き） -->
-                    <path class="river-shimmer" d="M-200,400
-                           C0,400 100,100 400,100
-                           C700,100 800,500 1100,500
-                           C1300,500 1400,200 1600,200" stroke="url(#water-shimmer)" stroke-width="60" fill="none"
-                        stroke-linecap="round" />
-                    <!-- 水の流れライン1（細い波） -->
-                    <path class="river-wave river-wave-1" d="M-180,380
-                           C20,380 120,120 420,120
-                           C720,120 820,480 1120,480
-                           C1320,480 1420,220 1620,220" stroke="#7DD3FC" stroke-width="4" fill="none"
-                        stroke-linecap="round" stroke-dasharray="20 40" opacity="0.6" />
-                    <!-- 水の流れライン2 -->
-                    <path class="river-wave river-wave-2" d="M-220,420
-                           C-20,420 80,80 380,80
-                           C680,80 780,520 1080,520
-                           C1280,520 1380,180 1580,180" stroke="#0EA5E9" stroke-width="3" fill="none"
-                        stroke-linecap="round" stroke-dasharray="15 35" opacity="0.5" />
-                </svg>
 
-                <!-- Streamline - 川の流れデザイン（縦の流れ） モバイル用 -->
-                <svg class="streamline-svg streamline-mobile" viewBox="0 0 600 1400" preserveAspectRatio="none">
-                    <defs>
-                        <!-- 川の流れグラデーション（モバイル・縦） -->
-                        <linearGradient id="river-gradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.2" />
-                            <stop offset="25%" stop-color="#0EA5E9" stop-opacity="0.4" />
-                            <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.45" />
-                            <stop offset="75%" stop-color="#0EA5E9" stop-opacity="0.4" />
-                            <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0.25" />
-                        </linearGradient>
-                        <!-- 水面の輝き（モバイル・縦） -->
-                        <linearGradient id="water-shimmer-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.4" />
-                            <stop offset="50%" stop-color="#E0F2FE" stop-opacity="0.6" />
-                            <stop offset="100%" stop-color="#BAE6FD" stop-opacity="0.4" />
-                        </linearGradient>
-                    </defs>
-                    <!-- メインの川の流れ（緩やかな蛇行・均一幅） -->
-                    <path class="river-main-mobile" d="M280,0
-                           C260,120 430,250 440,400
-                           C450,550 160,650 170,800
-                           C180,950 440,1050 430,1150
-                           C420,1300 200,1350 220,1500" stroke="url(#river-gradient-mobile)" stroke-width="200"
-                        fill="none" stroke-linecap="round" />
-                    <!-- 川の中央線（輝き） -->
-                    <path class="river-shimmer-mobile" d="M280,0
-                           C260,120 430,250 440,400
-                           C450,550 160,650 170,800
-                           C180,950 440,1050 430,1150
-                           C420,1300 200,1350 220,1500" stroke="url(#water-shimmer-mobile)" stroke-width="80"
-                        fill="none" stroke-linecap="round" />
-                </svg>
 
-                <div class="container">
-                    <div class="service-header">
-                        <p class="service-label" data-en="Services">サービス</p>
-                        <h2 data-en="Our Services">事業案内</h2>
-                        <p class="service-intro" data-en="Supporting local communities with three core services">
-                            3つの事業で地域をサポート</p>
-                    </div>
+            <!-- 事業一覧 (Business List) -->
+            <!-- 事業一覧 (Business List) - INFOCUS CONTRAST Design -->
+            <style>
+                .contrast-section {
+                    background-color: #e0f2fe;
+                    /* Light surface water tone */
+                    color: #fff;
+                    padding: 0;
+                    margin: 0;
+                }
 
-                    <!-- 3つのサービス（YamatoDX風） -->
-                    <div class="service-grid">
-                        <!-- サービス 1: 業務改善・業務自動化 -->
-                        <div class="service-item">
-                            <div class="service-bg-number">01</div>
-                            <h3 class="service-title" data-en="Process Improvement & Automation">業務改善・業務自動化</h3>
-                            <ul class="service-list">
-                                <li data-en="Excel workflow automation">Excel業務の整理・自動化</li>
-                                <li data-en="Manual process optimization">手作業フローの見直し</li>
-                                <li data-en="Routine task automation design">定型作業の自動処理設計</li>
-                            </ul>
-                        </div>
+                .contrast-header {
+                    text-align: center;
+                    padding: 4rem 2rem 3rem;
+                    /* Adjusted for the new layout */
+                    background: transparent;
+                    color: #0369a1;
+                    position: relative;
+                }
 
-                        <!-- サービス 2: IT・ツール導入支援 -->
-                        <div class="service-item">
-                            <div class="service-bg-number">02</div>
-                            <h3 class="service-title" data-en="IT & Tool Implementation">IT・ツール導入支援</h3>
-                            <ul class="service-list">
-                                <li data-en="Cloud tool integration">クラウドツール導入サポート</li>
-                                <li data-en="Small-scale system development">小規模システム開発</li>
-                                <li data-en="API integration & data utilization">API連携・データ活用</li>
-                            </ul>
-                        </div>
+                .contrast-header h2 {
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                    color: #1f2937;
+                    margin-bottom: 0;
+                    position: relative;
+                    z-index: 2;
+                }
 
-                        <!-- サービス 3: AI・生成AI活用 -->
-                        <div class="service-item">
-                            <div class="service-bg-number">03</div>
-                            <h3 class="service-title" data-en="AI & Generative AI Utilization">AI・生成AI活用</h3>
-                            <ul class="service-list">
-                                <li data-en="ChatGPT and generative AI for business">ChatGPTなど生成AIの業務活用</li>
-                                <li data-en="Internal use case design support">社内利用を前提とした設計支援</li>
-                                <li data-en="Practical implementation guidance">実務に使える形への落とし込み</li>
-                            </ul>
-                        </div>
-                    </div>
+                /* Sticky Parallax Reveal for Businesses */
+                .businesses-reveal-wrapper {
+                    position: relative;
+                    z-index: 1;
+                }
 
-                    <div class="service-footer">
-                        <a href="contact.html" class="service-cta" data-en="View Service Details →">サービス詳細を見る →</a>
-                    </div>
+                .businesses-sticky-layer {
+                    position: sticky;
+                    top: 0;
+                    width: 100%;
+                    height: 100vh;
+                    background-color: #f0f9ff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                    border-top: 1px solid rgba(14, 165, 233, 0.1);
+                    /* Subtle separation from News section */
+                }
+
+                .businesses-sticky-layer::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 50px;
+                    background: linear-gradient(to bottom, rgba(240, 249, 255, 0), #f0f9ff);
+                    pointer-events: none;
+                }
+
+                .businesses-sticky-text {
+                    font-size: clamp(3rem, 10vw, 8rem);
+                    font-weight: 900;
+                    color: rgba(3, 105, 161, 0.08);
+                    /* Subtle watermark */
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    margin: 0;
+                    letter-spacing: 0.05em;
+                    pointer-events: none;
+                }
+
+                .contrast-list {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                }
+
+                .contrast-item {
+                    position: relative;
+                    flex: 1;
+                    width: 33.333%;
+                    height: 80vh;
+                    /* Extremely tall vertical space */
+                    min-height: 600px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                    text-decoration: none;
+                    perspective: 1000px;
+                }
+
+                .contrast-bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+                    z-index: 1;
+                }
+
+                /* Water Color Overlay */
+                .contrast-bg::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(180deg, rgba(56, 189, 248, 0.2) 0%, rgba(2, 132, 199, 0.6) 100%);
+                    transition: all 1.2s ease;
+                }
+
+                .contrast-item:hover .contrast-bg {
+                    transform: scale(1.03);
+                    /* Gentle wave zoom */
+                }
+
+                .contrast-item:hover .contrast-bg::after {
+                    background: linear-gradient(180deg, rgba(125, 211, 252, 0.4) 0%, rgba(14, 165, 233, 0.7) 100%);
+                }
+
+                /* Water Ripple Effect */
+                .contrast-item::before,
+                .contrast-item::after {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 0;
+                    height: 0;
+                    border: 2px solid rgba(255, 255, 255, 0.4);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    opacity: 0;
+                    z-index: 2;
+                    pointer-events: none;
+                }
+
+                .contrast-item:hover::before {
+                    animation: ripple-ring 2.5s ease-out forwards;
+                }
+
+                .contrast-item:hover::after {
+                    animation: ripple-ring 2.5s ease-out 1.2s forwards;
+                }
+
+                @keyframes ripple-ring {
+                    0% {
+                        width: 0;
+                        height: 0;
+                        opacity: 0.6;
+                        border-width: 8px;
+                    }
+
+                    100% {
+                        width: 150vw;
+                        height: 150vw;
+                        opacity: 0;
+                        border-width: 1px;
+                    }
+                }
+
+                .contrast-content {
+                    position: relative;
+                    z-index: 2;
+                    text-align: center;
+                    width: 100%;
+                    padding: 0 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .contrast-title {
+                    font-size: clamp(2rem, 4vw, 4rem);
+                    /* Reduced max size for 3-column fit */
+                    font-weight: 900;
+                    color: #fff;
+                    margin: 0;
+                    line-height: 1.2;
+                    letter-spacing: -0.01em;
+                    text-transform: uppercase;
+                    mix-blend-mode: overlay;
+                    /* Replicating the stark contrast effect */
+                    font-family: 'Inter', sans-serif;
+                    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+                    word-wrap: break-word;
+                    /* Ensure long words break */
+                    hyphens: auto;
+                }
+
+                /* Fallback for mix-blend-mode or explicit request */
+                .contrast-item:hover .contrast-title {
+                    color: transparent;
+                    -webkit-text-stroke: 2px rgba(255, 255, 255, 1);
+                    mix-blend-mode: normal;
+                    transform: translateY(-10px);
+                }
+
+                .contrast-desc {
+                    margin-top: 1.5rem;
+                    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+                    /* Slightly smaller for 3 columns */
+                    font-weight: 700;
+                    color: rgba(255, 255, 255, 0.95);
+                    max-width: 90%;
+                    /* Better fit in columns */
+                    line-height: 1.6;
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+                    transition-delay: 0.1s;
+                }
+
+                .contrast-item:hover .contrast-desc {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .contrast-badge {
+                    margin-bottom: 1.5rem;
+                    padding: 0.5rem 1.5rem;
+                    border: 1px solid rgba(255, 255, 255, 0.6);
+                    border-radius: 50px;
+                    font-size: 0.85rem;
+                    letter-spacing: 0.1em;
+                    color: #fff;
+                    text-transform: uppercase;
+                    backdrop-filter: blur(4px);
+                    transition: all 0.3s ease;
+                }
+
+                .contrast-item:hover .contrast-badge {
+                    background: #fff;
+                    color: #0284c7;
+                    border-color: #fff;
+                }
+
+                @media (max-width: 768px) {
+                    .contrast-list {
+                        flex-direction: column;
+                    }
+
+                    .contrast-item {
+                        width: 100%;
+                        height: 60vh;
+                        min-height: 400px;
+                    }
+
+                    .contrast-item:hover .contrast-title {
+                        color: #fff;
+                        -webkit-text-stroke: 0;
+                    }
+
+                    .contrast-desc {
+                        opacity: 1;
+                        transform: translateY(0);
+                        font-size: 0.95rem;
+                    }
+                }
+            </style>
+
+            <div class="businesses-reveal-wrapper">
+                <div class="businesses-sticky-layer">
+                    <p class="businesses-sticky-text" data-en="Our Businesses">Our Businesses</p>
                 </div>
-            </section>
+
+                <section class="contrast-section" id="services"
+                    style="background-color: #f0f9ff; position: relative; z-index: 10;">
+                    <div class="contrast-header" style="position: relative; z-index: 2;">
+                        <h2 data-en="Businesses">事業一覧</h2>
+                    </div>
+
+                    <div class="contrast-list">
+                        <!-- 事業 1: YamatoDX -->
+                        <a href="contact.html" class="contrast-item">
+                            <div class="contrast-bg"
+                                style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2000&auto=format&fit=crop');">
+                            </div>
+                            <div class="contrast-content">
+                                <span class="contrast-badge" data-en="DX Services">DX支援事業</span>
+                                <h3 class="contrast-title" data-en="YamatoDX">YamatoDX</h3>
+                                <p class="contrast-desc"
+                                    data-en="DX support business that strictly aligns with the field, from business improvement to IT implementation and AI utilization.">
+                                    現場に寄り添い、業務改善からIT導入・AI活用まで伴走するDX支援事業
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- 事業 2: Dacha club -->
+                        <a href="contact.html" class="contrast-item">
+                            <div class="contrast-bg"
+                                style="background-image: url('https://images.unsplash.com/photo-1595841696677-64df7a1cf7e9?q=80&w=2000&auto=format&fit=crop');">
+                            </div>
+                            <div class="contrast-content">
+                                <span class="contrast-badge" data-en="Agriculture">農業事業</span>
+                                <h3 class="contrast-title" data-en="Dacha club">Dacha club</h3>
+                                <p class="contrast-desc"
+                                    data-en="Agricultural business utilizing IT to expand the joy of living with a farm and growing.">
+                                    ITを活用し、畑のある暮らしと育てる喜びを広げる農業事業
+                                </p>
+                            </div>
+                        </a>
+
+                        <!-- 事業 3: MEGURU TRAVEL -->
+                        <a href="contact.html" class="contrast-item">
+                            <div class="contrast-bg"
+                                style="background-image: url('https://images.unsplash.com/photo-1492571350019-22de08371fd3?q=80&w=2000&auto=format&fit=crop');">
+                            </div>
+                            <div class="contrast-content">
+                                <span class="contrast-badge" data-en="Inbound Tourism">インバウンド開拓事業</span>
+                                <h3 class="contrast-title" data-en="MEGURU TRAVEL">MEGURU TRAVEL</h3>
+                                <p class="contrast-desc"
+                                    data-en="Inbound experience pioneering business that turns regional stories into experiences.">
+                                    地域の物語を体験に変えるインバウンド体験開拓事業
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div> <!-- Close businesses-reveal-wrapper -->
 
             <!-- 会社概要 (Company) - 彦根城背景デザイン -->
             <section class="section company-section hikone-castle-section" id="about">
@@ -2444,27 +2671,14 @@
                 </div>
             </section>
 
-            <!-- サービス一覧 (Service List) - ハイクラス企業HPデザイン -->
-            <section class="section service-list-section" id="service-list">
-                <div class="container">
-                    <div class="service-list-header">
-                        <h2 data-en="Service List">サービス一覧</h2>
-                        <p class="service-list-subtitle">Coming Soon</p>
-                        <p class="service-list-desc" data-en="Under preparation. Please contact us for details.">
-                            準備中です。詳細はお問い合わせください。
-                        </p>
-                        <a href="contact.html" class="service-list-cta" data-en="Contact Us →">お問い合わせはこちら →</a>
-                    </div>
-                </div>
-            </section>
-
             <!-- 記事セクション (Articles) -->
             <section class="section article-section" id="articles">
                 <div class="container">
                     <!-- ヘッダー -->
                     <div class="article-header">
                         <h2 data-en="Articles">記事</h2>
-                        <p class="article-subtitle" data-en="Introduction to AI Agents and DX Implementation Cases">AIエージェントとDX導入事例のご紹介</p>
+                        <p class="article-subtitle" data-en="Introduction to AI Agents and DX Implementation Cases">
+                            AIエージェントとDX導入事例のご紹介</p>
                     </div>
 
                     <!-- カテゴリフィルター（タブ） -->
@@ -2479,78 +2693,90 @@
                         <!-- 記事カード1: AIエージェント -->
                         <article class="article-card" data-category="ai-agent">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop" alt="AIエージェント">
+                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop"
+                                    alt="AIエージェント">
                                 <span class="article-category-badge" data-en="AI Agent">AIエージェント</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
 
                         <!-- 記事カード2: DX導入事例 -->
                         <article class="article-card" data-category="case-study">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&h=450&fit=crop" alt="DX導入事例">
+                                <img src="https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&h=450&fit=crop"
+                                    alt="DX導入事例">
                                 <span class="article-category-badge badge-case" data-en="Case Study">導入事例</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
 
                         <!-- 記事カード3: AIエージェント -->
                         <article class="article-card" data-category="ai-agent">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=450&fit=crop" alt="AIエージェント">
+                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=450&fit=crop"
+                                    alt="AIエージェント">
                                 <span class="article-category-badge" data-en="AI Agent">AIエージェント</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
 
                         <!-- 記事カード4: DX導入事例 -->
                         <article class="article-card" data-category="case-study">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=450&fit=crop" alt="DX導入事例">
+                                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=450&fit=crop"
+                                    alt="DX導入事例">
                                 <span class="article-category-badge badge-case" data-en="Case Study">導入事例</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
 
                         <!-- 記事カード5: AIエージェント -->
                         <article class="article-card" data-category="ai-agent">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?w=800&h=450&fit=crop" alt="AIエージェント">
+                                <img src="https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?w=800&h=450&fit=crop"
+                                    alt="AIエージェント">
                                 <span class="article-category-badge" data-en="AI Agent">AIエージェント</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
 
                         <!-- 記事カード6: DX導入事例 -->
                         <article class="article-card" data-category="case-study">
                             <div class="article-image">
-                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=450&fit=crop" alt="DX導入事例">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=450&fit=crop"
+                                    alt="DX導入事例">
                                 <span class="article-category-badge badge-case" data-en="Case Study">導入事例</span>
                             </div>
                             <div class="article-content">
                                 <time class="article-date">2026.--.--</time>
                                 <h3 class="article-title" data-en="Coming Soon">近日公開予定</h3>
-                                <p class="article-excerpt" data-en="Article content is being prepared.">記事の内容を準備中です。</p>
+                                <p class="article-excerpt" data-en="Article content is being prepared.">
+                                    記事の内容を準備中です。</p>
                             </div>
                         </article>
                     </div>
@@ -2589,10 +2815,9 @@
                         <div>
                             <h4 data-i18n="nav.services">Services</h4>
                             <ul>
-                                <li data-i18n="footer.services.1">業務改善・自動化</li>
-                                <li data-i18n="footer.services.2">ITツール導入支援</li>
-                                <li data-i18n="footer.services.3">AI活用コンサルティング</li>
-                                <li data-i18n="footer.services.4">QRオーダーシステム</li>
+                                <li data-i18n="footer.services.1">YamatoDX</li>
+                                <li data-i18n="footer.services.2">Dacha club</li>
+                                <li data-i18n="footer.services.3">MEGURU TRAVEL</li>
                             </ul>
                         </div>
                         <div>
@@ -2795,9 +3020,7 @@
                 "nav.contact": "お問い合わせ",
                 "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
                 "about.label": "Our Purpose",
-                "about.headline.1": "人と地域と紡ぎあい、",
-                "about.headline.2": "デジタルの実りを創造し、",
-                "about.headline.3": "「おもてなし」を未来へつなぐ。",
+                "about.headline.1": "あらゆる新しいものを巡らせる",
                 "about.subcopy": "私たちは、現場の皆様と同じ視点に立ち、<br>本当に役立つ解決策を共に創り上げ、持続可能な地域の明日を照らします。",
                 "about.cta": "お気軽にご相談ください",
                 "about.left_title": "現場の想いに寄り添い、<br>未来を創るパートナー",
@@ -2830,10 +3053,9 @@
                 "footer.cta_email": "メールで相談する",
                 "footer.contact_btn": "お問い合わせはこちら →",
                 "footer.desc": "滋賀・琵琶湖エリアを中心に、地域企業のDXを支援。<br>共に歩み、共に成長するパートナーを目指します。",
-                "footer.services.1": "業務改善・自動化",
-                "footer.services.2": "ITツール導入支援",
-                "footer.services.3": "AI活用コンサルティング",
-                "footer.services.4": "QRオーダーシステム",
+                "footer.services.1": "YamatoDX",
+                "footer.services.2": "Dacha club",
+                "footer.services.3": "MEGURU TRAVEL",
                 "footer.company.1": "会社概要",
                 "footer.company.2": "導入事例",
                 "footer.company.3": "お知らせ"
@@ -2845,9 +3067,7 @@
                 "nav.company": "Company",
                 "nav.contact": "Contact",
                 "hero.subtitle": "DIGITAL SHIFT FOR LOCAL",
-                "about.headline.1": "Resonating with the field,",
-                "about.headline.2": "Opening the region's future,",
-                "about.headline.3": "Harvesting certain digital value.",
+                "about.headline.1": "Circulating all new things.",
                 "about.subcopy": "We stand from the same perspective as those on the ground,<br>co-creating truly useful solutions and illuminating a sustainable future for the region.",
                 "about.cta": "Feel free to contact us",
                 "about.left_title": "A Partner Close to Your Vision,<br>Building the Future Together",
@@ -2880,10 +3100,9 @@
                 "footer.cta_email": "Consult via Email",
                 "footer.contact_btn": "Contact Us →",
                 "footer.desc": "Supporting DX for local companies mainly in the Shiga/Biwa area.<br>Aiming to be a partner walking and growing together.",
-                "footer.services.1": "Business Improvement/Automation",
-                "footer.services.2": "IT Tool Implementation Support",
-                "footer.services.3": "AI Utilization Consulting",
-                "footer.services.4": "QR Order System",
+                "footer.services.1": "YamatoDX",
+                "footer.services.2": "Dacha club",
+                "footer.services.3": "MEGURU TRAVEL",
                 "footer.company.1": "Company Profile",
                 "footer.company.2": "Case Studies",
                 "footer.company.3": "News"
@@ -3142,7 +3361,7 @@
 
         if (filterBtns.length > 0 && articleCards.length > 0) {
             filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const category = this.dataset.category;
 
                     // アクティブボタンの切り替え
