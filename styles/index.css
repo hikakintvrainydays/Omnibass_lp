@@ -1612,13 +1612,33 @@ footer {
 /* フィルタータブ */
 .article-filter {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Change to flex-start for scrolling */
     gap: 1rem;
     margin-bottom: 3rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
+    overflow-x: auto;
+    /* Enable horizontal scroll */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+    padding-bottom: 0.5rem;
+    /* Space for hidden scrollbar */
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.article-filter::-webkit-scrollbar {
+    display: none;
+}
+
+
 .filter-btn {
+    flex-shrink: 0;
+    /* Prevent squishing on mobile */
+    white-space: nowrap;
+    /* Keep text on one line */
     padding: 0.75rem 1.75rem;
     border: 2px solid #e5e7eb;
     background: white;
