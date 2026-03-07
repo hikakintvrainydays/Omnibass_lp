@@ -677,23 +677,27 @@ header {
 footer {
     background: #111827;
     color: white;
-    padding-top: 4rem;
-    padding-bottom: 2rem;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 3rem;
     font-size: 0.9rem;
     color: #9CA3AF;
-    margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 3fr 1fr 1fr;
+    }
 }
 
 .footer-grid h4 {
     color: white;
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .footer-grid ul {
@@ -701,7 +705,8 @@ footer {
 }
 
 .footer-grid li {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
+    white-space: nowrap;
 }
 
 .footer-grid a {
@@ -714,6 +719,7 @@ footer {
 }
 
 .bottom-bar {
+    margin-top: 4rem;
     border-top: 1px solid #374151;
     padding-top: 2rem;
     display: flex;
