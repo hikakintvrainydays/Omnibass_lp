@@ -43,11 +43,11 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 9999;
     transition: 0.3s;
     padding: 1rem 0;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px);  Removed for mobile performance */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
@@ -75,11 +75,32 @@ header {
     font-size: 0.9rem;
     font-weight: 500;
     color: #4B5563;
-    transition: color 0.3s;
 }
 
-.nav a:hover {
+.lang-switch {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 99px;
+    gap: 4px;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lang-btn.active {
+    background: white;
     color: var(--color-primary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .nav-btn {
@@ -88,36 +109,50 @@ header {
     padding: 0.5rem 1.25rem;
     border-radius: 99px;
     margin-left: 1rem;
-    transition: transform 0.2s, box-shadow 0.3s;
 }
 
-.nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
-}
-
-/* Hamburger Menu */
+/* Hamburger Menu Button - Mobile Only */
 .hamburger {
     display: none;
-    flex-direction: column;
-    gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
-    z-index: 101;
+    padding: 0;
+    z-index: 1100;
+    position: relative;
+    width: 44px;
+    height: 44px;
 }
 
 .hamburger span {
-    width: 25px;
-    height: 3px;
+    display: block;
+    width: 24px;
+    height: 2px;
     background: #1f2937;
-    border-radius: 3px;
-    transition: all 0.3s ease;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/* 通常時の3本線 */
+.hamburger span:nth-child(1) {
+    top: 14px;
+}
+
+.hamburger span:nth-child(2) {
+    top: 21px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 28px;
+}
+
+/* アクティブ時の×ボタン */
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    top: 21px;
+    transform: translateX(-50%) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -125,7 +160,27 @@ header {
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    top: 21px;
+    transform: translateX(-50%) rotate(-45deg);
+}
+
+/* Mobile menu overlay */
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.nav-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
 /* Hero Section - Lake Biwa Underwater Theme */
@@ -157,10 +212,13 @@ header {
 }
 
 @keyframes underwater-light {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) scale(1);
         opacity: 0.6;
     }
+
     50% {
         transform: translateY(20px) scale(1.1);
         opacity: 0.8;
@@ -183,10 +241,13 @@ header {
 }
 
 @keyframes water-ripple {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) scaleX(1);
         opacity: 0.3;
     }
+
     50% {
         transform: translateY(-15px) scaleX(1.15);
         opacity: 0.5;
@@ -213,6 +274,7 @@ header {
         opacity: 0;
         transform: translateY(-20px);
     }
+
     100% {
         opacity: 0.8;
         transform: translateY(0);
@@ -234,6 +296,7 @@ header {
         opacity: 0;
         transform: translateY(30px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -328,13 +391,16 @@ header {
         transform: translateY(0) translateX(0) scale(1);
         opacity: 0;
     }
+
     5% {
         opacity: 0.6;
     }
+
     50% {
         transform: translateY(-50vh) translateX(30px) scale(1.1);
         opacity: 0.7;
     }
+
     100% {
         transform: translateY(-100vh) translateX(-20px) scale(0.8);
         opacity: 0;
@@ -369,10 +435,13 @@ header {
 }
 
 @keyframes scroll-bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         opacity: 0.3;
     }
+
     50% {
         transform: translateY(10px);
         opacity: 1;
@@ -663,36 +732,46 @@ footer {
     color: white;
 }
 
-/* Responsive Design */
+/* Mobile Navigation */
 @media (max-width: 768px) {
     .hamburger {
-        display: flex;
+        display: block;
+        /* blockに変更（flex不要） */
     }
 
     .nav {
+        display: flex;
         position: fixed;
         top: 0;
         right: -100%;
-        width: 70%;
-        max-width: 300px;
+        width: 75%;
+        max-width: 320px;
         height: 100vh;
-        background: white;
+        background: #ffffff;
         flex-direction: column;
         padding: 5rem 2rem 2rem;
         gap: 1.5rem;
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         align-items: flex-start;
+        z-index: 1000;
+        overflow-y: auto;
+        will-change: right;
     }
 
     .nav.active {
-        right: 0;
+        right: 0 !important;
     }
 
     .nav a {
         font-size: 1.1rem;
         width: 100%;
         padding: 0.5rem 0;
+    }
+
+    .lang-switch {
+        width: 100%;
+        justify-content: center;
     }
 
     .nav-btn {
