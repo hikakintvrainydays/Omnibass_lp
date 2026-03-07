@@ -30,11 +30,11 @@
                 <span></span>
             </button>
             <nav class="nav" id="nav">
-                <a href="#about" data-i18n="nav.about">About</a>
-                <a href="#services" data-i18n="nav.services">Services</a>
-                <a href="#product" data-i18n="nav.product">Product</a>
-                <a href="company.html" data-i18n="nav.company">Company</a>
-                <a href="contact.html" data-i18n="nav.contact" class="nav-btn">お問い合わせ</a>
+                <a href="#news" data-en="News">ニュース</a>
+                <a href="#services" data-en="Services">事業内容</a>
+                <a href="company.html" data-en="Company">会社概要</a>
+                <a href="#articles" data-en="Articles">記事一覧</a>
+                <a href="contact.html" data-en="Contact" class="nav-btn">お問い合わせ</a>
                 <div class="lang-switch">
                     <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
                     <button class="lang-btn" onclick="setLang('en')">English</button>
@@ -323,24 +323,62 @@
                 <img src="images/hikone_castle_bg.png" alt="Hikone Castle" class="hikone-castle-bg-img"
                     style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); max-width: 100%; max-height: 85%; height: auto; width: auto; opacity: 0.12; pointer-events: none; z-index: 0;" />
 
-                <div class="container">
-                    <div class="company-header" style="text-align: center; margin-bottom: 3rem;">
+                <div class="container" style="position: relative; z-index: 1; max-width: 900px;">
 
-                        <h2 style="font-size: 2.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;"
-                            data-en="About Us">会社概要
-                        </h2>
-                        <p style="font-size: 1rem; color: #6b7280;"
-                            data-en="A team from Shiga University, walking together with the local community">
-                            滋賀大学発、地域と共に歩むチーム</p>
+                    <!-- Vertical rhythm: top line -->
+                    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 4rem;">
+                        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #cbd5e1);">
+                        </div>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #94a3b8;">Company</span>
+                        <div style="flex: 1; height: 1px; background: linear-gradient(270deg, transparent, #cbd5e1);">
+                        </div>
                     </div>
-                    <div class="company-content" style="text-align: center;">
-                        <p class="company-desc" style="text-align: center; display: inline-block;"
-                            data-en="A venture from Shiga University. We support the DX promotion of local companies.">
-                            滋賀大学発のベンチャー。<br>
-                            地域企業のDX推進をサポートします。
+
+                    <!-- Company Name - Hero Typography -->
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: #1e293b; line-height: 1.6; letter-spacing: 0.02em;"
+                            data-en="Shaping the future, from Shiga.">
+                            琵琶湖のほとりから、<br class="br-mobile">未来をつくる。
                         </p>
-                        <a href="#" class="service-list-cta" data-en="Learn More →">こちらから →</a>
                     </div>
+
+                    <!-- Accent line -->
+                    <div
+                        style="width: 40px; height: 2px; background: #0ea5e9; margin: 0 auto 3rem; border-radius: 1px;">
+                    </div>
+
+                    <!-- Description -->
+                    <p style="text-align: center; font-size: 1.3rem; color: #64748b; line-height: 2.4; max-width: 620px; margin: 0 auto 3.5rem; letter-spacing: 0.03em;"
+                        data-en="Born from Shiga University, Omnibass walks alongside local businesses — turning their challenges into digital solutions that feel natural, not forced. From DX consulting to inbound tourism, we create new flows from Mother Lake.">
+                        あらゆる新しいものを巡らせ、<br class="br-pc">
+                        地域の現場に合った形で、そっと根づかせ、<br class="br-pc">
+                        次の一歩につながる未来を共につくります。
+                    </p>
+
+                    <!-- CTA - Minimal text link style -->
+                    <div style="text-align: center; margin-bottom: 4rem;">
+                        <a href="company.html" class="company-cta"
+                            style="display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 600; color: #1e293b; text-decoration: none; padding-bottom: 0.4rem; border-bottom: 2px solid #1e293b; letter-spacing: 0.05em; transition: all 0.3s ease;"
+                            data-en="View Company Details">
+                            会社詳細を見る
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Vertical rhythm: bottom line -->
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #cbd5e1);">
+                        </div>
+                        <span style="font-size: 0.7rem; font-weight: 500; color: #94a3b8; letter-spacing: 0.1em;">Shiga,
+                            Japan</span>
+                        <div style="flex: 1; height: 1px; background: linear-gradient(270deg, transparent, #cbd5e1);">
+                        </div>
+                    </div>
+
                 </div>
             </section>
 

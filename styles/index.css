@@ -803,15 +803,21 @@ footer {
     text-decoration: underline;
 }
 
+/* Company CTA hover */
+.company-cta:hover {
+    color: #0284c7 !important;
+    border-bottom-color: #0284c7 !important;
+}
+
+.company-cta:hover svg {
+    transform: translateX(4px);
+    transition: transform 0.3s ease;
+}
+
 /* Company Section - 中程度の水深（ミディアムブルー） */
 .company-section {
-    background: linear-gradient(to bottom,
-            #0ea5e9 0%,
-            #0284c7 30%,
-            #0369a1 70%,
-            #075985 100%);
     color: #1f2937;
-    /* Changed from white to dark gray for better readability */
+    padding: 12rem 0 14rem !important;
 }
 
 .company-content {
@@ -1863,6 +1869,11 @@ footer {
     display: none;
 }
 
+/* PC専用改行 - モバイルで非表示 */
+.br-pc {
+    display: inline;
+}
+
 /* ========================================
    RESPONSIVE OPTIMIZATION (Phase 5)
    ======================================== */
@@ -1983,6 +1994,11 @@ footer {
     /* モバイルでは改行を表示 */
     .br-mobile {
         display: inline;
+    }
+
+    /* PC専用改行はモバイルで非表示 */
+    .br-pc {
+        display: none;
     }
 
     .hero h1 {

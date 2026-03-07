@@ -709,7 +709,7 @@ footer {
 .company-section {
     position: relative;
     background: linear-gradient(180deg, var(--color-surface) 0%, #F8FAFC 50%, var(--color-light) 100%);
-    padding: 7rem 0 8rem;
+    padding: 10rem 0 12rem;
     overflow: hidden;
 }
 
