@@ -832,6 +832,13 @@ body.nav-open header {
 /* ---- Phone / Phablet (<=768px) ---- */
 @media (max-width: 768px) {
 
+  /* モバイルでは <br> を無視して自然に折り返す */
+  .biz-desc br,
+  .about-card__text br,
+  .footer-tagline br {
+    display: none;
+  }
+
   /* Business 本体：1カラム化 */
   .biz-layout {
     grid-template-columns: 1fr;

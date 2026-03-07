@@ -4,7 +4,8 @@
       "Bash(powershell -Command:*)",
       "Bash(python:*)",
       "Bash(powershell -File -:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(wc:*)"
     ]
   }
 }

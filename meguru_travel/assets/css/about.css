@@ -368,6 +368,14 @@ body::after {
 }
 
 @media (max-width: 768px) {
+  /* モバイルでは <br> を無視して自然に折り返す（Value・署名は除外） */
+  #mission .about-desc br,
+  #vision .about-desc br,
+  .about-sub br,
+  .greeting-text p:not(.greeting-signature) br {
+    display: none;
+  }
+
   .about-hero-section { padding: 20vh 1rem 20vh; }
   .about-hero-title { font-size: clamp(2rem, 6vw, 2.6rem); }
 

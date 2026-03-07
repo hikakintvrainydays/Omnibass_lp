@@ -18,6 +18,11 @@
     --font-jp: 'Noto Sans JP', sans-serif;
 }
 
+.nowrap {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -230,52 +235,7 @@ header.scrolled .hamburger span {
     }
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    color: var(--color-white);
-    font-family: var(--font-en);
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 1s 1.5s forwards ease-out;
-}
 
-.scroll-line {
-    width: 1px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: var(--color-white);
-    animation: scrollDown 2s infinite ease-in-out;
-}
-
-@keyframes scrollDown {
-    0% {
-        transform: translateY(-100%);
-    }
-
-    100% {
-        transform: translateY(200%);
-    }
-}
 
 /* Common Sections */
 .section {
@@ -318,6 +278,43 @@ header.scrolled .hamburger span {
 /* About Us Section - Redesign */
 .about {
     background: var(--color-bg);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+    width: 100%;
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+}
+
+.about-content h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.about-content p {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
 }
 
 .about-intro {
@@ -579,6 +576,10 @@ header.scrolled .hamburger span {
 }
 
 /* Responsive */
+.sp-br {
+    display: none;
+}
+
 @media (max-width: 992px) {
     .about-grid {
         grid-template-columns: 1fr;
@@ -591,6 +592,14 @@ header.scrolled .hamburger span {
 }
 
 @media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.4rem;
+    }
+
+    .sp-br {
+        display: block;
+    }
+
     .nav {
         position: fixed;
         top: 0;
