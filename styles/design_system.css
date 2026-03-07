@@ -302,12 +302,13 @@ header {
 }
 
 .main-copy {
-    font-size: clamp(2rem, 4.5vw, 4rem);
-    /* Reduced size */
+    font-size: clamp(1.5rem, 4.5vw, 4rem);
     font-weight: 900;
     line-height: 1.5;
     margin-bottom: 2.5rem;
     letter-spacing: 0.05em;
+    overflow-wrap: break-word;
+    word-break: normal;
 }
 
 .main-copy span {
@@ -1558,7 +1559,7 @@ footer {
     -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04),
-                0 1px 4px rgba(0, 0, 0, 0.02);
+        0 1px 4px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.5);
     transition: all 0.3s ease;
 }
@@ -1566,7 +1567,7 @@ footer {
 .service-item:hover {
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06),
-                0 2px 8px rgba(0, 0, 0, 0.03);
+        0 2px 8px rgba(0, 0, 0, 0.03);
     transform: translateY(-2px);
 }
 

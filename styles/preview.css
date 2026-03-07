@@ -1,0 +1,1111 @@
+:root {
+    --color-primary: #2563EB;
+    --color-secondary: #7C3AED;
+    --color-text: #1F2937;
+    --color-light: #F8FAFC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text);
+    line-height: 1.6;
+    background: var(--color-light);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    transition: 0.3s;
+    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.05em;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #4B5563;
+}
+
+.lang-switch {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 99px;
+    gap: 4px;
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    padding: 0.4rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lang-btn.active {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn {
+    background: var(--color-primary);
+    color: white !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px;
+    margin-left: 1rem;
+}
+
+/* --- Parallax Reveal Styles --- */
+
+/* The Fixed Layer (Vision) - Sits behind everything */
+.vision-fixed-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Update to Suntory-like Royal Blue for high contrast with white text */
+    background: linear-gradient(135deg, #0052D4 0%, #209CFF 100%);
+    color: white;
+    z-index: 1;
+}
+
+/* ... */
+
+/* Gradient Overlay - Overlaps the Vision Spacer */
+.gradient-overlay {
+    height: 100vh;
+    width: 100%;
+    /* Make it more transparent at the top to show Vision text clearly */
+    background: linear-gradient(to bottom,
+            rgba(248, 250, 252, 0) 0%,
+            rgba(248, 250, 252, 0.1) 70%,
+            rgba(248, 250, 252, 1) 100%);
+    position: relative;
+    z-index: 15;
+    margin-top: -100vh;
+    pointer-events: none;
+}
+
+/* Main Content Background - prevents gray area on mobile */
+.main-content-bg {
+    background: #ffffff;
+    position: relative;
+    z-index: 20;
+}
+
+/* Canvas */
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    pointer-events: none;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8.5vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.8rem;
+    color: #111;
+    letter-spacing: -2px;
+}
+
+.hero p {
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #666;
+    font-weight: 500;
+    font-family: 'Courier New', monospace;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, #ccc, transparent);
+}
+
+/* Philosophy Head (Inside Fixed Layer) */
+.philosophy-head {
+    text-align: center;
+    max-width: 100%;
+    /* Allow full width to prevent line breaks */
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 5;
+    /* Ensure text is above the fixed background */
+}
+
+.vision-kicker {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 3rem;
+    display: block;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.main-copy {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    /* Adjusted for better fit */
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 0;
+    letter-spacing: 0.05em;
+    word-break: keep-all;
+    /* Prevent unnatural breaks */
+    overflow-wrap: break-word;
+}
+
+.main-copy span {
+    display: inline-block;
+}
+
+.sub-copy {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    /* Larger sub-copy */
+    font-weight: 500;
+    line-height: 1.8;
+    opacity: 0.95;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    border-radius: 99px;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+
+/* Philosophy Grid (In Main Content) */
+.philo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.philo-box {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.philo-list li {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.section {
+    padding: 6rem 0;
+}
+
+/* Logic */
+.logic {
+    background: #f9fafb;
+}
+
+.logic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.logic-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid #f3f4f6;
+    transition: 0.3s;
+}
+
+.logic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.logic-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.logic-title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.logic-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Product */
+.product {
+    overflow: hidden;
+}
+
+.prod-layout {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.prod-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.prod-img {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.prod-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 8px solid white;
+    transform: rotate(2deg);
+}
+
+.feature-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.f-icon {
+    width: 40px;
+    height: 40px;
+    background: #eff6ff;
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Footer */
+footer {
+    background: #111827;
+    color: white;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+
+.cta-area {
+    text-align: center;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+}
+
+.cta-btn {
+    background: white;
+    color: var(--color-primary);
+    display: inline-block;
+    padding: 1rem 3rem;
+    border-radius: 99px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.cta-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cta-btn-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem 3rem;
+    border-radius: 99px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    transition: transform 0.2s;
+    min-width: 280px;
+}
+
+.cta-line {
+    background: #06C755;
+}
+
+.cta-email {
+    background: var(--color-primary);
+}
+
+.cta-btn-item:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    font-size: 0.9rem;
+    color: #9CA3AF;
+}
+
+.footer-grid h4 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.footer-grid ul {
+    list-style: none;
+}
+
+.footer-grid li {
+    margin-bottom: 0.8rem;
+}
+
+.bottom-bar {
+    margin-top: 4rem;
+    border-top: 1px solid #374151;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    color: #6B7280;
+    font-size: 0.8rem;
+}
+
+/* Hikone Castle Animation */
+.castle-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin-top: 4rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.castle-silhouette {
+    width: 300px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.castle-silhouette.built {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.castle-caption {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: #6B7280;
+    opacity: 0;
+    transition: opacity 1s ease-out 0.5s;
+}
+
+.castle-caption.visible {
+    opacity: 1;
+}
+
+/* O.SINGULARITY Style Sections */
+.os-section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-text);
+}
+
+/* Service Cards */
+.service-section {
+    background: #fff;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: #f9fafb;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.service-card-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.service-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+.service-card-desc {
+    font-size: 0.95rem;
+    color: #6b7280;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.service-card-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.service-card-link:hover {
+    text-decoration: underline;
+}
+
+/* News Section */
+.news-section {
+    background: #f9fafb;
+}
+
+.news-content {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.news-placeholder {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    padding: 3rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    border: 1px dashed #d1d5db;
+}
+
+.news-link-wrapper {
+    text-align: center;
+}
+
+.news-link {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
+
+/* Company Section */
+.company-section {
+    background: #fff;
+}
+
+.company-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.company-desc {
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.company-link {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.company-link:hover {
+    text-decoration: underline;
+}
+
+/* Service List Section */
+.service-list-section {
+    background: #f9fafb;
+    text-align: center;
+}
+
+.service-list-desc {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+.service-list-link {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.service-list-link:hover {
+    text-decoration: underline;
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    text-align: center;
+}
+
+.cta-section .os-section-title {
+    color: white;
+}
+
+.cta-desc {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* OS Footer */
+.os-footer {
+    background: #111827;
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.footer-nav a {
+    color: #9ca3af;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+    color: white;
+}
+
+.footer-copy {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/* ========================================
+   ニュースセクション - ハイクラス企業HPデザイン
+   ======================================== */
+.news-section {
+    position: relative;
+    background: #ffffff;
+    padding: 6rem 0;
+}
+
+.news-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+}
+
+.news-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* セクションアイコン共通スタイル */
+.section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-icon:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 12px 30px rgba(14, 165, 233, 0.25);
+}
+
+.section-icon svg {
+    width: 36px;
+    height: 36px;
+    transition: all 0.3s ease;
+}
+
+.section-icon:hover svg {
+    filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.5));
+}
+
+.news-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.news-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+/* ニュースカード */
+.news-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    transition: all 0.3s ease;
+}
+
+.news-item:hover {
+    background: #fafafa;
+    padding-left: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-right: 1rem;
+}
+
+.news-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+    min-width: 100px;
+    font-weight: 500;
+}
+
+.news-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #0ea5e9;
+    color: white;
+    margin-right: 1rem;
+}
+
+.news-title {
+    font-size: 1rem;
+    color: #1f2937;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.news-title:hover {
+    color: #0ea5e9;
+}
+
+.news-placeholder-box {
+    text-align: center;
+    padding: 3rem;
+    background: #f9fafb;
+    border-radius: 1rem;
+    border: 1px dashed #e5e7eb;
+}
+
+.news-placeholder-box p {
+    color: #9ca3af;
+    margin: 0;
+}
+
+.news-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    color: #0ea5e9;
+    font-weight: 600;
+    border: 2px solid #0ea5e9;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+}
+
+.news-more:hover {
+    background: #0ea5e9;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .news-item {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .news-header h2 {
+        font-size: 2rem;
+    }
+}
+
+/* ========================================
+   事業案内セクション - ハイクラス企業HPデザイン
+   ======================================== */
+.service-section {
+    position: relative;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    padding: 6rem 0;
+}
+
+.service-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+}
+
+.service-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.service-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.service-subtitle {
+    font-size: 1rem;
+    color: #0ea5e9;
+    font-weight: 500;
+}
+
+.service-intro {
+    font-size: 1.1rem;
+    color: #6b7280;
+    margin-top: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* 3ステップ横並び */
+.service-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .service-steps {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+    }
+}
+
+.service-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-step:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.12);
+    border-color: #38bdf8;
+}
+
+.step-number {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+.step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: #f0f9ff;
+    border-radius: 12px;
+    color: #0284c7;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.step-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.7;
+}
+
+/* ========================================
+   彦根城背景デザイン
+   ======================================== */
+.hikone-castle-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.hikone-castle-bg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    opacity: 1;
+}
+
+.castle-subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 2rem;
+}
+
+/* ========================================
+   サービス一覧セクション - ハイクラス企業HPデザイン
+   ======================================== */
+.service-list-section {
+    position: relative;
+    background: #ffffff;
+    padding: 6rem 0;
+}
+
+.service-list-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+}
+
+.service-list-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.service-list-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+}
+
+.service-list-subtitle {
+    font-size: 1rem;
+    color: #0ea5e9;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.service-list-desc {
+    font-size: 1rem;
+    color: #6b7280;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.service-list-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+    color: white;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+.service-list-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .philo-grid,
+    .prod-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        display: none;
+    }
+}

@@ -1,0 +1,4 @@
+/* Shared page-specific overrides for consulting.html and toruroute.html */
+body { height: auto; background: #000; color:#fff; }
+.container { max-width: 960px; margin: 6rem auto; padding: 0 1rem; }
+a { color:#7de2ff; }
