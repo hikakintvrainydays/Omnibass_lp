@@ -176,7 +176,7 @@ function rebuildBusinessMarkup() {
             data-desc="${tour.desc}"
             data-link="../customize_tour/index.html"
             data-vision-left="logo_instance_customize_tour.png"
-            data-vision-right="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1600&auto=format&fit=crop">
+            data-vision-right="assets/img/generated/vision_custom_tour.webp">
             ${tour.title}
           </button>
 
@@ -186,7 +186,7 @@ function rebuildBusinessMarkup() {
             data-desc="${route.desc}"
             data-link="http://meguru-route.meguru-travel.jp/"
             data-vision-left="logo_instance_megururoute.png"
-            data-vision-right="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop">
+            data-vision-right="assets/img/generated/vision_route.webp">
             ${route.title}
           </button>
 
@@ -196,7 +196,7 @@ function rebuildBusinessMarkup() {
             data-desc="${consult.desc}"
             data-link=""
             data-vision-left="logo_instance_inbound_counsultant.png"
-            data-vision-right="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1600&auto=format&fit=crop">
+            data-vision-right="assets/img/generated/vision_consult.webp">
             Partner
           </button>
         </div>

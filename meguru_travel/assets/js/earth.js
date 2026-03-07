@@ -23,7 +23,7 @@ scene.add(light);
 
 // 🌍 地球
 const texture = new THREE.TextureLoader().load(
-  "https://threejs.org/examples/textures/land_ocean_ice_cloud_2048.jpg",
+  "../img/earth.jpg",
   () => renderer.render(scene, camera)
 );
 const geometry = new THREE.SphereGeometry(2.3, 64, 64);
