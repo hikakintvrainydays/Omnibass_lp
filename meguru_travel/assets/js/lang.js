@@ -1,6 +1,6 @@
 // ============================================
 // 🌐 Simple i18n (rebuilt from scratch)
-// Default language: English
+// Default language: Japanese
 // Exposes window.TT: { getLang, setLang, translations, t }
 // Fires: i18n:ready, i18n:change
 // ============================================
@@ -11,7 +11,7 @@
       business: {
         title: 'Business',
         tour:    { title: 'Custom Tour',       desc: 'We offer fully customized tours designed for each guest.<br>Experience authentic culture and meaningful local connections through carefully curated moments.<br>Our English-fluent guides are entertainers who create memorable journeys, not just sightseeing tours.' },
-        route:   { title: 'ToruRoute',         desc: 'Bringing the local spirit to the world.<br>ToruRoute is a digital portal that connects travelers with local restaurants and experiences —<br>capturing the charm of each area through photos, stories, and genuine recommendations.' },
+        route:   { title: 'MeguruRoute',         desc: 'Bringing the local spirit to the world.<br>MeguruRoute is a digital portal that connects travelers with local restaurants and experiences —<br>capturing the charm of each area through photos, stories, and genuine recommendations.' },
         consult: { title: 'Inbound Consulting', desc: 'We work alongside local tourism, dining, and hospitality partners —<br>helping them rediscover and share their unique charm with the world.<br>From inbound strategy to experience design and branding, we act as a creative partner that communicates true local value.' },
         btn: 'Learn more'
       },
@@ -24,7 +24,7 @@
       footer: {
         tagline: 'Your next journey begins here.',
         contact: 'Contact',
-        copyright: '© 2025 Toru Tour. All rights reserved.'
+        copyright: '© 2025 MEGURU TRAVEL. All rights reserved.'
       },
       aboutPage: {
         heroTitle: 'About Us',
@@ -36,53 +36,45 @@
         vision: {
           title: 'Vision',
           sub: 'Building bridges between communities and the world.',
-          desc: 'Through travel, Toru Tour creates a cycle of growth — where people learn, connect, and make regions shine.<br>We believe tourism is not just about showcasing places, but about co-creating culture together.'
+          desc: 'Through travel, MEGURU TRAVEL creates a cycle of growth — where people learn, connect, and make regions shine.<br>We believe tourism is not just about showcasing places, but about co-creating culture together.'
         },
         value: {
           title: 'Value',
           desc: '- <strong>Authenticity | Sharing what’s real</strong><br>  We communicate the true voices and culture of each community.<br>- <strong>Empathy | Connecting through heart</strong><br>  Building relationships that resonate between locals and travelers.<br>- <strong>Growth | Growing together</strong><br>  Every journey is a chance to learn, evolve, and inspire the next generation.'
         },
         greeting: {
-          sub: 'MESSAGE FROM CEO',
+          sub: 'MESSAGE FROM FOUNDER',
           title: 'Message',
           people: [
             {
-              name: 'CEO — Toru Yoshizaki',
-              lines: [
-                'Travel is a continuous journey of encounters and learning.<br>We aim to create journeys that connect hearts between regions and the world.',
-                'By sharing local voices and culture as they are, travelers can experience the “real Japan,”<br>and those experiences bring both learning and pride to local communities.'
-              ],
-              signature: 'Toru Tour Inc.<br>CEO: Toru Yoshizaki'
-            },
-            {
-              name: 'Yamato Takeuchi',
+              name: 'Founder — Yamato Takeuchi',
               lines: [
                 'We value co-creation through travel.<br>We believe the future of tourism will evolve when travelers and communities learn from each other.',
                 'And someday — beyond language, culture, or even planets —<br>we hope to create journeys where we could connect hearts with beings from outer space.'
               ],
-              signature: 'Toru Tour Inc.<br>Yamato Takeuchi'
+              signature: 'OMNIBASS Inc.<br>MEGURU TRAVEL — Founder: Yamato Takeuchi'
             }
           ]
         },
         company: {
-          title: 'Company Profile',
-          th: { name: 'Company Name', founded: 'Founded', addr: 'Location', business: 'Business Areas', rep: 'CEO', contact: 'Contact' },
+          title: 'Profile',
+          th: { name: 'Operated by', founded: 'Founded', addr: 'Location', business: 'Business Areas', rep: 'Founder', contact: 'Contact' },
           values: {
-            name: 'Toru Tour Inc.',
+            name: 'OMNIBASS Inc.',
             founded: '2025',
             addr: 'Hikone, Shiga, Japan',
             business: 'Inbound tourism / Tour planning / Regional promotion / Web design & media support',
-            rep: 'Toru Yoshizaki',
-            contact: 'torutour81@gmail.com'
+            rep: 'Yamato Takeuchi',
+            contact: 'megurutravel81@gmail.com'
           }
         },
-        footer: { home: 'Home', business: 'Business', company: 'Company', contact: 'Contact' }
+        footer: { home: 'Home', business: 'Business', company: 'Profile', contact: 'Contact' }
       },
       contactPage: {
         title: 'Contact',
         desc: 'Please send your questions or requests using the form below.',
         form: { name: 'Name', email: 'Email', message: 'Message (optional)', submit: 'Send' },
-        footer: { home: 'Home', business: 'Business', company: 'Company', contact: 'Contact' }
+        footer: { home: 'Home', business: 'Business', company: 'Profile', contact: 'Contact' }
       }
     },
     ja: {
@@ -90,20 +82,20 @@
       business: {
         title: '事業紹介',
         tour:    { title: 'カスタマイズツアー',     desc: 'お客様一人ひとりに合わせた、完全オーダーメイドの旅を提供します。<br>地域の文化や人とのつながりを深く感じられる特別な体験をご用意。<br>ガイドは流暢な英語を話し、観光を超えた“心に残る物語”を演出するエンターテイナーです。' },
-        route:   { title: 'ToruRoute',           desc: '地域の“今”を世界へ。<br>ToruRouteは、地元の飲食店や体験スポットを写真やレビューで紹介する、<br>地域と旅人をつなぐデジタルポータルです。<br>現地の魅力をわかりやすく伝え、訪れるきっかけを生み出します。' },
+        route:   { title: 'MeguruRoute',           desc: '地域の"今"を世界へ。<br>MeguruRouteは、地元の飲食店や体験スポットを写真やレビューで紹介する、<br>地域と旅人をつなぐデジタルポータルです。<br>現地の魅力をわかりやすく伝え、訪れるきっかけを生み出します。' },
         consult: { title: 'インバウンドコンサルティング', desc: '観光・飲食・宿泊事業者さまと共に、<br>地域の魅力を見つめ直し、世界へ伝えるお手伝いをしています。<br>海外からの集客や体験設計、ブランド発信まで、“魅力を伝えるパートナー”として伴走します。' },
         btn: '詳しく見る'
       },
       about: {
         title: '私たちについて',
-        heading: 'Toru Tourの想い',
+        heading: 'MEGURU TRAVELの想い',
         text: '言葉の壁を、学びと心で越える。<br>京都・宇治から、世界中の旅人と地域をつなぎます。',
         btn: '詳しく見る'
       },
       footer: {
         tagline: '次の旅が、ここから始まる。',
         contact: 'お問い合わせ',
-        copyright: '© 2025 Toru Tour. All rights reserved.'
+        copyright: '© 2025 MEGURU TRAVEL. All rights reserved.'
       },
       aboutPage: {
         heroTitle: '私たちについて',
@@ -115,53 +107,45 @@
         vision: {
           title: 'Vision',
           sub: '地域と世界のあいだに、心の橋をかける。',
-          desc: 'Toru Tourは、旅を通じて人が育ち、地域が輝く“つながりの循環”を生み出します。<br>私たちは、観光を「伝える仕事」から「共に創る文化」へと進化させていきます。'
+          desc: 'MEGURU TRAVELは、旅を通じて人が育ち、地域が輝く"つながりの循環"を生み出します。<br>私たちは、観光を「伝える仕事」から「共に創る文化」へと進化させていきます。'
         },
         value: {
           title: 'Value',
           desc: '・<strong>Authenticity｜本質を伝える</strong><br>　地域の声と文化を、飾らずまっすぐに届ける。<br>・<strong>Empathy｜心でつながる</strong><br>　人と人、地域と旅人が共に響き合う関係を築く。<br>・<strong>Growth｜共に育つ</strong><br>　旅を通じて、学び、挑戦し、次の世代へつなぐ。'
         },
         greeting: {
-          sub: 'MESSAGE FROM CEO',
+          sub: 'MESSAGE FROM FOUNDER',
           title: '代表挨拶',
           people: [
             {
-              name: '吉崎 徹（代表取締役）',
-              lines: [
-                '旅は、出会いと学びの連続です。<br>私たちは、地域と世界の“心をつなぐ”旅を創ることを目指しています。',
-                '地元の声や文化をそのまま伝えることで、旅人が「本当の日本」を体験できるように。<br>そしてその体験が、地域の人々にとっても新たな誇りと学びになるように。'
-              ],
-              signature: '株式会社Toru Tour<br>代表取締役　吉崎 徹'
-            },
-            {
-              name: '竹内 大和',
+              name: '竹内 大和（代表）',
               lines: [
                 '私たちは「旅を通じた共創」を大切にしています。<br>旅人と地域が互いに学び合うことで、未来の観光が変わると信じています。',
                 'そしていつか——言葉も文化も超えて、宇宙人とでも語り合えるような、<br>そんな心の通じる旅を創り続けたいと思っています。'
               ],
-              signature: '株式会社Toru Tour<br>竹内 大和'
+              signature: '株式会社OMNIBASS<br>MEGURU TRAVEL 代表　竹内 大和'
             }
           ]
         },
         company: {
-          title: '会社概要',
-          th: { name: '会社名', founded: '設立', addr: '所在地', business: '事業内容', rep: '代表取締役', contact: '連絡先' },
+          title: '概要',
+          th: { name: '運営', founded: '設立', addr: '所在地', business: '事業内容', rep: '代表', contact: '連絡先' },
           values: {
-            name: '株式会社Toru Tour',
+            name: '株式会社OMNIBASS',
             founded: '2025年',
             addr: '滋賀県彦根市',
             business: 'インバウンド観光 / ツアー企画 / 地域プロモーション / Web制作・運営支援',
-            rep: '吉崎 徹',
-            contact: 'torutour81@gmail.com'
+            rep: '竹内 大和',
+            contact: 'megurutravel81@gmail.com'
           }
         },
-        footer: { home: 'トップ', business: '事業紹介', company: '会社概要', contact: 'お問い合わせ' }
+        footer: { home: 'トップ', business: '事業紹介', company: '概要', contact: 'お問い合わせ' }
       },
       contactPage: {
         title: 'お問い合わせ',
         desc: 'ご質問・ご相談は以下のフォームからお送りください。',
         form: { name: '氏名', email: 'メールアドレス', message: 'メッセージ（任意）', submit: '送信' },
-        footer: { home: 'トップ', business: '事業紹介', company: '会社概要', contact: 'お問い合わせ' }
+        footer: { home: 'トップ', business: '事業紹介', company: '概要', contact: 'お問い合わせ' }
       }
     }
   };
@@ -186,7 +170,7 @@
     } catch(_) { return null; }
   };
 
-  let lang = getLangFromUrl() || 'en';
+  let lang = getLangFromUrl() || 'ja';
 
   const t = (path) => {
     try {
@@ -271,7 +255,7 @@
       if (back) {
         back.textContent = t('thanksPage.back');
         try {
-          const lang = (window.TT && typeof window.TT.getLang === 'function') ? window.TT.getLang() : 'en';
+          const lang = (window.TT && typeof window.TT.getLang === 'function') ? window.TT.getLang() : 'ja';
           back.setAttribute('href', `index.html?lang=${lang}`);
         } catch(_) {}
       }
@@ -395,7 +379,7 @@
     }
 
     // Title
-    document.title = (lang === 'en') ? 'Toru Tour | Official Site' : 'Toru Tour｜公式サイト';
+    document.title = (lang === 'ja') ? 'MEGURU TRAVEL｜公式サイト' : 'MEGURU TRAVEL | Official Site';
 
     // Sync selects
     const ds = document.getElementById('langSelectDesktop'); if (ds) ds.value = lang;

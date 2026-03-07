@@ -126,7 +126,7 @@ function setBoard(board, src) {
         frame.classList.add("active");
       });
     };
-  }, 140);
+  }, 300);
 }
 
 // ============================
@@ -137,7 +137,7 @@ const FALLBACK_EN = {
   business: {
     title: 'Business',
     tour: { title: 'Custom Tour', desc: 'We design tailor-made itineraries for every traveler, offering local-guided experiences that capture the spirit of each region.' },
-    route: { title: 'ToruRoute', desc: 'Discover local restaurants and shops with photos, reviews, and translated menus connecting local culture with the world.' },
+    route: { title: 'MeguruRoute', desc: 'Discover local restaurants and shops with photos, reviews, and translated menus connecting local culture with the world.' },
     consult: { title: 'Inbound Consulting', desc: 'We support tourism, dining, and hospitality businesses with English communication and UX design.' },
     btn: 'Learn more'
   }
@@ -184,8 +184,8 @@ function rebuildBusinessMarkup() {
             data-key="route"
             data-title="${route.title}"
             data-desc="${route.desc}"
-            data-link="http://toru-route.toru-tour.jp/"
-            data-vision-left="logo_instance_toruroute.png"
+            data-link="http://meguru-route.meguru-travel.jp/"
+            data-vision-left="logo_instance_megururoute.png"
             data-vision-right="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop">
             ${route.title}
           </button>
@@ -222,8 +222,8 @@ rebuildBusinessMarkup();
       #bizPanel, #bizPanel * { pointer-events: auto !important; z-index: 9999 !important; }
       #bizLinkBtn { pointer-events: auto !important; opacity: 1 !important; z-index: 10000 !important; }
       /* フッターの黒レイヤーはデフォルト相互作用無効（footer セクションに来たら再度有効化する処理は不要）*/
-      .main-footer { pointer-events: none !important; }
-      .main-footer.active { pointer-events: auto !important; z-index: 60 !important; }
+      .main-footer { pointer-events: none !important; transition: opacity 0.5s ease, visibility 0.5s ease; }
+      .main-footer.active { pointer-events: auto !important; z-index: 60 !important; opacity: 1 !important; visibility: visible !important; }
       /* ヒーローロゴやヒントはクリックを奪わない */
       .hero-logo-container { pointer-events: none !important; }
       #scrollHint { pointer-events: none !important; }
@@ -368,11 +368,11 @@ bizTabs.forEach((tab, i) => {
 // ============================
 // 🧭 スナップスクロール（2ステップ）
 // ============================
-const SNAP_LOCK_MS = 500;
+const SNAP_LOCK_MS = 800;
 let snapLock = false;
 const WHEEL_UNIT = 120;
 const MIN_DELTA = 30;
-const STEPS_PER_SWITCH = 2;
+const STEPS_PER_SWITCH = 1;
 
 let wheelAccumAbs = 0;
 let sectionSteps = 0;
@@ -498,10 +498,12 @@ function onScroll() {
   // フッターはフッターセクションのときのみ前面・操作可にする
   if (footerEl) {
     if (sec?.id === "footer") {
-      footerEl.style.display = "flex";
+      footerEl.style.opacity = "1";
+      footerEl.style.visibility = "visible";
       footerEl.classList.add("active");
     } else {
-      footerEl.style.display = "none";
+      footerEl.style.opacity = "0";
+      footerEl.style.visibility = "hidden";
       footerEl.classList.remove("active");
     }
   }
@@ -558,30 +560,17 @@ window.addEventListener("touchend", (e) => {
 
   const dir = diff > 0 ? 1 : -1;
   if (Math.abs(diff) < 40) return;
+  if (snapLock) return;
 
+  snapLock = true;
   const inBusiness = getActiveIndex() === businessSectionIndex;
 
   if (inBusiness) {
-    if (dir !== bizLastDir) { resetBizCount(); bizLastDir = dir; }
-    bizSteps += 1;
-    if (bizSteps >= STEPS_PER_SWITCH) {
-      bizSteps = 0;
-      if (snapLock) return;
-      snapLock = true;
-      snapWithinBusinessBySteps(dir);
-      setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
-    }
+    snapWithinBusinessBySteps(dir);
   } else {
-    if (dir !== lastDir) { resetSectionCount(); lastDir = dir; }
-    sectionSteps += 1;
-    if (sectionSteps >= STEPS_PER_SWITCH) {
-      sectionSteps = 0;
-      if (snapLock) return;
-      snapLock = true;
-      snapGlobalBySteps(dir);
-      setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
-    }
+    snapGlobalBySteps(dir);
   }
+  setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
 }, { passive: true });
 
 // キーボード
@@ -591,31 +580,18 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "End")  { e.preventDefault(); scrollToIndex(sections.length - 1); return; }
 
   e.preventDefault();
-  const dir = (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") ? 1 : -1;
+  if (snapLock) return;
 
+  const dir = (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") ? 1 : -1;
   const inBusiness = getActiveIndex() === businessSectionIndex;
 
+  snapLock = true;
   if (inBusiness) {
-    if (dir !== bizLastDir) { resetBizCount(); bizLastDir = dir; }
-    bizSteps += 1;
-    if (bizSteps >= STEPS_PER_SWITCH) {
-      bizSteps = 0;
-      if (snapLock) return;
-      snapLock = true;
-      snapWithinBusinessBySteps(dir);
-      setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
-    }
+    snapWithinBusinessBySteps(dir);
   } else {
-    if (dir !== lastDir) { resetSectionCount(); lastDir = dir; }
-    sectionSteps += 1;
-    if (sectionSteps >= STEPS_PER_SWITCH) {
-      sectionSteps = 0;
-      if (snapLock) return;
-      snapLock = true;
-      snapGlobalBySteps(dir);
-      setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
-    }
+    snapGlobalBySteps(dir);
   }
+  setTimeout(() => { snapLock = false; }, SNAP_LOCK_MS);
 });
 
 // 初期化

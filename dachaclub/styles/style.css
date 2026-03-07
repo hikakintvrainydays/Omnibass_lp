@@ -175,7 +175,7 @@ header.scrolled .hamburger span {
     width: 100%;
     height: 100%;
     /* Gradient overlay + image placeholder */
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url('../images/hero_bg.png') center/cover no-repeat;
     z-index: 1;
     transform: scale(1.05);
     /* slightly scaled for entry animation */
@@ -315,46 +315,150 @@ header.scrolled .hamburger span {
     border-radius: 2px;
 }
 
-/* About Us Section */
+/* About Us Section - Redesign */
 .about {
+    background: var(--color-bg);
+}
+
+.about-intro {
     background: var(--color-white);
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.about-image {
-    position: relative;
     border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 4rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    margin-bottom: 5rem;
 }
 
-.about-image img {
-    width: 100%;
-    transform: scale(1);
-    transition: transform 0.5s ease;
+.mission-label,
+.vision-label,
+.approach-en {
+    display: block;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-family: var(--font-en);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
-.about-image:hover img {
-    transform: scale(1.05);
+.mission-statement {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    color: var(--color-text);
 }
 
-.about-content h3 {
+.about-intro-text p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+}
+
+.about-intro-vision {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.vision-statement {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.about-approach {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.approach-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.approach-jp {
     font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
+    margin-bottom: 1rem;
 }
 
-.about-content p {
+.approach-header p {
     color: var(--color-text-light);
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
+}
+
+.approach-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.approach-step {
+    background: var(--color-white);
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.approach-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(43, 122, 11, 0.08);
+}
+
+.step-number {
+    font-family: var(--font-en);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-secondary);
+    opacity: 0.5;
+    line-height: 1;
+}
+
+.step-content h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.step-content p {
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
+.step-arrow {
+    color: var(--color-secondary);
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+.approach-cta {
+    text-align: center;
+    margin: 4rem 0 2rem;
+}
+
+.approach-footer-text {
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .about-intro {
+        padding: 2rem;
+    }
+
+    .approach-step {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem;
+    }
 }
 
 .btn {

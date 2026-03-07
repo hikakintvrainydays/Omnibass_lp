@@ -3,7 +3,7 @@
 // ===============================
 
 // ✅ あなたのフォームエンドポイント
-const CF7_ENDPOINT = "https://toru-tour.jp/service_hub/wp-json/contact-form-7/v1/contact-forms/7/feedback";
+const CF7_ENDPOINT = "https://meguru-travel.jp/service_hub/wp-json/contact-form-7/v1/contact-forms/7/feedback";
 
 const form = document.getElementById("contactForm");
 const resultMessage = document.getElementById("resultMessage");

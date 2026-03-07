@@ -73,10 +73,10 @@ canvas#earthCanvas {
 
 /* ✨ フェードイン効果（中央の重ねコンテンツ） */
 .fade-section {
-  opacity: 0; 
-  transform: translateY(20px); 
-  transition: all 0.5s ease-out;
-  position: absolute; 
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  position: absolute;
   max-width: min(86ch, 92vw); padding: 0 1rem;
   margin-top: 5rem;
 }
@@ -584,6 +584,7 @@ body.nav-open header {
   transform: translateX(-50%);
   z-index: 15; /* ヘッダーより下、ビジョンより上 */
   pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .hero-logo {
   width: 60vw;
@@ -1097,6 +1098,9 @@ h1, h2, h3, p {
   align-items: center;
   color: #fff;
   text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 /* ✨ キャッチフレーズ */
@@ -1147,7 +1151,8 @@ h1, h2, h3, p {
 /* ====== Interactivity overrides ====== */
 .overlay-content { pointer-events: auto !important; z-index: 30 !important; }
 .overlay-content * { pointer-events: auto !important; }
-.main-footer { pointer-events: none !important; }
+.main-footer { pointer-events: none !important; transition: opacity 0.5s ease, visibility 0.5s ease; }
+.main-footer.active { pointer-events: auto !important; }
 #bizLinkBtn { pointer-events: auto !important; opacity: 1 !important; z-index: 1001; }
 .biz-panel, .biz-tabs { z-index: 50; }
 /* Ensure only the active section is interactive */
