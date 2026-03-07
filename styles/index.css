@@ -397,15 +397,13 @@ header {
 }
 
 .main-copy {
-    font-size: clamp(2rem, 5vw, 4.5rem);
-    /* Adjusted for better fit */
+    font-size: clamp(1.5rem, 5vw, 4.5rem);
     font-weight: 700;
     line-height: 1.6;
     margin-bottom: 0;
     letter-spacing: 0.05em;
-    word-break: keep-all;
-    /* Prevent unnatural breaks */
     overflow-wrap: break-word;
+    word-break: normal;
 }
 
 .main-copy span {
