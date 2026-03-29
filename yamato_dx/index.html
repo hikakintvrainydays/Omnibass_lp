@@ -3,515 +3,630 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>竹内大和｜AI × データ × 自動化で現場を進化</title>
-  <meta name="description" content="21歳フルスタックエンジニア竹内大和のポートフォリオ。AI・データ・自動化・店舗DXの実績とサービス。">
+  <title>DXをはじめるならYamatoDX｜中小企業の業務改善・IT活用</title>
+  <meta name="description" content="滋賀・関西の中小企業・個人事業主向けに、業務改善・IT導入・AI活用を一貫して支援します。DXの最初の相談から伴走します。">
+  <meta name="author" content="竹内 大和">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="竹内大和">
+  <meta property="og:title" content="DX支援なら竹内大和｜中小企業の業務改善・IT活用">
+  <meta property="og:description" content="滋賀・関西の中小企業・個人事業主向けに、業務改善・IT導入・AI活用を一貫して支援します。DXの最初の相談から伴走します。">
+  <meta property="og:image" content="assets/images/hero_image.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DX支援なら竹内大和｜中小企業の業務改善・IT活用">
+  <meta name="twitter:description" content="滋賀・関西の中小企業・個人事業主向けに、業務改善・IT導入・AI活用を一貫して支援します。DXの最初の相談から伴走します。">
+  <meta name="twitter:image" content="assets/images/hero_image.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/static/style.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "竹内 大和",
+      "description": "主に滋賀・関西の中小企業・個人事業主向けに、業務改善・IT導入・AI活用を一貫して支援します。DXの最初の相談から伴走します。",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Shiga, Japan"
+      },
+      "inLanguage": "ja",
+      "image": "assets/images/hero_image.webp",
+      "email": "yamato1106take@gmail.com",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "yamato1106take@gmail.com",
+          "availableLanguage": ["Japanese", "English"]
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "竹内 大和",
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "滋賀大学"
+        }
+      },
+      "knowsAbout": ["業務改善", "DX", "業務自動化", "IT導入", "生成AI"]
+    }
+  </script>
 </head>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1NVEKB6YL1"></script>
-<script src="js/gtag.js"></script>
 
 <body>
+  <canvas class="flow-canvas" aria-hidden="true"></canvas>
   <div class="language-switch">
     <input type="radio" id="lang-ja" name="lang" checked>
     <input type="radio" id="lang-en" name="lang">
 
-    <div class="language-toggle">
-      <label for="lang-ja">日本語</label>
-      <label for="lang-en">English</label>
-    </div>
-
     <div class="language-panels">
       <div class="lang-panel lang-panel--ja">
-        <header class="hero" id="hero-ja">
-          <div class="container hero__grid">
-            <div class="hero__copy">
-              <p class="eyebrow eyebrow--light">DATA / AI / AUTOMATION</p>
-              <h1>AI × データ × 自動化で現場を静かにアップデート。</h1>
-              <p class="hero__lead">若きデータサイエンティスト、竹内大和。現場の熱量を最短距離で仕組み化します。</p>
-              <div class="hero__facts">
-                <span>10+業界</span>
-                <span>Speed First</span>
-              </div>
-              <div class="cta-row">
-                <a class="btn btn-line" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
-                <a class="btn btn-mail" href="mailto:yamato1106take@gmail.com">メールで相談</a>
+        <header class="site-header">
+          <div class="container header__inner">
+            <a class="brand" href="#hero-ja" aria-label="ホーム">
+              <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+              <a href="#shiga-support-ja">DX支援</a>
+              <a href="#services-ja">支援内容</a>
+              <a href="member.html">運営者紹介</a>
+              <a href="#column-ja">DXコラム</a>
+              <a href="#contact-ja">お問い合わせ</a>
+            </nav>
+            <div class="header__actions">
+              <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu-ja">
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+              </button>
+              <div class="header__desktop">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
               </div>
             </div>
-            <div class="hero__visual">
-              <div class="hero__photo" data-label="HERO / キーボードを打つ手元＋青い光" aria-hidden="true"></div>
+          </div>
+          <div class="mobile-menu" id="mobile-menu-ja" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+              <nav class="mobile-menu__nav">
+                <a href="#shiga-support-ja">DX支援</a>
+                <a href="#services-ja">支援内容</a>
+                <a href="#operator-ja">運営者</a>
+                <a href="#column-ja">DXコラム</a>
+                <a href="#contact-ja">お問い合わせ</a>
+              </nav>
+              <div class="mobile-menu__controls">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
-        <main>
-                    <section class="section skills" id="skills-ja">
-            <div class="container">
-              <div class="section__header">
-                <p class="eyebrow">Skill Tags</p>
-                <h2>スキルセット</h2>
-              </div>
-              <details class="skills-panel">
-                <summary>
-                  <span>スキルセットを開く</span>
-                  <span class="skills-panel__icon">＋</span>
-                </summary>
-                <div class="skills-panel__body">
-                  <div class="skills__grid">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">R</span>
-                    <span class="skill-tag">VBA</span>
-                    <span class="skill-tag">Google Apps Script</span>
-
-                    <span class="skill-tag">AIモデル開発（LLM）</span>
-                    <span class="skill-tag">画像分析</span>
-                    <span class="skill-tag">時系列分析</span>
-
-                    <span class="skill-tag">データ分析</span>
-                    <span class="skill-tag">統計分析</span>
-                    <span class="skill-tag">データ可視化</span>
-                    <span class="skill-tag">店舗分析・顧客分析</span>
-
-                    <span class="skill-tag">Web制作（HTML / CSS / JS）</span>
-                    <span class="skill-tag">Webアプリ開発（Django/React）</span>
-
-                    <span class="skill-tag">業務自動化・効率化（GAS / VBA / Python / GCP）</span>
-                    <span class="skill-tag">クラウド（AWS / GCP）</span>
+        <section class="lake-hero" id="hero-ja">
+          <div class="container lake-hero__grid">
+            <div class="lake-hero__content">
+              <p class="lake-hero__eyebrow">DX支援</p>
+              <h1 class="lake-hero__title">DXをはじめるなら、<br><span class="lake-hero__accent">YamatoDX</span></h1>
+              <p class="lake-hero__lead">滋賀・関西を中心に、現場に合わせて業務改善・IT導入・AI活用まで伴走します。</p>
+            </div>
+            <div class="lake-hero__visual" aria-hidden="true">
+              <div class="lake-hero__lake">
+                <div class="lake-hero__particles" aria-hidden="true">
+                  <div class="lake-hero__trail lake-hero__trail--1">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--2">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--3">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--4">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
                   </div>
                 </div>
-              </details>
-              <div class="skills__cta">
-                <a class="btn btn-mail" href="https://github.com/YamatoGH/YamatoGH.git" target="_blank" rel="noopener">GitHubでコードを見る</a>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section class="section works" id="works-ja">
-            <div class="container">
-              <div class="section__header">
-                <p class="eyebrow">Works</p>
-                <h2>実績例</h2>
-              </div>
-              <div class="works__grid">
-                <article class="work-card">
-                  <div class="work-card__title">地方交通事業者：需要予測モデル構築</div>
-                  <p>気象データ・需要データ・地域イベントを統合し、需要変動を高精度に予測するモデルを構築。運行ダイヤ改善に貢献し、外部メディアにも紹介される評価を獲得。</p>
-                </article>
-                <article class="work-card">
-                  <div class="work-card__title">地域施策プロジェクト：エリア分析 × 優先度スコアリング</div>
-                  <p>地域データをもとにエリアごとの傾向をスコアリング。現場活動の優先度・行動計画の精度を向上させ、意思決定の迷いをデータで解消。</p>
-                </article>
-                <article class="work-card">
-                  <div class="work-card__title">学習塾：立地分析 × 生徒データ統合</div>
-                  <p>生徒住所・商圏データ・競合情報を統合し、新規校舎開設のための意思決定モデルを構築。可視化レポートや自動分析ツールにより、判断をデータドリブンに切り替え。</p>
-                </article>
-                <article class="work-card">
-                  <div class="work-card__title">店舗DX：業務自動化（GAS / Python）</div>
-                  <p>店舗運営の定型業務（入力・集計・レポート配信など）をGAS / Pythonで自動化し、手作業を70〜90%削減。スタッフが接客に集中できる負担のない現場を構築。</p>
-                </article>
-              </div>
+        <section class="section lead-block" id="shiga-support-ja">
+          <div class="container lead-block__grid">
+            <div class="section__header">
+              <p class="eyebrow">DX Support</p>
+              <h2>中小企業向けDX支援</h2>
             </div>
-          </section>
+            <div class="lead-block__card">
+              <p>主に滋賀・関西の中小企業・個人事業主向けに、業務改善・DX導入・IT活用を一気通貫で支援します。</p>
+              <ul class="lead-block__list">
+                <li>Excelや手作業に限界を感じている</li>
+                <li>ITやDXの最初の一歩が分からない</li>
+              </ul>
+              <p>最初の相談から伴走するDX支援です。</p>
+            </div>
+          </div>
+        </section>
 
+        <main>
           <section class="section services" id="services-ja">
             <div class="container">
               <div class="section__header">
-                <p class="eyebrow eyebrow--light">Services</p>
-                <h2>サービスラインアップ</h2>
+                <p class="eyebrow">Services</p>
+                <h2>提供しているDX支援内容</h2>
               </div>
-              <div class="services__grid">
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/analytics_image.png" alt="分析と可視化のビジュアル">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">ANALYTICS / VISUALIZATION</p>
-                    <h3>分析・可視化</h3>
-                    <p>散らばった数字・地域・利用者・文章を整理し、「何を優先すべきか」を誰でも理解できる形にします。</p>
-                    <ul class="service-item__details">
-                      <li>人の動き・需要予測 / エリア分析・マップ可視化</li>
-                      <li>顧客・生徒データの可視化 / 長文の要約・レポート自動更新</li>
-                      <li>判断基準が明確になり、優先度が一目でわかる状態づくり</li>
-                    </ul>
-                  </div>
+              <div class="services__cards">
+                <article class="service-card">
+                  <div class="service-card__icon" aria-hidden="true">01</div>
+                  <h3>業務改善・業務自動化</h3>
+                  <ul>
+                    <li>Excel業務の整理・自動化</li>
+                    <li>手作業フローの見直し</li>
+                    <li>定型作業の自動処理設計</li>
+                  </ul>
                 </article>
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/automation_image.png" alt="業務プロセス自動化のビジュアル">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">PROCESS / AUTOMATION</p>
-                    <h3>業務プロセスの整理・自動化</h3>
-                    <p>入力・転記・集計・報告・連絡などの現場作業を洗い出し、仕組み化すべきポイントを整理したうえで自動化します。</p>
-                    <ul class="service-item__details">
-                      <li>名簿・顧客・生徒・利用者の整理と一元化</li>
-                      <li>予約・受付・状況管理のフロー統合 / レポート自動生成</li>
-                      <li>システム連携やAI補助で属人化を解消し、業務を継続的に回す</li>
-                    </ul>
-                  </div>
+                <article class="service-card service-card--offset">
+                  <div class="service-card__icon" aria-hidden="true">02</div>
+                  <h3>IT・ツール導入支援</h3>
+                  <ul>
+                    <li>クラウドツール導入サポート</li>
+                    <li>小規模システム開発</li>
+                    <li>API連携・データ活用</li>
+                  </ul>
                 </article>
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/web_create_image.png" alt="Web構築のビジュアル">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">WEB / OPERATION</p>
-                    <h3>Web構築</h3>
-                    <p>利用者が見るページと現場が使う管理画面をひとつの流れで設計。情報発信から内部運用まで一人でつなぎます。</p>
-                    <ul class="service-item__details">
-                      <li>ホームページ制作（多言語対応）、情報更新ページ、予約・問い合わせ導線</li>
-                      <li>顧客 / 生徒 / 利用者の管理画面、指標確認ダッシュボード</li>
-                      <li>AIによる質問回答・翻訳・要約、現場専用の軽量画面を構築</li>
-                    </ul>
-                  </div>
+                <article class="service-card service-card--offset-lg">
+                  <div class="service-card__icon" aria-hidden="true">03</div>
+                  <h3>AI・生成AI活用</h3>
+                  <ul>
+                    <li>ChatGPTなど生成AIの業務活用</li>
+                    <li>社内利用を前提とした設計支援</li>
+                    <li>実務に使える形への落とし込み</li>
+                  </ul>
                 </article>
+              </div>
+              <div class="section__cta">
+                <a class="btn btn-primary" href="#contact-ja">サービス詳細を見る</a>
               </div>
             </div>
           </section>
 
-          <section class="section flow" id="value-ja">
+          <section class="section before-after" id="before-after-ja">
             <div class="container">
               <div class="section__header">
                 <p class="eyebrow">Before / After</p>
-                <h2>前後比較</h2>
+                <h2>DX支援で変わること</h2>
+                <p class="section__lead">現場の負担を減らし、判断の材料を整えます。</p>
               </div>
-              <div class="flow__grid">
-                <div class="flow__panel">
-                  <h3>Before</h3>
-                  <ul>
-                    <li>紙とExcelに依存している</li>
-                    <li>判断のたびに迷いが生まれる</li>
-                    <li>訪日客・多言語対応が追いつかない</li>
-                    <li>毎月同じ作業で時間が溶ける</li>
+              <div class="before-after__grid">
+                <div class="before-after__panel before-after__panel--before">
+                  <p class="before-after__label">Before</p>
+                  <ul class="before-after__list">
+                    <li>手作業と二重入力が多い</li>
+                    <li>Excel管理が属人化している</li>
+                    <li>データが散在している</li>
+                    <li>判断が経験と勘に偏る</li>
                   </ul>
                 </div>
-                <div class="flow__arrow" aria-hidden="true">→</div>
-                <div class="flow__panel">
-                  <h3>After</h3>
-                  <ul>
-                    <li>仕組み化され、作業負荷が大幅減</li>
-                    <li>データで即判断できる</li>
-                    <li>多言語対応がテンプレート化</li>
-                    <li>その場で動くプロトタイプを提示</li>
+                <div class="before-after__panel before-after__panel--after">
+                  <p class="before-after__label">After</p>
+                  <ul class="before-after__list">
+                    <li>定型作業が自動化される</li>
+                    <li>情報が整理され共有できる</li>
+                    <li>数値で意思決定できる</li>
+                    <li>ボトルネックが見える</li>
                   </ul>
                 </div>
               </div>
             </div>
           </section>
 
-          <section class="section profile" id="profile-ja">
+          <section class="section profile" id="operator-ja">
             <div class="container profile__grid">
               <div class="profile__photo" data-label="PROFILE / 白背景＋自然な笑顔"></div>
               <div class="profile__copy">
-                <p class="eyebrow">Profile</p>
-                <h2>竹内 大和</h2>
-                <p>滋賀大学データサイエンス学部に在籍。塾・飲食・観光・企業・政治など多領域の現場で、ヒアリングから要件整理、実装まで一気通貫で担当してきました。</p>
-                <p>「動きながら作る」を信条に、AI・データ・自動化・Webを横断するプロダクトをスピード重視で届けます。</p>
+                <p class="eyebrow">Operator</p>
+                <h2>運営者について</h2>
+                <p>竹内 大和（たけうち やまと） <br>滋賀大学在学。<br>代表 / DX支援・業務改善エンジニア</p>
+                <p>技術ありきではなく、現場で本当に使えるDX・業務改善を重視します。</p>
+                <div class="profile__actions">
+                  <button class="btn btn-primary profile-card__open" type="button" data-card-target="profile-card-ja" aria-expanded="false" aria-controls="profile-card-ja">
+                    プロフィールを見る
+                  </button>
+                </div>
               </div>
             </div>
           </section>
 
-          <section class="section usp" id="strengths-ja">
-            <div class="container usp__inner">
-              <div class="usp__line" aria-hidden="true"></div>
-              <div class="usp__copy">
-                <h2>強み</h2>
-                <ul>
-                  <li>塾・飲食・観光・政治など多業種で実務経験。</li>
-                  <li>ヒアリング→試作→改善を高速に回す意思決定。</li>
-                  <li>AI / データ / 自動化 / Web を横断した一気通貫開発。</li>
-                  <li>現場の課題を言語化し、仕組みとして実装する設計力。</li>
-                  <li>検証データを軸に、数字で語れる成果まで伴走。</li>
+          <div class="profile-card" id="profile-card-ja" aria-hidden="true" role="dialog" aria-modal="true">
+            <button class="profile-card__backdrop" type="button" data-card-close aria-label="閉じる"></button>
+            <div class="profile-card__panel" role="document" tabindex="-1">
+              <button class="profile-card__close" type="button" data-card-close aria-label="閉じる">×</button>
+              <div class="profile-card__header">
+                <div class="profile-card__media">
+                  <div class="profile-card__photo" aria-hidden="true"></div>
+                  <img class="profile-card__logo" src="assets/images/YamatoDX_logo.png" alt="YamatoDX ロゴ">
+                </div>
+                <div>
+                  <p class="profile-card__name">竹内 大和</p>
+                  <p class="profile-card__title">代表 / DX支援・業務改善エンジニア</p>
+                  <p class="profile-card__meta">滋賀大学 在学</p>
+                </div>
+              </div>
+              <div class="profile-card__section">
+                <p class="profile-card__label">連絡先</p>
+                <ul class="profile-card__list">
+                  <li class="profile-card__item"><span>電話</span><a class="profile-card__link" href="tel:070-4018-1718">070-4018-1718</a></li>
+                  <li class="profile-card__item"><span>メール</span><a class="profile-card__link" href="mailto:yamato1106take@gmail.com">yamato1106take@gmail.com</a></li>
+                  <li class="profile-card__item"><span>公式LINE</span><a class="profile-card__link" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">公式LINE</a></li>
                 </ul>
               </div>
             </div>
-          </section>
+          </div>
 
-          <section class="section pricing" id="pricing-ja">
+
+          <section class="section works" id="column-ja">
             <div class="container">
               <div class="section__header">
-                <p class="eyebrow">Pricing</p>
-                <h2>料金（目安）</h2>
+                <p class="eyebrow">DX Column</p>
+                <h2>DXコラム</h2>
               </div>
-              <div class="pricing__table">
-                <div><span>AI / データ分析</span><strong>15〜60万円</strong></div>
-                <div><span>業務自動化</span><strong>10〜40万円</strong></div>
-                <div><span>店舗DX</span><strong>10〜30万円</strong></div>
-                <div><span>スポット伴走</span><strong>3〜30万円</strong></div>
+              <div class="news-list">
+                <div class="news-item news-item--empty">
+                  <div class="news-item__meta">
+                    <span class="news-item__date">準備中</span>
+                    <span class="news-item__tag">DXコラム</span>
+                  </div>
+                  <h3 class="news-item__title">まだありません</h3>
+                  <span class="news-item__arrow">→</span>
+                </div>
               </div>
-              <p class="pricing__note">※内容・難易度・スピードに応じて調整します。まずはヒアリングで整理しましょう。</p>
+              <div class="section__cta">
+                <a class="btn btn-secondary" href="#contact-ja">一覧を見る</a>
+              </div>
             </div>
           </section>
 
           <section class="section contact" id="contact-ja">
             <div class="container contact__inner">
               <div>
-                <p class="eyebrow eyebrow--light">Contact</p>
-                <h2>まずは気軽に相談を。</h2>
-                <p>無料ヒアリングで、現状と次の一手を一緒に描きます。</p>
+                <p class="eyebrow">Contact</p>
+                <h2>お問い合わせ</h2>
+                <p>DXや業務改善の最初の相談から対応します。地域や業種に合わせて、状況に応じた進め方をご提案します。</p>
+                <p class="contact__meta">連絡方法：LINE・メール</p>
+                <a class="contact__link" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">▶ お問い合わせはこちら</a>
               </div>
               <div class="cta-row">
-                <a class="btn btn-line" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
-                <a class="btn btn-mail" href="mailto:yamato1106take@gmail.com">メールで相談</a>
+                <a class="btn btn-primary" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
+                <a class="btn btn-secondary" href="mailto:yamato1106take@gmail.com">メールで相談</a>
               </div>
             </div>
           </section>
         </main>
 
         <footer class="footer">
-          <p>© 2025 Takeuchi Yamato</p>
+          <div class="container footer__grid">
+            <div class="footer__brand">
+              <a class="brand" href="#hero-ja" aria-label="ホーム">
+                <span class="brand__mark" aria-hidden="true"></span>
+              </a>
+              <p>琵琶湖から、ビジネスに新しい流れを。地域に根ざした、あなたに一番近いDXパートナー。</p>
+            </div>
+            <div class="footer__links">
+              <h4>支援内容</h4>
+              <a href="#services-ja">業務改善・業務自動化</a>
+              <a href="#services-ja">IT・ツール導入支援</a>
+              <a href="#services-ja">AI・生成AI活用</a>
+            </div>
+            <div class="footer__links">
+              <h4>お問い合わせ</h4>
+              <a href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
+              <a href="mailto:yamato1106take@gmail.com">メール相談</a>
+            </div>
+          </div>
+          <p class="footer__copy">© 2026 Yamato Takeuchi</p>
         </footer>
       </div>
 
-      <div class="lang-panel lang-panel--en">
-        <header class="hero" id="hero-en">
-          <div class="container hero__grid">
-            <div class="hero__copy">
-              <p class="eyebrow eyebrow--light">DATA / AI / AUTOMATION</p>
-              <h1>AI × data × automation quietly upgrade the frontline.</h1>
-              <p class="hero__lead">I'm Yamato Takeuchi, a young data scientist. I turn on-site energy into systems via the shortest route.</p>
-              <div class="hero__facts">
-                <span>10+ industries</span>
-                <span>Speed First</span>
-              </div>
-              <div class="cta-row">
-                <a class="btn btn-line" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Chat on LINE</a>
-                <a class="btn btn-mail" href="mailto:yamato1106take@gmail.com">Email me</a>
+      <div class="lang-panel lang-panel--en" lang="en">
+        <header class="site-header">
+          <div class="container header__inner">
+            <a class="brand" href="#hero-en" aria-label="Home">
+              <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+              <a href="#shiga-support-en">DX Support</a>
+              <a href="#services-en">Services</a>
+              <a href="#operator-en">Operator</a>
+              <a href="assets/about.html">operator introduction</a>
+              <a href="#column-en">DX Column</a>
+              <a href="#contact-en">Contact</a>
+            </nav>
+            <div class="header__actions">
+              <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-en">
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+              </button>
+              <div class="header__desktop">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
               </div>
             </div>
-            <div class="hero__visual">
-              <div class="hero__photo" data-label="HERO / hands on keyboard + blue gradients" aria-hidden="true"></div>
+          </div>
+          <div class="mobile-menu" id="mobile-menu-en" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+              <nav class="mobile-menu__nav">
+                <a href="#shiga-support-en">DX Support</a>
+                <a href="#services-en">Services</a>
+                <a href="#operator-en">Operator</a>
+                <a href="#column-en">DX Column</a>
+                <a href="#contact-en">Contact</a>
+              </nav>
+              <div class="mobile-menu__controls">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
             </div>
           </div>
         </header>
 
-        <main>
-
-                    <section class="section skills" id="skills-en">
-            <div class="container">
-              <div class="section__header">
-                <p class="eyebrow">Skill Tags</p>
-                <h2>Skillset</h2>
+        <section class="lake-hero" id="hero-en">
+          <div class="container lake-hero__grid">
+            <div class="lake-hero__content">
+              <p class="lake-hero__eyebrow">DX Support</p>
+              <h2 class="lake-hero__title">Start DX with<br><span class="lake-hero__accent">Support for SMEs & solo operators</span></h2>
+              <p class="lake-hero__lead">We support process improvement, IT adoption, and practical AI for growing teams.</p>
+              <div class="lake-hero__trust">
+                <span class="lake-hero__dot" aria-hidden="true"></span>
+                <span>Trusted by teams across industries</span>
               </div>
-              <details class="skills-panel">
-                <summary>
-                  <span>View all skills</span>
-                  <span class="skills-panel__icon">＋</span>
-                </summary>
-                <div class="skills-panel__body">
-                  <div class="skills__grid">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">R</span>
-                    <span class="skill-tag">VBA</span>
-                    <span class="skill-tag">Google Apps Script</span>
-
-                    <span class="skill-tag">AI Model Development (LLM)</span>
-                    <span class="skill-tag">Image Analysis</span>
-                    <span class="skill-tag">Time Series Analysis</span>
-
-                    <span class="skill-tag">Data Analytics</span>
-                    <span class="skill-tag">Statistical Analysis</span>
-                    <span class="skill-tag">Data Visualization</span>
-                    <span class="skill-tag">Retail / Customer Analytics</span>
-
-                    <span class="skill-tag">Web Development (HTML / CSS / JS)</span>
-                    <span class="skill-tag">Web Apps (Django / React)</span>
-
-                    <span class="skill-tag">Automation (GAS / VBA / Python / GCP)</span>
-                    <span class="skill-tag">Cloud (AWS / GCP)</span>
+            </div>
+            <div class="lake-hero__visual" aria-hidden="true">
+              <div class="lake-hero__lake">
+                <div class="lake-hero__particles" aria-hidden="true">
+                  <div class="lake-hero__trail lake-hero__trail--1">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--2">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--3">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                  </div>
+                  <div class="lake-hero__trail lake-hero__trail--4">
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
+                    <span class="lake-hero__particle"></span>
                   </div>
                 </div>
-              </details>
-              <div class="skills__cta">
-                <a class="btn btn-mail" href="https://github.com/YamatoGH/YamatoGH.git" target="_blank" rel="noopener">See GitHub</a>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <section class="section works" id="works-en">
-            <div class="container">
-              <div class="section__header">
-                <p class="eyebrow">Works</p>
-                <h2>Case studies</h2>
-              </div>
-              <div class="works__grid">
-                <article class="work-card">
-                  <h3>Regional transit operator: demand forecasting model</h3>
-                  <p>Integrated weather data, demand records, and local events to build a high-accuracy demand forecasting model. Contributed to timetable improvements and earned recognition through external media coverage.</p>
-                </article>
-                <article class="work-card">
-                  <h3>Regional initiative project: area analysis × priority scoring</h3>
-                  <p>Scored tendencies for each area with regional datasets so field teams could raise the precision of priority setting and action plans, removing hesitation in decision-making through data.</p>
-                </article>
-                <article class="work-card">
-                  <h3>Cram school: location analysis × student data integration</h3>
-                  <p>Unified student addresses, trade-area data, and competitor insights to build decision models for opening new campuses. Visualization reports and automated analysis tools shifted judgments to a data-driven footing.</p>
-                </article>
-                <article class="work-card">
-                  <h3>Retail DX: operations automation (GAS / Python)</h3>
-                  <p>Automated routine store operations—inputs, aggregation, and report distribution—using GAS / Python, trimming manual work by 70–90% so staff can stay focused on guests.</p>
-                </article>
-              </div>
+        <section class="section lead-block" id="shiga-support-en">
+          <div class="container lead-block__grid">
+            <div class="section__header">
+              <p class="eyebrow">DX Support</p>
+              <h2>DX support for SMEs</h2>
             </div>
-          </section>
+            <div class="lead-block__card">
+              <p>We support small businesses and solo operators with operations improvement, DX onboarding, and practical IT adoption.</p>
+              <ul class="lead-block__list">
+                <li>Hitting limits with Excel or manual workflows</li>
+                <li>Unsure where to start with IT or DX</li>
+              </ul>
+              <p>We stay close from the first consultation.</p>
+            </div>
+          </div>
+        </section>
 
+        <main>
           <section class="section services" id="services-en">
             <div class="container">
               <div class="section__header">
-                <p class="eyebrow eyebrow--light">Services</p>
-                <h2>Service lineup</h2>
+                <p class="eyebrow">Services</p>
+                <h2>DX support we provide</h2>
               </div>
-              <div class="services__grid">
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/analytics_image.png" alt="Analytics visual">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">ANALYTICS / VISUALIZATION</p>
-                    <h3>Analytics & visualization</h3>
-                    <p>Organize scattered numbers, regions, users, and text so anyone understands what must be prioritized.</p>
-                    <ul class="service-item__details">
-                      <li>Mobility and demand forecasting, area analysis, and map visualization</li>
-                      <li>Customer / student data visualization, long-form summarization, automated report updates</li>
-                      <li>Clarify decision criteria so priorities are obvious at a glance</li>
-                    </ul>
-                  </div>
+              <div class="services__cards">
+                <article class="service-card">
+                  <div class="service-card__icon" aria-hidden="true">01</div>
+                  <h3>Operations improvement & automation</h3>
+                  <ul>
+                    <li>Organize and automate Excel workflows</li>
+                    <li>Review manual processes</li>
+                    <li>Design routine automation</li>
+                  </ul>
                 </article>
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/automation_image.png" alt="Automation visual">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">PROCESS / AUTOMATION</p>
-                    <h3>Process design & automation</h3>
-                    <p>Surface repetitive on-site work—inputs, transcription, aggregation, reporting, communication—identify what should be systematized, and automate it.</p>
-                    <ul class="service-item__details">
-                      <li>Consolidate rosters plus customer / student / visitor records into a single source</li>
-                      <li>Unify reservation, reception, and status flows while generating reports automatically</li>
-                      <li>System integrations and AI assistance remove single-person dependency and keep ops running</li>
-                    </ul>
-                  </div>
+                <article class="service-card service-card--offset">
+                  <div class="service-card__icon" aria-hidden="true">02</div>
+                  <h3>IT & tool adoption support</h3>
+                  <ul>
+                    <li>Cloud tool onboarding</li>
+                    <li>Small-scale system development</li>
+                    <li>API integration and data utilization</li>
+                  </ul>
                 </article>
-                <article class="service-item">
-                  <figure class="service-item__media">
-                    <img src="assets/images/web_create_image.png" alt="Web build visual">
-                  </figure>
-                  <div class="service-item__body">
-                    <p class="service-item__category">WEB / OPERATIONS</p>
-                    <h3>Web builds</h3>
-                    <p>Design public-facing pages and internal consoles as one flow, connecting information delivery with on-site operations.</p>
-                    <ul class="service-item__details">
-                      <li>Website builds (multilingual), update pages, and reservation / inquiry funnels</li>
-                      <li>Management consoles for customers / students / users plus KPI dashboards</li>
-                      <li>AI-powered Q&A, translation, summarization, and lightweight on-site screens</li>
-                    </ul>
-                  </div>
+                <article class="service-card service-card--offset-lg">
+                  <div class="service-card__icon" aria-hidden="true">03</div>
+                  <h3>AI & generative AI use</h3>
+                  <ul>
+                    <li>Practical use of ChatGPT and generative AI</li>
+                    <li>Support for internal adoption design</li>
+                    <li>Turn ideas into usable workflows</li>
+                  </ul>
                 </article>
+              </div>
+              <div class="section__cta">
+                <a class="btn btn-primary" href="#contact-en">View details</a>
               </div>
             </div>
           </section>
 
-          <section class="section flow" id="value-en">
+          <section class="section before-after" id="before-after-en">
             <div class="container">
-              <div class="section__header talk">
+              <div class="section__header">
                 <p class="eyebrow">Before / After</p>
-                <h2>Before-and-after contrast</h2>
+                <h2>How DX changes daily work</h2>
+                <p class="section__lead">Reduce manual load and make decisions with clear data.</p>
               </div>
-              <div class="flow__grid">
-                <div class="flow__panel">
-                  <h3>Before</h3>
-                  <ul>
-                    <li>Rely heavily on paper and Excel</li>
-                    <li>Every decision invites hesitation</li>
-                    <li>Inbound / multi-language support can't keep up</li>
-                    <li>The same monthly work keeps melting away time</li>
+              <div class="before-after__grid">
+                <div class="before-after__panel before-after__panel--before">
+                  <p class="before-after__label">Before</p>
+                  <ul class="before-after__list">
+                    <li>Too much manual entry and handoffs</li>
+                    <li>Spreadsheets owned by individuals</li>
+                    <li>Data lives in separate tools</li>
+                    <li>Decisions rely on gut feeling</li>
                   </ul>
                 </div>
-                <div class="flow__arrow" aria-hidden="true">→</div>
-                <div class="flow__panel">
-                  <h3>After</h3>
-                  <ul>
-                    <li>Systematized workflows cut workload drastically</li>
-                    <li>Instant decisions powered by data</li>
-                    <li>Multi-language responses become templated</li>
-                    <li>Working prototypes demonstrated on the spot</li>
+                <div class="before-after__panel before-after__panel--after">
+                  <p class="before-after__label">After</p>
+                  <ul class="before-after__list">
+                    <li>Repetitive work is automated</li>
+                    <li>Information is organized and shared</li>
+                    <li>Decisions are based on numbers</li>
+                    <li>Bottlenecks become visible</li>
                   </ul>
                 </div>
               </div>
             </div>
           </section>
 
-          <section class="section profile" id="profile-en">
+          <section class="section profile" id="operator-en">
             <div class="container profile__grid">
               <div class="profile__photo" data-label="PROFILE / bright portrait with soft light"></div>
               <div class="profile__copy">
-                <p class="eyebrow">Profile</p>
-                <h2>Yamato Takeuchi</h2>
-                <p>Currently enrolled in the Faculty of Data Science at Shiga University. I have handled everything from hearing to requirement design and implementation across cram schools, food service, tourism, enterprises, and political teams.</p>
-                <p>“Build while moving” is my credo, delivering AI / data / automation / web products at speed across every layer.</p>
+                <p class="eyebrow">Operator</p>
+                <h2>About the operator</h2>
+                <p>Yamato Takeuchi<br>Representative / DX support & operations improvement engineer</p>
+                <p>The focus is field-ready DX and operations improvement that teams can actually use.</p>
+                <div class="profile__actions">
+                  <button class="btn btn-primary profile-card__open" type="button" data-card-target="profile-card-en" aria-expanded="false" aria-controls="profile-card-en">
+                    View profile card
+                  </button>
+                </div>
               </div>
             </div>
           </section>
 
-          <section class="section usp" id="strengths-en">
-            <div class="container usp__inner">
-              <div class="usp__line" aria-hidden="true"></div>
-              <div class="usp__copy">
-                <h2>Strengths</h2>
-                <ul>
-                  <li>Practical exposure across cram schools, dining, tourism, enterprises, and political fields.</li>
-                  <li>A fast loop of hearing → prototyping → improvement for decisive execution.</li>
-                  <li>End-to-end development that spans AI / data / automation / web.</li>
-                  <li>Skill in verbalizing on-site issues and implementing them as systems.</li>
-                  <li>Stay alongside teams with validation data so outcomes are proven in numbers.</li>
+          <div class="profile-card" id="profile-card-en" aria-hidden="true" role="dialog" aria-modal="true">
+            <button class="profile-card__backdrop" type="button" data-card-close aria-label="Close"></button>
+            <div class="profile-card__panel" role="document" tabindex="-1">
+              <button class="profile-card__close" type="button" data-card-close aria-label="Close">×</button>
+              <div class="profile-card__header">
+                <div class="profile-card__media">
+                  <div class="profile-card__photo" aria-hidden="true"></div>
+                  <img class="profile-card__logo" src="assets/images/YamatoDX_logo.png" alt="YamatoDX logo">
+                </div>
+                <div>
+                  <p class="profile-card__name">Yamato Takeuchi</p>
+                  <p class="profile-card__title">Representative / DX support & operations improvement engineer</p>
+                  <p class="profile-card__meta">Currently studying at Shiga University</p>
+                </div>
+              </div>
+              <div class="profile-card__section">
+                <p class="profile-card__label">Contact</p>
+                <ul class="profile-card__list">
+                  <li class="profile-card__item"><span>Phone</span><a class="profile-card__link" href="tel:070-4018-1718">070-4018-1718</a></li>
+                  <li class="profile-card__item"><span>Email</span><a class="profile-card__link" href="mailto:yamato1106take@gmail.com">yamato1106take@gmail.com</a></li>
+                  <li class="profile-card__item"><span>Official LINE</span><a class="profile-card__link" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Official LINE</a></li>
                 </ul>
               </div>
             </div>
-          </section>
+          </div>
 
-          <section class="section pricing" id="pricing-en">
+
+          <section class="section works" id="column-en">
             <div class="container">
               <div class="section__header">
-                <p class="eyebrow">Pricing</p>
-                <h2>Pricing (guide)</h2>
+                <p class="eyebrow">DX Column</p>
+                <h2>DX insights</h2>
               </div>
-              <div class="pricing__table">
-                <div><span>AI / Data analytics</span><strong>¥150k–600k</strong></div>
-                <div><span>Automation</span><strong>¥100k–400k</strong></div>
-                <div><span>Retail DX</span><strong>¥100k–300k</strong></div>
-                <div><span>Spot support</span><strong>¥30k–300k</strong></div>
+              <div class="news-list">
+                <div class="news-item news-item--empty">
+                  <div class="news-item__meta">
+                    <span class="news-item__date">Coming soon</span>
+                    <span class="news-item__tag">DX Column</span>
+                  </div>
+                  <h3 class="news-item__title">No posts yet</h3>
+                  <span class="news-item__arrow">→</span>
+                </div>
               </div>
-              <p class="pricing__note">Adjusted based on scope, difficulty, and required speed. Let's align everything during an initial hearing.</p>
+              <div class="section__cta">
+                <a class="btn btn-secondary" href="#contact-en">View all</a>
+              </div>
             </div>
           </section>
 
           <section class="section contact" id="contact-en">
             <div class="container contact__inner">
               <div>
-                <p class="eyebrow eyebrow--light">Contact</p>
-                <h2>Start with a casual conversation.</h2>
-                <p>We'll map your current state and next steps together through a complimentary hearing.</p>
+                <p class="eyebrow">Contact</p>
+                <h2>Contact</h2>
+                <p>We can start from the first DX or operations improvement questions and propose next steps for your team.</p>
+                <p class="contact__meta">Contact: LINE or email</p>
               </div>
               <div class="cta-row">
-                <a class="btn btn-line" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Chat on LINE</a>
-                <a class="btn btn-mail" href="mailto:yamato1106take@gmail.com">Email me</a>
+                <a class="btn btn-primary" href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Chat on LINE</a>
+                <a class="btn btn-secondary" href="mailto:yamato1106take@gmail.com">Email me</a>
               </div>
             </div>
           </section>
         </main>
 
         <footer class="footer">
-          <p>© 2025 Takeuchi Yamato</p>
+          <div class="container footer__grid">
+            <div class="footer__brand">
+              <a class="brand" href="#hero-en" aria-label="Home">
+                <span class="brand__mark" aria-hidden="true"></span>
+              </a>
+              <p>From Lake Biwa to your operations. A DX partner for teams that want a steady, practical upgrade.</p>
+            </div>
+            <div class="footer__links">
+              <h4>Services</h4>
+              <a href="#services-en">Operations improvement & automation</a>
+              <a href="#services-en">IT & tool adoption support</a>
+              <a href="#services-en">AI & generative AI use</a>
+            </div>
+            <div class="footer__links">
+              <h4>Contact</h4>
+              <a href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Chat on LINE</a>
+              <a href="mailto:yamato1106take@gmail.com">Email me</a>
+            </div>
+          </div>
+          <p class="footer__copy">© 2026 Yamato Takeuchi</p>
         </footer>
+      </div>
     </div>
   </div>
-</div>
-<script src="js/skills-panel.js"></script>
+
+<script src="assets/static/main.js"></script>
 </body>
 </html>

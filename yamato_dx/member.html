@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>運営者紹介｜YamatoDX</title>
+  <meta name="description" content="YamatoDXの運営者紹介ページ。運営責任者 竹内大和、プログラミングアシスタント 山本悠翔のプロフィールを掲載しています。">
+  <meta name="author" content="竹内 大和">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/static/style.css">
+</head>
+
+<body>
+  <canvas class="flow-canvas" aria-hidden="true"></canvas>
+
+  <div class="language-switch">
+    <input type="radio" id="lang-ja" name="lang" checked>
+    <input type="radio" id="lang-en" name="lang">
+
+    <div class="language-panels">
+
+      <!-- ================= 日本語 ================= -->
+      <div class="lang-panel lang-panel--ja">
+
+        <!-- ===== ヘッダー ===== -->
+        <header class="site-header">
+          <div class="container header__inner">
+            <a class="brand" href="./index.html#hero-ja" aria-label="ホーム">
+              <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+              <a href="./index.html#shiga-support-ja">DX支援</a>
+              <a href="./index.html#services-ja">支援内容</a>
+              <a href="./member.html">運営者紹介</a>
+              <a href="./index.html#column-ja">DXコラム</a>
+              <a href="./index.html#contact-ja">お問い合わせ</a>
+            </nav>
+          </div>
+        </header>
+
+        <!-- ===== メイン ===== -->
+        <main>
+          <section class="section">
+            <div class="container">
+              <div class="section__header">
+                <p class="eyebrow">Operator</p>
+                <h1>運営者紹介</h1>
+              </div>
+
+              <div class="member-list">
+
+                <!-- ===== 竹内 大和（一覧：写真なし） ===== -->
+                <div class="member-card">
+                  <h2>竹内 大和</h2>
+                  <p class="role">運営責任者 / 代表</p>
+                  <p class="description">
+                    滋賀大学 在学<br><br>
+                    中小企業・個人事業主向けに、業務改善・IT導入・DX支援を担当。
+                  </p>
+                  <div class="profile__actions">
+                    <button
+                      class="btn btn-primary profile-card__open"
+                      type="button"
+                      data-card-target="profile-card-takeuchi"
+                      aria-expanded="false"
+                      aria-controls="profile-card-takeuchi">
+                      プロフィールを見る
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ===== 山本 悠翔（一覧：写真なし） ===== -->
+                <div class="member-card">
+                  <h2>山本 悠翔</h2>
+                  <p class="role">プログラミングアシスト</p>
+                  <p class="description">
+                    東海大学 在学
+                  </p>
+                  <div class="profile__actions">
+                    <button
+                      class="btn btn-primary profile-card__open"
+                      type="button"
+                      data-card-target="profile-card-yamamoto"
+                      aria-expanded="false"
+                      aria-controls="profile-card-yamamoto">
+                      プロフィールを見る
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <!-- ===== 竹内：プロフィールカード ===== -->
+        <div class="profile-card" id="profile-card-takeuchi" aria-hidden="true" role="dialog" aria-modal="true">
+          <button class="profile-card__backdrop" type="button" data-card-close aria-label="閉じる"></button>
+          <div class="profile-card__panel" role="document" tabindex="-1">
+            <button class="profile-card__close" type="button" data-card-close aria-label="閉じる">×</button>
+            <div class="profile-card__header">
+              <div class="profile-card__media">
+                <div
+                  class="profile-card__photo"
+                  style="
+                    background-image: url('assets/images/yamato_selfy.png');
+                    background-position: center center;
+                  "
+                  aria-hidden="true"></div>
+              </div>
+              <div>
+                <p class="profile-card__name">竹内 大和</p>
+                <p class="profile-card__title">運営責任者 / 代表</p>
+                <p class="profile-card__meta">滋賀大学 在学</p>
+              </div>
+            </div>
+            <div class="profile-card__section">
+              <p class="profile-card__label">プロフィール</p>
+              <p>
+                技術ありきではなく、現場で本当に使えるDX・業務改善を重視。<br>
+                最初の相談から設計・実装・定着まで一貫して支援します。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== 山本：プロフィールカード（写真を上寄せ） ===== -->
+        <div class="profile-card" id="profile-card-yamamoto" aria-hidden="true" role="dialog" aria-modal="true">
+          <button class="profile-card__backdrop" type="button" data-card-close aria-label="閉じる"></button>
+          <div class="profile-card__panel" role="document" tabindex="-1">
+            <button class="profile-card__close" type="button" data-card-close aria-label="閉じる">×</button>
+            <div class="profile-card__header">
+              <div class="profile-card__media">
+                <div
+                  class="profile-card__photo"
+                  style="
+                    background-image: url('assets/images/haruto_selfy.jpg');
+                    background-position: center top;
+                  "
+                  aria-hidden="true"></div>
+              </div>
+              <div>
+                <p class="profile-card__name">山本 悠翔</p>
+                <p class="profile-card__title">プログラミングアシスタント</p>
+                <p class="profile-card__meta">東海大学 在学</p>
+              </div>
+            </div>
+            <div class="profile-card__section">
+              <p class="profile-card__label">連絡先</p>
+              <ul class="profile-card__list">
+                <li class="profile-card__item">
+                  <span>メール</span>
+                  <a class="profile-card__link" href="mailto:haruto.y.0921@icloud.com">
+                    haruto.y.0921@icloud.com
+                  </a>
+                </li>
+                <li class="profile-card__item">
+                  <span>電話</span>
+                  <a class="profile-card__link" href="tel:08080801944">
+                    080-8080-1944
+                  </a>
+                </li>
+              </ul>
+              <p>
+                皆さんのお力になれるよう全力でサポートさせていただきます。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== フッター ===== -->
+        <footer class="footer">
+          <div class="container footer__grid">
+            <div class="footer__brand">
+              <a class="brand" href="./index.html#hero-ja" aria-label="ホーム">
+                <span class="brand__mark" aria-hidden="true"></span>
+              </a>
+              <p>琵琶湖から、ビジネスに新しい流れを。地域に根ざしたDXパートナー。</p>
+            </div>
+            <div class="footer__links">
+              <h4>支援内容</h4>
+              <a href="./index.html#services-ja">業務改善・業務自動化</a>
+              <a href="./index.html#services-ja">IT・ツール導入支援</a>
+              <a href="./index.html#services-ja">AI・生成AI活用</a>
+            </div>
+            <div class="footer__links">
+              <h4>お問い合わせ</h4>
+              <a href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
+              <a href="mailto:yamato1106take@gmail.com">メール相談</a>
+            </div>
+          </div>
+          <p class="footer__copy">© 2026 Yamato Takeuchi</p>
+        </footer>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/static/main.js"></script>
+</body>
+</html>
