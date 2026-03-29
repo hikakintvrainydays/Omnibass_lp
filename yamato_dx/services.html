@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サービス一覧｜YamatoDX</title>
+  <meta name="description" content="YamatoDXが提供する「伴奏支援型業務デジタル化」や「QURUメニュー」をはじめとした、サービス一覧をご紹介します。">
+  <meta name="author" content="竹内 大和">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="竹内大和">
+  <meta property="og:title" content="サービス一覧｜YamatoDX">
+  <meta property="og:description" content="YamatoDXが提供するサービスの一覧をご紹介します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/static/style.css">
+</head>
+<body>
+  <canvas class="flow-canvas" aria-hidden="true"></canvas>
+  <div class="language-switch">
+    <input type="radio" id="lang-ja" name="lang" checked>
+    <input type="radio" id="lang-en" name="lang">
+
+    <div class="language-panels">
+      <div class="lang-panel lang-panel--ja">
+        <header class="site-header">
+          <div class="container header__inner">
+            <a class="brand" href="index.html" aria-label="ホーム">
+              <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+              <a href="index.html#shiga-support-ja">DX支援</a>
+              <a href="index.html#services-ja">支援内容</a>
+              <a href="member.html">運営者紹介</a>
+              <a href="index.html#column-ja">DXコラム</a>
+              <a href="index.html#contact-ja">お問い合わせ</a>
+            </nav>
+            <div class="header__actions">
+              <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu-ja">
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+              </button>
+              <div class="header__desktop">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mobile-menu" id="mobile-menu-ja" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+              <nav class="mobile-menu__nav">
+                <a href="index.html#shiga-support-ja">DX支援</a>
+                <a href="index.html#services-ja">支援内容</a>
+                <a href="index.html#operator-ja">運営者</a>
+                <a href="index.html#column-ja">DXコラム</a>
+                <a href="index.html#contact-ja">お問い合わせ</a>
+              </nav>
+              <div class="mobile-menu__controls">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section class="section service-details" id="service-details-ja" style="padding-top: 8rem; min-height: 80vh;">
+            <div class="container">
+              <div class="section__header">
+                <p class="eyebrow">Service List</p>
+                <h2>サービス一覧</h2>
+              </div>
+              <div class="service-details__grid">
+                <!-- 伴奏支援型業務デジタル化 -->
+                <article class="service-detail-card">
+                  <div class="service-detail-card__image">
+                    <img src="assets/images/service_dx.png" alt="伴奏支援型業務デジタル化">
+                  </div>
+                  <div class="service-detail-card__content">
+                    <h3>伴奏支援型業務デジタル化</h3>
+                    <p>中小企業・個人事業主様の現場に密着し、ヒアリングから業務フローの見直し、ITツールの選定・導入、そして運用定着までを一貫してサポートします。単なるシステムの押し売りではなく、お客様のペースに合わせた「伴走型」の支援により、現場担当者が自発的に活用できるデジタル化を実現します。</p>
+                    <ul>
+                      <li>現状の業務フローの可視化と無駄の抽出</li>
+                      <li>自社に最適なITツール・クラウドサービスの選定と導入支援</li>
+                      <li>導入後のサポートおよび継続的な業務改善の仕組みづくり</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <!-- QURUメニュー -->
+                <article class="service-detail-card">
+                  <div class="service-detail-card__image">
+                    <img src="assets/images/service_quru.png" alt="QURUメニュー">
+                  </div>
+                  <div class="service-detail-card__content">
+                    <h3>QURUメニュー</h3>
+                    <p>飲食店やサービス業に特化した、スマートフォンから簡単に注文・閲覧ができるデジタルメニューの導入パッケージです。紙のメニューからデジタルへ移行することで、注文業務の効率化やメニュー変更の手間を大幅に削減し、顧客体験の向上と売上・利益の最大化に貢献します。</p>
+                    <ul>
+                      <li>写真やテキストを自由に変更できる専用デジタルメニューの構築</li>
+                      <li>QRコードを読み取るだけのアプリ不要な簡単アクセス</li>
+                      <li>オススメ商品のハイライトや多言語対応による単価アップ支援</li>
+                    </ul>
+                    <div class="service-detail-card__actions">
+                      <a href="#" class="btn btn-primary" style="width: 100%;">QURUメニューについて詳しく見る</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <div class="container footer__grid">
+            <div class="footer__brand">
+              <a class="brand" href="index.html" aria-label="ホーム">
+                <span class="brand__mark" aria-hidden="true"></span>
+              </a>
+              <p>琵琶湖から、ビジネスに新しい流れを。地域に根ざした、あなたに一番近いDXパートナー。</p>
+            </div>
+            <div class="footer__links">
+              <h4>支援内容</h4>
+              <a href="index.html#services-ja">業務改善・業務自動化</a>
+              <a href="index.html#services-ja">IT・ツール導入支援</a>
+              <a href="index.html#services-ja">AI・生成AI活用</a>
+            </div>
+            <div class="footer__links">
+              <h4>お問い合わせ</h4>
+              <a href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">LINEで相談</a>
+              <a href="mailto:yamato1106take@gmail.com">メール相談</a>
+            </div>
+          </div>
+          <p class="footer__copy">© 2026 Yamato Takeuchi</p>
+        </footer>
+      </div>
+
+      <div class="lang-panel lang-panel--en" lang="en">
+        <header class="site-header">
+          <div class="container header__inner">
+            <a class="brand" href="index.html" aria-label="Home">
+              <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+              <a href="index.html#shiga-support-en">DX Support</a>
+              <a href="index.html#services-en">Services</a>
+              <a href="index.html#operator-en">Operator</a>
+              <a href="assets/about.html">operator introduction</a>
+              <a href="index.html#column-en">DX Column</a>
+              <a href="index.html#contact-en">Contact</a>
+            </nav>
+            <div class="header__actions">
+              <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-en">
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+                <span class="menu-toggle__bar"></span>
+              </button>
+              <div class="header__desktop">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mobile-menu" id="mobile-menu-en" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+              <nav class="mobile-menu__nav">
+                <a href="index.html#shiga-support-en">DX Support</a>
+                <a href="index.html#services-en">Services</a>
+                <a href="index.html#operator-en">Operator</a>
+                <a href="index.html#column-en">DX Column</a>
+                <a href="index.html#contact-en">Contact</a>
+              </nav>
+              <div class="mobile-menu__controls">
+                <div class="language-toggle">
+                  <label for="lang-ja">日本語</label>
+                  <label for="lang-en">English</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section class="section service-details" id="service-details-en" style="padding-top: 8rem; min-height: 80vh;">
+            <div class="container">
+              <div class="section__header">
+                <p class="eyebrow">Service List</p>
+                <h2>Service List</h2>
+              </div>
+              <div class="service-details__grid">
+                <!-- Hands-on Digitalization Support -->
+                <article class="service-detail-card">
+                  <div class="service-detail-card__image">
+                    <img src="assets/images/service_dx.png" alt="Hands-on Digitalization Support">
+                  </div>
+                  <div class="service-detail-card__content">
+                    <h3>Hands-on Digitalization Support</h3>
+                    <p>We work closely with SMEs and solo operators, from understanding and reviewing current workflows to selecting, implementing, and establishing the right IT tools. Rather than simply selling systems, our hands-on approach adapts to your pace, ensuring practical digitalization that truly works for your team on the frontline.</p>
+                    <ul>
+                      <li>Visualizing current workflows and identifying inefficiencies</li>
+                      <li>Selecting and implementing optimal IT tools and cloud services</li>
+                      <li>Post-implementation support and building continuous improvement systems</li>
+                    </ul>
+                  </div>
+                </article>
+
+                <!-- QURU Menu -->
+                <article class="service-detail-card">
+                  <div class="service-detail-card__image">
+                    <img src="assets/images/service_quru.png" alt="QURU Menu">
+                  </div>
+                  <div class="service-detail-card__content">
+                    <h3>QURU Menu</h3>
+                    <p>A specialized digital menu implementation package for restaurants and retail, allowing easy ordering and browsing via smartphones. Transitioning from paper to digital menus dramatically reduces ordering friction and update hassles, ultimately enhancing the customer experience and maximizing sales.</p>
+                    <ul>
+                      <li>Creation of a flexible digital menu interface with photos and descriptions</li>
+                      <li>App-free access simply by scanning a QR code with a smartphone</li>
+                      <li>Upselling assistance through highlighted recommendations and multi-language support</li>
+                    </ul>
+                    <div class="service-detail-card__actions">
+                      <a href="#" class="btn btn-primary" style="width: 100%;">Learn more about QURU Menu</a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <div class="container footer__grid">
+            <div class="footer__brand">
+              <a class="brand" href="index.html" aria-label="Home">
+                <span class="brand__mark" aria-hidden="true"></span>
+              </a>
+              <p>From Lake Biwa to your operations. A DX partner for teams that want a steady, practical upgrade.</p>
+            </div>
+            <div class="footer__links">
+              <h4>Services</h4>
+              <a href="index.html#services-en">Operations improvement & automation</a>
+              <a href="index.html#services-en">IT & tool adoption support</a>
+              <a href="index.html#services-en">AI & generative AI use</a>
+            </div>
+            <div class="footer__links">
+              <h4>Contact</h4>
+              <a href="https://lin.ee/D4wzr4x" target="_blank" rel="noopener">Chat on LINE</a>
+              <a href="mailto:yamato1106take@gmail.com">Email me</a>
+            </div>
+          </div>
+          <p class="footer__copy">© 2026 Yamato Takeuchi</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/static/main.js"></script>
+</body>
+</html>
