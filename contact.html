@@ -14,16 +14,30 @@
 </head>
 
 <body>
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
     <!-- Header -->
     <header>
         <div class="container header-inner">
-            <a href="index.html" class="logo">OMNIBASS</a>
-            <nav class="nav">
-                <a href="index.html">HOME</a>
-                <a href="index.html#philosophy">PHILOSOPHY</a>
-                <a href="index.html#service">SERVICE</a>
-                <a href="company.html">COMPANY</a>
-                <a href="contact.html" class="nav-btn">CONTACT</a>
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/omnibass_logo.png" alt="OMNIBASS" style="height: 100px; width: auto; object-fit: contain; margin: -30px 0;">
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav">
+                <a href="index.html#news" data-en="News">ニュース</a>
+                <a href="index.html#services" data-en="Services">事業内容</a>
+                <a href="company.html" data-en="Company">会社概要</a>
+                <a href="index.html#articles" data-en="Articles">記事一覧</a>
+                <a href="contact.html" data-en="Contact" class="nav-btn">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -77,24 +91,65 @@
         </div>
     </main>
 
-    <!-- Simple Footer (Copied/Simplified from Index) -->
-    <footer class="os-footer">
+    <!-- Footer (Unified) -->
+    <footer>
         <div class="container">
-            <div class="footer-nav">
-                <a href="index.html">HOME</a>
-                <a href="index.html#philosophy">PHILOSOPHY</a>
-                <a href="index.html#service">SERVICE</a>
-                <a href="company.html">COMPANY</a>
-                <a href="contact.html">CONTACT</a>
+            <div class="cta-area">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 700;" data-i18n="footer.cta_title">
+                    お気軽にご相談ください</h2>
+                <p style="margin-bottom: 3rem; color: #ccc;" data-i18n="footer.cta_body">
+                    課題やご要望など、お気軽にお聞かせください。</p>
+
+                <div style="margin-top: 2rem;">
+                    <a href="contact.html" class="nav-btn"
+                        style="display: inline-block; margin: 0; padding: 1rem 3rem; font-size: 1.1rem; text-decoration: none; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 900;">
+                        <span data-i18n="footer.contact_btn">お問い合わせはこちら →</span>
+                    </a>
+                </div>
             </div>
-            <div class="bottom-bar"
-                style="justify-content: center; border: none; margin-top: 2rem; border-top: 1px solid #374151;">
-                <p>&copy; 2024 OMNIBASS Inc. All Rights Reserved.</p>
+
+            <div class="footer-grid">
+                <div style="padding-right: 1.5rem;">
+                    <span style="font-size: 2.5rem; font-weight: 900; display: block; margin-bottom: 1rem; color: white; letter-spacing: 0.05em;">OMNIBASS</span>
+                    <p style="font-size: clamp(0.75rem, 3.5vw, 1.4rem); color: #e2e8f0; letter-spacing: 0.05em; font-weight: 600; margin-top: 0.5rem; line-height: 1.8;"
+                        data-en="Omnibass circulates all things new, gently rooting them in local communities, and co-creates a future that leads to the next step.">
+                        <span style="display:inline-block; white-space:nowrap;">株式会社オムニバスはあらゆる新しいものを巡らせ、</span><br>
+                        <span style="display:inline-block; white-space:nowrap;">地域の現場に合った形で、そっと根づかせ、</span><br>
+                        <span style="display:inline-block; white-space:nowrap;">次の一歩につながる未来を共につくります。</span>
+                    </p>
+                </div>
+                <div>
+                    <h4 data-en="Navigation">メニュー</h4>
+                    <ul>
+                        <li><a href="index.html#news" data-en="News">ニュース</a></li>
+                        <li><a href="index.html#services" data-en="Services">事業内容</a></li>
+                        <li><a href="company.html" data-en="Company">会社概要</a></li>
+                        <li><a href="index.html#articles" data-en="Articles">記事一覧</a></li>
+                        <li><a href="contact.html" data-en="Contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-en="Services">事業内容</h4>
+                    <ul>
+                        <li>YamatoDX</li>
+                        <li>Dacha club</li>
+                        <li>MEGURU TRAVEL</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-bar">
+                <p>&copy; 2026 OMNIBASS Inc. All rights reserved.</p>
+                <div>
+                    <i class="fab fa-twitter" style="margin-left: 1rem; cursor: pointer;"></i>
+                    <i class="fab fa-facebook" style="margin-left: 1rem; cursor: pointer;"></i>
+                </div>
             </div>
         </div>
     </footer>
 
     <script src="js/contact.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
