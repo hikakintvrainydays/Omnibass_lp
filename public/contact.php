@@ -93,8 +93,9 @@ $headers = "From: " . mb_encode_mimeheader($name) . " <{$from_email}>\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// メール送信
-$result = mb_send_mail($to_email, $mail_subject, $mail_body, $headers);
+// メール送信 (ロリポップ対策で第5引数 -f 指定を追加)
+$return_path = "-f" . $from_email;
+$result = mb_send_mail($to_email, $mail_subject, $mail_body, $headers, $return_path);
 
 if ($result) {
     echo json_encode(['success' => true]);
