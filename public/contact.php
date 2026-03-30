@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 設定
-$to_email = 'your-email@example.com'; // ← 受信先メールアドレスを設定してください
-$from_email = 'noreply@omnibus.jp';   // ← 送信元メールアドレスを設定してください
+$to_email = 'yamato@biwako-omnibass.com'; // ← 受信先メールアドレスを設定してください
+$from_email = 'info@biwako-omnibass.com';   // ← 送信元メールアドレスを設定してください
 
 // JSON入力を取得
 $json = file_get_contents('php://input');
