@@ -98,6 +98,48 @@ $return_path = "-f" . $from_email;
 $result = mb_send_mail($to_email, $mail_subject, $mail_body, $headers, $return_path);
 
 if ($result) {
+    // --- お客様への自動返信メール ---
+    $auto_reply_subject = "【Omnibus】お問い合わせを受け付けました";
+    
+    $auto_reply_body = <<<EOT
+{$name} 様
+
+この度はOmnibusへお問い合わせいただき、誠にありがとうございます。
+以下の内容でお問い合わせを受け付けました。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+■ お名前
+{$name}
+
+■ メールアドレス
+{$email}
+
+■ 件名
+{$subject}
+
+■ お問い合わせ内容
+{$message}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+内容を確認次第、担当者よりご連絡させていただきます。
+今しばらくお待ちくださいますようお願い申し上げます。
+
+※本メールは自動配信されております。
+お心当たりのない場合は、誠にお手数ですが本メールを破棄していただきますようお願いいたします。
+--------------------------------------------------
+株式会社Omnibus (オムニバス)
+Email: {$from_email}
+--------------------------------------------------
+EOT;
+
+    // 自動返信用のヘッダー
+    $auto_reply_headers = "From: " . mb_encode_mimeheader("Omnibus") . " <{$from_email}>\r\n";
+    $auto_reply_headers .= "Reply-To: {$from_email}\r\n";
+    $auto_reply_headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    
+    // お客様へ自動返信を送信（エラーになってもメインの送信は成功しているので処理は止めない）
+    mb_send_mail($email, $auto_reply_subject, $auto_reply_body, $auto_reply_headers, $return_path);
+
     echo json_encode(['success' => true]);
 } else {
     echo json_encode(['success' => false, 'error' => 'メールの送信に失敗しました。しばらく経ってからお試しください。']);
