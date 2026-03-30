@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 設定
-$to_email = 'yamato@biwako-omnibass.com'; // ← 受信先メールアドレスを設定してください
+$to_email = 'info@biwako-omnibass.com'; // ← 受信先メールアドレスを設定してください (yamato@が存在しないため一時的にinfo@に変更)
 $from_email = 'info@biwako-omnibass.com';   // ← 送信元メールアドレスを設定してください
 
 // JSON入力を取得
@@ -88,10 +88,10 @@ Omnibus ホームページからのお問い合わせ
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOT;
 
-// メールヘッダー
+// メールヘッダー (Content-Typeはmb_send_mailが自動生成するため指定NG)
 $headers = "From: " . mb_encode_mimeheader($name) . " <{$from_email}>\r\n";
 $headers .= "Reply-To: {$email}\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
 
 // メール送信 (ロリポップ対策で第5引数 -f 指定を追加)
 $return_path = "-f" . $from_email;
