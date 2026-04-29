@@ -62,7 +62,7 @@
           values: {
             name: 'OMNIBASS Inc.',
             founded: '2025',
-            addr: 'Hikone, Shiga, Japan',
+            addr: 'HQ: 227 Daikoku-cho, Dai-2 Kyoto Bldg. 402, Shimogyo-ku, Kyoto, Japan<br>Operations: Hikone, Shiga, Japan',
             business: 'Inbound tourism / Tour planning / Regional promotion / Web design & media support',
             rep: 'Yamato Takeuchi',
             contact: 'megurutravel81@gmail.com'
@@ -133,7 +133,7 @@
           values: {
             name: '株式会社OMNIBASS',
             founded: '2025年',
-            addr: '滋賀県彦根市',
+            addr: '本社：京都府京都市下京区大黒町227番地 第2キョートビル402<br>事業拠点：滋賀県彦根市',
             business: 'インバウンド観光 / ツアー企画 / 地域プロモーション / Web制作・運営支援',
             rep: '竹内 大和',
             contact: 'megurutravel81@gmail.com'
@@ -358,7 +358,7 @@
           translations[lang]?.aboutPage?.company?.values?.rep || '',
           translations[lang]?.aboutPage?.company?.values?.contact || ''
         ];
-        rows.forEach((tr, i) => { const td = tr.querySelector('td'); if (td && vals[i] !== '') td.textContent = vals[i]; });
+        rows.forEach((tr, i) => { const td = tr.querySelector('td'); if (td && vals[i] !== '') td.innerHTML = vals[i]; });
       }
 
       // Footer links (applies to about/contact pages)
