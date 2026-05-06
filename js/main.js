@@ -344,9 +344,8 @@
         // 記事セクション - カテゴリフィルタリング機能
         // ========================================
         const filterBtns = document.querySelectorAll('.filter-btn');
-        const articleCards = document.querySelectorAll('.article-card');
 
-        if (filterBtns.length > 0 && articleCards.length > 0) {
+        if (filterBtns.length > 0) {
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function () {
                     const category = this.dataset.category;
@@ -355,8 +354,8 @@
                     filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
 
-                    // カードのフィルタリング
-                    articleCards.forEach(card => {
+                    // カードのフィルタリング（CMS差し替え後も追従するため毎回再取得）
+                    document.querySelectorAll('.article-card').forEach(card => {
                         if (category === 'all' || card.dataset.category === category) {
                             card.classList.remove('hidden');
                             // フェードインアニメーション
