@@ -16,8 +16,8 @@
  * if you used different IDs when you created the APIs.
  */
 window.OMNIBASS_CMS_CONFIG = {
-    serviceDomain: 'YOUR_SERVICE_DOMAIN',
-    apiKey: 'YOUR_API_KEY',
+    serviceDomain: 'ie4goy9psi',
+    apiKey: 'EnvocVdgZA9UF6OTh0qTgomxDLy20nTFo8rU',
     endpoints: {
         news: 'news',
         columns: 'columns'
