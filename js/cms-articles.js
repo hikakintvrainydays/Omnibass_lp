@@ -38,12 +38,18 @@
 
     function pickImage(item) {
         if (item.thumbnail && item.thumbnail.url) return item.thumbnail.url;
+        // 記事ID → Unsplash画像のマップから引く
+        if (window.OmnibassArticleImages && item.id) {
+            return window.OmnibassArticleImages.getCardImageUrl(item.id);
+        }
         return FALLBACK_IMAGE;
     }
 
     function buildCard(item) {
         const esc = window.OmnibassCMS.escapeHtml;
-        const slug = (item.category && item.category.id) ? item.category.id : (item.category || '');
+        // microCMSのセレクトフィールドは配列で返る場合があるため両対応
+        const rawCategory = Array.isArray(item.category) ? item.category[0] : item.category;
+        const slug = (rawCategory && rawCategory.id) ? rawCategory.id : (rawCategory || '');
         const cat = esc(slug);
         const date = esc(window.OmnibassCMS.formatDateDot(item.publishedAt || item.createdAt));
         const title = esc(item.title || '');
@@ -51,7 +57,8 @@
         const image = esc(pickImage(item));
         const label = esc(categoryLabel(slug));
         const badgeExtra = badgeClass(slug);
-        const link = item.link ? esc(item.link) : '';
+        const externalLink = item.link ? esc(item.link) : '';
+        const detailHref = item.id ? `articles/?id=${encodeURIComponent(item.id)}` : '';
 
         const inner = `
             <div class="article-image">
@@ -64,9 +71,13 @@
                 <p class="article-excerpt">${excerpt}</p>
             </div>`;
 
-        const tag = link ? 'a' : 'article';
-        const linkAttr = link ? ` href="${link}" target="_blank" rel="noopener"` : '';
-        return `<${tag} class="article-card" data-category="${cat}"${linkAttr}>${inner}</${tag}>`;
+        // 外部リンクが指定されていればそちらを優先、なければ詳細ページへ
+        let href = externalLink || detailHref;
+        let target = externalLink ? ' target="_blank" rel="noopener"' : '';
+        if (href) {
+            return `<a class="article-card" data-category="${cat}" href="${href}"${target}>${inner}</a>`;
+        }
+        return `<article class="article-card" data-category="${cat}">${inner}</article>`;
     }
 
     async function render() {

@@ -1,0 +1,142 @@
+- generic [ref=e2]:
+  - radio "日本語 日本語 日本語 日本語" [checked] [ref=e3]
+  - radio "English English English English" [ref=e4]
+  - generic [ref=e6]:
+    - banner [ref=e7]:
+      - generic [ref=e8]:
+        - link "ホーム" [ref=e9] [cursor=pointer]:
+          - /url: "#hero-ja"
+        - navigation [ref=e11]:
+          - link "DX支援" [ref=e12] [cursor=pointer]:
+            - /url: "#shiga-support-ja"
+          - link "支援内容" [ref=e13] [cursor=pointer]:
+            - /url: "#services-ja"
+          - link "運営者紹介" [ref=e14] [cursor=pointer]:
+            - /url: member.html
+          - link "DXコラム" [ref=e15] [cursor=pointer]:
+            - /url: "#column-ja"
+          - link "お問い合わせ" [ref=e16] [cursor=pointer]:
+            - /url: "#contact-ja"
+        - generic [ref=e19]:
+          - generic [ref=e20] [cursor=pointer]: 日本語
+          - generic [ref=e21] [cursor=pointer]: English
+    - generic [ref=e24]:
+      - paragraph [ref=e25]: DX支援
+      - heading "DXをはじめるなら、 YamatoDX" [level=1] [ref=e26]:
+        - text: DXをはじめるなら、
+        - text: YamatoDX
+      - paragraph [ref=e27]: 滋賀・関西を中心に、現場に合わせて業務改善・IT導入・AI活用まで伴走します。
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - paragraph [ref=e31]: DX Support
+        - heading "中小企業向けDX支援" [level=2] [ref=e32]
+      - generic [ref=e33]:
+        - paragraph [ref=e34]: 主に滋賀・関西の中小企業・個人事業主向けに、業務改善・DX導入・IT活用を一気通貫で支援します。
+        - list [ref=e35]:
+          - listitem [ref=e36]: Excelや手作業に限界を感じている
+          - listitem [ref=e37]: ITやDXの最初の一歩が分からない
+        - paragraph [ref=e38]: 最初の相談から伴走するDX支援です。
+    - main [ref=e39]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - paragraph [ref=e43]: Services
+          - heading "提供しているDX支援内容" [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - article [ref=e46]:
+            - generic: "01"
+            - heading "業務改善・業務自動化" [level=3] [ref=e47]
+            - list [ref=e48]:
+              - listitem [ref=e49]: Excel業務の整理・自動化
+              - listitem [ref=e50]: 手作業フローの見直し
+              - listitem [ref=e51]: 定型作業の自動処理設計
+          - article [ref=e52]:
+            - generic: "02"
+            - heading "IT・ツール導入支援" [level=3] [ref=e53]
+            - list [ref=e54]:
+              - listitem [ref=e55]: クラウドツール導入サポート
+              - listitem [ref=e56]: 小規模システム開発
+              - listitem [ref=e57]: API連携・データ活用
+          - article [ref=e58]:
+            - generic: "03"
+            - heading "AI・生成AI活用" [level=3] [ref=e59]
+            - list [ref=e60]:
+              - listitem [ref=e61]: ChatGPTなど生成AIの業務活用
+              - listitem [ref=e62]: 社内利用を前提とした設計支援
+              - listitem [ref=e63]: 実務に使える形への落とし込み
+        - link "サービス一覧を見る" [ref=e65] [cursor=pointer]:
+          - /url: services.html
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - paragraph [ref=e69]: Before / After
+          - heading "DX支援で変わること" [level=2] [ref=e70]
+          - paragraph [ref=e71]: 現場の負担を減らし、判断の材料を整えます。
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - paragraph [ref=e74]: Before
+            - list [ref=e75]:
+              - listitem [ref=e76]: 手作業と二重入力が多い
+              - listitem [ref=e77]: Excel管理が属人化している
+              - listitem [ref=e78]: データが散在している
+              - listitem [ref=e79]: 判断が経験と勘に偏る
+          - generic [ref=e80]:
+            - paragraph [ref=e81]: After
+            - list [ref=e82]:
+              - listitem [ref=e83]: 定型作業が自動化される
+              - listitem [ref=e84]: 情報が整理され共有できる
+              - listitem [ref=e85]: 数値で意思決定できる
+              - listitem [ref=e86]: ボトルネックが見える
+      - generic [ref=e90]:
+        - paragraph [ref=e91]: Operator
+        - heading "運営者について" [level=2] [ref=e92]
+        - paragraph [ref=e93]:
+          - text: 竹内 大和（たけうち やまと）
+          - text: 滋賀大学在学。
+          - text: 代表 / DX支援・業務改善エンジニア
+        - paragraph [ref=e94]: 技術ありきではなく、現場で本当に使えるDX・業務改善を重視します。
+        - button "プロフィールを見る" [ref=e96] [cursor=pointer]
+      - generic [ref=e98]:
+        - generic [ref=e99]:
+          - paragraph [ref=e100]: DX Column
+          - heading "DXコラム" [level=2] [ref=e101]
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - generic [ref=e105]: 準備中
+            - generic [ref=e106]: DXコラム
+          - heading "まだありません" [level=3] [ref=e107]
+          - generic [ref=e108]: →
+        - link "一覧を見る" [ref=e110] [cursor=pointer]:
+          - /url: "#contact-ja"
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - paragraph [ref=e114]: Contact
+          - heading "お問い合わせ" [level=2] [ref=e115]
+          - paragraph [ref=e116]: DXや業務改善の最初の相談から対応します。地域や業種に合わせて、状況に応じた進め方をご提案します。
+          - paragraph [ref=e117]: 連絡方法：LINE・メール
+          - link "▶ お問い合わせはこちら" [ref=e118] [cursor=pointer]:
+            - /url: https://lin.ee/D4wzr4x
+        - generic [ref=e119]:
+          - link "LINEで相談" [ref=e120] [cursor=pointer]:
+            - /url: https://lin.ee/D4wzr4x
+          - link "メールで相談" [ref=e121] [cursor=pointer]:
+            - /url: mailto:yamato1106take@gmail.com
+    - contentinfo [ref=e122]:
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - link "ホーム" [ref=e125] [cursor=pointer]:
+            - /url: "#hero-ja"
+          - paragraph [ref=e127]: 琵琶湖から、ビジネスに新しい流れを。地域に根ざした、あなたに一番近いDXパートナー。
+        - generic [ref=e128]:
+          - heading "支援内容" [level=4] [ref=e129]
+          - link "業務改善・業務自動化" [ref=e130] [cursor=pointer]:
+            - /url: services.html
+          - link "IT・ツール導入支援" [ref=e131] [cursor=pointer]:
+            - /url: services.html
+          - link "AI・生成AI活用" [ref=e132] [cursor=pointer]:
+            - /url: services.html
+        - generic [ref=e133]:
+          - heading "お問い合わせ" [level=4] [ref=e134]
+          - link "LINEで相談" [ref=e135] [cursor=pointer]:
+            - /url: https://lin.ee/D4wzr4x
+          - link "メール相談" [ref=e136] [cursor=pointer]:
+            - /url: mailto:yamato1106take@gmail.com
+      - paragraph [ref=e137]: © 2026 Yamato Takeuchi

@@ -1,0 +1,83 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "ホーム" [ref=e4] [cursor=pointer]:
+        - /url: ../index.html
+      - navigation [ref=e6]:
+        - link "DX支援" [ref=e7] [cursor=pointer]:
+          - /url: ../index.html#shiga-support-ja
+        - link "支援内容" [ref=e8] [cursor=pointer]:
+          - /url: ../index.html#services-ja
+        - link "運営者紹介" [ref=e9] [cursor=pointer]:
+          - /url: ../member.html
+        - link "DXコラム" [ref=e10] [cursor=pointer]:
+          - /url: ../index.html#column-ja
+        - link "お問い合わせ" [ref=e11] [cursor=pointer]:
+          - /url: ../index.html#contact-ja
+      - tablist [ref=e14]:
+        - button "日本語" [ref=e15] [cursor=pointer]
+        - button "English" [ref=e16] [cursor=pointer]
+  - main [ref=e17]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - navigation [ref=e23]:
+          - link "トップ" [ref=e24] [cursor=pointer]:
+            - /url: ../index.html
+          - text: /
+          - link "DXコラム" [ref=e25] [cursor=pointer]:
+            - /url: ../index.html#column-ja
+        - generic [ref=e26]:
+          - time [ref=e27]: 2026.04.28
+          - generic [ref=e28]: DXコラム
+        - heading "中小企業がDXに踏み出すための「最初の一歩」とは" [level=1] [ref=e29]
+      - img "中小企業がDXに踏み出すための「最初の一歩」とは" [ref=e31]
+      - article [ref=e32]:
+        - generic [ref=e33]:
+          - paragraph [ref=e34]: 「DXに取り組まなければ」と頭では分かっていても、何から始めればいいのか分からない——。中小企業の経営者・現場担当者の多くが抱える共通の悩みです。本コラムでは、DXの「最初の一歩」を踏み出すための実践的なステップを解説します。
+          - heading "そもそもDXとは何か" [level=2] [ref=e35]
+          - paragraph [ref=e36]: DX（Digital Transformation）とは、デジタル技術を使って業務やビジネスモデルを変革すること。重要なのは「デジタル化」そのものではなく、それによって何が変わるかです。例えば紙の書類をPDFにしただけではDXとは言えません。「PDF化したことで承認フローが3日→1時間に短縮された」ところまで含めて、はじめてDXです。
+          - heading "「最初の一歩」の選び方" [level=2] [ref=e37]
+          - paragraph [ref=e38]: 多くの中小企業がDXで失敗するパターンは、「壮大な構想を立てて、何も動かないまま終わる」というもの。最初の一歩は、以下の3条件を満たす業務から選ぶのがおすすめです。
+          - list [ref=e39]:
+            - listitem [ref=e40]:
+              - strong [ref=e41]: 毎日／毎週繰り返される業務
+              - text: — 効果を実感しやすい
+            - listitem [ref=e42]:
+              - strong [ref=e43]: 1人の担当者で完結する業務
+              - text: — 関係者の調整コストが低い
+            - listitem [ref=e44]:
+              - strong [ref=e45]: 失敗してもダメージが小さい業務
+              - text: — 心理的に取り組みやすい
+          - 'heading "具体例: 月次の請求書作成業務" [level=2] [ref=e46]'
+          - paragraph [ref=e47]: 例えば「月末に20社分の請求書を作成し、PDF化してメール送付する」業務。これを以下のように改善できます。
+          - list [ref=e48]:
+            - listitem [ref=e49]: 請求情報をスプレッドシートで一元管理
+            - listitem [ref=e50]: 差し込み印刷ツールで請求書PDFを一括生成
+            - listitem [ref=e51]: メール送信スクリプトで自動配信
+          - paragraph [ref=e52]: この変革で、月8時間かかっていた作業が30分に。生まれた時間を「お客様への提案」に振り向けることができます。
+          - heading "YamatoDXがお手伝いできること" [level=2] [ref=e53]
+          - paragraph [ref=e54]: 「最初の一歩」をどこに置くか、何を改善すればいいか——。YamatoDXは、業務の棚卸しから具体的なツール選定、定着まで一貫して伴走します。お気軽にご相談ください。
+        - generic [ref=e55]:
+          - heading "関連コラム" [level=2] [ref=e56]
+          - list [ref=e57]:
+            - listitem [ref=e58]:
+              - text: 失敗を避けるために →
+              - link "なぜ多くの中小企業のDXは失敗するのか — 3つの落とし穴" [ref=e59] [cursor=pointer]:
+                - /url: https://digital-yamato-dx.jp/dx-columns/?id=e4n-5lrcvyj
+            - listitem [ref=e60]:
+              - text: 具体的な手順を知りたい方は →
+              - link "ローコード／ノーコードを業務に取り入れる現実的な手順" [ref=e61] [cursor=pointer]:
+                - /url: https://digital-yamato-dx.jp/dx-columns/?id=3k7xp1kihgp5
+            - listitem [ref=e62]:
+              - text: AI活用を検討中なら →
+              - link "業務改善に効くAIエージェントの具体的な使いどころ5選" [ref=e63] [cursor=pointer]:
+                - /url: https://digital-yamato-dx.jp/dx-columns/?id=zsgxr3czn
+        - generic [ref=e65]:
+          - paragraph [ref=e66]:
+            - text: 「うちの場合はどう進めればいい？」
+            - text: 少しでも気になる点があれば、ぜひお気軽にご相談ください。
+          - link "YamatoDXの無料相談を予約する →" [ref=e67] [cursor=pointer]:
+            - /url: https://digital-yamato-dx.jp/#contact-ja
+          - paragraph [ref=e68]: 中小企業のDX支援なら YamatoDX（株式会社OMNIBASS）
+        - link "← DXコラム一覧へ戻る" [ref=e70] [cursor=pointer]:
+          - /url: ../index.html#column-ja

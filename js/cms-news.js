@@ -17,20 +17,36 @@
     const LIMIT_DEFAULT = 5;
 
     function buildItem(item) {
+        const esc = window.OmnibassCMS.escapeHtml;
         const date = window.OmnibassCMS.formatDateDot(item.publishedAt || item.createdAt);
-        const tag = window.OmnibassCMS.escapeHtml(item.category || 'お知らせ');
-        const title = window.OmnibassCMS.escapeHtml(item.title || '');
-        const link = item.link ? window.OmnibassCMS.escapeHtml(item.link) : '';
+        // microCMSのセレクトフィールドは配列で返るため両対応
+        const cat = Array.isArray(item.category) ? item.category[0] : item.category;
+        const tag = esc(cat || 'お知らせ');
+        const title = esc(item.title || '');
+        const externalLink = item.link ? esc(item.link) : '';
+        const detailHref = item.id ? `news/?id=${encodeURIComponent(item.id)}` : '';
+        const cardImage = (window.OmnibassArticleImages && item.id)
+            ? window.OmnibassArticleImages.getCardImageUrl(item.id)
+            : '';
+        // 画像が無い記事もレイアウトを揃えるため、空のプレースホルダーを置く
+        const thumbHtml = cardImage
+            ? `<div class="news-thumb"><img src="${esc(cardImage)}" alt="" loading="lazy"></div>`
+            : `<div class="news-thumb news-thumb--empty" aria-hidden="true"></div>`;
 
         const inner = `
-            <time class="news-date">${window.OmnibassCMS.escapeHtml(date)}</time>
+            ${thumbHtml}
+            <time class="news-date">${esc(date)}</time>
             <div class="news-content">
                 <span class="news-tag">${tag}</span>
                 <h3 class="news-title">${title}</h3>
             </div>`;
 
-        if (link) {
-            return `<a href="${link}" class="news-item data-island" target="_blank" rel="noopener">${inner}</a>`;
+        // 外部リンクが指定されていればそちらを優先、なければ詳細ページへ
+        if (externalLink) {
+            return `<a href="${externalLink}" class="news-item data-island" target="_blank" rel="noopener">${inner}</a>`;
+        }
+        if (detailHref) {
+            return `<a href="${detailHref}" class="news-item data-island">${inner}</a>`;
         }
         return `<article class="news-item data-island">${inner}</article>`;
     }

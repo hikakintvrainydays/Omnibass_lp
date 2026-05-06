@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュース | OMNIBASS</title>
+    <meta name="description" content="OMNIBASS株式会社のニュース記事ページ。">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="../styles/detail.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="../index.html" class="logo">
+                <img src="../images/omnibass_logo.png" alt="OMNIBASS"
+                    style="height: 100px; width: auto; object-fit: contain; margin: -30px 0;">
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav">
+                <a href="../index.html#news" data-en="News">ニュース</a>
+                <a href="../index.html#services" data-en="Services">事業内容</a>
+                <a href="../company.html" data-en="Company">会社概要</a>
+                <a href="../index.html#articles" data-en="Articles">記事一覧</a>
+                <a href="../contact.html" data-en="Contact" class="nav-btn">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="article-root">
+        <div class="article-state" id="article-loading">
+            <div class="spinner"></div>
+            <p data-en="Loading...">読み込み中...</p>
+        </div>
+    </main>
+
+    <script src="../js/cms-config.js"></script>
+    <script src="../js/cms-client.js"></script>
+    <script src="../js/article-images.js?v=2"></script>
+    <script src="../js/seo.js"></script>
+    <script>
+        (function () {
+            const root = document.getElementById('article-root');
+
+            function getId() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('id');
+            }
+
+            function showError(titleJa, titleEn, msgJa, msgEn) {
+                root.innerHTML = `
+                    <div class="article-state">
+                        <h1 data-en="${titleEn}">${titleJa}</h1>
+                        <p data-en="${msgEn}">${msgJa}</p>
+                        <a href="../index.html#news" data-en="Back to home">トップへ戻る</a>
+                    </div>`;
+                applyLang(currentLang());
+            }
+
+            function currentLang() {
+                return document.querySelector('.lang-btn.active')?.textContent === 'English' ? 'en' : 'ja';
+            }
+
+            function applyLang(lang) {
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const en = el.getAttribute('data-en');
+                    if (!el.getAttribute('data-ja')) {
+                        el.setAttribute('data-ja', el.textContent.trim());
+                    }
+                    el.textContent = lang === 'en' ? en : el.getAttribute('data-ja');
+                });
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                if (lang === 'en') document.querySelectorAll('.lang-btn')[1]?.classList.add('active');
+                else document.querySelectorAll('.lang-btn')[0]?.classList.add('active');
+            }
+
+            window.setLang = applyLang;
+
+            async function render() {
+                const id = getId();
+                if (!id) {
+                    showError('記事が見つかりません', 'Article not found',
+                        'URLが正しくない可能性があります。', 'The URL may be incorrect.');
+                    return;
+                }
+                if (!window.OmnibassCMS || !window.OmnibassCMS.isConfigured()) {
+                    showError('CMS未設定', 'CMS not configured',
+                        'CMSの接続設定が完了していません。', 'CMS connection is not configured.');
+                    return;
+                }
+
+                const data = await window.OmnibassCMS.fetchDetail('news', id);
+                if (!data) {
+                    showError('記事が見つかりません', 'Article not found',
+                        'この記事は削除されたか、URLが間違っている可能性があります。',
+                        'This article may have been removed or the URL is wrong.');
+                    return;
+                }
+
+                // SEO meta + JSON-LD
+                if (window.OmnibassSeo) {
+                    const heroImageUrl = window.OmnibassArticleImages
+                        ? window.OmnibassArticleImages.getHeroImageUrl(id)
+                        : '';
+                    const desc = (data.body || '').replace(/<[^>]*>/g, '').slice(0, 140) || '株式会社OMNIBASSのニュース。';
+                    window.OmnibassSeo.applyArticle({
+                        title: data.title || 'ニュース',
+                        description: desc,
+                        image: heroImageUrl,
+                        publishedAt: data.publishedAt || data.createdAt,
+                        modifiedAt: data.revisedAt || data.updatedAt,
+                        path: `/news/?id=${encodeURIComponent(id)}`,
+                        sectionPath: '/news.html',
+                        articleSection: 'ニュース',
+                        keywords: ['OMNIBASS', '株式会社OMNIBASS', 'ニュース', '滋賀', '京都', 'DX']
+                    });
+                } else {
+                    document.title = `${data.title || 'ニュース'} | OMNIBASS`;
+                }
+
+                const esc = window.OmnibassCMS.escapeHtml;
+                const date = esc(window.OmnibassCMS.formatDateDot(data.publishedAt || data.createdAt));
+                // microCMS のセレクトフィールドは配列で返るため両対応
+                const cat = Array.isArray(data.category) ? data.category[0] : data.category;
+                const tag = esc(cat || 'お知らせ');
+                const title = esc(data.title || '');
+                const body = data.body || '';
+                const linkUrl = data.link ? esc(data.link) : '';
+
+                let bodyHtml = '';
+                if (body) {
+                    // microCMS が <img> タグを除去するため、本文末尾に残った
+                    // 画像クレジット（<hr><p>画像: ...</p>）の残骸を取り除く。
+                    const cleaned = body.replace(/<hr\s*\/?>\s*<p[^>]*>(?:画像|ヘッダー画像)[^<]*<a[^>]*>[^<]*<\/a>(?:[^<]*<a[^>]*>[^<]*<\/a>)?<\/p>\s*$/, '');
+                    bodyHtml = `<div class="article-content">${cleaned}</div>`;
+                } else {
+                    bodyHtml = `<div class="article-content"><p style="color:#94a3b8;" data-en="No body content yet.">本文は準備中です。</p></div>`;
+                }
+
+                let linkHtml = '';
+                if (linkUrl) {
+                    linkHtml = `
+                        <a href="${linkUrl}" target="_blank" rel="noopener" class="article-external-link">
+                            <div>
+                                <div class="article-external-link__label" data-en="Related link">関連リンク</div>
+                                <div class="article-external-link__url">${linkUrl}</div>
+                            </div>
+                            <i class="fas fa-arrow-up-right-from-square article-external-link__icon"></i>
+                        </a>`;
+                }
+
+                const heroImageUrl = window.OmnibassArticleImages
+                    ? window.OmnibassArticleImages.getHeroImageUrl(id)
+                    : '';
+                const heroImageHtml = heroImageUrl
+                    ? `<div class="article-hero-image"><img src="${heroImageUrl}" alt="${title}" loading="eager"></div>`
+                    : '';
+
+                root.innerHTML = `
+                    <section class="article-hero">
+                        <div class="container">
+                            <nav class="article-hero__breadcrumb">
+                                <a href="../index.html" data-en="Home">トップ</a>
+                                <span class="sep">/</span>
+                                <a href="../index.html#news" data-en="News">ニュース</a>
+                            </nav>
+                            <div class="article-hero__meta">
+                                <time class="article-hero__date">${date}</time>
+                                <span class="article-hero__tag">${tag}</span>
+                            </div>
+                            <h1 class="article-hero__title">${title}</h1>
+                        </div>
+                    </section>
+                    ${heroImageHtml}
+                    <section class="article-body">
+                        <div class="container">
+                            ${bodyHtml}
+                            ${linkHtml}
+                            <div class="article-footer-nav">
+                                <a href="../index.html#news" data-en="← Back to News">← ニュース一覧へ戻る</a>
+                            </div>
+                        </div>
+                    </section>`;
+
+                applyLang(currentLang());
+            }
+
+            render();
+
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const overlay = document.getElementById('nav-overlay');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                });
+                overlay.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

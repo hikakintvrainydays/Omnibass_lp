@@ -1,0 +1,70 @@
+/* News card thumbnail (added for CMS-driven cards) */
+.news-list .news-item {
+    align-items: center !important;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.news-list .news-thumb {
+    flex: 0 0 120px !important;
+    width: 120px !important;
+    height: 80px !important;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f1f5f9;
+    align-self: center;
+}
+
+.news-list .news-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block;
+}
+
+/* 画像なし記事のプレースホルダー（位置揃え専用、見た目は透明） */
+.news-list .news-thumb--empty {
+    background: transparent !important;
+    border: none !important;
+    visibility: hidden;
+}
+
+/* Date column should not shrink, keep aligned */
+.news-list .news-date {
+    flex: 0 0 auto !important;
+    min-width: 90px !important;
+    white-space: nowrap !important;
+}
+
+/* Tag bubble should never wrap text */
+.news-list .news-tag {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+/* Content should take remaining space */
+.news-list .news-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.news-list .news-title {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@media (max-width: 600px) {
+    .news-list .news-thumb {
+        flex: 0 0 80px !important;
+        width: 80px !important;
+        height: 60px !important;
+    }
+    .news-list .news-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+}

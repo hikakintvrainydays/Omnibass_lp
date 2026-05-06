@@ -37,6 +37,26 @@
         }
     }
 
+    async function fetchDetail(endpoint, id) {
+        if (!isConfigured()) return null;
+        if (!id) return null;
+        const cfg = global.YAMATO_CMS_CONFIG;
+        const url = `https://${cfg.serviceDomain}.microcms.io/api/v1/${endpoint}/${encodeURIComponent(id)}`;
+        try {
+            const res = await fetch(url, {
+                headers: { 'X-MICROCMS-API-KEY': cfg.apiKey }
+            });
+            if (!res.ok) {
+                console.warn(`[YamatoCMS] ${endpoint}/${id} request failed: ${res.status}`);
+                return null;
+            }
+            return await res.json();
+        } catch (err) {
+            console.warn(`[YamatoCMS] ${endpoint}/${id} fetch error`, err);
+            return null;
+        }
+    }
+
     function escapeHtml(value) {
         if (value == null) return '';
         return String(value)
@@ -60,6 +80,7 @@
     global.YamatoCMS = {
         isConfigured,
         fetchList,
+        fetchDetail,
         escapeHtml,
         formatDateDot
     };

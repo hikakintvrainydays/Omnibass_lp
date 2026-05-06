@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXコラム | YamatoDX</title>
+    <meta name="description" content="DX支援に関するコラム記事。中小企業の業務改善・IT活用の実践知をお届けします。">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=4">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1NVEKB6YL1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1NVEKB6YL1');
+</script>
+
+<body data-lang="ja">
+    <header class="site-header">
+        <div class="container header__inner">
+            <a class="brand" href="../index.html" aria-label="ホーム">
+                <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+                <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
+                <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
+                <a href="../index.html#column-ja" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
+            </nav>
+            <div class="header__actions">
+                <div class="header__desktop">
+                    <div class="language-toggle lang-toggle" role="tablist">
+                        <button type="button" class="is-active" data-lang="ja">日本語</button>
+                        <button type="button" data-lang="en">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="column-root">
+        <div class="column-state">
+            <div class="spinner"></div>
+            <p data-en="Loading...">読み込み中...</p>
+        </div>
+    </main>
+
+    <script src="../assets/static/cms-config.js"></script>
+    <script src="../assets/static/cms-client.js"></script>
+    <script src="../assets/static/article-images.js"></script>
+    <script src="../assets/static/related-articles.js"></script>
+    <script src="../assets/static/seo.js"></script>
+    <script>
+        (function () {
+            const root = document.getElementById('column-root');
+
+            function getId() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('id');
+            }
+
+            function setLang(lang) {
+                document.body.setAttribute('data-lang', lang);
+                document.querySelectorAll('.lang-toggle button').forEach(b => {
+                    b.classList.toggle('is-active', b.dataset.lang === lang);
+                });
+                // Update [data-en]/[data-ja] within site-nav (not within lang-panel which already swaps)
+                document.querySelectorAll('.site-nav a').forEach(a => {
+                    if (lang === 'en' && a.dataset.en) a.textContent = a.dataset.en;
+                    else if (a.dataset.ja) a.textContent = a.dataset.ja;
+                });
+            }
+
+            document.querySelectorAll('.lang-toggle button').forEach(b => {
+                b.addEventListener('click', () => setLang(b.dataset.lang));
+            });
+
+            function showError(titleJa, titleEn, msgJa, msgEn) {
+                root.innerHTML = `
+                    <div class="column-state">
+                        <div class="lang-panel lang-panel--ja">
+                            <h1>${titleJa}</h1>
+                            <p>${msgJa}</p>
+                            <a href="../index.html">トップへ戻る</a>
+                        </div>
+                        <div class="lang-panel lang-panel--en">
+                            <h1>${titleEn}</h1>
+                            <p>${msgEn}</p>
+                            <a href="../index.html">Back to home</a>
+                        </div>
+                    </div>`;
+            }
+
+            function pickField(item, key, lang) {
+                const enKey = key + 'En';
+                if (lang === 'en') {
+                    return (item[enKey] && String(item[enKey]).trim()) || item[key] || '';
+                }
+                return (item[key] && String(item[key]).trim()) || item[enKey] || '';
+            }
+
+            async function render() {
+                const id = getId();
+                if (!id) {
+                    showError('記事が見つかりません', 'Article not found',
+                        'URLが正しくない可能性があります。', 'The URL may be incorrect.');
+                    return;
+                }
+                if (!window.YamatoCMS || !window.YamatoCMS.isConfigured()) {
+                    showError('CMS未設定', 'CMS not configured',
+                        'CMSの接続設定が完了していません。', 'CMS connection is not configured.');
+                    return;
+                }
+
+                const data = await window.YamatoCMS.fetchDetail('dx-columns', id);
+                if (!data) {
+                    showError('記事が見つかりません', 'Article not found',
+                        'この記事は削除されたか、URLが間違っている可能性があります。',
+                        'This article may have been removed or the URL is wrong.');
+                    return;
+                }
+
+                const esc = window.YamatoCMS.escapeHtml;
+                const date = esc(window.YamatoCMS.formatDateDot(data.publishedAt || data.createdAt));
+                const titleJa = esc(pickField(data, 'title', 'ja'));
+                const titleEn = esc(pickField(data, 'title', 'en') || data.title || '');
+                const tagJa = esc(pickField(data, 'tag', 'ja') || 'DXコラム');
+                const tagEn = esc(pickField(data, 'tag', 'en') || data.tag || 'DX Column');
+                const body = data.body || '';
+                const linkUrl = data.link ? esc(data.link) : '';
+
+                const cleanedBody = body
+                    ? body.replace(/<hr\s*\/?>\s*<p[^>]*>(?:画像|ヘッダー画像|本文画像)[^<]*<a[^>]*>[^<]*<\/a>(?:[^<]*<a[^>]*>[^<]*<\/a>)?<\/p>\s*$/, '')
+                    : '';
+                const bodyHtmlJa = cleanedBody
+                    ? `<div class="column-content">${cleanedBody}</div>`
+                    : `<div class="column-content"><p style="color:#94a3b8;">本文は準備中です。</p></div>`;
+                const bodyHtmlEn = cleanedBody
+                    ? `<div class="column-content">${cleanedBody}</div>`
+                    : `<div class="column-content"><p style="color:#94a3b8;">No body content yet.</p></div>`;
+
+                const linkHtmlJa = linkUrl ? `
+                    <a href="${linkUrl}" target="_blank" rel="noopener" class="column-external-link">
+                        <div>
+                            <div class="column-external-link__label">関連リンク</div>
+                            <div class="column-external-link__url">${linkUrl}</div>
+                        </div>
+                        <span class="column-external-link__icon">↗</span>
+                    </a>` : '';
+                const linkHtmlEn = linkUrl ? `
+                    <a href="${linkUrl}" target="_blank" rel="noopener" class="column-external-link">
+                        <div>
+                            <div class="column-external-link__label">Related link</div>
+                            <div class="column-external-link__url">${linkUrl}</div>
+                        </div>
+                        <span class="column-external-link__icon">↗</span>
+                    </a>` : '';
+
+                const heroImageUrl = window.YamatoArticleImages
+                    ? window.YamatoArticleImages.getHeroImageUrl(id)
+                    : '';
+                const heroImageHtml = heroImageUrl
+                    ? `<div class="column-hero-image"><img src="${heroImageUrl}" alt="${titleJa}" loading="eager"></div>`
+                    : '';
+
+                // SEO meta + JSON-LD
+                if (window.YamatoSeo) {
+                    const desc = (cleanedBody || '').replace(/<[^>]*>/g, '').slice(0, 150) || '中小企業のDX支援、業務改善、AIエージェント活用についての解説コラム。';
+                    window.YamatoSeo.applyArticle({
+                        title: pickField(data, 'title', 'ja') || data.title || 'DXコラム',
+                        description: desc,
+                        image: heroImageUrl,
+                        publishedAt: data.publishedAt || data.createdAt,
+                        modifiedAt: data.revisedAt || data.updatedAt,
+                        path: `/dx-columns/?id=${encodeURIComponent(id)}`,
+                        articleSection: pickField(data, 'tag', 'ja') || 'DXコラム',
+                        keywords: [
+                            '中小企業 DX', '滋賀 DX支援', '関西 業務改善',
+                            'AIエージェント', '生成AI', 'DXコラム', 'YamatoDX',
+                            'IT導入', 'ローコード', '業務自動化'
+                        ]
+                    });
+                } else {
+                    document.title = `${data.title || 'DXコラム'} | YamatoDX`;
+                }
+
+                const relatedHtml = (window.YamatoRelated && window.YamatoRelated.buildSection(id)) || '';
+
+                root.innerHTML = `
+                    <div class="lang-panel lang-panel--ja">
+                        <section class="column-hero">
+                            <nav class="column-hero__breadcrumb">
+                                <a href="../index.html">トップ</a>
+                                <span class="sep">/</span>
+                                <a href="../index.html#column-ja">DXコラム</a>
+                            </nav>
+                            <div class="column-hero__meta">
+                                <time class="column-hero__date">${date}</time>
+                                <span class="column-hero__tag">${tagJa}</span>
+                            </div>
+                            <h1 class="column-hero__title">${titleJa}</h1>
+                        </section>
+                        ${heroImageHtml}
+                        <article class="column-body">
+                            ${bodyHtmlJa}
+                            ${linkHtmlJa}
+                            ${relatedHtml}
+                            <div class="column-footer-nav">
+                                <a href="../index.html#column-ja">← DXコラム一覧へ戻る</a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="lang-panel lang-panel--en">
+                        <section class="column-hero">
+                            <nav class="column-hero__breadcrumb">
+                                <a href="../index.html">Home</a>
+                                <span class="sep">/</span>
+                                <a href="../index.html#column-en">DX Column</a>
+                            </nav>
+                            <div class="column-hero__meta">
+                                <time class="column-hero__date">${date}</time>
+                                <span class="column-hero__tag">${tagEn}</span>
+                            </div>
+                            <h1 class="column-hero__title">${titleEn}</h1>
+                        </section>
+                        ${heroImageHtml}
+                        <article class="column-body">
+                            ${bodyHtmlEn}
+                            ${linkHtmlEn}
+                            ${relatedHtml}
+                            <div class="column-footer-nav">
+                                <a href="../index.html#column-en">← Back to DX Columns</a>
+                            </div>
+                        </article>
+                    </div>`;
+            }
+
+            render();
+        })();
+    </script>
+</body>
+
+</html>

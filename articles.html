@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>記事一覧 | 中小企業のDX・AIエージェント活用 | 株式会社OMNIBASS</title>
+    <meta name="description" content="株式会社OMNIBASSの記事一覧。中小企業向けのDX、AIエージェント活用、業務改善、ローコード開発などの実践的な解説コラムをまとめています。">
+    <meta name="keywords" content="中小企業 DX,AIエージェント,生成AI,業務改善,ローコード,YamatoDX,記事,コラム,滋賀 DX,関西 DX支援">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://biwako-omnibass.com/articles.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://biwako-omnibass.com/articles.html">
+    <meta property="og:title" content="記事一覧 | 中小企業のDX・AIエージェント活用 | 株式会社OMNIBASS">
+    <meta property="og:description" content="中小企業向けのDX、AIエージェント活用、業務改善のコラムをまとめた記事一覧。">
+    <meta property="og:image" content="https://biwako-omnibass.com/images/omnibass_logo.png">
+    <meta property="og:site_name" content="OMNIBASS">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="styles/design_system.css" rel="stylesheet">
+    <link href="styles/animations.css" rel="stylesheet">
+    <link href="styles/responsive.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/cards-image.css" rel="stylesheet">
+    <link href="styles/list-page.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/omnibass_logo.png" alt="OMNIBASS"
+                    style="height: 100px; width: auto; object-fit: contain; margin: -30px 0;">
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav">
+                <a href="index.html#news" data-en="News">ニュース</a>
+                <a href="index.html#services" data-en="Services">事業内容</a>
+                <a href="company.html" data-en="Company">会社概要</a>
+                <a href="articles.html" data-en="Articles">記事一覧</a>
+                <a href="contact.html" data-en="Contact" class="nav-btn">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="list-page">
+        <section class="list-hero">
+            <div class="container">
+                <nav class="list-hero__breadcrumb">
+                    <a href="index.html" data-en="Home">トップ</a>
+                    <span class="sep">/</span>
+                    <span data-en="Articles">記事</span>
+                </nav>
+                <p class="list-hero__kicker">ARTICLES</p>
+                <h1 class="list-hero__title" data-en="Articles">記事一覧</h1>
+                <p class="list-hero__subtitle" data-en="Practical insights on AI Agents and DX">
+                    AIエージェントとDX導入に関する実践的な解説をお届けします
+                </p>
+            </div>
+        </section>
+
+        <section class="list-body">
+            <div class="container">
+                <!-- Filter -->
+                <div class="article-filter" id="article-filter">
+                    <button class="filter-btn active" data-category="all" data-en="All">すべて</button>
+                    <button class="filter-btn" data-category="ai-agent" data-en="AI Agent">AIエージェント</button>
+                    <button class="filter-btn" data-category="case-study" data-en="Case Study">DX導入事例</button>
+                </div>
+
+                <!-- List grid -->
+                <div class="article-grid" id="article-grid">
+                    <p class="list-empty" data-en="Loading...">読み込み中...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/cms-config.js"></script>
+    <script src="js/cms-client.js"></script>
+    <script src="js/article-images.js?v=2"></script>
+    <script>
+        (function () {
+            const grid = document.getElementById('article-grid');
+            const filter = document.getElementById('article-filter');
+
+            const CATEGORY_LABEL = {
+                'ai-agent': { ja: 'AIエージェント', en: 'AI Agent' },
+                'case-study': { ja: 'DX導入事例', en: 'Case Study' }
+            };
+
+            function escapeHtml(s) {
+                return window.OmnibassCMS.escapeHtml(s);
+            }
+            function formatDate(iso) {
+                return window.OmnibassCMS.formatDateDot(iso);
+            }
+
+            function buildCard(item) {
+                const slug = Array.isArray(item.category) ? item.category[0]
+                    : (item.category && item.category.id) ? item.category.id : (item.category || '');
+                const labels = CATEGORY_LABEL[slug] || { ja: slug || '記事', en: slug || 'Article' };
+                const date = escapeHtml(formatDate(item.publishedAt || item.createdAt));
+                const title = escapeHtml(item.title || '');
+                const excerpt = escapeHtml(item.excerpt || '');
+                const externalLink = item.link ? escapeHtml(item.link) : '';
+                const detailHref = item.id ? `articles/?id=${encodeURIComponent(item.id)}` : '';
+                const imageUrl = (item.thumbnail && item.thumbnail.url)
+                    ? item.thumbnail.url
+                    : (window.OmnibassArticleImages ? window.OmnibassArticleImages.getCardImageUrl(item.id) : '');
+                const badgeExtra = slug === 'case-study' ? 'badge-case' : '';
+                const inner = `
+                    <div class="article-image">
+                        <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(labels.ja)}" loading="lazy">
+                        <span class="article-category-badge ${badgeExtra}" data-en="${escapeHtml(labels.en)}">${escapeHtml(labels.ja)}</span>
+                    </div>
+                    <div class="article-content">
+                        <time class="article-date">${date}</time>
+                        <h3 class="article-title">${title}</h3>
+                        <p class="article-excerpt">${excerpt}</p>
+                    </div>`;
+                const href = externalLink || detailHref;
+                const target = externalLink ? ' target="_blank" rel="noopener"' : '';
+                if (href) {
+                    return `<a class="article-card" data-category="${escapeHtml(slug)}" href="${href}"${target}>${inner}</a>`;
+                }
+                return `<article class="article-card" data-category="${escapeHtml(slug)}">${inner}</article>`;
+            }
+
+            function applyFilter(cat) {
+                grid.querySelectorAll('.article-card').forEach(card => {
+                    if (cat === 'all' || card.dataset.category === cat) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+
+            filter.addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+                filter.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                applyFilter(btn.dataset.category || 'all');
+            });
+
+            async function render() {
+                if (!window.OmnibassCMS || !window.OmnibassCMS.isConfigured()) {
+                    grid.innerHTML = '<p class="list-empty">CMSが未設定のため記事を取得できません。</p>';
+                    return;
+                }
+                const cfg = window.OMNIBASS_CMS_CONFIG || {};
+                const endpoint = (cfg.endpoints && cfg.endpoints.columns) || 'columns';
+                const data = await window.OmnibassCMS.fetchList(endpoint, {
+                    limit: 100,
+                    orders: '-publishedAt'
+                });
+                if (!data || !Array.isArray(data.contents) || data.contents.length === 0) {
+                    grid.innerHTML = '<p class="list-empty">記事はまだありません。</p>';
+                    return;
+                }
+                grid.innerHTML = data.contents.map(buildCard).join('');
+            }
+
+            render();
+
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const overlay = document.getElementById('nav-overlay');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                });
+                overlay.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            }
+
+            // Language switch (simple data-en swap)
+            window.setLang = function (lang) {
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const en = el.getAttribute('data-en');
+                    if (!el.getAttribute('data-ja')) {
+                        el.setAttribute('data-ja', el.textContent.trim());
+                    }
+                    el.textContent = lang === 'en' ? en : el.getAttribute('data-ja');
+                });
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                if (lang === 'en') document.querySelectorAll('.lang-btn')[1]?.classList.add('active');
+                else document.querySelectorAll('.lang-btn')[0]?.classList.add('active');
+            };
+        })();
+    </script>
+</body>
+
+</html>

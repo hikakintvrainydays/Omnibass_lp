@@ -1293,13 +1293,46 @@ a {
 
 .news-item {
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
   padding: 1.2rem 0;
   border-bottom: 1px solid var(--border);
   transition: color 0.2s ease;
   position: relative;
   animation: list-slide 0.8s ease both;
+}
+
+.news-item__thumb {
+  flex: 0 0 120px;
+  width: 120px;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.news-item__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.news-item__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .news-item__thumb {
+    flex: 0 0 80px;
+    width: 80px;
+    height: 60px;
+  }
 }
 
 .news-item--empty {
@@ -2525,5 +2558,118 @@ body.card-open {
 @media (min-width: 768px) {
   .service-details__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== Case Studies (横スクロールカード) ===== */
+.case-studies {
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.case-slider {
+  margin-top: 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.case-slider__track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  padding-bottom: 8px;
+}
+
+.case-card {
+  width: 420px;
+  flex: 0 0 420px;
+  background: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  scroll-snap-align: start;
+}
+
+.case-card__image-wrap {
+  position: relative;
+  height: 250px;
+  background: #d9dde3;
+}
+
+.case-card__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.case-card__content {
+  padding: 32px;
+}
+
+.case-card__title {
+  margin: 0 0 20px;
+  color: #1f2937;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.4;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.case-card__text {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.case-slider::-webkit-scrollbar {
+  height: 10px;
+}
+
+.case-slider::-webkit-scrollbar-track {
+  background: #dbe2ea;
+  border-radius: 999px;
+}
+
+.case-slider::-webkit-scrollbar-thumb {
+  background: #0ea5e9;
+  border-radius: 999px;
+}
+
+.case-slider {
+  scrollbar-color: #0ea5e9 #dbe2ea;
+  scrollbar-width: auto;
+}
+
+@media (max-width: 768px) {
+  .case-slider__track {
+    gap: 20px;
+  }
+
+  .case-card {
+    width: 84vw;
+    flex: 0 0 84vw;
+  }
+
+  .case-card__image-wrap {
+    height: 210px;
+  }
+
+  .case-card__content {
+    padding: 24px;
+  }
+
+  .case-card__title {
+    font-size: 20px;
+  }
+
+  .case-card__text {
+    font-size: 15px;
   }
 }

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュース一覧 | 株式会社OMNIBASS</title>
+    <meta name="description" content="株式会社OMNIBASSのニュース一覧ページ。設立、オフィス開設、DX支援サービス「YamatoDX」やインバウンド事業「MEGURU TRAVEL」、農業事業「Dacha club」に関する最新のお知らせをまとめています。">
+    <meta name="keywords" content="OMNIBASS,オムニバス,ニュース,プレスリリース,お知らせ,YamatoDX,Dacha club,MEGURU TRAVEL,滋賀,京都">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://biwako-omnibass.com/news.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://biwako-omnibass.com/news.html">
+    <meta property="og:title" content="ニュース一覧 | 株式会社OMNIBASS">
+    <meta property="og:description" content="株式会社OMNIBASSの最新ニュース・プレスリリース一覧。">
+    <meta property="og:image" content="https://biwako-omnibass.com/images/omnibass_logo.png">
+    <meta property="og:site_name" content="OMNIBASS">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800;900&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="styles/design_system.css" rel="stylesheet">
+    <link href="styles/animations.css" rel="stylesheet">
+    <link href="styles/responsive.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/cards-image.css" rel="stylesheet">
+    <link href="styles/list-page.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="index.html" class="logo" style="display: flex; align-items: center;">
+                <img src="images/omnibass_logo.png" alt="OMNIBASS"
+                    style="height: 100px; width: auto; object-fit: contain; margin: -30px 0;">
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="nav">
+                <a href="news.html" data-en="News">ニュース</a>
+                <a href="index.html#services" data-en="Services">事業内容</a>
+                <a href="company.html" data-en="Company">会社概要</a>
+                <a href="articles.html" data-en="Articles">記事一覧</a>
+                <a href="contact.html" data-en="Contact" class="nav-btn">お問い合わせ</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('ja')">日本語</button>
+                    <button class="lang-btn" onclick="setLang('en')">English</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="list-page">
+        <section class="list-hero">
+            <div class="container">
+                <nav class="list-hero__breadcrumb">
+                    <a href="index.html" data-en="Home">トップ</a>
+                    <span class="sep">/</span>
+                    <span data-en="News">ニュース</span>
+                </nav>
+                <p class="list-hero__kicker">NEWS</p>
+                <h1 class="list-hero__title" data-en="News">ニュース</h1>
+                <p class="list-hero__subtitle" data-en="Latest company updates">
+                    OMNIBASSの最新情報をお届けします
+                </p>
+            </div>
+        </section>
+
+        <section class="list-body list-body--news">
+            <div class="container">
+                <div class="news-list" id="news-list">
+                    <p class="list-empty" data-en="Loading...">読み込み中...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/cms-config.js"></script>
+    <script src="js/cms-client.js"></script>
+    <script src="js/article-images.js?v=2"></script>
+    <script>
+        (function () {
+            const list = document.getElementById('news-list');
+
+            function escapeHtml(s) {
+                return window.OmnibassCMS.escapeHtml(s);
+            }
+            function formatDate(iso) {
+                return window.OmnibassCMS.formatDateDot(iso);
+            }
+
+            function buildItem(item) {
+                const date = formatDate(item.publishedAt || item.createdAt);
+                const cat = Array.isArray(item.category) ? item.category[0] : item.category;
+                const tag = escapeHtml(cat || 'お知らせ');
+                const title = escapeHtml(item.title || '');
+                const externalLink = item.link ? escapeHtml(item.link) : '';
+                const detailHref = item.id ? `news/?id=${encodeURIComponent(item.id)}` : '';
+                const cardImage = (window.OmnibassArticleImages && item.id)
+                    ? window.OmnibassArticleImages.getCardImageUrl(item.id)
+                    : '';
+                const thumbHtml = cardImage
+                    ? `<div class="news-thumb"><img src="${escapeHtml(cardImage)}" alt="" loading="lazy"></div>`
+                    : `<div class="news-thumb news-thumb--empty" aria-hidden="true"></div>`;
+                const inner = `
+                    ${thumbHtml}
+                    <time class="news-date">${escapeHtml(date)}</time>
+                    <div class="news-content">
+                        <span class="news-tag">${tag}</span>
+                        <h3 class="news-title">${title}</h3>
+                    </div>`;
+                if (externalLink) {
+                    return `<a href="${externalLink}" class="news-item data-island" target="_blank" rel="noopener">${inner}</a>`;
+                }
+                if (detailHref) {
+                    return `<a href="${detailHref}" class="news-item data-island">${inner}</a>`;
+                }
+                return `<article class="news-item data-island">${inner}</article>`;
+            }
+
+            async function render() {
+                if (!window.OmnibassCMS || !window.OmnibassCMS.isConfigured()) {
+                    list.innerHTML = '<p class="list-empty">CMSが未設定のためニュースを取得できません。</p>';
+                    return;
+                }
+                const cfg = window.OMNIBASS_CMS_CONFIG || {};
+                const endpoint = (cfg.endpoints && cfg.endpoints.news) || 'news';
+                const data = await window.OmnibassCMS.fetchList(endpoint, {
+                    limit: 100,
+                    orders: '-publishedAt'
+                });
+                if (!data || !Array.isArray(data.contents) || data.contents.length === 0) {
+                    list.innerHTML = '<p class="list-empty">ニュースはまだありません。</p>';
+                    return;
+                }
+                list.innerHTML = data.contents.map(buildItem).join('');
+            }
+
+            render();
+
+            // Hamburger
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav');
+            const overlay = document.getElementById('nav-overlay');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                });
+                overlay.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            }
+
+            window.setLang = function (lang) {
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const en = el.getAttribute('data-en');
+                    if (!el.getAttribute('data-ja')) {
+                        el.setAttribute('data-ja', el.textContent.trim());
+                    }
+                    el.textContent = lang === 'en' ? en : el.getAttribute('data-ja');
+                });
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                if (lang === 'en') document.querySelectorAll('.lang-btn')[1]?.classList.add('active');
+                else document.querySelectorAll('.lang-btn')[0]?.classList.add('active');
+            };
+        })();
+    </script>
+</body>
+
+</html>

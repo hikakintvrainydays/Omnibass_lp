@@ -33,18 +33,32 @@
             ? pick(item.tagEn, item.tag || 'DX Column')
             : pick(item.tag, item.tagEn || 'DXコラム');
         const date = window.YamatoCMS.formatDateDot(item.publishedAt || item.createdAt);
-        const link = item.link ? esc(item.link) : '';
+        const externalLink = item.link ? esc(item.link) : '';
+        const detailHref = item.id ? `dx-columns/?id=${encodeURIComponent(item.id)}` : '';
+        const cardImage = (window.YamatoArticleImages && item.id)
+            ? window.YamatoArticleImages.getCardImageUrl(item.id)
+            : '';
+        const thumbHtml = cardImage
+            ? `<div class="news-item__thumb"><img src="${esc(cardImage)}" alt="" loading="lazy"></div>`
+            : '';
 
         const inner = `
-            <div class="news-item__meta">
-                <span class="news-item__date">${esc(date)}</span>
-                <span class="news-item__tag">${esc(tag)}</span>
+            ${thumbHtml}
+            <div class="news-item__body">
+                <div class="news-item__meta">
+                    <span class="news-item__date">${esc(date)}</span>
+                    <span class="news-item__tag">${esc(tag)}</span>
+                </div>
+                <h3 class="news-item__title">${esc(title)}</h3>
             </div>
-            <h3 class="news-item__title">${esc(title)}</h3>
             <span class="news-item__arrow">→</span>`;
 
-        if (link) {
-            return `<a class="news-item" href="${link}" target="_blank" rel="noopener">${inner}</a>`;
+        // 外部リンクが指定されていればそちらを優先、なければ詳細ページへ
+        if (externalLink) {
+            return `<a class="news-item" href="${externalLink}" target="_blank" rel="noopener">${inner}</a>`;
+        }
+        if (detailHref) {
+            return `<a class="news-item" href="${detailHref}">${inner}</a>`;
         }
         return `<div class="news-item">${inner}</div>`;
     }
