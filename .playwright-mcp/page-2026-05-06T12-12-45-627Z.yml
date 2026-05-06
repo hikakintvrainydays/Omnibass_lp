@@ -1,0 +1,149 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - navigation [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - list [ref=e10]:
+              - listitem [ref=e11]:
+                - link "OMNIBASSのホームページの記事" [ref=e12] [cursor=pointer]:
+                  - /url: https://ie4goy9psi.microcms.io
+            - link "追加" [ref=e14] [cursor=pointer]:
+              - /url: https://app.microcms.io/create-service
+              - img "追加" [ref=e15]
+          - generic [ref=e16]:
+            - button "お知らせ" [ref=e17] [cursor=pointer]:
+              - generic [ref=e18]: notifications
+            - link "障害情報" [ref=e20] [cursor=pointer]:
+              - /url: https://status.microcms.io
+              - generic [ref=e21]: cell_tower
+            - button "yamato" [ref=e22] [cursor=pointer]:
+              - generic [ref=e24]: yamato
+      - generic [ref=e25]:
+        - text: 
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]:
+              - paragraph [ref=e29]: OMNIBASSのホームページの記事
+              - paragraph [ref=e30]: ie4goy9psi
+            - link "設定" [ref=e31] [cursor=pointer]:
+              - /url: /settings
+              - generic [ref=e32]: settings
+          - generic [ref=e33]:
+            - generic [ref=e35]:
+              - term [ref=e36]:
+                - link "コンテンツ（API）" [ref=e37] [cursor=pointer]:
+                  - /url: /apis
+                - button "APIメニュー" [ref=e39] [cursor=pointer]:
+                  - generic [ref=e40]: more_vert
+              - definition [ref=e41]:
+                - list [ref=e42]:
+                  - listitem "コラム" [ref=e43]:
+                    - link "icon_type_list コラム" [ref=e44] [cursor=pointer]:
+                      - /url: /apis/columns
+                      - img "icon_type_list" [ref=e45]
+                      - paragraph [ref=e55]: コラム
+                  - listitem "DXコラム" [ref=e56]:
+                    - link "icon_type_list DXコラム" [ref=e57] [cursor=pointer]:
+                      - /url: /apis/dx-columns
+                      - img "icon_type_list" [ref=e58]
+                      - paragraph [ref=e68]: DXコラム
+                  - listitem "ニュース" [ref=e69]:
+                    - link "icon_type_list ニュース" [ref=e70] [cursor=pointer]:
+                      - /url: /apis/news
+                      - img "icon_type_list" [ref=e71]
+                      - paragraph [ref=e81]: ニュース
+            - generic [ref=e83]:
+              - term [ref=e84]:
+                - link "メディア" [ref=e85] [cursor=pointer]:
+                  - /url: /media
+              - definition [ref=e86]:
+                - link "0件のアイテム" [ref=e87] [cursor=pointer]:
+                  - /url: /media
+                  - generic [ref=e88]: image
+                  - text: 0件のアイテム
+            - generic [ref=e90]:
+              - term [ref=e91]:
+                - link "レビュー" [ref=e92] [cursor=pointer]:
+                  - /url: /reviews
+              - definition [ref=e93]:
+                - link "question_answer 0件の申請" [ref=e94] [cursor=pointer]:
+                  - /url: /reviews
+                  - generic [ref=e95]: question_answer
+                  - text: 0件の申請
+            - generic [ref=e97]:
+              - term [ref=e98]:
+                - link "権限管理" [ref=e99] [cursor=pointer]:
+                  - /url: /members
+              - definition [ref=e100]:
+                - link "person 1人のメンバー" [ref=e101] [cursor=pointer]:
+                  - /url: /members
+                  - generic [ref=e102]: person
+                  - text: 1人のメンバー
+                - link "group 1個のロール" [ref=e103] [cursor=pointer]:
+                  - /url: /roles
+                  - generic [ref=e104]: group
+                  - text: 1個のロール
+                - link "vpn_key 1個のAPIキー" [ref=e105] [cursor=pointer]:
+                  - /url: /api-keys
+                  - generic [ref=e106]: vpn_key
+                  - text: 1個のAPIキー
+      - generic [ref=e214]:
+        - generic [ref=e215]:
+          - heading "APIスキーマを定義" [level=2] [ref=e216]
+          - paragraph [ref=e217]:
+            - text: コンテンツID（id）や各種日時（createdAt, updatedAt, publishedAt, revisedAt）は自動的に作成されます。
+            - text: ファイルインポートする場合は
+            - button "こちら" [ref=e218] [cursor=pointer]
+            - text: から。
+          - generic [ref=e219]:
+            - generic [ref=e220]:
+              - button [ref=e221]:
+                - generic [ref=e222]: drag_handle
+              - generic [ref=e223]:
+                - paragraph [ref=e224]: 3CUjeaAf55
+                - generic [ref=e225]:
+                  - generic [ref=e226]:
+                    - generic [ref=e228]: フィールドID
+                    - textbox "フィールドID" [ref=e229]:
+                      - /placeholder: "例: title"
+                      - text: title
+                  - generic [ref=e231]:
+                    - generic [ref=e233]: 表示名
+                    - textbox "表示名" [ref=e234]:
+                      - /placeholder: "例: タイトル"
+                      - text: タイトル
+                  - group "種類" [ref=e236]:
+                    - generic [ref=e238]: 種類
+                    - button "フィールドの種類を変更" [ref=e392] [cursor=pointer]:
+                      - generic [ref=e241]: テキストフィールド
+                      - generic [ref=e242]: expand_more
+                - generic [ref=e244]:
+                  - button "詳細設定" [ref=e245] [cursor=pointer]:
+                    - generic [ref=e246]: settings
+                    - text: 詳細設定
+                  - button "削除" [ref=e247] [cursor=pointer]:
+                    - generic [ref=e248]: clear
+                    - text: 削除
+                - list [ref=e249]:
+                  - listitem [ref=e250]:
+                    - generic [ref=e251]:
+                      - generic [ref=e253]: 必須項目
+                      - switch "必須項目" [checked] [active] [ref=e254] [cursor=pointer]
+            - status [ref=e256]
+          - button "フィールドを追加" [ref=e258] [cursor=pointer]:
+            - generic [ref=e259]: add
+            - text: フィールドを追加
+        - generic [ref=e260]:
+          - generic [ref=e261]:
+            - emphasis [ref=e262]: "3"
+            - text: /3 ステップ
+          - button "戻る" [ref=e264] [cursor=pointer]
+          - button "作成" [ref=e266] [cursor=pointer]
+    - region "Notifications (F8)":
+      - list
+  - region "Chat Widget" [ref=e153]:
+    - iframe [ref=e154]:
+      - button "ウェブチャットを開く" [ref=f24e5]:
+        - img [ref=f24e8]
+        - img [ref=f24e15]

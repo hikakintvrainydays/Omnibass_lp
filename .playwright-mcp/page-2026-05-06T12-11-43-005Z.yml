@@ -1,0 +1,121 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e6]:
+      - navigation [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - list [ref=e10]:
+              - listitem [ref=e11]:
+                - link "OMNIBASSのホームページの記事" [ref=e12] [cursor=pointer]:
+                  - /url: https://ie4goy9psi.microcms.io
+            - link "追加" [ref=e14] [cursor=pointer]:
+              - /url: https://app.microcms.io/create-service
+              - img "追加" [ref=e15]
+          - generic [ref=e16]:
+            - button "お知らせ" [ref=e17] [cursor=pointer]:
+              - generic [ref=e18]: notifications
+            - link "障害情報" [ref=e20] [cursor=pointer]:
+              - /url: https://status.microcms.io
+              - generic [ref=e21]: cell_tower
+            - button "yamato" [ref=e22] [cursor=pointer]:
+              - generic [ref=e24]: yamato
+      - generic [ref=e25]:
+        - text: 
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]:
+              - paragraph [ref=e29]: OMNIBASSのホームページの記事
+              - paragraph [ref=e30]: ie4goy9psi
+            - link "設定" [ref=e31] [cursor=pointer]:
+              - /url: /settings
+              - generic [ref=e32]: settings
+          - generic [ref=e33]:
+            - generic [ref=e35]:
+              - term [ref=e36]:
+                - link "コンテンツ（API）" [ref=e37] [cursor=pointer]:
+                  - /url: /apis
+                - button "APIメニュー" [ref=e39] [cursor=pointer]:
+                  - generic [ref=e40]: more_vert
+              - definition [ref=e41]:
+                - list [ref=e42]:
+                  - listitem "コラム" [ref=e43]:
+                    - link "icon_type_list コラム" [ref=e44] [cursor=pointer]:
+                      - /url: /apis/columns
+                      - img "icon_type_list" [ref=e45]
+                      - paragraph [ref=e55]: コラム
+                  - listitem "DXコラム" [ref=e56]:
+                    - link "icon_type_list DXコラム" [ref=e57] [cursor=pointer]:
+                      - /url: /apis/dx-columns
+                      - img "icon_type_list" [ref=e58]
+                      - paragraph [ref=e68]: DXコラム
+                  - listitem "ニュース" [ref=e69]:
+                    - link "icon_type_list ニュース" [ref=e70] [cursor=pointer]:
+                      - /url: /apis/news
+                      - img "icon_type_list" [ref=e71]
+                      - paragraph [ref=e81]: ニュース
+            - generic [ref=e83]:
+              - term [ref=e84]:
+                - link "メディア" [ref=e85] [cursor=pointer]:
+                  - /url: /media
+              - definition [ref=e86]:
+                - link "0件のアイテム" [ref=e87] [cursor=pointer]:
+                  - /url: /media
+                  - generic [ref=e88]: image
+                  - text: 0件のアイテム
+            - generic [ref=e90]:
+              - term [ref=e91]:
+                - link "レビュー" [ref=e92] [cursor=pointer]:
+                  - /url: /reviews
+              - definition [ref=e93]:
+                - link "question_answer 0件の申請" [ref=e94] [cursor=pointer]:
+                  - /url: /reviews
+                  - generic [ref=e95]: question_answer
+                  - text: 0件の申請
+            - generic [ref=e97]:
+              - term [ref=e98]:
+                - link "権限管理" [ref=e99] [cursor=pointer]:
+                  - /url: /members
+              - definition [ref=e100]:
+                - link "person 1人のメンバー" [ref=e101] [cursor=pointer]:
+                  - /url: /members
+                  - generic [ref=e102]: person
+                  - text: 1人のメンバー
+                - link "group 1個のロール" [ref=e103] [cursor=pointer]:
+                  - /url: /roles
+                  - generic [ref=e104]: group
+                  - text: 1個のロール
+                - link "vpn_key 1個のAPIキー" [ref=e105] [cursor=pointer]:
+                  - /url: /api-keys
+                  - generic [ref=e106]: vpn_key
+                  - text: 1個のAPIキー
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - heading "APIの型を選択" [level=2] [ref=e178]
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - radio "icon_type_list リスト形式 JSON配列を返却するAPIを作成します。ブログやお知らせの一覧、カルーセル等に適しています。" [checked] [active] [ref=e182]
+              - generic [ref=e183] [cursor=pointer]:
+                - definition [ref=e184]:
+                  - img "icon_type_list" [ref=e185]
+                - term [ref=e195]: リスト形式
+                - definition [ref=e196]: JSON配列を返却するAPIを作成します。ブログやお知らせの一覧、カルーセル等に適しています。
+            - generic [ref=e197]:
+              - radio "icon_type_object オブジェクト形式 JSONオブジェクトを返却するAPIを作成します。設定ファイルや単体ページ情報などの取得に適しています。" [ref=e198]
+              - generic [ref=e199] [cursor=pointer]:
+                - definition [ref=e200]:
+                  - img "icon_type_object" [ref=e201]
+                - term [ref=e205]: オブジェクト形式
+                - definition [ref=e206]: JSONオブジェクトを返却するAPIを作成します。設定ファイルや単体ページ情報などの取得に適しています。
+        - generic [ref=e207]:
+          - generic [ref=e208]:
+            - emphasis [ref=e209]: "2"
+            - text: /3 ステップ
+          - button "戻る" [ref=e211] [cursor=pointer]
+          - button "次へ" [ref=e213] [cursor=pointer]
+    - region "Notifications (F8)":
+      - list
+  - region "Chat Widget" [ref=e153]:
+    - iframe [ref=e154]:
+      - button "ウェブチャットを開く" [ref=f24e5]:
+        - img [ref=f24e8]
+        - img [ref=f24e15]

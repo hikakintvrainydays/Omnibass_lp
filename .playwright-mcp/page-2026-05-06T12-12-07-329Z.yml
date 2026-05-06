@@ -1,0 +1,275 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - navigation:
+          - generic:
+            - generic:
+              - list:
+                - listitem:
+                  - link:
+                    - /url: https://ie4goy9psi.microcms.io
+              - link:
+                - /url: https://app.microcms.io/create-service
+                - img
+            - generic:
+              - button:
+                - generic: notifications
+              - link:
+                - /url: https://status.microcms.io
+                - generic: cell_tower
+              - button:
+                - generic:
+                  - generic: yamato
+        - generic:
+          - text: 
+          - generic:
+            - generic:
+              - generic:
+                - paragraph: OMNIBASSのホームページの記事
+                - paragraph: ie4goy9psi
+              - link:
+                - /url: /settings
+                - generic: settings
+            - generic:
+              - generic:
+                - generic:
+                  - term:
+                    - link:
+                      - /url: /apis
+                      - text: コンテンツ（API）
+                    - generic:
+                      - button:
+                        - generic: more_vert
+                  - definition:
+                    - list:
+                      - listitem:
+                        - link:
+                          - /url: /apis/columns
+                          - img
+                          - paragraph: コラム
+                      - listitem:
+                        - link:
+                          - /url: /apis/dx-columns
+                          - img
+                          - paragraph: DXコラム
+                      - listitem:
+                        - link:
+                          - /url: /apis/news
+                          - img
+                          - paragraph: ニュース
+              - generic:
+                - generic:
+                  - term:
+                    - link:
+                      - /url: /media
+                      - text: メディア
+                  - definition:
+                    - link:
+                      - /url: /media
+                      - generic: image
+                      - text: 0件のアイテム
+              - generic:
+                - generic:
+                  - term:
+                    - link:
+                      - /url: /reviews
+                      - text: レビュー
+                  - definition:
+                    - link:
+                      - /url: /reviews
+                      - generic: question_answer
+                      - text: 0件の申請
+              - generic:
+                - generic:
+                  - term:
+                    - link:
+                      - /url: /members
+                      - text: 権限管理
+                  - definition:
+                    - link:
+                      - /url: /members
+                      - generic: person
+                      - text: 1人のメンバー
+                    - link:
+                      - /url: /roles
+                      - generic: group
+                      - text: 1個のロール
+                    - link:
+                      - /url: /api-keys
+                      - generic: vpn_key
+                      - text: 1個のAPIキー
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=2]: APIスキーマを定義
+              - paragraph:
+                - text: コンテンツID（id）や各種日時（createdAt, updatedAt, publishedAt, revisedAt）は自動的に作成されます。 ファイルインポートする場合は
+                - button: こちら
+                - text: から。
+              - generic:
+                - generic:
+                  - button:
+                    - generic: drag_handle
+                  - generic:
+                    - paragraph: 3CUjeaAf55
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: フィールドID
+                        - textbox:
+                          - /placeholder: "例: title"
+                          - text: title
+                      - generic:
+                        - generic:
+                          - generic: 表示名
+                        - textbox:
+                          - /placeholder: "例: タイトル"
+                          - text: タイトル
+                      - group:
+                        - generic:
+                          - generic: 種類
+                        - generic:
+                          - button [expanded] [ref=e267] [cursor=pointer]:
+                            - generic [ref=e241]: 未選択
+                            - generic [ref=e242]: expand_more
+                          - alert: 選択してください
+                    - generic:
+                      - button:
+                        - generic: settings
+                        - text: 詳細設定
+                      - button:
+                        - generic: clear
+                        - text: 削除
+                    - list:
+                      - listitem:
+                        - generic:
+                          - generic:
+                            - generic: 必須項目
+                          - switch
+                - status
+              - generic:
+                - button:
+                  - generic: add
+                  - text: フィールドを追加
+            - generic:
+              - generic:
+                - emphasis: "3"
+                - text: /3 ステップ
+              - generic:
+                - button: 戻る
+              - generic:
+                - button [disabled]: 作成
+  - region:
+    - iframe [ref=e154]:
+      - button "ウェブチャットを開く" [ref=f24e5]:
+        - img [ref=f24e8]
+        - img [ref=f24e15]
+  - dialog [ref=e270]:
+    - generic [ref=e271]:
+      - banner [ref=e272]:
+        - heading "種類を選択してください" [level=3] [ref=e273]
+        - paragraph [ref=e274]: 「カスタムフィールド」および「繰り返しフィールド」は、API作成後にご利用いただけます
+      - list [ref=e275]:
+        - listitem [ref=e276]:
+          - button "title テキストフィールド 自由入力の1行テキストです。タイトル等に適しています。" [active] [ref=e277] [cursor=pointer]:
+            - generic [ref=e279]: title
+            - generic [ref=e280]:
+              - term [ref=e281]:
+                - paragraph [ref=e282]: テキストフィールド
+              - definition [ref=e283]: 自由入力の1行テキストです。タイトル等に適しています。
+        - listitem [ref=e284]:
+          - button "notes テキストエリア 自由入力の複数行テキストです。プレーンテキストによる入力となります。" [ref=e285] [cursor=pointer]:
+            - generic [ref=e287]: notes
+            - generic [ref=e288]:
+              - term [ref=e289]:
+                - paragraph [ref=e290]: テキストエリア
+              - definition [ref=e291]: 自由入力の複数行テキストです。プレーンテキストによる入力となります。
+        - listitem [ref=e292]:
+          - button "text_fields リッチエディタ 旧リッチエディタの機能に加え、テーブルや区切り線などがご利用できます。" [ref=e293] [cursor=pointer]:
+            - generic [ref=e295]: text_fields
+            - generic [ref=e296]:
+              - term [ref=e297]:
+                - paragraph [ref=e298]: リッチエディタ
+              - definition [ref=e299]: 旧リッチエディタの機能に加え、テーブルや区切り線などがご利用できます。
+        - listitem [ref=e300]:
+          - button "text_fields 旧リッチエディタ 非推奨 自由入力の複数行テキストです。リッチエディタによる編集が可能です。APIからHTMLが取得できます。" [ref=e301] [cursor=pointer]:
+            - generic [ref=e303]: text_fields
+            - generic [ref=e304]:
+              - term [ref=e305]:
+                - paragraph [ref=e306]: 旧リッチエディタ
+                - generic [ref=e307]: 非推奨
+              - definition [ref=e308]: 自由入力の複数行テキストです。リッチエディタによる編集が可能です。APIからHTMLが取得できます。
+        - listitem [ref=e309]:
+          - button "insert_photo 画像 画像用のフィールドです。APIからは画像URLが返却されます。" [ref=e310] [cursor=pointer]:
+            - generic [ref=e312]: insert_photo
+            - generic [ref=e313]:
+              - term [ref=e314]:
+                - paragraph [ref=e315]: 画像
+              - definition [ref=e316]: 画像用のフィールドです。APIからは画像URLが返却されます。
+        - listitem [ref=e317]:
+          - button "collections 複数画像 複数の画像用のフィールドです。APIからは画像URLの配列が返却されます。" [ref=e318] [cursor=pointer]:
+            - generic [ref=e320]: collections
+            - generic [ref=e321]:
+              - term [ref=e322]:
+                - paragraph [ref=e323]: 複数画像
+              - definition [ref=e324]: 複数の画像用のフィールドです。APIからは画像URLの配列が返却されます。
+        - listitem [ref=e325]:
+          - button "date_range 日時 Date型のフィールドです。カレンダーから日時を選択することができます。" [ref=e326] [cursor=pointer]:
+            - generic [ref=e328]: date_range
+            - generic [ref=e329]:
+              - term [ref=e330]:
+                - paragraph [ref=e331]: 日時
+              - definition [ref=e332]: Date型のフィールドです。カレンダーから日時を選択することができます。
+        - listitem [ref=e333]:
+          - button "toggle_on 真偽値 Boolean型のフィールドです。スイッチでオン/オフを切り替えることができます。" [ref=e334] [cursor=pointer]:
+            - generic [ref=e336]: toggle_on
+            - generic [ref=e337]:
+              - term [ref=e338]:
+                - paragraph [ref=e339]: 真偽値
+              - definition [ref=e340]: Boolean型のフィールドです。スイッチでオン/オフを切り替えることができます。
+        - listitem [ref=e341]:
+          - button "list セレクトフィールド 定義したリストの中から値を選択するフィールドです。設定により複数選択も可能です。" [ref=e342] [cursor=pointer]:
+            - generic [ref=e344]: list
+            - generic [ref=e345]:
+              - term [ref=e346]:
+                - paragraph [ref=e347]: セレクトフィールド
+              - definition [ref=e348]: 定義したリストの中から値を選択するフィールドです。設定により複数選択も可能です。
+        - listitem [ref=e349]:
+          - button "settings_ethernet コンテンツ参照 他コンテンツのレスポンスを含むことができます。参照先がリスト型の場合は選択式となります。" [ref=e350] [cursor=pointer]:
+            - generic [ref=e352]: settings_ethernet
+            - generic [ref=e353]:
+              - term [ref=e354]:
+                - paragraph [ref=e355]: コンテンツ参照
+              - definition [ref=e356]: 他コンテンツのレスポンスを含むことができます。参照先がリスト型の場合は選択式となります。
+        - listitem [ref=e357]:
+          - button "settings_ethernet 複数コンテンツ参照 他コンテンツを複数参照することができます。レスポンスは配列形式となります。" [ref=e358] [cursor=pointer]:
+            - generic [ref=e360]: settings_ethernet
+            - generic [ref=e361]:
+              - term [ref=e362]:
+                - paragraph [ref=e363]: 複数コンテンツ参照
+              - definition [ref=e364]: 他コンテンツを複数参照することができます。レスポンスは配列形式となります。
+        - listitem [ref=e365]:
+          - button "looks_one 数字 Number型のフィールドです。入力時は数値型のキーボードが開きます。" [ref=e366] [cursor=pointer]:
+            - generic [ref=e368]: looks_one
+            - generic [ref=e369]:
+              - term [ref=e370]:
+                - paragraph [ref=e371]: 数字
+              - definition [ref=e372]: Number型のフィールドです。入力時は数値型のキーボードが開きます。
+        - listitem [ref=e373]:
+          - button "insert_drive_file ファイル ファイル用のフィールドです。APIからはファイルURLが返却されます。 lock 現在のプランではご利用できません" [ref=e374] [cursor=pointer]:
+            - generic [ref=e376]: insert_drive_file
+            - generic [ref=e377]:
+              - term [ref=e378]:
+                - paragraph [ref=e379]: ファイル
+              - definition [ref=e380]: ファイル用のフィールドです。APIからはファイルURLが返却されます。
+            - generic [ref=e381]:
+              - generic [ref=e382]: lock
+              - paragraph [ref=e383]: 現在のプランではご利用できません
+        - listitem [ref=e384]:
+          - button "extension 拡張フィールド 拡張フィールドを用いて、外部データの読み込みを行うことができます" [ref=e385] [cursor=pointer]:
+            - generic [ref=e387]: extension
+            - generic [ref=e388]:
+              - term [ref=e389]:
+                - paragraph [ref=e390]: 拡張フィールド
+              - definition [ref=e391]: 拡張フィールドを用いて、外部データの読み込みを行うことができます
