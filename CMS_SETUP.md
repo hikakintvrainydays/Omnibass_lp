@@ -126,3 +126,68 @@ PHP も MySQL も不要です。HTML/JS だけです。
 
 ブラウザに埋め込む API キーは必ず **GET 専用** にしてください。
 書き込み権限のあるキーをサイトに置くと、誰でも記事を作成・削除できてしまいます。
+
+---
+
+# YamatoDX サイト (digital-yamato-dx.jp) の連携
+
+YamatoDX のトップページ (`yamato_dx/index.html`) の「DXコラム / DX Column」セクションも
+同じ仕組みで microCMS から配信できます。**Omnibass トップとは別の API（エンドポイント）** を使い、
+同一の microCMS サービスを共有する構成にしてあります。
+
+## 1. microCMS で `dx-columns` API を作る
+
+| 項目 | 値 |
+|---|---|
+| API名 | DXコラム |
+| エンドポイント | `dx-columns` |
+| API の型 | **リスト形式** |
+
+フィールド:
+
+| フィールドID | 表示名 | 種類 | 必須 | 備考 |
+|---|---|---|---|---|
+| `title` | タイトル (日本語) | テキストフィールド | ✅ | |
+| `titleEn` | Title (English) | テキストフィールド |  | 未入力なら `title` を流用 |
+| `tag` | タグ (日本語) | テキストフィールド | ✅ | 例: `DXコラム` / `事例` |
+| `tagEn` | Tag (English) | テキストフィールド |  | 未入力なら `tag` を流用 |
+| `link` | 外部リンク | テキストフィールド |  | 任意 |
+
+> 1 つの記事を JA/EN の両言語パネルに同時表示する設計です。
+> 英語版を後から書く運用なら `titleEn` / `tagEn` は空のままで OK（日本語が両方に出ます）。
+
+## 2. 設定ファイル
+
+`yamato_dx/assets/static/cms-config.js` には Omnibass と同じサービスID / API キーが
+セット済みです。**別の microCMS サービスに分けたい場合のみ** ここを書き換えてください。
+
+```js
+window.YAMATO_CMS_CONFIG = {
+    serviceDomain: 'ie4goy9psi',     // Omnibass と共有 (変更可)
+    apiKey: '...',                   // GET 専用キー
+    endpoints: { dxColumns: 'dx-columns' },
+    limits: { dxColumns: 6 }
+};
+```
+
+## 3. ロリポップ（または digital-yamato-dx.jp の配信先）にアップロード
+
+YamatoDX サイト側にアップロードするファイル:
+
+```
+yamato_dx/index.html
+yamato_dx/assets/static/cms-config.js
+yamato_dx/assets/static/cms-client.js
+yamato_dx/assets/static/cms-columns.js
+```
+
+YamatoDX 用ファイルは `assets/static/` 配下に閉じているので、Omnibass トップ側の
+`js/` ファイルとは独立しています。両サイトを別ドメイン・別ホスティングに置いても問題ありません。
+
+## 4. 動作確認
+
+JA/EN どちらに切り替えても、microCMS で公開した記事が「DXコラム / DX Column」セクションに
+反映されることを確認します。何も出ない場合は DevTools の Console を確認:
+
+- `[YamatoCMS] dx-columns request failed: 404` → エンドポイント名違い (`dx-columns` で作成したか確認)
+- `[YamatoCMS] dx-columns request failed: 401` → API キーの権限・サービスID違い
