@@ -3,3 +3,7 @@ dist/
 .DS_Store
 .env
 *.log
+
+# 確認用スクリーンショット（Playwrightで撮影、コミット不要）
+_verification/
+.playwright-mcp/
