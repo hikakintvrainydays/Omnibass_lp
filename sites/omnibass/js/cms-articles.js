@@ -38,9 +38,10 @@
 
     function pickImage(item) {
         if (item.thumbnail && item.thumbnail.url) return item.thumbnail.url;
-        // 記事ID → Unsplash画像のマップから引く
+        // 記事ID → Unsplash画像のマップから引く (旧microCMS時代の画像IDマッピング)
         if (window.OmnibassArticleImages && item.id) {
-            return window.OmnibassArticleImages.getCardImageUrl(item.id);
+            const mapped = window.OmnibassArticleImages.getCardImageUrl(item.id);
+            if (mapped) return mapped;
         }
         return FALLBACK_IMAGE;
     }

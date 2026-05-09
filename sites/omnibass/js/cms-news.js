@@ -25,9 +25,11 @@
         const title = esc(item.title || '');
         const externalLink = item.link ? esc(item.link) : '';
         const detailHref = item.id ? `news/?id=${encodeURIComponent(item.id)}` : '';
-        const cardImage = (window.OmnibassArticleImages && item.id)
-            ? window.OmnibassArticleImages.getCardImageUrl(item.id)
-            : '';
+        // WPの featured_media (item.thumbnail.url) を優先、無ければ旧microCMS時代の画像マップを参照
+        let cardImage = (item.thumbnail && item.thumbnail.url) ? item.thumbnail.url : '';
+        if (!cardImage && window.OmnibassArticleImages && item.id) {
+            cardImage = window.OmnibassArticleImages.getCardImageUrl(item.id) || '';
+        }
         // 画像が無い記事もレイアウトを揃えるため、空のプレースホルダーを置く
         const thumbHtml = cardImage
             ? `<div class="news-thumb"><img src="${esc(cardImage)}" alt="" loading="lazy"></div>`

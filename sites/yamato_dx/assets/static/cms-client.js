@@ -1,38 +1,90 @@
 /**
- * Tiny microCMS client for the YamatoDX site.
+ * WordPress REST API client for the YamatoDX site.
  * 設定が未入力の状態では null を返し、呼び出し側は静的HTMLにフォールバックします。
+ *
+ * dx-columns は ACF で title_en / tag_ja / tag_en を持つため、それらを
+ * microCMS 互換の titleEn / tag / tagEn にマッピングして返す。
  */
 (function (global) {
-    const PLACEHOLDER_DOMAIN = 'YOUR_SERVICE_DOMAIN';
-    const PLACEHOLDER_KEY = 'YOUR_API_KEY';
-
     function isConfigured() {
         const cfg = global.YAMATO_CMS_CONFIG;
-        return !!(
-            cfg &&
-            cfg.serviceDomain &&
-            cfg.apiKey &&
-            cfg.serviceDomain !== PLACEHOLDER_DOMAIN &&
-            cfg.apiKey !== PLACEHOLDER_KEY
-        );
+        return !!(cfg && cfg.wpBase && /^https?:\/\//.test(cfg.wpBase));
+    }
+
+    function stripTags(html) {
+        if (!html) return '';
+        return String(html).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function decodeEntities(html) {
+        if (!html) return '';
+        return String(html)
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#0?39;/g, "'")
+            .replace(/&#8217;/g, "’")
+            .replace(/&#8220;/g, "“")
+            .replace(/&#8221;/g, "”")
+            .replace(/&nbsp;/g, ' ');
+    }
+
+    function pickFeaturedImage(post) {
+        const media = post && post._embedded && post._embedded['wp:featuredmedia'];
+        if (Array.isArray(media) && media[0] && media[0].source_url) {
+            return { url: media[0].source_url };
+        }
+        return null;
+    }
+
+    function normalizePost(post) {
+        if (!post || typeof post !== 'object') return null;
+        const acf = (post.acf && typeof post.acf === 'object') ? post.acf : {};
+        return {
+            id: String(post.id),
+            title: decodeEntities(stripTags(post.title && post.title.rendered)),
+            titleEn: acf.title_en || '',
+            tag: acf.tag_ja || '',
+            tagEn: acf.tag_en || '',
+            link: acf.external_link || '',
+            thumbnail: pickFeaturedImage(post),
+            content: (post.content && post.content.rendered) || '',
+            body: (post.content && post.content.rendered) || '',
+            publishedAt: post.date_gmt ? (post.date_gmt + 'Z') : (post.date || ''),
+            createdAt: post.date_gmt ? (post.date_gmt + 'Z') : (post.date || '')
+        };
+    }
+
+    function buildListUrl(endpoint, params) {
+        const cfg = global.YAMATO_CMS_CONFIG;
+        const qs = new URLSearchParams();
+        const limit = (params && params.limit) || 10;
+        qs.set('per_page', String(limit));
+        qs.set('_embed', '1');
+        qs.set('orderby', 'date');
+        qs.set('order', 'desc');
+        qs.set('status', 'publish');
+        return `${cfg.wpBase}/${endpoint}?${qs.toString()}`;
     }
 
     async function fetchList(endpoint, params) {
         if (!isConfigured()) return null;
-        const cfg = global.YAMATO_CMS_CONFIG;
-        const query = new URLSearchParams(params || {}).toString();
-        const url = `https://${cfg.serviceDomain}.microcms.io/api/v1/${endpoint}${query ? `?${query}` : ''}`;
         try {
-            const res = await fetch(url, {
-                headers: { 'X-MICROCMS-API-KEY': cfg.apiKey }
-            });
+            const res = await fetch(buildListUrl(endpoint, params));
             if (!res.ok) {
-                console.warn(`[YamatoCMS] ${endpoint} request failed: ${res.status}`);
+                console.warn(`[WP/YamatoDX] ${endpoint} request failed: ${res.status}`);
                 return null;
             }
-            return await res.json();
+            const total = parseInt(res.headers.get('X-WP-Total') || '0', 10);
+            const arr = await res.json();
+            if (!Array.isArray(arr)) return null;
+            return {
+                contents: arr.map(normalizePost).filter(Boolean),
+                totalCount: isNaN(total) ? arr.length : total
+            };
         } catch (err) {
-            console.warn(`[YamatoCMS] ${endpoint} fetch error`, err);
+            console.warn(`[WP/YamatoDX] ${endpoint} fetch error`, err);
             return null;
         }
     }
@@ -41,18 +93,16 @@
         if (!isConfigured()) return null;
         if (!id) return null;
         const cfg = global.YAMATO_CMS_CONFIG;
-        const url = `https://${cfg.serviceDomain}.microcms.io/api/v1/${endpoint}/${encodeURIComponent(id)}`;
+        const url = `${cfg.wpBase}/${endpoint}/${encodeURIComponent(id)}?_embed=1`;
         try {
-            const res = await fetch(url, {
-                headers: { 'X-MICROCMS-API-KEY': cfg.apiKey }
-            });
+            const res = await fetch(url);
             if (!res.ok) {
-                console.warn(`[YamatoCMS] ${endpoint}/${id} request failed: ${res.status}`);
+                console.warn(`[WP/YamatoDX] ${endpoint}/${id} request failed: ${res.status}`);
                 return null;
             }
-            return await res.json();
+            return normalizePost(await res.json());
         } catch (err) {
-            console.warn(`[YamatoCMS] ${endpoint}/${id} fetch error`, err);
+            console.warn(`[WP/YamatoDX] ${endpoint}/${id} fetch error`, err);
             return null;
         }
     }

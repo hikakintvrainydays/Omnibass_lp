@@ -7,3 +7,6 @@ dist/
 # 確認用スクリーンショット（Playwrightで撮影、コミット不要）
 _verification/
 .playwright-mcp/
+
+# microCMS → WP 移行スクリプトのダンプ／結果ログ
+_migration/

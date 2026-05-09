@@ -1,21 +1,14 @@
 /**
- * microCMS connection settings for the YamatoDX site.
+ * WordPress (cms.omnibass.jp) REST API connection settings for the YamatoDX site.
  *
- * 共有するか分けるかについて:
- *   - Omnibass トップ (omnibass.jp) と YamatoDX (digital-yamato-dx.jp) は
- *     ドメインが異なりますが、同じ microCMS サービスを共有しても構いません。
- *     エンドポイント (API ID) を分けて使います。
- *   - YamatoDX 専用に新しい microCMS サービスを作る場合は serviceDomain と
- *     apiKey をそのサービスのものに差し替えてください。
+ * Omnibass と同じ WP インスタンスを共有し、エンドポイントだけ分けている。
+ * dx-columns は CPT (rest_base = "dx-columns")。
  *
- * apiKey は **必ず GET 専用** のキーを使うこと。
+ * 公開GETのみで取得するため API キーや認証は不要。
  */
 window.YAMATO_CMS_CONFIG = {
-    serviceDomain: 'ie4goy9psi',
-    apiKey: 'EnvocVdgZA9UF6OTh0qTgomxDLy20nTFo8rU',
+    wpBase: 'http://cms.biwako-omnibass.com/wp-json/wp/v2',
     endpoints: {
-        // YamatoDX の DXコラム用 (リスト形式)
-        // microCMS 側でこの API ID を作成してください
         dxColumns: 'dx-columns'
     },
     limits: {
