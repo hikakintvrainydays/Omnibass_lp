@@ -35,9 +35,12 @@
         const date = window.YamatoCMS.formatDateDot(item.publishedAt || item.createdAt);
         const externalLink = item.link ? esc(item.link) : '';
         const detailHref = item.id ? `dx-columns/?id=${encodeURIComponent(item.id)}` : '';
-        const cardImage = (window.YamatoArticleImages && item.id)
-            ? window.YamatoArticleImages.getCardImageUrl(item.id)
-            : '';
+        const wpThumb = (item.thumbnail && item.thumbnail.url) ? item.thumbnail.url : '';
+        const cardImage = wpThumb || (
+            (window.YamatoArticleImages && item.id)
+                ? window.YamatoArticleImages.getCardImageUrl(item.id)
+                : ''
+        );
         const thumbHtml = cardImage
             ? `<div class="news-item__thumb"><img src="${esc(cardImage)}" alt="" loading="lazy"></div>`
             : '';

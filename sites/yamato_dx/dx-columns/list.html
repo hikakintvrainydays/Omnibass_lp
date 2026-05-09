@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXコラム一覧 | YamatoDX｜滋賀・関西の中小企業向けDX支援</title>
+    <meta name="description" content="YamatoDXのDXコラム一覧。中小企業のDX入門・業務改善・AI活用・補助金・法令対応・業種別DX・滋賀/関西の地域支援など、実務視点の解説記事を掲載しています。">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <link rel="canonical" href="https://digital-yamato-dx.jp/dx-columns/list.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DXコラム一覧 | YamatoDX">
+    <meta property="og:description" content="中小企業のDX・業務改善・AI活用・補助金・法令対応に関する解説コラム。滋賀・関西の中小企業向けに実務視点でまとめています。">
+    <meta property="og:url" content="https://digital-yamato-dx.jp/dx-columns/list.html">
+    <link rel="stylesheet" href="../assets/static/style.css">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=4">
+    <style>
+        .column-list-page {
+            padding: 80px 0 120px;
+        }
+        .column-list-page .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .column-list-hero {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .column-list-hero p.eyebrow {
+            font-size: 13px;
+            letter-spacing: 0.18em;
+            color: #18d6ff;
+            margin: 0 0 8px;
+            text-transform: uppercase;
+        }
+        .column-list-hero h1 {
+            font-size: clamp(28px, 4vw, 40px);
+            margin: 0 0 12px;
+            line-height: 1.3;
+        }
+        .column-list-hero p.lead {
+            color: #94a3b8;
+            margin: 0 auto;
+            max-width: 680px;
+            line-height: 1.7;
+        }
+        .column-tag-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .column-tag-filter button {
+            padding: 8px 18px;
+            font-size: 13px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .column-tag-filter button:hover {
+            border-color: #18d6ff;
+            color: #fff;
+        }
+        .column-tag-filter button.is-active {
+            background: #18d6ff;
+            color: #0a0f1a;
+            border-color: #18d6ff;
+        }
+        .column-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .column-card {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .column-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(24, 214, 255, 0.45);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .column-card__thumb {
+            aspect-ratio: 16 / 9;
+            background: #0e1525;
+            overflow: hidden;
+        }
+        .column-card__thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .column-card__body {
+            padding: 18px 20px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .column-card__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .column-card__tag {
+            background: rgba(24, 214, 255, 0.1);
+            color: #18d6ff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+        }
+        .column-card__title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin: 0;
+            color: #f1f5f9;
+        }
+        .column-list-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #94a3b8;
+        }
+        .column-list-state .spinner {
+            margin: 0 auto 14px;
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(255, 255, 255, 0.12);
+            border-top-color: #18d6ff;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .column-list-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+        .column-list-pagination button {
+            min-width: 40px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .column-list-pagination button:hover {
+            border-color: #18d6ff;
+            color: #fff;
+        }
+        .column-list-pagination button[disabled] {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .column-list-pagination button.is-current {
+            background: #18d6ff;
+            color: #0a0f1a;
+            border-color: #18d6ff;
+        }
+        .column-list-back {
+            margin-top: 56px;
+            text-align: center;
+        }
+        .column-list-back a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .column-list-back a:hover {
+            color: #18d6ff;
+        }
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1NVEKB6YL1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-1NVEKB6YL1');
+</script>
+
+<body data-lang="ja">
+    <header class="site-header">
+        <div class="container header__inner">
+            <a class="brand" href="../index.html" aria-label="ホーム">
+                <span class="brand__mark" aria-hidden="true"></span>
+            </a>
+            <nav class="site-nav">
+                <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
+                <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
+                <a href="../index.html#column-ja" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
+            </nav>
+            <div class="header__actions">
+                <div class="header__desktop">
+                    <div class="language-toggle lang-toggle" role="tablist">
+                        <button type="button" class="is-active" data-lang="ja">日本語</button>
+                        <button type="button" data-lang="en">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="column-list-page">
+        <div class="container">
+            <div class="column-list-hero">
+                <p class="eyebrow">DX Column</p>
+                <h1 data-en="DX Column" data-ja="DXコラム">DXコラム</h1>
+                <p class="lead" data-en="Practical DX columns for SMEs in Shiga and Kansai. Topics include process improvement, AI use, subsidies, compliance, and industry-specific guides."
+                   data-ja="中小企業の経営者・現場担当者向けに、DX入門・業務改善・AI活用・補助金・法令対応・業種別DXなどを実務視点で解説しています。">
+                    中小企業の経営者・現場担当者向けに、DX入門・業務改善・AI活用・補助金・法令対応・業種別DXなどを実務視点で解説しています。
+                </p>
+            </div>
+
+            <div class="column-tag-filter" id="tag-filter">
+                <!-- buttons rendered by JS -->
+            </div>
+
+            <div id="column-list-root">
+                <div class="column-list-state">
+                    <div class="spinner"></div>
+                    <p data-en="Loading...">読み込み中...</p>
+                </div>
+            </div>
+
+            <div class="column-list-pagination" id="pagination" hidden></div>
+
+            <div class="column-list-back">
+                <a href="../index.html">← <span data-en="Back to top" data-ja="トップに戻る">トップに戻る</span></a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../assets/static/cms-config.js?v=wp1"></script>
+    <script src="../assets/static/cms-client.js?v=wp1"></script>
+    <script src="../assets/static/article-images.js"></script>
+    <script>
+        (function () {
+            const PER_PAGE = 12;
+            const root = document.getElementById('column-list-root');
+            const tagFilterEl = document.getElementById('tag-filter');
+            const paginationEl = document.getElementById('pagination');
+
+            let allItems = [];
+            let activeTag = '__all__';
+            let currentPage = 1;
+
+            function setLang(lang) {
+                document.body.setAttribute('data-lang', lang);
+                document.querySelectorAll('.lang-toggle button').forEach(b => {
+                    b.classList.toggle('is-active', b.dataset.lang === lang);
+                });
+                document.querySelectorAll('[data-en],[data-ja]').forEach(el => {
+                    if (lang === 'en' && el.dataset.en) el.textContent = el.dataset.en;
+                    else if (el.dataset.ja) el.textContent = el.dataset.ja;
+                });
+                renderList();
+                renderTags();
+            }
+
+            document.querySelectorAll('.lang-toggle button').forEach(b => {
+                b.addEventListener('click', () => setLang(b.dataset.lang));
+            });
+
+            function getLang() {
+                return document.body.getAttribute('data-lang') || 'ja';
+            }
+
+            function pickField(item, key, lang) {
+                const enKey = key + 'En';
+                if (lang === 'en') {
+                    return (item[enKey] && String(item[enKey]).trim()) || item[key] || '';
+                }
+                return (item[key] && String(item[key]).trim()) || item[enKey] || '';
+            }
+
+            function getThumb(item) {
+                if (item.thumbnail && item.thumbnail.url) return item.thumbnail.url;
+                if (window.YamatoArticleImages && item.id) {
+                    return window.YamatoArticleImages.getCardImageUrl(item.id);
+                }
+                return '';
+            }
+
+            function buildCard(item, lang) {
+                const esc = window.YamatoCMS.escapeHtml;
+                const title = pickField(item, 'title', lang);
+                const tag = pickField(item, 'tag', lang) || (lang === 'en' ? 'DX Column' : 'DXコラム');
+                const date = window.YamatoCMS.formatDateDot(item.publishedAt || item.createdAt);
+                const href = item.id ? `?id=${encodeURIComponent(item.id)}` : '#';
+                const thumb = getThumb(item);
+                const thumbHtml = thumb
+                    ? `<div class="column-card__thumb"><img src="${esc(thumb)}" alt="" loading="lazy"></div>`
+                    : '';
+                return `
+                    <a class="column-card" href="${esc(href)}">
+                        ${thumbHtml}
+                        <div class="column-card__body">
+                            <div class="column-card__meta">
+                                <span>${esc(date)}</span>
+                                <span class="column-card__tag">${esc(tag)}</span>
+                            </div>
+                            <h2 class="column-card__title">${esc(title)}</h2>
+                        </div>
+                    </a>`;
+            }
+
+            function getFilteredItems() {
+                if (activeTag === '__all__') return allItems;
+                const lang = getLang();
+                return allItems.filter(it => {
+                    const tagJa = (it.tag || '').trim();
+                    const tagEn = (it.tagEn || '').trim();
+                    return tagJa === activeTag || tagEn === activeTag;
+                });
+            }
+
+            function renderTags() {
+                const lang = getLang();
+                const tagSet = new Map();
+                allItems.forEach(it => {
+                    const t = pickField(it, 'tag', lang);
+                    if (t && !tagSet.has(t)) tagSet.set(t, true);
+                });
+                const allLabel = lang === 'en' ? 'All' : 'すべて';
+                const tags = ['__all__', ...tagSet.keys()];
+                tagFilterEl.innerHTML = tags.map(t => {
+                    const label = t === '__all__' ? allLabel : t;
+                    const cls = t === activeTag ? 'is-active' : '';
+                    return `<button type="button" class="${cls}" data-tag="${window.YamatoCMS.escapeHtml(t)}">${window.YamatoCMS.escapeHtml(label)}</button>`;
+                }).join('');
+                tagFilterEl.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        activeTag = btn.dataset.tag;
+                        currentPage = 1;
+                        renderTags();
+                        renderList();
+                    });
+                });
+            }
+
+            function renderList() {
+                const lang = getLang();
+                const items = getFilteredItems();
+                if (items.length === 0) {
+                    const msg = lang === 'en' ? 'No articles yet.' : '記事はまだありません。';
+                    root.innerHTML = `<div class="column-list-state"><p>${msg}</p></div>`;
+                    paginationEl.hidden = true;
+                    return;
+                }
+                const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
+                if (currentPage > totalPages) currentPage = totalPages;
+                const start = (currentPage - 1) * PER_PAGE;
+                const slice = items.slice(start, start + PER_PAGE);
+                root.innerHTML = `<div class="column-list-grid">${slice.map(it => buildCard(it, lang)).join('')}</div>`;
+                renderPagination(totalPages);
+            }
+
+            function renderPagination(totalPages) {
+                if (totalPages <= 1) {
+                    paginationEl.hidden = true;
+                    paginationEl.innerHTML = '';
+                    return;
+                }
+                paginationEl.hidden = false;
+                const lang = getLang();
+                const prev = lang === 'en' ? '← Prev' : '← 前へ';
+                const next = lang === 'en' ? 'Next →' : '次へ →';
+                let html = `<button type="button" data-page="${currentPage - 1}" ${currentPage <= 1 ? 'disabled' : ''}>${prev}</button>`;
+                for (let p = 1; p <= totalPages; p++) {
+                    const cls = p === currentPage ? 'is-current' : '';
+                    html += `<button type="button" class="${cls}" data-page="${p}">${p}</button>`;
+                }
+                html += `<button type="button" data-page="${currentPage + 1}" ${currentPage >= totalPages ? 'disabled' : ''}>${next}</button>`;
+                paginationEl.innerHTML = html;
+                paginationEl.querySelectorAll('button[data-page]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const p = parseInt(btn.dataset.page, 10);
+                        if (!isNaN(p)) {
+                            currentPage = p;
+                            renderList();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    });
+                });
+            }
+
+            async function init() {
+                if (!window.YamatoCMS || !window.YamatoCMS.isConfigured()) {
+                    root.innerHTML = `<div class="column-list-state"><p>CMSの接続設定が完了していません。</p></div>`;
+                    return;
+                }
+                // 100件以上取得 (per_page max 100)
+                const data = await window.YamatoCMS.fetchList('dx-columns', { limit: 100 });
+                if (!data || !Array.isArray(data.contents)) {
+                    root.innerHTML = `<div class="column-list-state"><p>記事の取得に失敗しました。</p></div>`;
+                    return;
+                }
+                allItems = data.contents;
+                renderTags();
+                renderList();
+            }
+
+            init();
+        })();
+    </script>
+</body>
+
+</html>

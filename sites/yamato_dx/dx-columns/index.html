@@ -160,9 +160,9 @@
                         <span class="column-external-link__icon">↗</span>
                     </a>` : '';
 
-                const heroImageUrl = window.YamatoArticleImages
-                    ? window.YamatoArticleImages.getHeroImageUrl(id)
-                    : '';
+                const heroImageUrl = (data.thumbnail && data.thumbnail.url)
+                    ? data.thumbnail.url
+                    : (window.YamatoArticleImages ? window.YamatoArticleImages.getHeroImageUrl(id) : '');
                 const heroImageHtml = heroImageUrl
                     ? `<div class="column-hero-image"><img src="${heroImageUrl}" alt="${titleJa}" loading="eager"></div>`
                     : '';
