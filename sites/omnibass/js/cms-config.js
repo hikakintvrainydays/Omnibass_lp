@@ -1,5 +1,5 @@
 /**
- * WordPress (cms.omnibass.jp) REST API connection settings.
+ * WordPress (cms.biwako-omnibass.com) REST API connection settings.
  *
  *   wpBase    : WP REST API のベースURL。末尾スラッシュ無し。
  *   endpoints : 各コンテンツの rest_base
@@ -8,9 +8,12 @@
  *
  * 公開GETのみで取得するため API キーや認証は不要。
  * 書き込み (Application Password) は scripts/wp-publish.mjs 側で扱い、ブラウザには絶対に置かない。
+ *
+ * 本番ページは https:// で配信されるため、wpBase も必ず https:// を使うこと。
+ * http:// にすると Mixed Content でブラウザがブロックし、CMSが反映されなくなる。
  */
 window.OMNIBASS_CMS_CONFIG = {
-    wpBase: 'http://cms.biwako-omnibass.com/wp-json/wp/v2',
+    wpBase: 'https://cms.biwako-omnibass.com/wp-json/wp/v2',
     endpoints: {
         news: 'posts',
         columns: 'columns'
