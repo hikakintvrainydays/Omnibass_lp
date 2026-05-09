@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DXコラム | YamatoDX</title>
     <meta name="description" content="DX支援に関するコラム記事。中小企業の業務改善・IT活用の実践知をお届けします。">
-    <link rel="stylesheet" href="../assets/static/detail.css?v=5">
+    <link rel="stylesheet" href="../assets/static/style.css">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=7">
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -19,19 +20,25 @@
 </script>
 
 <body data-lang="ja">
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container header__inner">
-            <a class="brand" href="../index.html" aria-label="ホーム">
+            <a class="brand" href="../index.html" aria-label="YamatoDX">
                 <span class="brand__mark" aria-hidden="true"></span>
             </a>
             <nav class="site-nav">
                 <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
                 <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                <a href="../index.html#case-studies-ja" data-en="Case Studies" data-ja="導入事例">導入事例</a>
                 <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
-                <a href="../index.html#column-ja" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                <a href="list.html" data-en="Columns" data-ja="DXコラム">DXコラム</a>
                 <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
             </nav>
             <div class="header__actions">
+                <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="menu-toggle__bar"></span>
+                    <span class="menu-toggle__bar"></span>
+                    <span class="menu-toggle__bar"></span>
+                </button>
                 <div class="header__desktop">
                     <div class="language-toggle lang-toggle" role="tablist">
                         <button type="button" class="is-active" data-lang="ja">日本語</button>
@@ -40,7 +47,39 @@
                 </div>
             </div>
         </div>
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+                <nav class="mobile-menu__nav">
+                    <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
+                    <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                    <a href="../index.html#case-studies-ja" data-en="Case Studies" data-ja="導入事例">導入事例</a>
+                    <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
+                    <a href="list.html" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                    <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
+                </nav>
+                <div class="mobile-menu__controls">
+                    <div class="language-toggle lang-toggle" role="tablist">
+                        <button type="button" class="is-active" data-lang="ja">日本語</button>
+                        <button type="button" data-lang="en">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
+    <script>
+        (function () {
+            const header = document.getElementById('site-header');
+            const toggle = header && header.querySelector('.menu-toggle');
+            if (header && toggle) {
+                toggle.addEventListener('click', () => {
+                    const open = header.classList.toggle('is-open');
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    const mm = document.getElementById('mobile-menu');
+                    if (mm) mm.setAttribute('aria-hidden', open ? 'false' : 'true');
+                });
+            }
+        })();
+    </script>
 
     <div class="reading-progress" aria-hidden="true">
         <div class="reading-progress__bar" id="reading-progress-bar"></div>
@@ -54,7 +93,7 @@
     </main>
 
     <script src="../assets/static/cms-config.js?v=wp1"></script>
-    <script src="../assets/static/cms-client.js?v=wp1"></script>
+    <script src="../assets/static/cms-client.js?v=wp2"></script>
     <script src="../assets/static/article-images.js"></script>
     <script src="../assets/static/related-articles.js"></script>
     <script src="../assets/static/seo.js"></script>
@@ -322,22 +361,36 @@
                     const article = panel.querySelector('.column-body');
                     if (!article) return;
 
-                    // プログレス計算: 記事の上端〜下端を 0〜100% に
+                    // プログレス計算: 記事の上端がビューポート上端を超えてから、
+                    // 記事の下端がビューポート下端に到達するまでを 0〜100% に。
                     const rect = article.getBoundingClientRect();
                     const articleTop = rect.top + window.scrollY;
                     const articleHeight = article.offsetHeight;
                     const viewportH = window.innerHeight;
-                    const scrolled = window.scrollY - articleTop + viewportH * 0.3;
-                    const progress = Math.max(0, Math.min(1, scrolled / Math.max(1, articleHeight - viewportH * 0.3)));
+                    const start = articleTop;
+                    const end = articleTop + articleHeight - viewportH;
+                    const span = Math.max(1, end - start);
+                    const progress = Math.max(0, Math.min(1, (window.scrollY - start) / span));
                     if (progressBar) progressBar.style.width = (progress * 100) + '%';
 
                     // 現在ビューにあるH2を判定
-                    const headings = panel.querySelectorAll('.column-content h2');
+                    const headings = Array.from(panel.querySelectorAll('.column-content h2'));
+                    const docH = Math.max(
+                        document.documentElement.scrollHeight,
+                        document.body.scrollHeight
+                    );
+                    const atBottom = (window.scrollY + viewportH) >= (docH - 4);
+                    const activationLine = Math.min(160, viewportH * 0.35);
                     let activeId = '';
-                    for (const h of headings) {
-                        const top = h.getBoundingClientRect().top;
-                        if (top < 120) activeId = h.id;
-                        else break;
+                    if (atBottom && headings.length > 0) {
+                        // ページ最下部に到達したら、最後の H2 をアクティブに
+                        activeId = headings[headings.length - 1].id;
+                    } else {
+                        for (const h of headings) {
+                            const top = h.getBoundingClientRect().top;
+                            if (top < activationLine) activeId = h.id;
+                            else break;
+                        }
                     }
                     const tocList = document.getElementById(`toc-list-${lang}`);
                     if (tocList) {

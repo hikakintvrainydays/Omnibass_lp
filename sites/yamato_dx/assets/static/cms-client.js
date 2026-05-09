@@ -61,7 +61,9 @@
         const qs = new URLSearchParams();
         const limit = (params && params.limit) || 10;
         qs.set('per_page', String(limit));
-        qs.set('_embed', '1');
+        // featured_media のみ embed し、必要フィールドだけに絞る (レスポンス約 1/4 に縮小)
+        qs.set('_embed', 'wp:featuredmedia');
+        qs.set('_fields', 'id,date,date_gmt,modified_gmt,title,acf,featured_media,_links,_embedded');
         qs.set('orderby', 'date');
         qs.set('order', 'desc');
         qs.set('status', 'publish');
@@ -70,23 +72,36 @@
 
     async function fetchList(endpoint, params) {
         if (!isConfigured()) return null;
-        try {
-            const res = await fetch(buildListUrl(endpoint, params));
-            if (!res.ok) {
-                console.warn(`[WP/YamatoDX] ${endpoint} request failed: ${res.status}`);
+        const url = buildListUrl(endpoint, params);
+        // ネットワーク不安定対策: 1回まで自動リトライ
+        for (let attempt = 0; attempt < 2; attempt++) {
+            try {
+                const res = await fetch(url, { credentials: 'omit' });
+                if (!res.ok) {
+                    console.warn(`[WP/YamatoDX] ${endpoint} request failed: ${res.status} (attempt ${attempt + 1})`);
+                    if (attempt === 0) {
+                        await new Promise(r => setTimeout(r, 500));
+                        continue;
+                    }
+                    return null;
+                }
+                const total = parseInt(res.headers.get('X-WP-Total') || '0', 10);
+                const arr = await res.json();
+                if (!Array.isArray(arr)) return null;
+                return {
+                    contents: arr.map(normalizePost).filter(Boolean),
+                    totalCount: isNaN(total) ? arr.length : total
+                };
+            } catch (err) {
+                console.warn(`[WP/YamatoDX] ${endpoint} fetch error (attempt ${attempt + 1})`, err);
+                if (attempt === 0) {
+                    await new Promise(r => setTimeout(r, 500));
+                    continue;
+                }
                 return null;
             }
-            const total = parseInt(res.headers.get('X-WP-Total') || '0', 10);
-            const arr = await res.json();
-            if (!Array.isArray(arr)) return null;
-            return {
-                contents: arr.map(normalizePost).filter(Boolean),
-                totalCount: isNaN(total) ? arr.length : total
-            };
-        } catch (err) {
-            console.warn(`[WP/YamatoDX] ${endpoint} fetch error`, err);
-            return null;
         }
+        return null;
     }
 
     async function fetchDetail(endpoint, id) {

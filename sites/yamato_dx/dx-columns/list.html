@@ -12,7 +12,8 @@
     <meta property="og:title" content="DXコラム一覧 | YamatoDX">
     <meta property="og:description" content="中小企業のDX・業務改善・AI活用・補助金・法令対応に関する解説コラム。滋賀・関西の中小企業向けに実務視点でまとめています。">
     <meta property="og:url" content="https://digital-yamato-dx.jp/dx-columns/list.html">
-    <link rel="stylesheet" href="../assets/static/detail.css?v=5">
+    <link rel="stylesheet" href="../assets/static/style.css">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=7">
     <style>
         .column-list-page {
             max-width: 1180px;
@@ -267,19 +268,25 @@
 </script>
 
 <body data-lang="ja">
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container header__inner">
-            <a class="brand" href="../index.html" aria-label="ホーム">
+            <a class="brand" href="../index.html" aria-label="YamatoDX">
                 <span class="brand__mark" aria-hidden="true"></span>
             </a>
             <nav class="site-nav">
                 <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
                 <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                <a href="../index.html#case-studies-ja" data-en="Case Studies" data-ja="導入事例">導入事例</a>
                 <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
-                <a href="../index.html#column-ja" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                <a href="list.html" data-en="Columns" data-ja="DXコラム">DXコラム</a>
                 <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
             </nav>
             <div class="header__actions">
+                <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="menu-toggle__bar"></span>
+                    <span class="menu-toggle__bar"></span>
+                    <span class="menu-toggle__bar"></span>
+                </button>
                 <div class="header__desktop">
                     <div class="language-toggle lang-toggle" role="tablist">
                         <button type="button" class="is-active" data-lang="ja">日本語</button>
@@ -288,7 +295,39 @@
                 </div>
             </div>
         </div>
+        <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+            <div class="container mobile-menu__inner">
+                <nav class="mobile-menu__nav">
+                    <a href="../index.html#shiga-support-ja" data-en="DX Support" data-ja="DX支援">DX支援</a>
+                    <a href="../index.html#services-ja" data-en="Services" data-ja="支援内容">支援内容</a>
+                    <a href="../index.html#case-studies-ja" data-en="Case Studies" data-ja="導入事例">導入事例</a>
+                    <a href="../member.html" data-en="About" data-ja="運営者紹介">運営者紹介</a>
+                    <a href="list.html" data-en="Columns" data-ja="DXコラム">DXコラム</a>
+                    <a href="../index.html#contact-ja" data-en="Contact" data-ja="お問い合わせ">お問い合わせ</a>
+                </nav>
+                <div class="mobile-menu__controls">
+                    <div class="language-toggle lang-toggle" role="tablist">
+                        <button type="button" class="is-active" data-lang="ja">日本語</button>
+                        <button type="button" data-lang="en">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
+    <script>
+        (function () {
+            const header = document.getElementById('site-header');
+            const toggle = header && header.querySelector('.menu-toggle');
+            if (header && toggle) {
+                toggle.addEventListener('click', () => {
+                    const open = header.classList.toggle('is-open');
+                    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    const mm = document.getElementById('mobile-menu');
+                    if (mm) mm.setAttribute('aria-hidden', open ? 'false' : 'true');
+                });
+            }
+        })();
+    </script>
 
     <main class="column-list-page">
         <div class="column-list-hero">
@@ -324,7 +363,7 @@
     </main>
 
     <script src="../assets/static/cms-config.js?v=wp1"></script>
-    <script src="../assets/static/cms-client.js?v=wp1"></script>
+    <script src="../assets/static/cms-client.js?v=wp2"></script>
     <script src="../assets/static/article-images.js"></script>
     <script>
         (function () {
@@ -380,7 +419,7 @@
                 const title = pickField(item, 'title', lang);
                 const tag = pickField(item, 'tag', lang) || (lang === 'en' ? 'DX Column' : 'DXコラム');
                 const date = window.YamatoCMS.formatDateDot(item.publishedAt || item.createdAt);
-                const href = item.id ? `?id=${encodeURIComponent(item.id)}` : '#';
+                const href = item.id ? `index.html?id=${encodeURIComponent(item.id)}` : '#';
                 const thumb = getThumb(item);
                 const thumbHtml = thumb
                     ? `<div class="column-card__thumb"><img src="${esc(thumb)}" alt="" loading="lazy"></div>`
@@ -484,9 +523,16 @@
                     root.innerHTML = `<div class="column-list-state"><p>CMSの接続設定が完了していません。</p></div>`;
                     return;
                 }
+                root.innerHTML = `<div class="column-list-state"><div class="spinner"></div><p>読み込み中...</p></div>`;
                 const data = await window.YamatoCMS.fetchList('dx-columns', { limit: 100 });
                 if (!data || !Array.isArray(data.contents)) {
-                    root.innerHTML = `<div class="column-list-state"><p>記事の取得に失敗しました。</p></div>`;
+                    root.innerHTML = `
+                        <div class="column-list-state">
+                            <p>記事の取得に失敗しました。通信が不安定な可能性があります。</p>
+                            <p><button type="button" id="retry-btn" style="margin-top:14px;padding:10px 22px;border:1px solid var(--border-strong);background:var(--text);color:#fff;border-radius:999px;font-weight:700;cursor:pointer;font-family:inherit;">再読み込み</button></p>
+                        </div>`;
+                    const retryBtn = document.getElementById('retry-btn');
+                    if (retryBtn) retryBtn.addEventListener('click', init);
                     return;
                 }
                 allItems = data.contents;

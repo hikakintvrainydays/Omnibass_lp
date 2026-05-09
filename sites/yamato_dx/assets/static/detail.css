@@ -66,75 +66,34 @@ body[data-lang="en"] .lang-panel--en { display: block; }
   box-shadow: 0 0 12px rgba(24, 214, 255, 0.6);
 }
 
-/* Header */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--border);
-}
-.site-header .container {
-  max-width: var(--max-wide);
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.header__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-}
-.brand {
+/* Header / Brand / Nav / Language toggle は style.css のものを共有して使う。
+ * detail.css 側では上書きしない。 */
+
+/* lang-toggle (button式) を style.css の language-toggle (label式) と
+ * 揃えた最低限のスタイルだけ用意する。 */
+.lang-toggle {
   display: inline-flex;
   align-items: center;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-}
-.brand__mark {
-  width: 28px;
-  height: 28px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
-  border-radius: 8px;
-  display: inline-block;
-}
-.site-nav {
-  display: flex;
-  gap: 28px;
-}
-.site-nav a {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-soft);
-  letter-spacing: 0.02em;
-  transition: color 0.2s;
-}
-.site-nav a:hover { color: var(--primary-strong); }
-.header__actions { display: flex; align-items: center; gap: 12px; }
-.header__desktop { display: flex; }
-.language-toggle, .lang-toggle {
-  display: inline-flex;
-  border: 1px solid var(--border-strong);
+  background: #f8fafc;
   border-radius: 999px;
-  padding: 3px;
-  background: var(--bg-soft);
+  padding: 0.15rem;
+  box-shadow: none;
 }
-.language-toggle button, .lang-toggle button {
+.lang-toggle button {
   border: 0;
   background: transparent;
-  padding: 5px 14px;
-  font-size: 12px;
+  padding: 0.4rem 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
   font-weight: 700;
-  color: var(--muted);
+  color: #64748b;
   cursor: pointer;
   border-radius: 999px;
   transition: background 0.2s, color 0.2s;
   font-family: inherit;
 }
-.language-toggle button.is-active, .lang-toggle button.is-active {
-  background: var(--text);
+.lang-toggle button.is-active {
+  background: #0b1220;
   color: #fff;
 }
 
