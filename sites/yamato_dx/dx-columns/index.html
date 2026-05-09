@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DXコラム | YamatoDX</title>
     <meta name="description" content="DX支援に関するコラム記事。中小企業の業務改善・IT活用の実践知をお届けします。">
-    <link rel="stylesheet" href="../assets/static/detail.css?v=4">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=5">
 </head>
 
 <!-- Google tag (gtag.js) -->
@@ -41,6 +41,10 @@
             </div>
         </div>
     </header>
+
+    <div class="reading-progress" aria-hidden="true">
+        <div class="reading-progress__bar" id="reading-progress-bar"></div>
+    </div>
 
     <main id="column-root">
         <div class="column-state">
@@ -190,53 +194,170 @@
 
                 const relatedHtml = (window.YamatoRelated && window.YamatoRelated.buildSection(id)) || '';
 
+                // 読了時間 (本文プレーンテキスト文字数 / 600 字/分)
+                const plainTextLen = (cleanedBody || '').replace(/<[^>]*>/g, '').length;
+                const readMinutes = Math.max(1, Math.round(plainTextLen / 600));
+                const readTimeJa = `約${readMinutes}分で読めます`;
+                const readTimeEn = `${readMinutes} min read`;
+
                 root.innerHTML = `
                     <div class="lang-panel lang-panel--ja">
-                        <section class="column-hero">
-                            <nav class="column-hero__breadcrumb">
-                                <a href="../index.html">トップ</a>
-                                <span class="sep">/</span>
-                                <a href="../index.html#column-ja">DXコラム</a>
-                            </nav>
-                            <div class="column-hero__meta">
-                                <time class="column-hero__date">${date}</time>
-                                <span class="column-hero__tag">${tagJa}</span>
+                        <div class="column-layout">
+                            <div class="column-layout__main">
+                                <section class="column-hero">
+                                    <nav class="column-hero__breadcrumb">
+                                        <a href="../index.html">トップ</a>
+                                        <span class="sep">/</span>
+                                        <a href="list.html">DXコラム</a>
+                                    </nav>
+                                    <div class="column-hero__meta">
+                                        <time class="column-hero__date">${date}</time>
+                                        <span class="column-hero__tag">${tagJa}</span>
+                                        <span class="column-hero__readtime">${readTimeJa}</span>
+                                    </div>
+                                    <h1 class="column-hero__title">${titleJa}</h1>
+                                </section>
+                                ${heroImageHtml}
+                                <article class="column-body">
+                                    ${bodyHtmlJa}
+                                    ${linkHtmlJa}
+                                    ${relatedHtml}
+                                    <div class="column-footer-nav">
+                                        <a href="list.html">← DXコラム一覧へ戻る</a>
+                                    </div>
+                                </article>
                             </div>
-                            <h1 class="column-hero__title">${titleJa}</h1>
-                        </section>
-                        ${heroImageHtml}
-                        <article class="column-body">
-                            ${bodyHtmlJa}
-                            ${linkHtmlJa}
-                            ${relatedHtml}
-                            <div class="column-footer-nav">
-                                <a href="../index.html#column-ja">← DXコラム一覧へ戻る</a>
-                            </div>
-                        </article>
+                            <aside class="column-layout__aside">
+                                <nav class="column-toc" aria-label="目次">
+                                    <p class="column-toc__title">Contents</p>
+                                    <ul class="column-toc__list" id="toc-list-ja"></ul>
+                                </nav>
+                            </aside>
+                        </div>
                     </div>
                     <div class="lang-panel lang-panel--en">
-                        <section class="column-hero">
-                            <nav class="column-hero__breadcrumb">
-                                <a href="../index.html">Home</a>
-                                <span class="sep">/</span>
-                                <a href="../index.html#column-en">DX Column</a>
-                            </nav>
-                            <div class="column-hero__meta">
-                                <time class="column-hero__date">${date}</time>
-                                <span class="column-hero__tag">${tagEn}</span>
+                        <div class="column-layout">
+                            <div class="column-layout__main">
+                                <section class="column-hero">
+                                    <nav class="column-hero__breadcrumb">
+                                        <a href="../index.html">Home</a>
+                                        <span class="sep">/</span>
+                                        <a href="list.html">DX Column</a>
+                                    </nav>
+                                    <div class="column-hero__meta">
+                                        <time class="column-hero__date">${date}</time>
+                                        <span class="column-hero__tag">${tagEn}</span>
+                                        <span class="column-hero__readtime">${readTimeEn}</span>
+                                    </div>
+                                    <h1 class="column-hero__title">${titleEn}</h1>
+                                </section>
+                                ${heroImageHtml}
+                                <article class="column-body">
+                                    ${bodyHtmlEn}
+                                    ${linkHtmlEn}
+                                    ${relatedHtml}
+                                    <div class="column-footer-nav">
+                                        <a href="list.html">← Back to DX Columns</a>
+                                    </div>
+                                </article>
                             </div>
-                            <h1 class="column-hero__title">${titleEn}</h1>
-                        </section>
-                        ${heroImageHtml}
-                        <article class="column-body">
-                            ${bodyHtmlEn}
-                            ${linkHtmlEn}
-                            ${relatedHtml}
-                            <div class="column-footer-nav">
-                                <a href="../index.html#column-en">← Back to DX Columns</a>
-                            </div>
-                        </article>
+                            <aside class="column-layout__aside">
+                                <nav class="column-toc" aria-label="Table of contents">
+                                    <p class="column-toc__title">Contents</p>
+                                    <ul class="column-toc__list" id="toc-list-en"></ul>
+                                </nav>
+                            </aside>
+                        </div>
                     </div>`;
+
+                // TOC構築 + プログレスバー + アクティブ追従
+                buildAndWireToc();
+            }
+
+            // H2要素にid付与してTOC生成、scroll連動でアクティブ表示&プログレスバー駆動
+            function buildAndWireToc() {
+                const lang = document.body.getAttribute('data-lang') || 'ja';
+                const tocLists = {
+                    ja: document.getElementById('toc-list-ja'),
+                    en: document.getElementById('toc-list-en'),
+                };
+
+                // 表示中の lang-panel を対象に TOC 生成
+                ['ja', 'en'].forEach(l => {
+                    const panel = document.querySelector(`.lang-panel--${l}`);
+                    if (!panel) return;
+                    const headings = panel.querySelectorAll('.column-content h2');
+                    const tocList = tocLists[l];
+                    if (!tocList) return;
+                    tocList.innerHTML = '';
+                    headings.forEach((h, i) => {
+                        if (!h.id) h.id = `toc-${l}-${i}`;
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = '#' + h.id;
+                        a.textContent = h.textContent;
+                        a.dataset.targetId = h.id;
+                        li.appendChild(a);
+                        tocList.appendChild(li);
+                        a.addEventListener('click', (ev) => {
+                            ev.preventDefault();
+                            const target = document.getElementById(h.id);
+                            if (target) {
+                                const top = target.getBoundingClientRect().top + window.scrollY - 80;
+                                window.scrollTo({ top, behavior: 'smooth' });
+                            }
+                        });
+                    });
+                });
+
+                wireScrollEffects();
+            }
+
+            function wireScrollEffects() {
+                const progressBar = document.getElementById('reading-progress-bar');
+                const update = () => {
+                    const lang = document.body.getAttribute('data-lang') || 'ja';
+                    const panel = document.querySelector(`.lang-panel--${lang}`);
+                    if (!panel) return;
+                    const article = panel.querySelector('.column-body');
+                    if (!article) return;
+
+                    // プログレス計算: 記事の上端〜下端を 0〜100% に
+                    const rect = article.getBoundingClientRect();
+                    const articleTop = rect.top + window.scrollY;
+                    const articleHeight = article.offsetHeight;
+                    const viewportH = window.innerHeight;
+                    const scrolled = window.scrollY - articleTop + viewportH * 0.3;
+                    const progress = Math.max(0, Math.min(1, scrolled / Math.max(1, articleHeight - viewportH * 0.3)));
+                    if (progressBar) progressBar.style.width = (progress * 100) + '%';
+
+                    // 現在ビューにあるH2を判定
+                    const headings = panel.querySelectorAll('.column-content h2');
+                    let activeId = '';
+                    for (const h of headings) {
+                        const top = h.getBoundingClientRect().top;
+                        if (top < 120) activeId = h.id;
+                        else break;
+                    }
+                    const tocList = document.getElementById(`toc-list-${lang}`);
+                    if (tocList) {
+                        tocList.querySelectorAll('a').forEach(a => {
+                            a.classList.toggle('is-active', a.dataset.targetId === activeId);
+                        });
+                    }
+                };
+                update();
+                window.addEventListener('scroll', () => {
+                    if (window.__yamatoTocRaf) return;
+                    window.__yamatoTocRaf = requestAnimationFrame(() => {
+                        window.__yamatoTocRaf = null;
+                        update();
+                    });
+                }, { passive: true });
+                // 言語切替時に再構築
+                document.querySelectorAll('.lang-toggle button').forEach(b => {
+                    b.addEventListener('click', () => setTimeout(update, 0));
+                });
             }
 
             render();
