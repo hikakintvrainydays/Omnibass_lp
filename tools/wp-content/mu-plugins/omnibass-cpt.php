@@ -43,7 +43,42 @@ add_action('init', function () {
         'menu_position' => 21,
         'menu_icon'     => 'dashicons-translation',
     ]);
+
+    // YamatoDX 専用カテゴリタクソノミー
+    register_taxonomy('dx_column_category', 'dx_columns', [
+        'labels' => [
+            'name'          => 'DXコラムカテゴリ',
+            'singular_name' => 'DXコラムカテゴリ',
+        ],
+        'show_in_rest'      => true,
+        'rest_base'         => 'dx-column-categories',
+        'hierarchical'      => true,
+        'show_admin_column' => true,
+    ]);
 });
+
+// dx_column_category の初期タームを (ACF tag_ja の値に合わせて) 自動投入
+add_action('init', function () {
+    if (!taxonomy_exists('dx_column_category')) {
+        return;
+    }
+    foreach ([
+        'dx-basics'    => 'DX入門',
+        'operations'   => '業務改善',
+        'it-adoption'  => 'IT導入',
+        'ai'           => 'AI活用',
+        'subsidy'      => '補助金',
+        'compliance'   => '法令対応',
+        'industry'     => '業種別DX',
+        'shiga-kansai' => '滋賀・関西',
+        'people'       => '人材・組織',
+        'security'     => 'セキュリティ',
+    ] as $slug => $name) {
+        if (!term_exists($slug, 'dx_column_category')) {
+            wp_insert_term($name, 'dx_column_category', ['slug' => $slug]);
+        }
+    }
+}, 11);
 
 add_action('init', function () {
     if (!taxonomy_exists('column_category')) {

@@ -13,7 +13,7 @@
     <meta property="og:description" content="中小企業のDX・業務改善・AI活用・補助金・法令対応に関する解説コラム。滋賀・関西の中小企業向けに実務視点でまとめています。">
     <meta property="og:url" content="https://digital-yamato-dx.jp/dx-columns/list.html">
     <link rel="stylesheet" href="../assets/static/style.css">
-    <link rel="stylesheet" href="../assets/static/detail.css?v=7">
+    <link rel="stylesheet" href="../assets/static/detail.css?v=8">
     <style>
         .column-list-page {
             max-width: 1180px;
@@ -368,14 +368,25 @@
     <script>
         (function () {
             const PER_PAGE = 12;
+            const TAXONOMY_REST = 'dx-column-categories';
+            const TAXONOMY_QUERY = 'dx-column-categories';
             const root = document.getElementById('column-list-root');
             const tagFilterEl = document.getElementById('tag-filter');
             const paginationEl = document.getElementById('pagination');
             const countEl = document.getElementById('article-count');
 
-            let allItems = [];
-            let activeTag = '__all__';
+            // 全カテゴリの term 情報。{id, slug, name, count} の配列
+            let allTerms = [];
+            // 現在の絞り込み: null なら全件
+            let activeTermId = null;
+            let activeTermSlug = '__all__';
+            // 現在の表示中ページ
             let currentPage = 1;
+            // 現在のフィルタにおける総ページ数 / 総件数
+            let totalCount = 0;
+            let totalPages = 1;
+            // 全件表示時の総数 (タグカウント未対応時のフォールバック表示用)
+            let totalAllCount = 0;
 
             function setLang(lang) {
                 document.body.setAttribute('data-lang', lang);
@@ -386,8 +397,9 @@
                     if (lang === 'en' && el.dataset.en) el.textContent = el.dataset.en;
                     else if (el.dataset.ja) el.textContent = el.dataset.ja;
                 });
-                renderList();
                 renderTags();
+                // 言語が変わってもサーバーから取得したデータ自体は同じ。再描画のみ。
+                if (lastFetched) renderListFromCache();
             }
 
             document.querySelectorAll('.lang-toggle button').forEach(b => {
@@ -439,57 +451,44 @@
                     </a>`;
             }
 
-            function getFilteredItems() {
-                if (activeTag === '__all__') return allItems;
-                return allItems.filter(it => {
-                    const tagJa = (it.tag || '').trim();
-                    const tagEn = (it.tagEn || '').trim();
-                    return tagJa === activeTag || tagEn === activeTag;
-                });
-            }
-
             function renderTags() {
                 const lang = getLang();
-                const tagSet = new Map();
-                allItems.forEach(it => {
-                    const t = pickField(it, 'tag', lang);
-                    if (t && !tagSet.has(t)) tagSet.set(t, true);
-                });
                 const allLabel = lang === 'en' ? 'All' : 'すべて';
-                const tags = ['__all__', ...tagSet.keys()];
-                tagFilterEl.innerHTML = tags.map(t => {
-                    const label = t === '__all__' ? allLabel : t;
-                    const cls = t === activeTag ? 'is-active' : '';
-                    return `<button type="button" class="${cls}" data-tag="${window.YamatoCMS.escapeHtml(t)}">${window.YamatoCMS.escapeHtml(label)}</button>`;
+                const items = [{ slug: '__all__', name: allLabel, id: null, count: totalAllCount }]
+                    .concat(allTerms.map(t => ({ slug: t.slug, name: t.name, id: t.id, count: t.count })));
+                tagFilterEl.innerHTML = items.map(it => {
+                    const cls = it.slug === activeTermSlug ? 'is-active' : '';
+                    const label = it.slug === '__all__' ? it.name : it.name;
+                    return `<button type="button" class="${cls}" data-slug="${window.YamatoCMS.escapeHtml(it.slug)}" data-id="${it.id == null ? '' : it.id}">${window.YamatoCMS.escapeHtml(label)}</button>`;
                 }).join('');
                 tagFilterEl.querySelectorAll('button').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        activeTag = btn.dataset.tag;
+                        activeTermSlug = btn.dataset.slug;
+                        activeTermId = btn.dataset.id ? parseInt(btn.dataset.id, 10) : null;
                         currentPage = 1;
-                        renderTags();
-                        renderList();
+                        loadAndRender();
                     });
                 });
             }
 
-            function renderList() {
+            // サーバー取得結果のキャッシュ (言語切替時の再描画用)
+            let lastFetched = null;
+
+            function renderListFromCache() {
+                if (!lastFetched) return;
                 const lang = getLang();
-                const items = getFilteredItems();
-                if (items.length === 0) {
+                const items = lastFetched.contents;
+                if (!items || items.length === 0) {
                     const msg = lang === 'en' ? 'No articles yet.' : '記事はまだありません。';
                     root.innerHTML = `<div class="column-list-state"><p>${msg}</p></div>`;
                     paginationEl.hidden = true;
                     return;
                 }
-                const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
-                if (currentPage > totalPages) currentPage = totalPages;
-                const start = (currentPage - 1) * PER_PAGE;
-                const slice = items.slice(start, start + PER_PAGE);
-                root.innerHTML = `<div class="column-list-grid">${slice.map(it => buildCard(it, lang)).join('')}</div>`;
-                renderPagination(totalPages);
+                root.innerHTML = `<div class="column-list-grid">${items.map(it => buildCard(it, lang)).join('')}</div>`;
+                renderPagination();
             }
 
-            function renderPagination(totalPages) {
+            function renderPagination() {
                 if (totalPages <= 1) {
                     paginationEl.hidden = true;
                     paginationEl.innerHTML = '';
@@ -499,32 +498,55 @@
                 const lang = getLang();
                 const prev = lang === 'en' ? '← Prev' : '← 前へ';
                 const next = lang === 'en' ? 'Next →' : '次へ →';
+                // ページ番号は7個までに省略表示
+                const pagesToShow = compactPageList(currentPage, totalPages, 7);
                 let html = `<button type="button" data-page="${currentPage - 1}" ${currentPage <= 1 ? 'disabled' : ''}>${prev}</button>`;
-                for (let p = 1; p <= totalPages; p++) {
-                    const cls = p === currentPage ? 'is-current' : '';
-                    html += `<button type="button" class="${cls}" data-page="${p}">${p}</button>`;
+                for (const p of pagesToShow) {
+                    if (p === '...') {
+                        html += `<button type="button" disabled>…</button>`;
+                    } else {
+                        const cls = p === currentPage ? 'is-current' : '';
+                        html += `<button type="button" class="${cls}" data-page="${p}">${p}</button>`;
+                    }
                 }
                 html += `<button type="button" data-page="${currentPage + 1}" ${currentPage >= totalPages ? 'disabled' : ''}>${next}</button>`;
                 paginationEl.innerHTML = html;
                 paginationEl.querySelectorAll('button[data-page]').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const p = parseInt(btn.dataset.page, 10);
-                        if (!isNaN(p)) {
+                        if (!isNaN(p) && p !== currentPage) {
                             currentPage = p;
-                            renderList();
+                            loadAndRender();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                         }
                     });
                 });
             }
 
-            async function init() {
-                if (!window.YamatoCMS || !window.YamatoCMS.isConfigured()) {
-                    root.innerHTML = `<div class="column-list-state"><p>CMSの接続設定が完了していません。</p></div>`;
-                    return;
+            function compactPageList(current, total, max) {
+                if (total <= max) {
+                    const arr = [];
+                    for (let i = 1; i <= total; i++) arr.push(i);
+                    return arr;
                 }
+                const arr = new Set([1, total, current, current - 1, current + 1]);
+                const sorted = Array.from(arr).filter(n => n >= 1 && n <= total).sort((a, b) => a - b);
+                const result = [];
+                for (let i = 0; i < sorted.length; i++) {
+                    if (i > 0 && sorted[i] - sorted[i - 1] > 1) result.push('...');
+                    result.push(sorted[i]);
+                }
+                return result;
+            }
+
+            async function loadAndRender() {
                 root.innerHTML = `<div class="column-list-state"><div class="spinner"></div><p>読み込み中...</p></div>`;
-                const data = await window.YamatoCMS.fetchList('dx-columns', { limit: 100 });
+                const params = { limit: PER_PAGE, page: currentPage };
+                if (activeTermId) {
+                    params.taxonomy = TAXONOMY_QUERY;
+                    params.termId = activeTermId;
+                }
+                const data = await window.YamatoCMS.fetchList('dx-columns', params);
                 if (!data || !Array.isArray(data.contents)) {
                     root.innerHTML = `
                         <div class="column-list-state">
@@ -532,13 +554,30 @@
                             <p><button type="button" id="retry-btn" style="margin-top:14px;padding:10px 22px;border:1px solid var(--border-strong);background:var(--text);color:#fff;border-radius:999px;font-weight:700;cursor:pointer;font-family:inherit;">再読み込み</button></p>
                         </div>`;
                     const retryBtn = document.getElementById('retry-btn');
-                    if (retryBtn) retryBtn.addEventListener('click', init);
+                    if (retryBtn) retryBtn.addEventListener('click', loadAndRender);
                     return;
                 }
-                allItems = data.contents;
-                if (countEl) countEl.textContent = String(allItems.length);
+                lastFetched = data;
+                totalCount = data.totalCount || 0;
+                totalPages = Math.max(1, data.totalPages || 1);
+                if (activeTermSlug === '__all__') totalAllCount = totalCount;
+                if (countEl) countEl.textContent = String(activeTermSlug === '__all__' ? totalAllCount : totalCount);
+                renderListFromCache();
+                renderTags(); // count反映のため再描画
+            }
+
+            async function init() {
+                if (!window.YamatoCMS || !window.YamatoCMS.isConfigured()) {
+                    root.innerHTML = `<div class="column-list-state"><p>CMSの接続設定が完了していません。</p></div>`;
+                    return;
+                }
+                // タグ群を取得 (なければ空配列で続行 = 単純ページネーション動作)
+                if (typeof window.YamatoCMS.fetchTerms === 'function') {
+                    const terms = await window.YamatoCMS.fetchTerms(TAXONOMY_REST);
+                    allTerms = (terms || []).filter(t => (t.count || 0) > 0);
+                }
                 renderTags();
-                renderList();
+                await loadAndRender();
             }
 
             init();

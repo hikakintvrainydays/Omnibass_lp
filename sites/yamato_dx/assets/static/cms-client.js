@@ -67,6 +67,10 @@
         qs.set('orderby', 'date');
         qs.set('order', 'desc');
         qs.set('status', 'publish');
+        if (params && params.page) qs.set('page', String(params.page));
+        if (params && params.taxonomy && params.termId) {
+            qs.set(params.taxonomy, String(params.termId));
+        }
         return `${cfg.wpBase}/${endpoint}?${qs.toString()}`;
     }
 
@@ -86,11 +90,13 @@
                     return null;
                 }
                 const total = parseInt(res.headers.get('X-WP-Total') || '0', 10);
+                const totalPages = parseInt(res.headers.get('X-WP-TotalPages') || '0', 10);
                 const arr = await res.json();
                 if (!Array.isArray(arr)) return null;
                 return {
                     contents: arr.map(normalizePost).filter(Boolean),
-                    totalCount: isNaN(total) ? arr.length : total
+                    totalCount: isNaN(total) ? arr.length : total,
+                    totalPages: isNaN(totalPages) ? 1 : totalPages
                 };
             } catch (err) {
                 console.warn(`[WP/YamatoDX] ${endpoint} fetch error (attempt ${attempt + 1})`, err);
@@ -142,10 +148,27 @@
         return `${yyyy}.${mm}.${dd}`;
     }
 
+    /** タクソノミーの term 一覧を取得。未設定 / 失敗時は null。 */
+    async function fetchTerms(taxonomyRest) {
+        if (!isConfigured()) return null;
+        const cfg = global.YAMATO_CMS_CONFIG;
+        const url = `${cfg.wpBase}/${taxonomyRest}?per_page=100&_fields=id,slug,name,count&orderby=count&order=desc`;
+        try {
+            const res = await fetch(url, { credentials: 'omit' });
+            if (!res.ok) return null;
+            const arr = await res.json();
+            return Array.isArray(arr) ? arr : null;
+        } catch (err) {
+            console.warn(`[WP/YamatoDX] terms ${taxonomyRest} fetch error`, err);
+            return null;
+        }
+    }
+
     global.YamatoCMS = {
         isConfigured,
         fetchList,
         fetchDetail,
+        fetchTerms,
         escapeHtml,
         formatDateDot
     };
